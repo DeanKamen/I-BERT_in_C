@@ -40,8 +40,20 @@ int main() {
   Tensor<int>* result4 = new Tensor(3,1,0);
   Tensor<int>::max(*max_array,1,*result4);
   Tensor<int>::print(result4);
+
+  Tensor<float> * ones3 = new Tensor(3,3, 1.0f);
+  Tensor<float>* result5 = new Tensor(3,1, 0.0f);
+  Tensor<float>::mul_scalar(*ones3, -1.1f, *result5);
+  Tensor<float>::floor_tensor(*result5, *result5);
+  Tensor<float>::print(result5);
+
+  Tensor<int>* twos3 = new Tensor(3, 3, 2);
+  Tensor<int>* result6 = new Tensor(3, 3, 0);
+  Tensor<int>::pow_dot(*twos3, *max_array, *result6);
+  Tensor<int>::print(result6);
 } 
 
+//anything outside the main loop will be implemented in the FPGA
 component void tensor_add_int(Tensor<int> &A, Tensor<int> &B, Tensor<int> &C)
 {
   Tensor<int>::add(A, B, C);

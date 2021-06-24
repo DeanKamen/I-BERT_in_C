@@ -30,11 +30,17 @@ class Tensor{
         static void add(Tensor &A, Tensor &B, Tensor &C);
         static void mul(Tensor &A, Tensor &B, Tensor &C);
         static void sub(Tensor &A, Tensor &B, Tensor &C);
-        static void add_scalar(Tensor &A, T &B, Tensor &C);
-        static void mul_scalar(Tensor &A, T &B, Tensor &C);
-        static void sub_scalar(Tensor &A, T &B, Tensor &C);
-        static void div_scalar(Tensor &A, T &B, Tensor &C);
+        static void add_scalar(Tensor &A, T B, Tensor &C);
+        static void mul_scalar(Tensor &A, T B, Tensor &C);
+        static void sub_scalar(Tensor &A, T B, Tensor &C);
+        static void div_scalar(Tensor &A, T B, Tensor &C);
+        static void pow_scalar(Tensor &A, T B, Tensor &C);
         static void max(Tensor& A, int dim, Tensor &C);
+        static void floor_tensor(Tensor& A, Tensor &C);
+        static void mul_dot(Tensor& A, Tensor &B, Tensor &C);
+        static void div_dot(Tensor& A, Tensor &B, Tensor &C);
+        static void pow_dot(Tensor& A, Tensor &B, Tensor &C);
+        static void clamp(Tensor& A, T min, T max, Tensor &C);
         //adressing methods
         static T get(Tensor &tensor, const unsigned &row, const unsigned &col);
         static void set(Tensor &tensor, const unsigned &row, const unsigned &col, T val);

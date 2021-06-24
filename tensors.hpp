@@ -88,7 +88,7 @@ void Tensor<T>::sub(Tensor &A, Tensor &B, Tensor &C)
 }
 
 template<class T>
-void Tensor<T>::add_scalar(Tensor &A, T &B, Tensor &C)
+void Tensor<T>::add_scalar(Tensor &A, T B, Tensor &C)
 {
     unsigned i,j;
     for (i = 0; i < A.t_numRows; i++)
@@ -101,7 +101,7 @@ void Tensor<T>::add_scalar(Tensor &A, T &B, Tensor &C)
 }
 
 template<class T>
-void Tensor<T>::mul_scalar(Tensor &A, T &B, Tensor &C)
+void Tensor<T>::mul_scalar(Tensor &A, T B, Tensor &C)
 {
     unsigned i,j;
     for (i = 0; i < A.t_numRows; i++)
@@ -114,7 +114,7 @@ void Tensor<T>::mul_scalar(Tensor &A, T &B, Tensor &C)
 }
 
 template<class T>
-void Tensor<T>::sub_scalar(Tensor &A, T &B, Tensor &C)
+void Tensor<T>::sub_scalar(Tensor &A, T B, Tensor &C)
 {
     unsigned i,j;
     for (i = 0; i < A.t_numRows; i++)
@@ -127,7 +127,7 @@ void Tensor<T>::sub_scalar(Tensor &A, T &B, Tensor &C)
 }
 
 template<class T>
-void Tensor<T>::div_scalar(Tensor &A, T &B, Tensor &C)
+void Tensor<T>::div_scalar(Tensor &A, T B, Tensor &C)
 {
     unsigned i,j;
     for (i = 0; i < A.t_numRows; i++)
@@ -137,6 +137,19 @@ void Tensor<T>::div_scalar(Tensor &A, T &B, Tensor &C)
             Tensor::set(C,i,j,Tensor::get(A,i,j) / B);
         }
     }
+}
+
+template<class T>
+void Tensor<T>::pow_scalar(Tensor& A, T B, Tensor &C)
+{// A = B^C, note that there are more efficient functions for 2^X or e^X or 10^X
+    unsigned i,j;
+    for (i = 0; i < A.t_numRows; i++)
+    {
+        for (j = 0; j < A.t_numCols; j++)
+        {
+            Tensor::set(C,i,j, pow(Tensor::get(A,i,j), B)));
+        }
+    }  
 }
 
 template<class T>
@@ -195,6 +208,75 @@ void Tensor<T>::max(Tensor& A, int dim, Tensor &C)
         }
 
     }
+}
+
+template<class T>
+void Tensor<T>::floor_tensor(Tensor& A, Tensor &C)
+{//does a cast to a float and then floors it.
+    unsigned i,j;
+    for (i = 0; i < A.t_numRows; i++)
+    {
+        for (j = 0; j < A.t_numCols; j++)
+        {
+            T temp = Tensor::get(A,i,j);
+            temp = floorf((float)temp);
+            Tensor::set(C,i,j,temp);
+        }
+    }
+}
+
+template<class T>
+void Tensor<T>::mul_dot(Tensor& A, Tensor &B, Tensor &C)
+{
+    unsigned i,j;
+    for (i = 0; i < A.t_numRows; i++)
+    {
+        for (j = 0; j < A.t_numCols; j++)
+        {
+            Tensor::set(C,i,j,Tensor::get(A,i,j) * Tensor::get(B,i,j));
+        }
+    }   
+}
+
+template<class T>
+void Tensor<T>::div_dot(Tensor& A, Tensor &B, Tensor &C)
+{
+    unsigned i,j;
+    for (i = 0; i < A.t_numRows; i++)
+    {
+        for (j = 0; j < A.t_numCols; j++)
+        {
+            Tensor::set(C,i,j,Tensor::get(A,i,j) / Tensor::get(B,i,j));
+        }
+    }   
+}
+
+template<class T>
+void Tensor<T>::pow_dot(Tensor& A, Tensor &B, Tensor &C)
+{// A = B^C, note that there are more efficient functions for 2^X or e^X or 10^X
+    unsigned i,j;
+    for (i = 0; i < A.t_numRows; i++)
+    {
+        for (j = 0; j < A.t_numCols; j++)
+        {
+            Tensor::set(C,i,j, pow(Tensor::get(A,i,j), Tensor::get(B,i,j)));
+        }
+    }  
+}
+
+template<class T>
+void Tensor<T>::clamp(Tensor& A, T min, T max, Tensor &C)
+{
+    unsigned i,j;
+    for (i = 0; i < A.t_numRows; i++)
+    {
+        for (j = 0; j < A.t_numCols; j++)
+        {
+            T viq = Tensor::get(A,i,j);
+            if(viq > max) set(C,i,j,max);
+            else if (viq < min) set(C,i,j,min)
+        }
+    }     
 }
 
 //adressing methods
