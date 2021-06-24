@@ -147,7 +147,7 @@ void Tensor<T>::pow_scalar(Tensor& A, T B, Tensor &C)
     {
         for (j = 0; j < A.t_numCols; j++)
         {
-            Tensor::set(C,i,j, pow(Tensor::get(A,i,j), B)));
+            Tensor::set(C,i,j, pow(Tensor::get(A,i,j), B));
         }
     }  
 }
@@ -273,8 +273,8 @@ void Tensor<T>::clamp(Tensor& A, T min, T max, Tensor &C)
         for (j = 0; j < A.t_numCols; j++)
         {
             T viq = Tensor::get(A,i,j);
-            if(viq > max) set(C,i,j,max);
-            else if (viq < min) set(C,i,j,min)
+            if(viq > max) {set(C,i,j,max);}
+            else if (viq < min) {set(C,i,j,min);}
         }
     }     
 }
