@@ -20,7 +20,7 @@ set "FILENAME=testbench"
 set "FILENAME2=testbench_cosim"
 set "LFLAGS=-o build/%FILENAME%.exe"
 set "LFLAGS2=-o build/%FILENAME2%.exe"
-set "SRCFILES=tensors.cpp testbench.cpp"
+set "SRCFILES=testbench.cpp"
 set "INCLUDE="
 
 if "%TARGET%" == "default" (  
@@ -40,10 +40,11 @@ if "%TARGET%" == "default" (
     exit /b 1
   )
 
+  cd build
   echo %FILENAME%.exe
-  build/%FILENAME%.exe
+  %FILENAME%.exe
   echo %FILENAME2%.exe
-  build/%FILENAME2%.exe
+  %FILENAME2%.exe
   goto:eof
 
 ) 
