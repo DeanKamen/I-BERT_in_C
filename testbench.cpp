@@ -1,12 +1,12 @@
 #include "HLS/hls.h"
 #include "HLS/stdio.h"
 #include "tensors.hpp" //YES I KNOW, but in order to make the compiler (i++) happy, it must not be a .h file
-//#include "HLS/matrix_mult.h"
 #include "tensor_mult.h"
 #include <iostream>
 
 void tensor_add_int(Tensor<int> &A, Tensor<int>& B, Tensor<int>& C);
 void tensor_mul_int(Tensor<int> &A, Tensor<int>& B, Tensor<int>& C);
+void test_function(Tensor<int>& view_test, Tensor<int>& space);
 // Test bench for program
 int main() {
   Tensor<int>* ones = new Tensor(3,3,1);
@@ -28,6 +28,7 @@ int main() {
 
   //I am sorry that this is so tedious at the moment.
   //Will make better ways of initalization
+  /*
   int maxr1[3] ={1,2,3};
   int maxr2[3] ={2,3,1};
   int maxr3[3] ={3,2,1};
@@ -51,7 +52,13 @@ int main() {
   Tensor<int>* result6 = new Tensor(3, 3, 0);
   Tensor<int>::pow_dot(*twos3, *max_array, *result6);
   Tensor<int>::print(result6);
-} 
+  */
+
+
+  Tensor<int>* view_test = new Tensor(3, 3, 2);
+  Tensor<int>* space = new Tensor(MAX_ROWS, MAX_COLS, 0);
+  test_function(*view_test, *space);
+}
 
 //anything outside the main loop will be implemented in the FPGA
 component void tensor_add_int(Tensor<int> &A, Tensor<int> &B, Tensor<int> &C)
@@ -63,4 +70,15 @@ component void tensor_add_int(Tensor<int> &A, Tensor<int> &B, Tensor<int> &C)
 component void tensor_mul_int(Tensor<int> &A, Tensor<int>& B, Tensor<int>& C)
 {
   matrix_multiply<int, 32 , 32 , 32>(A,B,C);
+}
+
+component void test_function(Tensor<int>& view_test, Tensor<int>& space)
+{
+  Tensor<int>::print(&view_test);
+  Tensor<int>::view(view_test, 1, 9, space);
+  Tensor<int>::print(&view_test);
+  Tensor<int>::view(view_test, 3, 3, space);
+  Tensor<int>::print(&view_test);
+  Tensor<int>::view(view_test, 9,-1, space);
+  Tensor<int>::print(&view_test);
 }

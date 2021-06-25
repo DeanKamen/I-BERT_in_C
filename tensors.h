@@ -16,7 +16,7 @@ template<class T>
 class Tensor{
     //private:
     public:
-    //temporarily public? should write get() functions
+    //temporarily public? should write get() and set() functions
         unsigned int t_numRows;
         unsigned int t_numCols;
         bool transposed = false;
@@ -36,11 +36,15 @@ class Tensor{
         static void div_scalar(Tensor &A, T B, Tensor &C);
         static void pow_scalar(Tensor &A, T B, Tensor &C);
         static void max(Tensor& A, int dim, Tensor &C);
+        static void min(Tensor& A, int dim, Tensor &C);
         static void floor_tensor(Tensor& A, Tensor &C);
         static void mul_dot(Tensor& A, Tensor &B, Tensor &C);
         static void div_dot(Tensor& A, Tensor &B, Tensor &C);
         static void pow_dot(Tensor& A, Tensor &B, Tensor &C);
         static void clamp(Tensor& A, T min, T max, Tensor &C);
+        //manipulation
+        static void fill(Tensor& A, T fill);
+        static void view(Tensor& A, int rows, int cols, Tensor& space);
         //adressing methods
         static T get(Tensor &tensor, const unsigned &row, const unsigned &col);
         static void set(Tensor &tensor, const unsigned &row, const unsigned &col, T val);
@@ -48,7 +52,13 @@ class Tensor{
         static void transpose(Tensor &a);
         static void print(Tensor*);        
         static unsigned getRows(Tensor& a);
-        static unsigned getCols(Tensor& a);     
+        static unsigned getCols(Tensor& a);
+        static bool eq(Tensor& A, Tensor &B);
+
+        //private helper functions
+    private:
+        static void setRows(Tensor& a, int num);
+        static void setCols(Tensor& a, int num);         
 };
 
 

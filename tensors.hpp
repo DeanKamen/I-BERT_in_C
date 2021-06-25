@@ -209,6 +209,62 @@ void Tensor<T>::max(Tensor& A, int dim, Tensor &C)
 
     }
 }
+template<class T>
+void Tensor<T>::min(Tensor& A, int dim, Tensor &C)
+//same code as MAX
+//dim=0 means you find the biggest in each column,
+//dim=1 means you find the biggest in each row. 
+{
+    if(dim == 0)
+    {
+        unsigned i,j;
+        T smallest;
+        bool first = true;
+        for (i = 0; i < A.t_numCols; i++)
+        {
+            for (j = 0; j < A.t_numRows; j++)
+            {
+                if(first) 
+                {
+                    smallest = Tensor<T>::get(A,j,i);
+                    first = false;
+                }
+                else{
+                    if(smallest > Tensor<T>::get(A,j,i))
+                    {
+                        smallest = Tensor<T>::get(A,j,i);
+                    }
+                }
+                Tensor<T>::set(C, 0, i, smallest);
+            }
+        }
+    }
+    else
+    { //dim ==1
+        unsigned i,j;
+        T smallest;
+        bool first = true;
+        for (i = 0; i < A.t_numRows; i++)
+        {
+            for (j = 0; j < A.t_numCols; j++)
+            {
+                if(first) 
+                {
+                    smallest = Tensor<T>::get(A,i,j);
+                    first = false;
+                }
+                else{
+                    if(smallest > Tensor<T>::get(A,i,j))
+                    {
+                        smallest = Tensor<T>::get(A,i,j);
+                    }
+                }
+                Tensor<T>::set(C, i, 0, smallest);
+            }
+        }
+
+    }
+}
 
 template<class T>
 void Tensor<T>::floor_tensor(Tensor& A, Tensor &C)
@@ -279,7 +335,66 @@ void Tensor<T>::clamp(Tensor& A, T min, T max, Tensor &C)
     }     
 }
 
-//adressing methods
+/****************************************************manipulation****************************************************/
+template<class T>
+void Tensor<T>::fill(Tensor& A, T fill)
+{
+    unsigned i,j;
+    for (i = 0; i < A.t_numRows; i++)
+    {
+        for (j = 0; j < A.t_numCols; j++)
+        {
+            set(A,i,j, fill);
+        }
+    }     
+}
+
+template<class T>
+void Tensor<T>::view(Tensor& A, const int rows, const int cols, Tensor& space)
+{// a PRIMITIVE implementation of https://pytorch.org/docs/stable/generated/torch.Tensor.view.html?highlight=view#torch.Tensor.view
+ // currentely only supports (rows, cols) where row and col go from -1 to 3072.
+ // reshapes the tensor so that its values fit in a new shape. BE SMART when using this, because the function is dumb
+    
+    //I cant make a local TENSOR! TODO:find a way to make one,  
+    unsigned i,j;
+    for (i = 0; i < A.t_numRows; i++)
+    {
+        for (j = 0; j < A.t_numCols; j++)
+        {
+            set(space,i,j, get(A,i,j)); //copy to local tensor space
+        }
+    }
+    //now we are going to copy to the new space. If we calculate inferred dimentions first
+    int numElements = getRows(A)*getCols(A);
+    int newRows = rows;
+    int newCols = cols;
+    //you can see how this will go bad if total elements doesnt neatly fit into the new shape
+    if(newRows == -1)
+    {
+        newRows = numElements/newCols;
+    }
+    else if(newCols == -1)
+    {
+        newCols = numElements/newRows;
+    }
+    unsigned curNewRow = 0;
+    unsigned curNewCol = 0;
+    for (i = 0; i < A.t_numRows; i++)
+    {
+        for (j = 0; j < A.t_numCols; j++)
+        {
+            set(A, curNewRow, curNewCol, get(space,i,j)); //copy from local tensor space
+            curNewCol++;
+            curNewCol = curNewCol % newCols;
+            //now if the modulus reset us, increment the row.
+            if(curNewCol == 0) curNewRow++; //only supports a stride of 1.
+        }
+    }
+    setRows(A, newRows);
+    setCols(A, newCols);
+}
+
+/****************************************************adressing methods****************************************************/
 template<class T>
 T Tensor<T>::get(Tensor &tensor, const unsigned &row, const unsigned &col)
 {
@@ -366,18 +481,58 @@ void Tensor<T>::print(Tensor* self)
 }
 
 template<class T>
-unsigned Tensor<T>::getRows(Tensor& a) { return a.t_numRows; }
-template<class T>
-unsigned Tensor<T>::getCols(Tensor& a) { return a.t_numCols; }
-
-
-/*
-T** subtensor(Tensor source, const unsigned &row, const unsigned &col, T** target)
-{ //this function grabs an array of size row x col from the source tensor and returns it
-  //useful for 2d matrix functions that you only want working on a subset of the tensor
-  //paired with copy tensor to write a 2d array to a tensor.
-    
-
+unsigned Tensor<T>::getRows(Tensor& a) 
+{ 
+    if(!a.transposed){
+        return a.t_numRows;
+    }else{
+        return a.t_numCols;
+    } 
 }
-Tensor copy_tensor(T** source, const unsigned &row, const unsigned &col, Tensor target);
-*/
+
+template<class T>
+unsigned Tensor<T>::getCols(Tensor& a) 
+{ 
+    if(!a.transposed){
+        return a.t_numCols;
+    }else{
+        return a.t_numRows;
+    } 
+}
+
+template<class T>
+bool Tensor<T>::eq(Tensor& A, Tensor &B)
+{//returns true if all elements are the same. No broadcasting.
+    unsigned i,j;
+    for (i = 0; i < A.t_numRows; i++)
+    {
+        for (j = 0; j < A.t_numCols; j++)
+        {
+            if(get(A,i,j) == get(A,i,j)){continue;}
+            else{return false;}
+        }
+    }
+    return true;  
+}
+
+
+//private helper functions
+template<class T>
+void Tensor<T>::setRows(Tensor& a, int num) 
+{ 
+    if(!a.transposed){
+        a.t_numRows = num;
+    }else{
+        a.t_numCols = num;
+    } 
+}
+
+template<class T>
+void Tensor<T>::setCols(Tensor& a, int num)
+{ 
+    if(!a.transposed){
+        a.t_numCols = num;
+    }else{
+        a.t_numRows = num;
+    } 
+}
