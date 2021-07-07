@@ -6,11 +6,11 @@
 #include "quantact.h"
 
 QuantAct::QuantAct(int activation_bit_i, 
-             float act_range_momentum_i=0.95f,
-             bool running_stat_i=true,
-             bool per_channel_i=false,
-             int channel_len= -1,
-             QuantMode quant_mode_i = QuantMode::none)
+             float act_range_momentum_i,
+             bool running_stat_i,
+             bool per_channel_i,
+             int channel_len,
+             QuantMode quant_mode_i)
 {
     activation_bit = activation_bit_i;
     act_range_momentum= act_range_momentum_i;
@@ -43,11 +43,11 @@ void QuantAct::unfix()
 }
 
 scaled_tuple QuantAct::QuantAct_forward(Tensor<float> x, 
-                              Tensor<float>* pre_act_scaling_factor = nullptr,
-                              Tensor<float>* identity = nullptr,
-                              Tensor<float>* identity_scaling_factor= nullptr,
-                              Tensor<float>* specified_min= nullptr,
-                              Tensor<float>* specified_max= nullptr)
+                              Tensor<float>* pre_act_scaling_factor,
+                              Tensor<float>* identity,
+                              Tensor<float>* identity_scaling_factor,
+                              Tensor<float>* specified_min,
+                              Tensor<float>* specified_max)
 {
     Tensor<float> x_act = x;
     if(identity == nullptr)
@@ -113,13 +113,10 @@ scaled_tuple QuantAct::QuantAct_forward(Tensor<float> x,
     float max = Tensor<float>::get(*x_max,0,0);
     act_scaling_factor = QuantAct::symmetric_linear_quantization_params(activation_bit, min, max, per_channel);
     
-    Tensor<float>* quant_act_int;
+    Tensor<float>* quant_act_int = nullptr;
     if(pre_act_scaling_factor == nullptr)
     {
-        if(quant_mode == QuantMode::symmetric)
-        {
-            quant_act_int = QuantAct::symmetric_quant_forward(x, activation_bit, act_scaling_factor);
-        }
+        quant_act_int = QuantAct::symmetric_quant_forward(x, activation_bit, act_scaling_factor);
     }
     else
     {
@@ -139,7 +136,7 @@ scaled_tuple QuantAct::QuantAct_forward(Tensor<float> x,
 Tensor<float>* QuantAct::symmetric_linear_quantization_params(unsigned num_bits,
                                         float saturation_min,
                                         float saturation_max,
-                                        bool per_channel=false)
+                                        bool per_channel)
 {
     /*
     Compute the scaling factor with the given quantization range for symmetric quantization.
@@ -150,20 +147,19 @@ Tensor<float>* QuantAct::symmetric_linear_quantization_params(unsigned num_bits,
     saturation_max: upper bound for quantization range
     
     */
-    Tensor<float> scale(1,1,0.f); //size should be changed when 3d matrix support is added.
+    Tensor<float>* scale = new Tensor<float>(1,1,0.f); 
     unsigned n =  exp2( num_bits - 1 ) - 1;
-    float scale;
     if (per_channel)
     {
-        //TODO: 3d matrix support
+        assert(false);
     }
     else
     {
-        Tensor<float>::set(scale,0,0, fmax(fabs(saturation_min), fabs(saturation_max)));
-        Tensor<float>::clamp(scale, 1e-8, FLT_MAX, scale); 
-        Tensor<float>::div_scalar(scale, n, scale);
+        Tensor<float>::set(*scale,0,0, fmax(fabs(saturation_min), fabs(saturation_max)));
+        Tensor<float>::clamp(*scale, 1e-8, FLT_MAX, *scale); 
+        Tensor<float>::div_scalar(*scale, n, *scale);
     }
-    return &scale;
+    return scale;
 }
 
 Tensor<float>* QuantAct::symmetric_quant_forward(Tensor<float> x, int k, Tensor<float>* specified_scale)
@@ -177,22 +173,22 @@ Tensor<float>* QuantAct::symmetric_quant_forward(Tensor<float> x, int k, Tensor<
 
     float n = exp2(k - 1) - 1;
 
-    Tensor<float>* new_quant_x = QuantAct::linear_quantize(x, scale, zero_point);
+    Tensor<float>* new_quant_x = QuantAct::linear_quantize(&x, scale, zero_point);
     Tensor<float>::clamp(*new_quant_x, -n, n-1, *new_quant_x);
     return new_quant_x;
 }
 
-Tensor<float>* QuantAct::linear_quantize(Tensor<float> x, Tensor<float>* scale, Tensor<float>* zero_point)
+Tensor<float>* QuantAct::linear_quantize(Tensor<float>* x, Tensor<float>* scale, Tensor<float>* zero_point)
 {
     //TODO: there will be overflow as max size in one direction is currently 3072
     Tensor<float> space (1,1,0.f);
-    Tensor<float>::view(x, -1, 1, space);
+    Tensor<float>::view(*x, -1, 1, space);
     Tensor<float>::view(*zero_point, -1, 1, space);
     Tensor<float>::reciprocal(*scale, *scale);
-    Tensor<float>::mul_dot(*scale, x, x);
-    Tensor<float>::add(x,*zero_point, x);
-    Tensor<float>::round(x,x);
-    return &x;
+    Tensor<float>::mul_dot(*scale, *x, *x);
+    Tensor<float>::add(*x,*zero_point, *x);
+    Tensor<float>::round(*x, *x);
+    return x;
 }
 
 Tensor<float>* QuantAct::fixedpoint_mul(
@@ -201,8 +197,8 @@ Tensor<float>* QuantAct::fixedpoint_mul(
         int bit_num,
         QuantMode quant_mode,
         Tensor<float>* z_scaling_factor,
-        Tensor<float>* identity = nullptr,
-        Tensor<float>* identity_scaling_factor = nullptr
+        Tensor<float>* identity,
+        Tensor<float>* identity_scaling_factor
     )
 {
     float n ;

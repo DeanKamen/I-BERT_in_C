@@ -1,6 +1,8 @@
 //tensors.cpp
 //Basic HLS tensor implementation for the HUBERT project.
 //created by Hunter Messner on 6/6/2021
+#ifndef __HUBERT_TENSORS_HPP__
+#define __HUBERT_TENSORS_HPP__
 
 #include "HLS/hls.h"
 #include "HLS/math.h"
@@ -8,7 +10,6 @@
 #include "HLS/stdio.h"
 #include "tensors.h"
 #include <iostream>
-
 
 /*                    DEFINITIONS                      */
 
@@ -369,7 +370,7 @@ void Tensor<T>::reciprocal(Tensor& A, Tensor& C)
         for (j = 0; j < A.t_numCols; j++)
         {
             T recip = Tensor::get(A,i,j);
-            T recip = 1.f/recip;
+            recip = 1.f/recip;
             Tensor::set(C,i,j,recip);
         }
     }     
@@ -442,15 +443,16 @@ void Tensor<T>::tensor_frexp(Tensor<float> inputs, Tensor<float>* m, Tensor<floa
     //C has a function called frexp, so I am just applying it to ever element in a matrix.
     //used for the fixed point multiply function in quant_act 
     //reutrns the mantissas and then put the exponents in a seperate tensor.
-    for (i = 0; i < A.t_numRows; i++)
+    unsigned i,j;
+    for (i = 0; i < inputs.t_numRows; i++)
     {
-        for (j = 0; j < A.t_numCols; j++)
+        for (j = 0; j < inputs.t_numCols; j++)
         {
             float m1;
-            int* e1;
-            m1 = frexp(get(inputs,i,j), e1);
-            set(m, i, j, m1);
-            set(e, i, j, *e1); 
+            int e1;
+            m1 = frexp(get(inputs,i,j), &e1);
+            set(*m, i, j, m1);
+            set(*e, i, j, (float)e1); 
         }
     }
 }
@@ -597,3 +599,5 @@ void Tensor<T>::setCols(Tensor& a, int num)
         a.t_numRows = num;
     } 
 }
+
+#endif

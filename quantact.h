@@ -43,7 +43,7 @@ class QuantAct
                                         bool per_channel=false);
 
     Tensor<float>* symmetric_quant_forward(Tensor<float> x, int k, Tensor<float>* specified_scale);
-    Tensor<float>* linear_quantize(Tensor<float> x, Tensor<float>* scale, Tensor<float>* zero_point);
+    Tensor<float>* linear_quantize(Tensor<float> *x, Tensor<float>* scale, Tensor<float>* zero_point);
     Tensor<float>* fixedpoint_mul(
         Tensor<float> pre_act,
         Tensor<float>* pre_act_scaling_factor,

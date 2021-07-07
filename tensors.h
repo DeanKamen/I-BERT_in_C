@@ -3,8 +3,8 @@
 //created by Hunter Messner on 6/6/2021
 
 
-#ifndef __HUBERT_TENSORS_HPP__
-#define __HUBERT_TENSORS_HPP__
+#ifndef __HUBERT_TENSORS_H__
+#define __HUBERT_TENSORS_H__
 
 //typedef int T; //CHANGE THIS TO MAKE A NEW CLASS, TEMPLATES DONT WORK
 
