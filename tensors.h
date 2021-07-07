@@ -42,9 +42,12 @@ class Tensor{
         static void div_dot(Tensor& A, Tensor &B, Tensor &C);
         static void pow_dot(Tensor& A, Tensor &B, Tensor &C);
         static void clamp(Tensor& A, T min, T max, Tensor &C);
+        static void round(Tensor& A, Tensor& C);
+        static void reciprocal(Tensor& A, Tensor& C);
         //manipulation
         static void fill(Tensor& A, T fill);
         static void view(Tensor& A, int rows, int cols, Tensor& space);
+        static void tensor_frexp(Tensor<float> inputs, Tensor<float>* m, Tensor<float>* e);
         //adressing methods
         static T get(Tensor &tensor, const unsigned &row, const unsigned &col);
         static void set(Tensor &tensor, const unsigned &row, const unsigned &col, T val);

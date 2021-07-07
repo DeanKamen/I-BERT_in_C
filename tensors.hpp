@@ -182,6 +182,9 @@ void Tensor<T>::max(Tensor& A, int dim, Tensor &C)
                 Tensor<T>::set(C, 0, i, largest);
             }
         }
+        //i know the dimentions of C, so i set them for safety
+        setRows(C, 1);
+        setCols(C, A.t_numCols);
     }
     else
     {
@@ -206,14 +209,16 @@ void Tensor<T>::max(Tensor& A, int dim, Tensor &C)
                 Tensor<T>::set(C, i, 0, largest);
             }
         }
+        setRows(C, A.t_numRows);
+        setCols(C, 1);
 
     }
 }
 template<class T>
 void Tensor<T>::min(Tensor& A, int dim, Tensor &C)
-//same code as MAX
-//dim=0 means you find the biggest in each column,
-//dim=1 means you find the biggest in each row. 
+//virtually same code as MAX
+//dim=0 means you find the smallest in each column,
+//dim=1 means you find the smallest in each row. 
 {
     if(dim == 0)
     {
@@ -238,6 +243,9 @@ void Tensor<T>::min(Tensor& A, int dim, Tensor &C)
                 Tensor<T>::set(C, 0, i, smallest);
             }
         }
+        //I can guarantee the dimentions of the resulting tensor.
+        setRows(C, 1);
+        setCols(C, A.t_numCols);
     }
     else
     { //dim ==1
@@ -262,6 +270,8 @@ void Tensor<T>::min(Tensor& A, int dim, Tensor &C)
                 Tensor<T>::set(C, i, 0, smallest);
             }
         }
+        setRows(C, A.t_numRows);
+        setCols(C, 1);
 
     }
 }
@@ -335,6 +345,37 @@ void Tensor<T>::clamp(Tensor& A, T min, T max, Tensor &C)
     }     
 }
 
+template<class T>
+void Tensor<T>::round(Tensor& A, Tensor& C)
+{
+    unsigned i,j;
+    for (i = 0; i < A.t_numRows; i++)
+    {
+        for (j = 0; j < A.t_numCols; j++)
+        {
+            T round = Tensor::get(A,i,j);
+            T rounded = roundf(round); //always cast to float
+            Tensor::set(C,i,j, rounded);
+        }
+    }     
+}
+
+template<class T>
+void Tensor<T>::reciprocal(Tensor& A, Tensor& C)
+{
+    unsigned i,j;
+    for (i = 0; i < A.t_numRows; i++)
+    {
+        for (j = 0; j < A.t_numCols; j++)
+        {
+            T recip = Tensor::get(A,i,j);
+            T recip = 1.f/recip;
+            Tensor::set(C,i,j,recip);
+        }
+    }     
+}
+
+
 /****************************************************manipulation****************************************************/
 template<class T>
 void Tensor<T>::fill(Tensor& A, T fill)
@@ -392,6 +433,26 @@ void Tensor<T>::view(Tensor& A, const int rows, const int cols, Tensor& space)
     }
     setRows(A, newRows);
     setCols(A, newCols);
+}
+
+template<class T>
+void Tensor<T>::tensor_frexp(Tensor<float> inputs, Tensor<float>* m, Tensor<float>* e)
+{
+    //I am writing this one myself as I dont have access to numpy
+    //C has a function called frexp, so I am just applying it to ever element in a matrix.
+    //used for the fixed point multiply function in quant_act 
+    //reutrns the mantissas and then put the exponents in a seperate tensor.
+    for (i = 0; i < A.t_numRows; i++)
+    {
+        for (j = 0; j < A.t_numCols; j++)
+        {
+            float m1;
+            int* e1;
+            m1 = frexp(get(inputs,i,j), e1);
+            set(m, i, j, m1);
+            set(e, i, j, *e1); 
+        }
+    }
 }
 
 /****************************************************adressing methods****************************************************/

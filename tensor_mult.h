@@ -44,6 +44,8 @@
 //			- C[][] -  C output 2 dimensional matrix
 //
 //Tip - You can safely ignore compiler warnings like default template arguments for a function template are a C++11 extension [-Wc++11-extensions]. 
+#ifndef __HUBERT_TENSORMULTIPLY_H__
+#define __HUBERT_TENSORMULTIPLY_H__
 
 #include "tensors.h"
 //this function cannot auto-detect matrix size, it must be entered manually with compile time constants.
@@ -146,3 +148,4 @@ void matrix_multiply(Tensor<T>& A, Tensor<T>&B, Tensor<T>& C) {
 	}
 }
 
+#endif

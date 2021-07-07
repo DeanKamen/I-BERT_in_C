@@ -1,6 +1,6 @@
 #include "HLS/hls.h"
 #include "HLS/stdio.h"
-#include "tensors.hpp" //YES I KNOW, but in order to make the compiler (i++) happy, it must not be a .h file
+#include "tensors.hpp" 
 #include "tensor_mult.h"
 #include <iostream>
 
