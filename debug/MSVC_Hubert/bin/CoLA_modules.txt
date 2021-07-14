@@ -1,0 +1,109 @@
+TransformerSentenceEncoderLayer(
+  (dropout_module): FairseqDropout()
+  (activation_dropout_module): FairseqDropout()
+  (activation_fn_approx): IntGELU()
+  (input_act): QuantAct(activation_bit=8, quant_mode: symmetric, Act_min: -2.04, Act_max: 5.75)
+  (self_attn): MultiheadAttention(
+    (dropout_module): FairseqDropout()
+    (k_proj): (QuantLinear() weight_bit=8, quant_mode=symmetric)
+    (v_proj): (QuantLinear() weight_bit=8, quant_mode=symmetric)
+    (q_proj): (QuantLinear() weight_bit=8, quant_mode=symmetric)
+    (k_proj_act): QuantAct(activation_bit=8, quant_mode: symmetric, Act_min: -11.25, Act_max: 11.27)
+    (v_proj_act): QuantAct(activation_bit=8, quant_mode: symmetric, Act_min: -4.28, Act_max: 2.96)
+    (q_proj_act): QuantAct(activation_bit=8, quant_mode: symmetric, Act_min: -12.82, Act_max: 12.98)
+    (softmax): IntSoftmax(
+      (act): QuantAct(activation_bit=16, quant_mode: symmetric, Act_min: 2173756.25, Act_max: 2334054074548224.00)
+    )
+    (attn_probs_act): QuantAct(activation_bit=8, quant_mode: symmetric, Act_min: 0.00, Act_max: 0.00)
+    (attn_act): QuantAct(activation_bit=8, quant_mode: symmetric, Act_min: -3.44, Act_max: 2.29)
+    (out_proj): (QuantLinear() weight_bit=8, quant_mode=symmetric)
+  )
+  (pre_self_attn_layer_norm_act): QuantAct(activation_bit=22, quant_mode: symmetric, Act_min: -15.31, Act_max: 20.19)
+  (self_attn_layer_norm): IntLayerNorm(
+    (activation): QuantAct(activation_bit=32, quant_mode: none, Act_min: 0.00, Act_max: 0.00)
+  )
+  (fc1_act): QuantAct(activation_bit=8, quant_mode: symmetric, Act_min: -21.07, Act_max: 24.13)
+  (fc2_act): QuantAct(activation_bit=8, quant_mode: symmetric, Act_min: -0.17, Act_max: 17.69)
+  (fc1): (QuantLinear() weight_bit=8, quant_mode=symmetric)
+  (fc2): (QuantLinear() weight_bit=8, quant_mode=symmetric)
+  (pre_final_layer_norm_act): QuantAct(activation_bit=22, quant_mode: symmetric, Act_min: -40.64, Act_max: 52.42)
+  (final_layer_norm): IntLayerNorm(
+    (activation): QuantAct(activation_bit=32, quant_mode: none, Act_min: 0.00, Act_max: 0.00)
+  )
+) 
+odict_keys(['activation_fn_approx.input_scaling_factor'
+'input_act.x_min'
+'input_act.x_max'
+'input_act.act_scaling_factor'
+'self_attn.k_proj.weight'
+'self_attn.k_proj.bias'
+'self_attn.k_proj.fc_scaling_factor'
+'self_attn.k_proj.weight_integer'
+'self_attn.k_proj.bias_integer'
+'self_attn.v_proj.weight'
+'self_attn.v_proj.bias'
+'self_attn.v_proj.fc_scaling_factor'
+'self_attn.v_proj.weight_integer'
+'self_attn.v_proj.bias_integer'
+'self_attn.q_proj.weight'
+'self_attn.q_proj.bias'
+'self_attn.q_proj.fc_scaling_factor'
+'self_attn.q_proj.weight_integer'
+'self_attn.q_proj.bias_integer'
+'self_attn.k_proj_act.x_min'
+'self_attn.k_proj_act.x_max'
+'self_attn.k_proj_act.act_scaling_factor'
+'self_attn.v_proj_act.x_min'
+'self_attn.v_proj_act.x_max'
+'self_attn.v_proj_act.act_scaling_factor'
+'self_attn.q_proj_act.x_min'
+'self_attn.q_proj_act.x_max'
+'self_attn.q_proj_act.act_scaling_factor'
+'self_attn.softmax.act.x_min'
+'self_attn.softmax.act.x_max'
+'self_attn.softmax.act.act_scaling_factor'
+'self_attn.attn_probs_act.x_min'
+'self_attn.attn_probs_act.x_max'
+'self_attn.attn_probs_act.act_scaling_factor'
+'self_attn.attn_act.x_min'
+'self_attn.attn_act.x_max'
+'self_attn.attn_act.act_scaling_factor'
+'self_attn.out_proj.weight'
+'self_attn.out_proj.bias'
+'self_attn.out_proj.fc_scaling_factor'
+'self_attn.out_proj.weight_integer'
+'self_attn.out_proj.bias_integer'
+'pre_self_attn_layer_norm_act.x_min'
+'pre_self_attn_layer_norm_act.x_max'
+'pre_self_attn_layer_norm_act.act_scaling_factor'
+'self_attn_layer_norm.weight'
+'self_attn_layer_norm.bias'
+'self_attn_layer_norm.shift'
+'self_attn_layer_norm.activation.x_min'
+'self_attn_layer_norm.activation.x_max'
+'self_attn_layer_norm.activation.act_scaling_factor'
+'fc1_act.x_min'
+'fc1_act.x_max'
+'fc1_act.act_scaling_factor'
+'fc2_act.x_min'
+'fc2_act.x_max'
+'fc2_act.act_scaling_factor'
+'fc1.weight'
+'fc1.bias'
+'fc1.fc_scaling_factor'
+'fc1.weight_integer'
+'fc1.bias_integer'
+'fc2.weight'
+'fc2.bias'
+'fc2.fc_scaling_factor'
+'fc2.weight_integer'
+'fc2.bias_integer'
+'pre_final_layer_norm_act.x_min'
+'pre_final_layer_norm_act.x_max'
+'pre_final_layer_norm_act.act_scaling_factor'
+'final_layer_norm.weight'
+'final_layer_norm.bias'
+'final_layer_norm.shift'
+'final_layer_norm.activation.x_min'
+'final_layer_norm.activation.x_max'
+'final_layer_norm.activation.act_scaling_factor']) 

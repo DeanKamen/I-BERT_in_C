@@ -22,14 +22,14 @@ QuantAct::QuantAct(int activation_bit_i,
     {
         x_min = new Tensor<float>(1, 1, 0.0f);
         x_max = new Tensor<float>(1, 1, 0.0f);
-        act_scaling_factor = new Tensor(1, 1, 0.0f);
+        act_scaling_factor = new Tensor<float>(1, 1, 0.0f);
     }
     else
     {
         assert(channel_len > 0);
         x_min = new Tensor<float>(1,channel_len, 0.0f);
         x_max = new Tensor<float>(1,channel_len, 0.0f);
-        act_scaling_factor = new Tensor(1,channel_len, 0.0f);
+        act_scaling_factor = new Tensor<float>(1,channel_len, 0.0f);
     }
 }
 
@@ -230,7 +230,7 @@ Tensor<float>* QuantAct::fixedpoint_mul(
     Tensor<float>::tensor_frexp(*new_scale, m, e);
     Tensor<float>* output = new Tensor<float>(*z_int);
     Tensor<float>::mul_dot(*z_int, *m, *output);
-    Tensor<float>* twos = new Tensor(Tensor<float>::getRows(*output), Tensor<float>::getCols(*output), 2.0f);
+    Tensor<float>* twos = new Tensor<float>(Tensor<float>::getRows(*output), Tensor<float>::getCols(*output), 2.0f);
     Tensor<float>::pow_dot(*twos, *e, *e); //use e as temp storage
     Tensor<float>::div_dot(*output, *e, *output);
     Tensor<float>::round(*output, *output);

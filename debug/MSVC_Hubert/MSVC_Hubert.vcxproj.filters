@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="tensors.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tensors.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tensor_mult.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="quantact.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HLS\internal\_function.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HLS\internal\_function_traits.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HLS\internal\_hls.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HLS\internal\_hls_float_common_inc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HLS\internal\_hls_float_FPGA.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HLS\internal\_hls_float_interface.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HLS\internal\_hls_float_X86-64.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HLS\internal\_memory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HLS\internal\_pipes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HLS\internal\_stream.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HLS\internal\_task.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HLS\internal\_task_FPGA.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HLS\internal\_task_X86-64.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HLS\internal\emulator_threadsupport.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HLS\ac_complex.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HLS\ac_fixed.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HLS\ac_fixed_math.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HLS\ac_fixed_math_internal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HLS\ac_int.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HLS\cholesky_decompose.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HLS\extendedmath.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HLS\hls.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HLS\hls_float.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HLS\hls_float_math.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HLS\ihc_apint.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HLS\lsu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HLS\math.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HLS\math_dsp_control.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HLS\matrix_mult.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HLS\ocl_types.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HLS\pipes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HLS\rand_lib.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HLS\stdio.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="loadTensors.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hubertEnums.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="softmax.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="quantact_testbench.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="quantact.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="loadTensors.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="softmax.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
