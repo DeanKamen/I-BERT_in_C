@@ -166,6 +166,7 @@
     <ClInclude Include="tensors.h" />
     <ClInclude Include="tensors.hpp" />
     <ClInclude Include="tensor_mult.h" />
+    <ClInclude Include="testglobals.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="loadTensors.cpp" />

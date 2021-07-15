@@ -19,7 +19,7 @@ public:
 	scaled_tuple int_exp(Tensor<float>* x_int, Tensor<float>* scaling_factor);
 	scaled_tuple softmax_forward(Tensor<float>* x_int, Tensor<float>* scaling_factor);
 
-	Tensor<float>* normal_softmax(Tensor<float>* row);
+	void normal_softmax(Tensor<float>* row, Tensor<float>* dest);
 
 	int output_bit;
 	QuantMode quant_mode;

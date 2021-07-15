@@ -1,4 +1,4 @@
-﻿  softmax.cpp
+﻿  quantact.cpp
 c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\hls\matrix_mult.h(71): warning C4068: unknown pragma
 c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\hls\matrix_mult.h(76): warning C4068: unknown pragma
 c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\hls\matrix_mult.h(82): warning C4068: unknown pragma
@@ -11,4 +11,17 @@ c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\tensor_mult.h(90
 c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\tensor_mult.h(109): warning C4068: unknown pragma
 c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\tensor_mult.h(115): warning C4068: unknown pragma
 c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\tensor_mult.h(121): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\quantact.cpp(180): warning C4244: 'initializing': conversion from 'double' to 'unsigned int', possible loss of data
+c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\quantact.cpp(188): warning C4305: 'argument': truncation from 'double' to 'T'
+          with
+          [
+              T=float
+          ]
+c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\quantact.cpp(189): warning C4244: 'argument': conversion from 'unsigned int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\quantact.cpp(203): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\tensors.hpp(772): warning C4715: 'Tensor<float>::one': not all control paths return a value
   MSVC_Hubert.vcxproj -> C:\Users\hunto_efxy22i\jupyterProjects\HUBERT\debug\MSVC_Hubert\x64\Debug\MSVC_Hubert.exe

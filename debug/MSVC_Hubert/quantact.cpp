@@ -78,7 +78,10 @@ scaled_tuple QuantAct::QuantAct_forward(Tensor<float>* x,
         if(!per_channel)
         {
             Tensor<float>::min(x_act, 1, local_xmin);
+			Tensor<float>::min(local_xmin, 0, local_xmin); // this is to collapse 2d matrixes fully
+
             Tensor<float>::max(x_act, 1, local_xmax);
+			Tensor<float>::max(local_xmax, 0, local_xmax);
         }
         else
         {
@@ -95,10 +98,10 @@ scaled_tuple QuantAct::QuantAct_forward(Tensor<float>* x,
     }
     else if(act_range_momentum == -1)
 	{
-		float obj_min = Tensor<float>::get(x_min, 0, 0);
-		float obj_max = Tensor<float>::get(x_max, 0, 0);
-		float localmin = Tensor<float>::get(local_xmin, 0, 0);
-		float localmax = Tensor<float>::get(local_xmax, 0, 0);
+		float obj_min = Tensor<float>::one(x_min);
+		float obj_max = Tensor<float>::one(x_max);
+		float localmin = Tensor<float>::one(local_xmin);
+		float localmax = Tensor<float>::one(local_xmax);
 
 		if (localmax > obj_max)
 		{
@@ -112,12 +115,12 @@ scaled_tuple QuantAct::QuantAct_forward(Tensor<float>* x,
     else
     {
         //here I am assuming xmin and xmax are 1x1
-        float objmin = Tensor<float>::get(x_min, 0,0);
-		float localmin = Tensor<float>::get(local_xmin, 0, 0);
+        float objmin = Tensor<float>::one(x_min);
+		float localmin = Tensor<float>::one(local_xmin);
         Tensor<float>::set(x_min, 0,0, objmin*act_range_momentum + localmin*(1-act_range_momentum));
 
-        float objmax = Tensor<float>::get(x_max, 0,0);
-		float localmax = Tensor<float>::get(local_xmax, 0, 0);
+        float objmax = Tensor<float>::one(x_max);
+		float localmax = Tensor<float>::one(local_xmax);
         Tensor<float>::set(x_max, 0,0, objmax*act_range_momentum + localmax*(1-act_range_momentum));
     }
 
@@ -134,8 +137,8 @@ scaled_tuple QuantAct::QuantAct_forward(Tensor<float>* x,
     if(specified_max != nullptr) 
     x_min = specified_max;
 
-    float min = Tensor<float>::get(x_min, 0, 0); 
-    float max = Tensor<float>::get(x_max, 0, 0);
+    float min = Tensor<float>::one(x_min); 
+    float max = Tensor<float>::one(x_max);
     act_scaling_factor = QuantAct::symmetric_linear_quantization_params(activation_bit, min, max, per_channel);
     
     Tensor<float>* quant_act_int = nullptr;
@@ -152,7 +155,7 @@ scaled_tuple QuantAct::QuantAct_forward(Tensor<float>* x,
     Tensor<float>* correct_output_scale = new Tensor<float>(act_scaling_factor);
     Tensor<float>::view(correct_output_scale, -1, 1, space);
 	//correct output scale has just one element while quant act int has 2
-    Tensor<float>::mul_scalar(quant_act_int, Tensor<float>::get(correct_output_scale,0,0), quant_act_int);
+    Tensor<float>::mul_scalar(quant_act_int, Tensor<float>::one(correct_output_scale), quant_act_int);
     scaled_tuple returnme;
     returnme.matrix = quant_act_int;
     returnme.scaling_factor = act_scaling_factor;
@@ -231,10 +234,10 @@ Tensor<float>* QuantAct::fixedpoint_mul(
     float n ;
     if (quant_mode == QuantMode::symmetric)
     {
-        n = exp2(bit_num - 1) -1;
+        n = (float)exp2(bit_num - 1) -1;
     }
     else{
-        n = exp2(bit_num) - 1;
+        n = (float)exp2(bit_num) - 1;
     }
     Tensor<float>* space = new Tensor<float>(1,1,0.f);
     Tensor<float>::view(pre_act_scaling_factor, -1,1, space);
@@ -244,8 +247,8 @@ Tensor<float>* QuantAct::fixedpoint_mul(
     }
 
     Tensor<float>* z_int = new Tensor<float>(pre_act);
-	//pre act and pre act scaling factor are not the same dimention
-    Tensor<float>::div_scalar(pre_act, Tensor<float>::get(pre_act_scaling_factor,0,0), z_int); 
+	//pre act is one dimentional
+    Tensor<float>::div_scalar(pre_act, Tensor<float>::one(pre_act_scaling_factor), z_int); 
     Tensor<float>::roundTensor(z_int, z_int);
 
     //the following is in double precision in the code, but I did not make it double precision here
@@ -261,11 +264,11 @@ Tensor<float>* QuantAct::fixedpoint_mul(
     Tensor<float>::tensor_frexp(new_scale, m, e);
     Tensor<float>* output = new Tensor<float>(z_int);
 	Tensor<float>* twos = new Tensor<float>(Tensor<float>::getRows(output), Tensor<float>::getCols(output), 2.0f);
-	//additionally, e is not multidimentional
-	Tensor<float>::pow_scalar(twos, Tensor<float>::get(e, 0, 0), twos); //use twos as temp storage
+	//additionally, e is one dimentional
+	Tensor<float>::pow_scalar(twos, Tensor<float>::one(e), twos); //use twos as temp storage
 	Tensor<float>::div_dot(output, twos, output);
 	//m is sigular dimention while z int is multi-dimentional
-    Tensor<float>::mul_scalar(output, Tensor<float>::get(m,0,0), output);
+    Tensor<float>::mul_scalar(output, Tensor<float>::one(m), output);
     Tensor<float>::roundTensor(output, output);
 
     if(identity != nullptr)

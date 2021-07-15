@@ -4,7 +4,7 @@
 //enum to desribe all preloaded Tensors
 enum class QuantMode {none, symmetric};
 
-enum class ForceDequantMode{none, nonlinear, softmax};
+enum class ForceDequantMode{none, nonlinear, softmax, layernorm};
 
 struct scaled_tuple
 {//to get the most fidelity out of the translation, I make

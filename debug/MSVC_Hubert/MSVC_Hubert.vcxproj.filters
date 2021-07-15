@@ -135,6 +135,9 @@
     <ClInclude Include="softmax.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="testglobals.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="quantact_testbench.cpp">

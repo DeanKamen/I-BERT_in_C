@@ -70,49 +70,217 @@ Tensor<T>::Tensor(Tensor<T> *A)
 }
 
 template<class T>
+void Tensor<T>::mul_cross(Tensor<T> *A, Tensor<T> *B, Tensor<T> *C)
+//this function needs to use MACROS or constants known at compile time for sizes.
+//when using multiplies in components, use the below prototype.
+{
+	matrix_multiply<T, MAX_ROWS, MAX_COLS, MAX_COLS, UNITS_PER_MULTIPLY>(A->t_tensor, B->t_tensor, C->t_tensor);
+}
+
+template<class T>
 void Tensor<T>::add(Tensor<T> *A, Tensor<T> *B, Tensor<T> *C)
 {
-	if (!sameSize(A, B))
+	int rowMod;
+	int colMod;
+	Tensor<T>* larger = A; //more rows or cols
+	Tensor<T>* smaller = B; //one row or one col
+	if (sameSize(A, B))
+	{//exactly the same size.
+		rowMod = getRows(A) + 1; //these mods do NOT affect the iterator
+		colMod = getCols(A) + 1;
+	} //larger smaller does matter now
+	else if (sameRows(A, B))
+	{
+		rowMod = getRows(A) + 1;
+		colMod = 1; //the column is always the 0th index.
+		flopSize(larger, smaller);
+	}
+	else if (sameCols(A, B))
+	{
+		rowMod = 1; //the row is always the 0th index.
+		colMod = getCols(A) + 1;; 
+		flopSize(larger, smaller);
+	}
+	else
 	{
 		printf("incompatible dimenions\n");
 		assert(false);
 	}
+
+	//now for the actual math
     unsigned i,j;
-    for (i = 0; i < A->t_numRows; i++)
+    for (i = 0; i < larger->t_numRows; i++)
     {
-        for (j = 0; j < A->t_numCols; j++)
+        for (j = 0; j < larger->t_numCols; j++)
         {
-            Tensor::set(C,i,j,Tensor::get(A,i,j) + Tensor::get(B,i,j));
+            Tensor::set(C,i,j,Tensor::get(larger, i, j) + Tensor::get(smaller, i % rowMod, j % colMod));
         }
     }
-}
-
-template<class T>
-void Tensor<T>::mul(Tensor<T> *A, Tensor<T> *B, Tensor<T> *C)
-//this function needs to use MACROS or constants known at compile time for sizes.
-//when using multiplies in components, use the below prototype.
-{
-    matrix_multiply<T, MAX_ROWS, MAX_COLS, MAX_COLS, UNITS_PER_MULTIPLY>(A->t_tensor, B->t_tensor, C->t_tensor);
 }
 
 template<class T>
 void Tensor<T>::sub(Tensor<T> *A, Tensor<T> *B, Tensor<T> *C)
 {
-	if (!sameSize(A, B))
+	int rowMod;
+	int colMod;
+	Tensor<T>* larger = A; //more rows or cols
+	Tensor<T>* smaller = B; //one row or one col
+	if (sameSize(A, B))
+	{//exactly the same size.
+		rowMod = getRows(A) + 1; //these mods do NOT affect the iterator
+		colMod = getCols(A) + 1;
+	} //larger smaller does matter now
+	else if (sameRows(A, B))
+	{
+		rowMod = getRows(A) + 1;
+		colMod = 1; //the column is always the 0th index.
+		flopSize(larger, smaller);
+	}
+	else if (sameCols(A, B))
+	{
+		rowMod = 1; //the row is always the 0th index.
+		colMod = getCols(A) + 1;;
+		flopSize(larger, smaller);
+	}
+	else
 	{
 		printf("incompatible dimenions\n");
 		assert(false);
 	}
-    unsigned i,j;
-    for (i = 0; i < A->t_numRows; i++)
-    {
-        for (j = 0; j < A->t_numCols; j++)
-        {
-            Tensor::set(C,i,j,Tensor::get(A,i,j) - Tensor::get(B,i,j));
-        }
-    }
+
+	//now for the actual math
+	unsigned i, j;
+	for (i = 0; i < larger->t_numRows; i++)
+	{
+		for (j = 0; j < larger->t_numCols; j++)
+		{
+			Tensor::set(C, i, j, Tensor::get(larger, i, j) - Tensor::get(smaller, i % rowMod, j % colMod));
+		}
+	}
 }
 
+template<class T>
+void Tensor<T>::mul_dot(Tensor<T> *A, Tensor<T> *B, Tensor<T> *C)
+{
+	int rowMod;
+	int colMod;
+	Tensor<T>* larger = A; //more rows or cols
+	Tensor<T>* smaller = B; //one row or one col
+	if (sameSize(A, B))
+	{//exactly the same size.
+		rowMod = getRows(A) + 1; //these mods do NOT affect the iterator
+		colMod = getCols(A) + 1;
+	} //larger smaller does matter now
+	else if (sameRows(A, B))
+	{
+		rowMod = getRows(A) + 1;
+		colMod = 1; //the column is always the 0th index.
+		flopSize(larger, smaller);
+	}
+	else if (sameCols(A, B))
+	{
+		rowMod = 1; //the row is always the 0th index.
+		colMod = getCols(A) + 1;;
+		flopSize(larger, smaller);
+	}
+	else
+	{
+		printf("incompatible dimenions\n");
+		assert(false);
+	}
+
+	//now for the actual math
+	unsigned i, j;
+	for (i = 0; i < larger->t_numRows; i++)
+	{
+		for (j = 0; j < larger->t_numCols; j++)
+		{
+			Tensor::set(C, i, j, Tensor::get(larger, i, j) * Tensor::get(smaller, i % rowMod, j % colMod));
+		}
+	}
+}
+
+template<class T>
+void Tensor<T>::div_dot(Tensor<T> *A, Tensor<T> *B, Tensor<T> *C)
+{
+	int rowMod;
+	int colMod;
+	Tensor<T>* larger = A; //more rows or cols
+	Tensor<T>* smaller = B; //one row or one col
+	if (sameSize(A, B))
+	{//exactly the same size.
+		rowMod = getRows(A) + 1; //these mods do NOT affect the iterator
+		colMod = getCols(A) + 1;
+	} //larger smaller does matter now
+	else if (sameRows(A, B))
+	{
+		rowMod = getRows(A) + 1;
+		colMod = 1; //the column is always the 0th index.
+		flopSize(larger, smaller);
+	}
+	else if (sameCols(A, B))
+	{
+		rowMod = 1; //the row is always the 0th index.
+		colMod = getCols(A) + 1;;
+		flopSize(larger, smaller);
+	}
+	else
+	{
+		printf("incompatible dimenions\n");
+		assert(false);
+	}
+
+	//now for the actual math
+	unsigned i, j;
+	for (i = 0; i < larger->t_numRows; i++)
+	{
+		for (j = 0; j < larger->t_numCols; j++)
+		{
+			Tensor::set(C, i, j, Tensor::get(larger, i, j) / Tensor::get(smaller, i % rowMod, j % colMod));
+		}
+	}
+}
+
+template<class T>
+void Tensor<T>::pow_dot(Tensor<T> *A, Tensor<T> *B, Tensor<T> *C)
+{// A = B^C, note that there are more efficient functions for 2^X or e^X or 10^X
+	int rowMod;
+	int colMod;
+	Tensor<T>* larger = A; //more rows or cols
+	Tensor<T>* smaller = B; //one row or one col
+	if (sameSize(A, B))
+	{//exactly the same size.
+		rowMod = getRows(A) + 1; //these mods do NOT affect the iterator
+		colMod = getCols(A) + 1;
+	} //larger smaller does matter now
+	else if (sameRows(A, B))
+	{
+		rowMod = getRows(A) + 1;
+		colMod = 1; //the column is always the 0th index.
+		flopSize(larger, smaller);
+	}
+	else if (sameCols(A, B))
+	{
+		rowMod = 1; //the row is always the 0th index.
+		colMod = getCols(A) + 1;;
+		flopSize(larger, smaller);
+	}
+	else
+	{
+		printf("incompatible dimenions\n");
+		assert(false);
+	}
+
+	//now for the actual math
+	unsigned i, j;
+	for (i = 0; i < larger->t_numRows; i++)
+	{
+		for (j = 0; j < larger->t_numCols; j++)
+		{
+			Tensor::set(C, i, j, pow(Tensor::get(larger, i, j), Tensor::get(smaller, i % rowMod, j % colMod)));
+		}
+	}
+}
 
 template<class T>
 void Tensor<T>::add_scalar(Tensor<T> *A, T B, Tensor<T> *C)
@@ -347,65 +515,7 @@ void Tensor<T>::floor_tensor(Tensor<T> *A, Tensor<T> *C)
 }
 
 template<class T>
-void Tensor<T>::mul_dot(Tensor<T> *A, Tensor<T> *B, Tensor<T> *C)
-{
-	if (!sameSize(A, B))
-	{
-		printf("incompatible dimenions\n");
-		assert(false);
-	}
-
-    unsigned i,j;
-    for (i = 0; i < A->t_numRows; i++)
-    {
-        for (j = 0; j < A->t_numCols; j++)
-        {
-            Tensor::set(C,i,j,Tensor::get(A,i,j) * Tensor::get(B,i,j));
-        }
-    }   
-}
-
-template<class T>
-void Tensor<T>::div_dot(Tensor<T> *A, Tensor<T> *B, Tensor<T> *C)
-{
-    unsigned i,j;
-	//error check
-	if (!sameSize(A, B))
-	{
-		printf("incompatible dimenions\n");
-		assert(false);
-	}
-	
-    for (i = 0; i < A->t_numRows; i++)
-    {
-        for (j = 0; j < A->t_numCols; j++)
-        {
-            Tensor::set(C,i,j,Tensor::get(A,i,j) / Tensor::get(B,i,j));
-        }
-    }   
-}
-
-template<class T>
-void Tensor<T>::pow_dot(Tensor<T> *A, Tensor<T> *B, Tensor<T> *C)
-{// A = B^C, note that there are more efficient functions for 2^X or e^X or 10^X
-	if (!sameSize(A, B))
-	{
-		printf("incompatible dimenions\n");
-		assert(false);
-	}
-
-    unsigned i,j;
-    for (i = 0; i < A->t_numRows; i++)
-    {
-        for (j = 0; j < A->t_numCols; j++)
-        {
-            Tensor::set(C,i,j, pow(Tensor::get(A,i,j), Tensor::get(B,i,j)));
-        }
-    }  
-}
-
-template<class T>
-void exp2(Tensor<T> *A, Tensor<T> *C)
+void Tensor<T>::exp2_tensor(Tensor<T> *A, Tensor<T> *C)
 {
 	unsigned i, j;
 	for (i = 0; i < A->t_numRows; i++)
@@ -467,10 +577,11 @@ void Tensor<T>::sum(Tensor<T> *A, int dim, Tensor<T>* C)
 {
 //dim=0 means you find the sum of each column,
 //dim=1 means you find the sum of each row. 
+	unsigned i, j;
+	T running;
+	running = T(0);
 	if (dim == 0)
 	{
-		unsigned i, j;
-		T runnning = 0;
 		for (i = 0; i < A->t_numCols; i++)
 		{
 			for (j = 0; j < A->t_numRows; j++)
@@ -486,8 +597,6 @@ void Tensor<T>::sum(Tensor<T> *A, int dim, Tensor<T>* C)
 	}
 	else
 	{ //dim ==1
-		unsigned i, j;
-		T runnning = 0;
 		for (i = 0; i < A->t_numRows; i++)
 		{
 			for (j = 0; j < A->t_numCols; j++)
@@ -648,6 +757,20 @@ void Tensor<T>::set(Tensor<T> *tensor, const unsigned &row, const unsigned &col,
     }
 }
 
+template<class T>
+T Tensor<T>::one(Tensor<T> *A)
+{//demotes a tensor to a primitive type (typically float)
+	if (Tensor<float>::getRows(A) == 1 && Tensor<float>::getCols(A) == 1)
+	{
+		return get(A, 0, 0);
+	}
+	else
+	{
+		printf("1x1 matrix asssumption failed");
+		assert(false);
+	}
+}
+
 //helper functions
 template<class T>
 void Tensor<T>::transpose(Tensor<T> *a)
@@ -744,6 +867,27 @@ template<class T>
 bool Tensor<T>::sameSize(Tensor<T> *A, Tensor<T> *B)
 {
 	return Tensor<float>::getRows(A) == Tensor<float>::getRows(B) && Tensor<float>::getCols(A) == Tensor<float>::getCols(B);
+}
+template<class T>
+bool Tensor<T>::sameRows(Tensor<T> *A, Tensor<T> *B)
+{
+	return Tensor<float>::getRows(A) == Tensor<float>::getRows(B);
+}
+template<class T>
+bool Tensor<T>::sameCols(Tensor<T> *A, Tensor<T> *B)
+{
+	return Tensor<float>::getCols(A) == Tensor<float>::getCols(B);
+}
+template<class T>
+void Tensor<T>::flopSize(Tensor<T> *lhs, Tensor<T> *rhs)
+{//At the end of this function lhs will always point to the larger of the two tensors
+	assert(sameRows(lhs,rhs) || sameCols(lhs,rhs)); //we assume that the tensors share one dimention
+	if (getCols(lhs) < getCols(rhs) || getRows(lhs) < getRows(rhs))
+	{
+		Tensor<T>* temp = lhs;
+		lhs = rhs;
+		rhs = temp;
+	}
 }
 
 #endif
