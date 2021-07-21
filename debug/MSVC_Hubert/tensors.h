@@ -1,12 +1,10 @@
-//tensors.hpp
+//tensors.h
 //Basic HLS tensor implementation for the HUBERT project.
 //created by Hunter Messner on 6/6/2021
 
 
 #ifndef __HUBERT_TENSORS_H__
 #define __HUBERT_TENSORS_H__
-
-//typedef int T; //CHANGE THIS TO MAKE A NEW CLASS, TEMPLATES DONT WORK
 
 /*                TUNING AND OPTIONS                   */
 const unsigned MAX_ROWS = 3072; // based on the max size of numpy arrays in default IBERT (3072)
@@ -67,14 +65,17 @@ class Tensor{
         static unsigned getCols(Tensor<T>* a);
         static bool eq(Tensor<T>* A, Tensor<T>* B);
 
+		//functions that probably shouldnt be used out of this file
+		static void setRows(Tensor<T>* a, int num);
+		static void setCols(Tensor<T>* a, int num);
+		static void copy(Tensor<T> *A, Tensor<T> *C);
         //private helper functions
     private:
-        static void setRows(Tensor<T>* a, int num);
-        static void setCols(Tensor<T>* a, int num);
 		static bool sameSize(Tensor<T> *A, Tensor<T> *B);
 		static bool sameRows(Tensor<T> *A, Tensor<T> *B);
 		static bool sameCols(Tensor<T> *A, Tensor<T> *B);
 		static void flopSize(Tensor<T> *lhs, Tensor<T> *rhs);
+		
 };
 
 

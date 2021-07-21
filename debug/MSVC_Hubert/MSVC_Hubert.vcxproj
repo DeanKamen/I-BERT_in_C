@@ -163,6 +163,8 @@
     <ClInclude Include="loadTensors.h" />
     <ClInclude Include="quantact.h" />
     <ClInclude Include="softmax.h" />
+    <ClInclude Include="tensor3d.h" />
+    <ClInclude Include="tensor3d.hpp" />
     <ClInclude Include="tensors.h" />
     <ClInclude Include="tensors.hpp" />
     <ClInclude Include="tensor_mult.h" />

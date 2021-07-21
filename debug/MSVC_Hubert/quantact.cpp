@@ -45,7 +45,7 @@ void QuantAct::unfix()
     running_stat=true;
 }
 
-scaled_tuple QuantAct::QuantAct_forward(Tensor<float>* x, 
+scaled_tuple3d QuantAct::QuantAct_forward(Tensor3d<float>* x, 
                               Tensor<float>* pre_act_scaling_factor,
                               Tensor<float>* identity,
                               Tensor<float>* identity_scaling_factor,
@@ -53,21 +53,21 @@ scaled_tuple QuantAct::QuantAct_forward(Tensor<float>* x,
                               Tensor<float>* specified_max)
 {
 	printf("QUANTACT_FORWARD START\n");
-	Tensor<float>::print(x);
+	Tensor3d<float>::print(x);
 	Tensor<float>::print(pre_act_scaling_factor);
 	Tensor<float>::print(identity);
 	Tensor<float>::print(identity_scaling_factor);
 	Tensor<float>::print(specified_min);
 	Tensor<float>::print(specified_max);
 
-    Tensor<float>* x_act = x;
+    Tensor3d<float>* x_act = new Tensor3d(x);
     if(identity == nullptr)
     {
         x_act = x;
     }
     else
     {
-        Tensor<float>::add(x, identity, x_act);
+        Tensor3d<float>::add(x, identity, x_act);
     }
 
 	Tensor<float>* local_xmin = new Tensor<float>(1, 1, 0.f);
@@ -77,11 +77,15 @@ scaled_tuple QuantAct::QuantAct_forward(Tensor<float>* x,
     {
         if(!per_channel)
         {
-            Tensor<float>::min(x_act, 1, local_xmin);
-			Tensor<float>::min(local_xmin, 0, local_xmin); // this is to collapse 2d matrixes fully
+			Tensor3d<float>* temp = new Tensor3d<float>(x_act);
+			Tensor3d<float>::min(temp, temp);
+			Tensor3d<float>::toTwoD(temp, local_xmin);
+			delete temp;
 
-            Tensor<float>::max(x_act, 1, local_xmax);
-			Tensor<float>::max(local_xmax, 0, local_xmax);
+			temp = new Tensor3d<float>(x_act);
+			Tensor3d<float>::max(temp, temp);
+			Tensor3d<float>::toTwoD(temp, local_xmax);
+			delete temp;
         }
         else
         {
@@ -126,7 +130,7 @@ scaled_tuple QuantAct::QuantAct_forward(Tensor<float>* x,
 
     if(quant_mode == QuantMode::none)
     {
-        scaled_tuple returnme;
+        scaled_tuple3d returnme;
         returnme.matrix = x_act;
         returnme.scaling_factor=nullptr; 
         return returnme;
@@ -141,7 +145,7 @@ scaled_tuple QuantAct::QuantAct_forward(Tensor<float>* x,
     float max = Tensor<float>::one(x_max);
     act_scaling_factor = QuantAct::symmetric_linear_quantization_params(activation_bit, min, max, per_channel);
     
-    Tensor<float>* quant_act_int = nullptr;
+    Tensor3d<float>* quant_act_int = nullptr;
     if(pre_act_scaling_factor == nullptr)
     {
         quant_act_int = QuantAct::symmetric_quant_forward(x, activation_bit, act_scaling_factor);
@@ -155,8 +159,8 @@ scaled_tuple QuantAct::QuantAct_forward(Tensor<float>* x,
     Tensor<float>* correct_output_scale = new Tensor<float>(act_scaling_factor);
     Tensor<float>::view(correct_output_scale, -1, 1, space);
 	//correct output scale has just one element while quant act int has 2
-    Tensor<float>::mul_scalar(quant_act_int, Tensor<float>::one(correct_output_scale), quant_act_int);
-    scaled_tuple returnme;
+    Tensor3d<float>::mul_scalar(quant_act_int, Tensor<float>::one(correct_output_scale), quant_act_int);
+    scaled_tuple3d returnme;
     returnme.matrix = quant_act_int;
     returnme.scaling_factor = act_scaling_factor;
     return returnme;
@@ -191,7 +195,7 @@ Tensor<float>* QuantAct::symmetric_linear_quantization_params(unsigned num_bits,
     return scale;
 }
 
-Tensor<float>* QuantAct::symmetric_quant_forward(Tensor<float>* x, int k, Tensor<float>* specified_scale)
+Tensor3d<float>* QuantAct::symmetric_quant_forward(Tensor3d<float>* x, int k, Tensor<float>* specified_scale)
 {
     Tensor<float>* scale = nullptr;
     if(specified_scale != nullptr)
@@ -202,27 +206,31 @@ Tensor<float>* QuantAct::symmetric_quant_forward(Tensor<float>* x, int k, Tensor
 
     float n = exp2(k - 1) - 1;
 
-    Tensor<float>* new_quant_x = QuantAct::linear_quantize(x, scale, zero_point);
-    Tensor<float>::clamp(new_quant_x, -n, n-1, new_quant_x);
+    Tensor3d<float>* new_quant_x = QuantAct::linear_quantize(x, scale, zero_point);
+    Tensor3d<float>::clamp(new_quant_x, -n, n-1, new_quant_x);
     return new_quant_x;
 }
 
-Tensor<float>* QuantAct::linear_quantize(Tensor<float>* x, Tensor<float>* scale, Tensor<float>* zero_point)
+Tensor3d<float>* QuantAct::linear_quantize(Tensor3d<float>* x, Tensor<float>* scale, Tensor<float>* zero_point)
 {
-    //TODO: there will be overflow as max size in one direction is currently 3072
-    Tensor<float>* space = new Tensor<float>(1,1,0.f);
-    Tensor<float>::view(x, -1, 1, space);
-    Tensor<float>::view(zero_point, -1, 1, space);
-	delete space;
+    //scale is 1 when x is truely 3d. When x is 2d, scale is also 2d (or at least broadcastable.)
+
     Tensor<float>::reciprocal(scale, scale);
-    Tensor<float>::mul_dot(scale, x, x);
-    Tensor<float>::add(x, zero_point, x);
-    Tensor<float>::roundTensor(x, x);
+	if (Tensor3d<float>::getDepth(x) != 1)
+	{
+		Tensor3d<float>::mul_scalar(x, Tensor<float>::one(scale), x);
+	}
+	else
+	{
+		Tensor3d<float>::mul_dot(x, scale, x);
+	}
+    Tensor3d<float>::add_scalar(x, Tensor<float>::one(zero_point), x);
+    Tensor3d<float>::roundTensor(x, x);
     return x;
 }
 
-Tensor<float>* QuantAct::fixedpoint_mul(
-        Tensor<float>* pre_act,
+Tensor3d<float>* QuantAct::fixedpoint_mul(
+        Tensor3d<float>* pre_act,
         Tensor<float>* pre_act_scaling_factor,
         int bit_num,
         QuantMode quant_mode,
@@ -246,10 +254,10 @@ Tensor<float>* QuantAct::fixedpoint_mul(
         Tensor<float>::view(identity_scaling_factor, -1, 1, space);
     }
 
-    Tensor<float>* z_int = new Tensor<float>(pre_act);
+    Tensor3d<float>* z_int = new Tensor3d<float>(pre_act);
 	//pre act is one dimentional
-    Tensor<float>::div_scalar(pre_act, Tensor<float>::one(pre_act_scaling_factor), z_int); 
-    Tensor<float>::roundTensor(z_int, z_int);
+    Tensor3d<float>::div_scalar(pre_act, Tensor<float>::one(pre_act_scaling_factor), z_int); 
+    Tensor3d<float>::roundTensor(z_int, z_int);
 
     //the following is in double precision in the code, but I did not make it double precision here
     Tensor<float>* _A = new Tensor<float>(pre_act_scaling_factor);
@@ -262,14 +270,14 @@ Tensor<float>* QuantAct::fixedpoint_mul(
     Tensor<float>* m = new Tensor<float>(new_scale);
     Tensor<float>* e = new Tensor<float>(new_scale);
     Tensor<float>::tensor_frexp(new_scale, m, e);
-    Tensor<float>* output = new Tensor<float>(z_int);
-	Tensor<float>* twos = new Tensor<float>(Tensor<float>::getRows(output), Tensor<float>::getCols(output), 2.0f);
+    Tensor3d<float>* output = new Tensor3d<float>(z_int);
+	Tensor<float>* twos = new Tensor<float>(Tensor3d<float>::getRows(output), Tensor3d<float>::getCols(output), 2.0f);
 	//additionally, e is one dimentional
 	Tensor<float>::pow_scalar(twos, Tensor<float>::one(e), twos); //use twos as temp storage
-	Tensor<float>::div_dot(output, twos, output);
+	Tensor3d<float>::div_dot(output, twos, output);
 	//m is sigular dimention while z int is multi-dimentional
-    Tensor<float>::mul_scalar(output, Tensor<float>::one(m), output);
-    Tensor<float>::roundTensor(output, output);
+    Tensor3d<float>::mul_scalar(output, Tensor<float>::one(m), output);
+    Tensor3d<float>::roundTensor(output, output);
 
     if(identity != nullptr)
     {	//TODO: verify functionality, may have to make changes if identity scaling facor is not the correct dimention.
@@ -298,18 +306,18 @@ Tensor<float>* QuantAct::fixedpoint_mul(
         Tensor<float>::div_dot(output1, e1, output1);
         Tensor<float>::roundTensor(output1, output1);
 
-        Tensor<float>::add(output1, output, output);
+        Tensor3d<float>::add(output, output1, output);
     }
 
     if( bit_num == 4 || bit_num == 8 || bit_num == 16)
     {
         if(quant_mode == QuantMode::symmetric)
         {
-            Tensor<float>::clamp(output, -n-1, n, output);
+            Tensor3d<float>::clamp(output, -n-1, n, output);
             return output;
         }
         else{
-            Tensor<float>::clamp(output, 0, n, output);
+            Tensor3d<float>::clamp(output, 0, n, output);
             return output;
         }
     }

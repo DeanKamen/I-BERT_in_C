@@ -8,6 +8,7 @@
 #include "hubertEnums.h"
 #include "softmax.h"
 #include "testglobals.h"
+#include "tensor3d.hpp"
 
 int main()
 {
@@ -17,6 +18,12 @@ int main()
     float *test3[3] = {r1, r2, r3};
     Tensor<float>* ptest3 = new Tensor<float>(3,3,(float**)test3);
     Tensor<float>::print(ptest3);
+
+	Tensor3d<float>* bruh = new Tensor3d<float>(ptest3);
+	Tensor3d<float>::print(bruh);
+	Tensor3d<float>::mul_dot(bruh,bruh,bruh);
+	Tensor3d<float>::print(bruh);
+
 
 	float tr1[3] = { 1.f, 1.f ,1.f };
 	float *test1[1] = { tr1 };
@@ -28,14 +35,12 @@ int main()
 
     Tensor<float>* arg2 = new Tensor<float>(1,1, 0.0009f);
 
-	Tensor<float>* softmax_testdata = new Tensor<float>(22, 22, (float**)psoftmax);
-	Tensor<float>::print(softmax_testdata);
-
-    scaled_tuple result1;
+	Tensor3d<float>* softmax_testdata = loadSoftmax();
+    scaled_tuple3d result1;
     Softmax testSoftmax (16, QuantMode::symmetric, ForceDequantMode::layernorm);
     result1 = testSoftmax.softmax_forward(softmax_testdata, arg2);
 	
 	printf("RESTULTS START\n");
-    Tensor<float>::print(result1.matrix);
+    Tensor3d<float>::print(result1.matrix);
     Tensor<float>::print(result1.scaling_factor);
 }

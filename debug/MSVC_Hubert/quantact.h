@@ -20,7 +20,7 @@ class QuantAct
              QuantMode quant_mode = QuantMode::none);
 
     //other functions
-    scaled_tuple QuantAct_forward(Tensor<float>* x, 
+    scaled_tuple3d QuantAct_forward(Tensor3d<float>* x, 
                               Tensor<float>* pre_act_scaling_factor = nullptr,
                               Tensor<float>* identity = nullptr,
                               Tensor<float>* identity_scaling_factor = nullptr,
@@ -33,10 +33,10 @@ class QuantAct
                                         float saturation_max,
                                         bool per_channel=false);
 
-    Tensor<float>* symmetric_quant_forward(Tensor<float>* x, int k, Tensor<float>* specified_scale);
-    Tensor<float>* linear_quantize(Tensor<float> *x, Tensor<float>* scale, Tensor<float>* zero_point);
-    Tensor<float>* fixedpoint_mul(
-        Tensor<float>* pre_act,
+    Tensor3d<float>* symmetric_quant_forward(Tensor3d<float>* x, int k, Tensor<float>* specified_scale);
+    Tensor3d<float>* linear_quantize(Tensor3d<float> *x, Tensor<float>* scale, Tensor<float>* zero_point);
+    Tensor3d<float>* fixedpoint_mul(
+        Tensor3d<float>* pre_act,
         Tensor<float>* pre_act_scaling_factor,
         int bit_num,
         QuantMode quant_mode,
@@ -44,7 +44,6 @@ class QuantAct
         Tensor<float>* identity = nullptr,
         Tensor<float>* identity_scaling_factor = nullptr
     );
-    Tensor<float>* batch_frexp(Tensor<float>* x, int max_bit=31);
 
     //members
     int activation_bit;

@@ -15,11 +15,11 @@ public:
 	//initializer
 	Softmax(int output_bit, QuantMode quant_mode = QuantMode::none, ForceDequantMode force_dequant = ForceDequantMode::none);
 	//member functions
-	scaled_tuple int_polynomial(Tensor<float>* x_int, Tensor<float>* scaling_factor);
-	scaled_tuple int_exp(Tensor<float>* x_int, Tensor<float>* scaling_factor);
-	scaled_tuple softmax_forward(Tensor<float>* x_int, Tensor<float>* scaling_factor);
+	scaled_tuple3d int_polynomial(Tensor3d<float>* x_int, Tensor<float>* scaling_factor);
+	scaled_tuple3d int_exp(Tensor3d<float>* x_int, Tensor<float>* scaling_factor);
+	scaled_tuple3d softmax_forward(Tensor3d<float>* x_int, Tensor<float>* scaling_factor);
 
-	void normal_softmax(Tensor<float>* row, Tensor<float>* dest);
+	void normal_softmax(Tensor3d<float>* row, Tensor3d<float>* dest);
 
 	int output_bit;
 	QuantMode quant_mode;

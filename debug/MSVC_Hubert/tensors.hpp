@@ -387,8 +387,9 @@ void Tensor<T>::max(Tensor<T> *A, int dim, Tensor<T> *C)
                         largest = Tensor<T>::get(A,j,i);
                     }
                 }
-                Tensor<T>::set(C, 0, i, largest);
             }
+			Tensor<T>::set(C, 0, i, largest);
+			first = true;
         }
         //i know the dimentions of C, so i set them for safety
         setRows(C, 1);
@@ -414,8 +415,9 @@ void Tensor<T>::max(Tensor<T> *A, int dim, Tensor<T> *C)
                         largest = Tensor<T>::get(A,i,j);
                     }
                 }
-                Tensor<T>::set(C, i, 0, largest);
             }
+			Tensor<T>::set(C, i, 0, largest);
+			first = true;
         }
         setRows(C, A->t_numRows);
         setCols(C, 1);
@@ -448,8 +450,9 @@ void Tensor<T>::min(Tensor<T> *A, int dim, Tensor<T> *C)
                         smallest = Tensor<T>::get(A,j,i);
                     }
                 }
-                Tensor<T>::set(C, 0, i, smallest);
             }
+			Tensor<T>::set(C, 0, i, smallest);
+			first = true;
         }
         //I can guarantee the dimentions of the resulting tensor.
         setRows(C, 1);
@@ -475,8 +478,9 @@ void Tensor<T>::min(Tensor<T> *A, int dim, Tensor<T> *C)
                         smallest = Tensor<T>::get(A,i,j);
                     }
                 }
-                Tensor<T>::set(C, i, 0, smallest);
             }
+			Tensor<T>::set(C, i, 0, smallest);
+			first = true;
         }
         setRows(C, A->t_numRows);
         setCols(C, 1);
@@ -604,6 +608,7 @@ void Tensor<T>::sum(Tensor<T> *A, int dim, Tensor<T>* C)
 				running += get(A, i, j);
 			}
 			Tensor<T>::set(C, i, 0, running);
+			running = 0;
 		}
 		setRows(C, A->t_numRows);
 		setCols(C, 1);
@@ -705,25 +710,27 @@ T Tensor<T>::get(Tensor<T> *tensor, const unsigned &row, const unsigned &col)
     //TODO: add safeguards to check if IN RANGE
     if(tensor->transposed)
     {//in this block everything is flipped because internally, we are treating the matrix as transposed 
-        if( true )//col < tensor.t_numRows && col < tensor.t_numRows)
+        if(row < getRows(tensor) && col < getCols(tensor))
         {
             return tensor->t_tensor[col][row];
         }
         else
         {
             printf("Tensor::get() index [%d][%d] out of range\n", col, row);
+			assert(false);
             return 0;
         }
     }
     else
     {// in this block everything is normal
-        if( true )//)row < tensor.t_numRows && row < tensor.t_numRows)
+        if(row < getRows(tensor) && col < getCols(tensor))
         {
             return tensor->t_tensor[row][col];
         }
         else
         {
             printf("Tensor::get() index [%d][%d] out of range\n", row, col);
+			assert(false);
             return 0;
         }
     }
@@ -735,7 +742,7 @@ void Tensor<T>::set(Tensor<T> *tensor, const unsigned &row, const unsigned &col,
     //TODO: add safeguards to check if IN RANGE
     if(tensor->transposed)
     {//in this block everything is flipped because internally, we are treating the matrix as transposed 
-        if(true)//col < tensor.t_numRows && col < tensor.t_numRows)
+        if(row < getRows(tensor) && col < getCols(tensor))
         {
            tensor->t_tensor[col][row] = val;
         }
@@ -746,7 +753,7 @@ void Tensor<T>::set(Tensor<T> *tensor, const unsigned &row, const unsigned &col,
     }
     else
     {// in this block everything is normal
-        if(true)//row < tensor.t_numRows && row < tensor.t_numRows)
+        if(row < getRows(tensor) && col < getCols(tensor))
         {
             tensor->t_tensor[row][col] = val;
         }
@@ -868,16 +875,19 @@ bool Tensor<T>::sameSize(Tensor<T> *A, Tensor<T> *B)
 {
 	return Tensor<float>::getRows(A) == Tensor<float>::getRows(B) && Tensor<float>::getCols(A) == Tensor<float>::getCols(B);
 }
+
 template<class T>
 bool Tensor<T>::sameRows(Tensor<T> *A, Tensor<T> *B)
 {
 	return Tensor<float>::getRows(A) == Tensor<float>::getRows(B);
 }
+
 template<class T>
 bool Tensor<T>::sameCols(Tensor<T> *A, Tensor<T> *B)
 {
 	return Tensor<float>::getCols(A) == Tensor<float>::getCols(B);
 }
+
 template<class T>
 void Tensor<T>::flopSize(Tensor<T> *lhs, Tensor<T> *rhs)
 {//At the end of this function lhs will always point to the larger of the two tensors
@@ -887,6 +897,17 @@ void Tensor<T>::flopSize(Tensor<T> *lhs, Tensor<T> *rhs)
 		Tensor<T>* temp = lhs;
 		lhs = rhs;
 		rhs = temp;
+	}
+}
+
+template<class T> void Tensor<T>::copy(Tensor<T> *A, Tensor<T> *C)
+{
+	for (unsigned i = 0; i < getRows(A); i++)
+	{
+		for (unsigned j = 0; j < getCols(A); j++)
+		{
+			set(C,i,j, get(A,i,j));
+		}
 	}
 }
 

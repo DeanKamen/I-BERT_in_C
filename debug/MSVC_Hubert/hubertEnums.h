@@ -1,6 +1,9 @@
 #ifndef __HUBERT_ENUMS_H__
 #define __HUBERT_ENUMS_H__
 
+#include "tensors.hpp"
+#include "tensor3d.hpp"
+
 //enum to desribe all preloaded Tensors
 enum class QuantMode {none, symmetric};
 
@@ -10,6 +13,12 @@ struct scaled_tuple
 {//to get the most fidelity out of the translation, I make
  //a struct that emulates the returned tuple of most forwards
 	Tensor<float>* matrix;
+	Tensor<float>* scaling_factor;
+};
+
+struct scaled_tuple3d
+{//same as scaled_tuple but 3d
+	Tensor3d<float>* matrix;
 	Tensor<float>* scaling_factor;
 };
 

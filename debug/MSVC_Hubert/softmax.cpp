@@ -27,7 +27,7 @@ Softmax::Softmax(int output_bit_i, QuantMode quant_mode_i, ForceDequantMode forc
 	coef[2] /= coef[0];
 }
 
-scaled_tuple Softmax::int_polynomial(Tensor<float>* x_int, Tensor<float>* scaling_factor)
+scaled_tuple3d Softmax::int_polynomial(Tensor3d<float>* x_int, Tensor<float>* scaling_factor)
 {
 	Tensor<float>* b_int = new Tensor<float>(scaling_factor);
 	Tensor<float>::reciprocal(scaling_factor, b_int);
@@ -39,21 +39,21 @@ scaled_tuple Softmax::int_polynomial(Tensor<float>* x_int, Tensor<float>* scalin
 	Tensor<float>::reciprocal(c_int, c_int);
 	Tensor<float>::mul_scalar(c_int, coef[2], c_int);
 
-	Tensor<float>* z = new Tensor<float>(x_int);
-	Tensor<float>::add_scalar(x_int, Tensor<float>::one(b_int), z);
-	Tensor<float>::mul_dot(x_int, z, z);
-	Tensor<float>::add_scalar(z, Tensor<float>::one(c_int), z);
+	Tensor3d<float>* z = new Tensor3d<float>(x_int);
+	Tensor3d<float>::add_scalar(x_int, Tensor<float>::one(b_int), z);
+	Tensor3d<float>::mul_dot(x_int, z, z);
+	Tensor3d<float>::add_scalar(z, Tensor<float>::one(c_int), z);
 
 	Tensor<float>::pow_scalar(scaling_factor, 2, scaling_factor);
 	Tensor<float>::mul_scalar(scaling_factor, coef[0], scaling_factor);
 	
-	scaled_tuple returnme;
+	scaled_tuple3d returnme;
 	returnme.matrix = z;
 	returnme.scaling_factor = scaling_factor;
 	return returnme;
 }
 
-scaled_tuple Softmax::int_exp(Tensor<float>* x_int, Tensor<float>* scaling_factor)
+scaled_tuple3d Softmax::int_exp(Tensor3d<float>* x_int, Tensor<float>* scaling_factor)
 {
 	Tensor<float>* x0_int = new Tensor<float>(scaling_factor);
 	Tensor<float>::reciprocal(scaling_factor, x0_int);
@@ -63,28 +63,28 @@ scaled_tuple Softmax::int_exp(Tensor<float>* x_int, Tensor<float>* scaling_facto
 	Tensor<float>* temp = new Tensor<float>(x0_int);
 	Tensor<float>::mul_scalar(temp, n, temp);
 	//not same dims
-	Tensor<float>::max_scalar(x_int, Tensor<float>::one(temp), x_int);
+	Tensor3d<float>::max_scalar(x_int, Tensor<float>::one(temp), x_int);
 	delete temp;
 
-	Tensor<float>* q = new Tensor<float>(x_int);
+	Tensor3d<float>* q = new Tensor3d<float>(x_int);
 	//not same dims
-	Tensor<float>::div_scalar(q, Tensor<float>::one(x0_int), q);
-	Tensor<float>::floor_tensor(q, q);
+	Tensor3d<float>::div_scalar(q, Tensor<float>::one(x0_int), q);
+	Tensor3d<float>::floor_tensor(q, q);
 
-	Tensor<float>* r = new Tensor<float>(x_int);
-	temp = new Tensor<float>(q);
-	Tensor<float>::mul_scalar(temp, Tensor<float>::one(x0_int), temp);
-	Tensor<float>::sub(x_int, temp, r);
-	delete temp;
+	Tensor3d<float>* r = new Tensor3d<float>(x_int);
+	Tensor3d<float>* temp2 = new Tensor3d<float>(q);
+	Tensor3d<float>::mul_scalar(temp2, Tensor<float>::one(x0_int), temp2);
+	Tensor3d<float>::sub(x_int, temp2, r);
+	delete temp2;
 
-	scaled_tuple exp = int_polynomial(r, scaling_factor);
+	scaled_tuple3d exp = int_polynomial(r, scaling_factor);
 
-	temp = new Tensor<float>(q);
-	Tensor<float>::sub_scalar(n, q, q);
-	Tensor<float>::exp2_tensor(q,q);
-	Tensor<float>::mul_dot(exp.matrix, q, exp.matrix);
-	Tensor<float>::floor_tensor(exp.matrix, exp.matrix);
-	Tensor<float>::clamp(exp.matrix, 0.f, FLT_MAX, exp.matrix);
+	temp2 = new Tensor3d<float>(q);
+	Tensor3d<float>::sub_scalar(n, q, q);
+	Tensor3d<float>::exp2_tensor(q,q);
+	Tensor3d<float>::mul_dot(exp.matrix, q, exp.matrix);
+	Tensor3d<float>::floor_tensor(exp.matrix, exp.matrix);
+	Tensor3d<float>::clamp(exp.matrix, 0.f, FLT_MAX, exp.matrix);
 	
 	float x = (float)exp2(n);
 	Tensor<float>::div_scalar(exp.scaling_factor,x,exp.scaling_factor);
@@ -93,13 +93,13 @@ scaled_tuple Softmax::int_exp(Tensor<float>* x_int, Tensor<float>* scaling_facto
 }
 
 
-scaled_tuple Softmax::softmax_forward(Tensor<float>* x, Tensor<float>* scaling_factor)
+scaled_tuple3d Softmax::softmax_forward(Tensor3d<float>* x, Tensor<float>* scaling_factor)
 {
-	Tensor<float>* x_int = new Tensor<float>(x);
+	Tensor3d<float>* x_int = new Tensor3d<float>(x);
 	if (quant_mode == QuantMode::none)
 	{
 		normal_softmax(x_int, x_int);
-		scaled_tuple rm;
+		scaled_tuple3d rm;
 		rm.matrix = x_int;
 		rm.scaling_factor = nullptr;
 		return rm;
@@ -107,54 +107,58 @@ scaled_tuple Softmax::softmax_forward(Tensor<float>* x, Tensor<float>* scaling_f
 	//symmetric mode below
 
 	//not same dims
-	Tensor<float>::div_scalar(x_int, Tensor<float>::one(scaling_factor), x_int);
-	Tensor<float>* x_int_max = new Tensor<float>(x_int);
-	Tensor<float>::max(x_int, 1, x_int_max);
-	Tensor<float>::sub(x_int, x_int_max, x_int);
+	Tensor3d<float>::div_scalar(x_int, Tensor<float>::one(scaling_factor), x_int);
+	Tensor3d<float>* x_int_max = new Tensor3d<float>(x_int);
+	Tensor3d<float>::max(x_int, 1, x_int_max);
+	Tensor3d<float>::sub(x_int, x_int_max, x_int);
 	
-	scaled_tuple exp = int_exp(x_int, scaling_factor);
-
+	scaled_tuple3d exp = int_exp(x_int, scaling_factor);
 
 	exp = act->QuantAct_forward(exp.matrix, exp.scaling_factor);
-	Tensor<float>* exp_int = new Tensor<float>(exp.matrix);
-	Tensor<float>::div_scalar(exp.matrix, Tensor<float>::one(exp.scaling_factor), exp_int);
-	Tensor<float>* exp_int_sum = new Tensor<float>(exp_int);
-	Tensor<float>::sum(exp_int, 1, exp_int_sum);
+	Tensor3d<float>* exp_int = new Tensor3d<float>(exp.matrix);
+	Tensor3d<float>::div_scalar(exp.matrix, Tensor<float>::one(exp.scaling_factor), exp_int);
+	//TODO: if performing incorrectly, use 2d exp_int_sum
+	Tensor3d<float>* exp_int_sum = new Tensor3d<float>(exp_int);
+	Tensor3d<float>::sum(exp_int, 1, exp_int_sum);
 
-	Tensor<float>* factor = new Tensor<float>(exp_int_sum);
-	Tensor<float>::reciprocal(exp_int_sum, factor);
-	Tensor<float>::mul_scalar(factor, exp2(32), factor);
-	Tensor<float>::floor_tensor(factor, factor);
+	Tensor3d<float>* factor = new Tensor3d<float>(exp_int_sum);
+	Tensor3d<float>::reciprocal(exp_int_sum, factor);
+	Tensor3d<float>::mul_scalar(factor, exp2(32), factor);
+	Tensor3d<float>::floor_tensor(factor, factor);
 
-	Tensor<float>::mul_scalar(exp_int, Tensor<float>::one(factor), exp_int);
-	Tensor<float>::div_scalar(exp_int, exp2(32-output_bit), exp_int);
-	Tensor<float>::floor_tensor(exp_int, exp_int);
+	Tensor3d<float>::mul_dot(exp_int, factor, exp_int); //TODO: verify this.
+	Tensor3d<float>::div_scalar(exp_int, exp2(32-output_bit), exp_int);
+	Tensor3d<float>::floor_tensor(exp_int, exp_int);
 
-	scaled_tuple returnme;
-	returnme.matrix = new Tensor<float>(exp_int);
+	scaled_tuple3d returnme;
+	returnme.matrix = new Tensor3d<float>(exp_int);
 	float sf = 1.f / exp2(output_bit);
-	Tensor<float>::mul_scalar(exp_int, sf, returnme.matrix);
+	Tensor3d<float>::mul_scalar(returnme.matrix, sf, returnme.matrix);
 	returnme.scaling_factor = new Tensor<float>(1, 1, sf);
 	return returnme;
 }
 
-void Softmax::normal_softmax(Tensor<float>* row, Tensor<float>* dest)
+void Softmax::normal_softmax(Tensor3d<float>* src, Tensor3d<float>* dest)
 {//according to https ://pytorch.org/docs/stable/generated/torch.nn.Softmax.html?highlight=softmax#torch.nn.Softmax
-	unsigned i, j;
-	for (i = 0; i < Tensor<float>::getRows(row); i++)
+ // dimention is curretly locked to 1, regarding each row as a unit to perform softmax on.
+	unsigned i, j, d;
+	for (d = 0; d < Tensor3d<float>::getRows(src); d++)
 	{
-		//do a softmax on every row.
-		float sum = 0;
-		for (j = 0; j < Tensor<float>::getCols(row); j++)
+		for (i = 0; i < Tensor3d<float>::getRows(src); i++)
 		{
-			sum += exp(Tensor<float>::get(row, i, j));
-		}
-		
-		for (j = 0; j < Tensor<float>::getCols(row); j++)
-		{
-			float el = Tensor<float>::get(row, i, j);
-			el = exp(el) / sum;
-			Tensor<float>::set(dest, i, j, el); //copy to local tensor space
+			//do a softmax on every row.
+			float sum = 0;
+			for (j = 0; j < Tensor3d<float>::getCols(src); j++)
+			{
+				sum += exp(Tensor3d<float>::get(src, i, j, d));
+			}
+
+			for (j = 0; j < Tensor3d<float>::getCols(src); j++)
+			{
+				float el = Tensor3d<float>::get(src, i, j, d);
+				el = exp(el) / sum;
+				Tensor3d<float>::set(dest, i, j, d, el); //copy to local tensor space
+			}
 		}
 	}
 }
