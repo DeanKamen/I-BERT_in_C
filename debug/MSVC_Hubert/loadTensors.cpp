@@ -81,17 +81,17 @@ Tensor3d<float>* loadSoftmax()
 	fread((void*)(&str_len), sizeof(str_len), 1, f);
 	fread((void*)(&str), str_len, 1, f);
 	str[str_len] = '\0'; //because its not null terminated
+	fread((void*)(&depth), sizeof(depth), 1, f);
 	fread((void*)(&rows), sizeof(rows), 1, f);
 	fread((void*)(&cols), sizeof(cols), 1, f);
-	fread((void*)(&depth), sizeof(depth), 1, f);
 
-	printf("%d %s (%d, %d, %d)\n", str_len, str , rows, cols, depth);
+	printf("%d %s (%d, %d, %d)\n", str_len, str, depth , rows, cols);
 
 	Tensor3d<float>* localTensor = new Tensor3d<float>();
 	Tensor3d<float>::setRows(localTensor, rows);
 	Tensor3d<float>::setCols(localTensor, cols);
 	int i;
-	for (unsigned d = 0; d < depth; d++)
+	for (int d = 0; d < depth; d++)
 	{
 		//allocate memory
 		Tensor<float>* oneLayer = new Tensor<float>(rows, cols, 0.f);

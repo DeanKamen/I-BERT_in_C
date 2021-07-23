@@ -502,6 +502,35 @@ void Tensor<T>::max_scalar(Tensor<T>* A, T compare, Tensor<T> *C)
 		}
 	}
 }
+template<class T>
+void Tensor<T>::min_scalar(Tensor<T>* A, T compare, Tensor<T> *C)
+{
+	unsigned i, j;
+	for (i = 0; i < A->t_numRows; i++)
+	{
+		for (j = 0; j < A->t_numCols; j++)
+		{
+			T mini = Tensor::get(A, i, j);
+			if (mini > compare) { set(C, i, j, compare); }
+			else { set(C, i, j, mini); }
+		}
+	}
+}
+
+template<class T>
+void Tensor<T>::abs_tensor(Tensor<T> *A, Tensor<T>* C)
+{
+	unsigned i, j;
+	for (i = 0; i < A->t_numRows; i++)
+	{
+		for (j = 0; j < A->t_numCols; j++)
+		{
+			T el = Tensor::get(A, i, j);
+			el = abs(el);
+			set(C, i, j, el);
+		}
+	}
+}
 
 template<class T>
 void Tensor<T>::floor_tensor(Tensor<T> *A, Tensor<T> *C)
@@ -615,7 +644,55 @@ void Tensor<T>::sum(Tensor<T> *A, int dim, Tensor<T>* C)
 	}
 }
 
+template<class T>
+void Tensor<T>::sign(Tensor<T> *A, Tensor<T> *C)
+{
+	unsigned i, j;
+	for (i = 0; i < A->t_numRows; i++)
+	{
+		for (j = 0; j < A->t_numCols; j++)
+		{
+			if (get(A, i, j) < 0)
+			{
+				set(C, i, j, (T)-1);
+			}
+			else if (get(A, i, j) > 0)
+			{
+				set(C, i, j, (T)1);
+			}
+			else
+			{
+				set(C, i, j, (T)0);
+			}
+		}
+	}
+}
 
+template<class T> 
+void Tensor<T>::mean(Tensor<T> *A, Tensor<T> *C)
+{// assume a row vector. can be expanded upon like max and min to work along multiple dimentions
+	assert(getRows(A) == 1);
+	float running = 0.f;
+	for (unsigned j = 0; j < getCols(A); j++)
+	{
+		running += get(A, 0, j);
+	}
+	setCols(C, 1);
+	set(C, 0, 0, running / (float)getCols(A));
+}
+
+template<class T>
+void Tensor<T>::sqrt_tensor(Tensor<T> *A, Tensor<T> *C)
+{
+	unsigned i, j;
+	for (i = 0; i < A->t_numRows; i++)
+	{
+		for (j = 0; j < A->t_numCols; j++)
+		{
+			set(C, i, j, sqrt(get(A,i,j)));
+		}
+	}
+}
 /****************************************************manipulation****************************************************/
 template<class T>
 void Tensor<T>::fill(Tensor<T> *A, T fill)
@@ -775,6 +852,7 @@ T Tensor<T>::one(Tensor<T> *A)
 	{
 		printf("1x1 matrix asssumption failed");
 		assert(false);
+		return 0;
 	}
 }
 

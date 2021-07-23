@@ -288,6 +288,22 @@ template<class T> void Tensor3d<T>::max_scalar(Tensor3d<T>* A, T compare, Tensor
 	}
 }
 
+template<class T> void Tensor3d<T>::min_scalar(Tensor3d<T>* A, T compare, Tensor3d<T> *C)
+{
+	for (unsigned d = 0; d < getDepth(A); d++)
+	{
+		Tensor<T>::min_scalar(get(A, d), compare, get(C, d));
+	}
+}
+
+template<class T> void Tensor3d<T>::abs_tensor(Tensor3d<T> *A, Tensor3d<T>* C)
+{
+	for (unsigned d = 0; d < getDepth(A); d++)
+	{
+		Tensor<T>::abs_tensor(get(A, d), get(C, d));
+	}
+}
+
 template<class T> void Tensor3d<T>::floor_tensor(Tensor3d<T> *A, Tensor3d<T> *C)
 {
 	for (unsigned d = 0; d < getDepth(A); d++)
@@ -356,6 +372,32 @@ template<class T> void Tensor3d<T>::sum(Tensor3d<T> *A, int dim, Tensor3d<T>* C)
 	}
 }
 
+template<class T> void Tensor3d<T>::sign(Tensor3d<T> *A, Tensor3d<T>* C)
+{
+	for (unsigned d = 0; d < getDepth(A); d++)
+	{
+		Tensor<T>::sign(get(A, d), get(C, d));
+	}
+}
+
+template<class T> void Tensor3d<T>::mean(Tensor3d<T> *A, Tensor3d<T>* C)
+{
+	for (unsigned d = 0; d < getDepth(A); d++)
+	{
+		Tensor<T>::mean(get(A, d), get(C, d));
+		setRows(C, Tensor<T>::getRows(get(C, d))); //propogate the row change up to the 3d level
+		setCols(C, Tensor<T>::getCols(get(C, d))); // and col change
+	}
+}
+
+template<class T> void Tensor3d<T>::sqrt_tensor(Tensor3d<T> *A, Tensor3d<T>* C)
+{
+	for (unsigned d = 0; d < getDepth(A); d++)
+	{
+		Tensor<T>::sqrt_tensor(get(A, d), get(C, d));
+	}
+}
+
 //manipulation
 //TODO: only if necessary
 //template<class T> Tensor3d<T>:: void tensor_frexp(Tensor<float>* inputs, Tensor<float>* m, Tensor<float>* e){}
@@ -366,6 +408,11 @@ template<class T> T Tensor3d<T>::get(Tensor3d<T> *tensor, const unsigned &row, c
 	if (dep < getDepth(tensor))
 	{
 		return Tensor<T>::get(tensor->matrix[dep], row, col);
+	}
+	else
+	{
+		assert(false);
+		return 0;
 	}
 }
 
@@ -382,6 +429,11 @@ template<class T> Tensor<T>* Tensor3d<T>::get(Tensor3d<T> *tensor, const unsigne
 	if (dep < getDepth(tensor))
 	{
 		return tensor->matrix[dep];
+	}
+	else
+	{
+		assert(false);
+		return nullptr;
 	}
 }
 template<class T> void Tensor3d<T>::set(Tensor3d<T> *tensor, const unsigned &dep, Tensor<T>* slice)
@@ -409,6 +461,7 @@ template<class T> Tensor<T>* Tensor3d<T>::twoD(Tensor3d<T> *A) //analog to one f
 	{
 		printf("faulty assumption");
 		assert(false);
+		return nullptr;
 	}
 }
 

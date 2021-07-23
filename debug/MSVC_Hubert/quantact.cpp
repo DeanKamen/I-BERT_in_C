@@ -23,7 +23,7 @@ QuantAct::QuantAct(int activation_bit_i,
     if(!per_channel)
     {
         x_min = loadTensor(preload::self_attn__softmax__act__x_min);//temporarily hardcoded for the softmax quantact
-		x_max = loadTensor(preload::self_attn__softmax__act__x_max);
+		x_max = loadTensor(preload::self_attn__softmax__act__x_max); //TODO: make it a parameter
 		act_scaling_factor = loadTensor(preload::self_attn__softmax__act__act_scaling_factor);
     }
     else
@@ -181,7 +181,7 @@ Tensor<float>* QuantAct::symmetric_linear_quantization_params(unsigned num_bits,
     
     */
     Tensor<float>* scale = new Tensor<float>(1,1,0.f); 
-    unsigned n =  exp2( num_bits - 1 ) - 1;
+    unsigned n =  (unsigned int)exp2( num_bits - 1 ) - 1;
     if (per_channel)
     {
         assert(false);
@@ -189,8 +189,8 @@ Tensor<float>* QuantAct::symmetric_linear_quantization_params(unsigned num_bits,
     else
     {
         Tensor<float>::set(scale,0,0, fmax(fabs(saturation_min), fabs(saturation_max)));
-        Tensor<float>::clamp(scale, 1e-8, FLT_MAX, scale); 
-        Tensor<float>::div_scalar(scale, n, scale);
+        Tensor<float>::clamp(scale, 1e-8f, FLT_MAX, scale); 
+        Tensor<float>::div_scalar(scale, (float)n, scale);
     }
     return scale;
 }
@@ -204,7 +204,7 @@ Tensor3d<float>* QuantAct::symmetric_quant_forward(Tensor3d<float>* x, int k, Te
     }
     Tensor<float>* zero_point = new Tensor<float>(1,1,0.f);
 
-    float n = exp2(k - 1) - 1;
+    float n = exp2f(float(k - 1)) - 1;
 
     Tensor3d<float>* new_quant_x = QuantAct::linear_quantize(x, scale, zero_point);
     Tensor3d<float>::clamp(new_quant_x, -n, n-1, new_quant_x);

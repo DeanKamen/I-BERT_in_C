@@ -160,8 +160,11 @@
     <ClInclude Include="HLS\rand_lib.h" />
     <ClInclude Include="HLS\stdio.h" />
     <ClInclude Include="hubertEnums.h" />
+    <ClInclude Include="IntGELU.h" />
+    <ClInclude Include="IntLayerNorm.h" />
     <ClInclude Include="loadTensors.h" />
     <ClInclude Include="quantact.h" />
+    <ClInclude Include="QuantLinear.h" />
     <ClInclude Include="softmax.h" />
     <ClInclude Include="tensor3d.h" />
     <ClInclude Include="tensor3d.hpp" />
@@ -171,9 +174,12 @@
     <ClInclude Include="testglobals.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="IntGELU.cpp" />
+    <ClCompile Include="IntLayerNorm.cpp" />
     <ClCompile Include="loadTensors.cpp" />
     <ClCompile Include="quantact.cpp" />
     <ClCompile Include="quantact_testbench.cpp" />
+    <ClCompile Include="QuantLinear.cpp" />
     <ClCompile Include="softmax.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

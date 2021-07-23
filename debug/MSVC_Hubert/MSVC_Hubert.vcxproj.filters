@@ -144,6 +144,15 @@
     <ClInclude Include="tensor3d.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="IntGELU.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IntLayerNorm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="QuantLinear.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="quantact_testbench.cpp">
@@ -156,6 +165,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="softmax.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="IntGELU.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="IntLayerNorm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="QuantLinear.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

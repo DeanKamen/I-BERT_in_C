@@ -10,6 +10,8 @@
 const unsigned MAX_ROWS = 3072; // based on the max size of numpy arrays in default IBERT (3072)
 const unsigned MAX_COLS = 3072;
 const unsigned UNITS_PER_MULTIPLY= 32; //must be a factor of the MAX_COLS
+typedef double fraction;
+
 template<class T>
 class Tensor{
     //private:
@@ -44,12 +46,17 @@ class Tensor{
         static void max(Tensor<T>* A, int dim, Tensor<T> *C);
         static void min(Tensor<T>* A, int dim, Tensor<T> *C);
 		static void max_scalar(Tensor<T>* A, T compare, Tensor<T> *C);
+		static void min_scalar(Tensor<T>* A, T compare, Tensor<T> *C);
+		static void abs_tensor(Tensor<T> *A, Tensor<T>* C);
         static void floor_tensor(Tensor<T> *A, Tensor<T> *C);
 		static void exp2_tensor(Tensor<T> *A, Tensor<T> *C);
         static void clamp(Tensor<T> *A, T min, T max, Tensor<T> *C);
         static void roundTensor(Tensor<T> *A, Tensor<T> *C);
         static void reciprocal(Tensor<T> *A, Tensor<T> *C);
 		static void sum(Tensor<T> *A, int dim, Tensor<T>* C);
+		static void sign(Tensor<T> *A, Tensor<T> *C);
+		static void mean(Tensor<T> *A, Tensor<T> *C);
+		static void sqrt_tensor(Tensor<T> *A, Tensor<T> *C);
         //manipulation
         static void fill(Tensor<T> *A, T fill);
         static void view(Tensor<T> *A, int rows, int cols, Tensor<T> *space);

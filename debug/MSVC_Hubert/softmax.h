@@ -4,7 +4,7 @@
 #include "HLS/hls.h"
 #include "HLS/stdio.h"
 #include "tensors.hpp" 
-#include "tensor_mult.h"
+#include "tensor3d.hpp"
 #include "hubertEnums.h"
 
 //softmax.h implements the softmax function

@@ -50,13 +50,17 @@ class Tensor3d{
 		static void max(Tensor3d<T>* A, Tensor3d<T> *C); // full collapse
 		static void min(Tensor3d<T>* A, Tensor3d<T> *C); 
 		static void max_scalar(Tensor3d<T>* A, T compare, Tensor3d<T> *C);
+		static void min_scalar(Tensor3d<T>* A, T compare, Tensor3d<T> *C);
+		static void abs_tensor(Tensor3d<T> *A, Tensor3d<T>* C);
         static void floor_tensor(Tensor3d<T> *A, Tensor3d<T> *C);
 		static void exp2_tensor(Tensor3d<T> *A, Tensor3d<T> *C);
         static void clamp(Tensor3d<T> *A, T min, T max, Tensor3d<T> *C);
         static void roundTensor(Tensor3d<T> *A, Tensor3d<T> *C);
         static void reciprocal(Tensor3d<T> *A, Tensor3d<T> *C);
 		static void sum(Tensor3d<T> *A, int dim, Tensor3d<T>* C);
-
+		static void sign(Tensor3d<T> *A, Tensor3d<T>* C);
+		static void mean(Tensor3d<T> *A, Tensor3d<T>* C);
+		static void sqrt_tensor(Tensor3d<T> *A, Tensor3d<T>* C);
         //manipulation
         //TODO: only if necessary
 		//static void tensor_frexp(Tensor<float>* inputs, Tensor<float>* m, Tensor<float>* e);

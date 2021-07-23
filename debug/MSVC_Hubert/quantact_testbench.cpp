@@ -12,28 +12,9 @@
 
 int main()
 {
-    float r1[3] = {1.f,2.f,3.f};
-	float r2[3] = { 1.f,2.f,3.f };
-	float r3[3] = { 1.f,2.f,3.f };
-    float *test3[3] = {r1, r2, r3};
-    Tensor<float>* ptest3 = new Tensor<float>(3,3,(float**)test3);
-    Tensor<float>::print(ptest3);
+	Tensor<float>::print(loadTensor(preload::self_attn_layer_norm__weight));
 
-	Tensor3d<float>* bruh = new Tensor3d<float>(ptest3);
-	Tensor3d<float>::print(bruh);
-	Tensor3d<float>::mul_dot(bruh,bruh,bruh);
-	Tensor3d<float>::print(bruh);
-
-
-	float tr1[3] = { 1.f, 1.f ,1.f };
-	float *test1[1] = { tr1 };
-	Tensor<float>* ptest1 = new Tensor<float>(1, 3, (float**)test1);
-	Tensor<float>::print(ptest1);
-
-	Tensor<float>::add(ptest3, ptest1, ptest3);
-	Tensor<float>::print(ptest3);
-
-    Tensor<float>* arg2 = new Tensor<float>(1,1, 0.0009f);
+    Tensor<float>* arg2 = new Tensor<float>(1,1, 0.00094321f);
 
 	Tensor3d<float>* softmax_testdata = loadSoftmax();
     scaled_tuple3d result1;
