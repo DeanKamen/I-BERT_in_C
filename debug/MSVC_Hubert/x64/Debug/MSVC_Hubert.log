@@ -1,28 +1,8 @@
 ﻿  IntGELU.cpp
-c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\hls\matrix_mult.h(71): warning C4068: unknown pragma
-c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\hls\matrix_mult.h(76): warning C4068: unknown pragma
-c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\hls\matrix_mult.h(82): warning C4068: unknown pragma
-c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\hls\matrix_mult.h(101): warning C4068: unknown pragma
-c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\hls\matrix_mult.h(107): warning C4068: unknown pragma
-c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\hls\matrix_mult.h(113): warning C4068: unknown pragma
 c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\tensor_mult.h(79): warning C4068: unknown pragma
 c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\tensor_mult.h(84): warning C4068: unknown pragma
 c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\tensor_mult.h(90): warning C4068: unknown pragma
-c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\tensor_mult.h(109): warning C4068: unknown pragma
-c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\tensor_mult.h(115): warning C4068: unknown pragma
-c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\tensor_mult.h(121): warning C4068: unknown pragma
-  quantact.cpp
-c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\hls\matrix_mult.h(71): warning C4068: unknown pragma
-c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\hls\matrix_mult.h(76): warning C4068: unknown pragma
-c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\hls\matrix_mult.h(82): warning C4068: unknown pragma
-c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\hls\matrix_mult.h(101): warning C4068: unknown pragma
-c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\hls\matrix_mult.h(107): warning C4068: unknown pragma
-c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\hls\matrix_mult.h(113): warning C4068: unknown pragma
-c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\tensor_mult.h(79): warning C4068: unknown pragma
-c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\tensor_mult.h(84): warning C4068: unknown pragma
-c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\tensor_mult.h(90): warning C4068: unknown pragma
-c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\tensor_mult.h(109): warning C4068: unknown pragma
-c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\tensor_mult.h(115): warning C4068: unknown pragma
-c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\tensor_mult.h(121): warning C4068: unknown pragma
-  Generating Code...
+c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\tensor_mult.h(110): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\tensor_mult.h(116): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\tensor_mult.h(122): warning C4068: unknown pragma
   MSVC_Hubert.vcxproj -> C:\Users\hunto_efxy22i\jupyterProjects\HUBERT\debug\MSVC_Hubert\x64\Debug\MSVC_Hubert.exe

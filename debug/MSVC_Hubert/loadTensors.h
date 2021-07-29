@@ -6,6 +6,7 @@
 #include "hubertEnums.h"
 //currently only loads float tensors, easy customization to int
 Tensor<float>* loadTensor(preload);
-Tensor3d<float>* loadSoftmax();
+Tensor3d<float>* loadGeneric3d(const char* fname);
+Tensor<float>* loadGeneric2d(const char* fname);
 
 #endif

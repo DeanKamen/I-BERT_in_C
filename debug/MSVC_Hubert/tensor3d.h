@@ -24,6 +24,9 @@ class Tensor3d{
         Tensor3d(Tensor<T> *A); //Takes a 2d matrix and copies it into the first layer.
 		Tensor3d(void); //all depth layers are nullpointer
 
+		//special cross multiply
+		static void linear_mul(Tensor3d<T> *A, Tensor<T> *B, Tensor3d<T> *C);
+
 		//2d broadcasting across 3d
         static void add(Tensor3d<T> *A, Tensor<T> *B, Tensor3d<T> *C);
         static void sub(Tensor3d<T> *A, Tensor<T> *B, Tensor3d<T> *C);

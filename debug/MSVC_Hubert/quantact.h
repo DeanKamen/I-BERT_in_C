@@ -28,13 +28,13 @@ class QuantAct
                               Tensor<float>* specified_max = nullptr);
     void fix();
     void unfix();
-    Tensor<float>* symmetric_linear_quantization_params(unsigned num_bits,
-                                        float saturation_min,
-                                        float saturation_max,
+    static Tensor<float>* symmetric_linear_quantization_params(unsigned num_bits,
+                                        Tensor<float>* saturation_min,
+                                        Tensor<float>* saturation_max,
                                         bool per_channel=false);
 
     Tensor3d<float>* symmetric_quant_forward(Tensor3d<float>* x, int k, Tensor<float>* specified_scale);
-    Tensor3d<float>* linear_quantize(Tensor3d<float> *x, Tensor<float>* scale, Tensor<float>* zero_point);
+    static Tensor3d<float>* linear_quantize(Tensor3d<float> *x, Tensor<float>* scale, Tensor<float>* zero_point);
     Tensor3d<float>* fixedpoint_mul(
         Tensor3d<float>* pre_act,
         Tensor<float>* pre_act_scaling_factor,
@@ -44,6 +44,7 @@ class QuantAct
         Tensor<float>* identity = nullptr,
         Tensor<float>* identity_scaling_factor = nullptr
     );
+	void set_param(preload x_min_n, preload x_max_n, preload act_scaling_factor_n);
 
     //members
     int activation_bit;

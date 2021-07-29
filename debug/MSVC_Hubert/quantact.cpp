@@ -20,20 +20,15 @@ QuantAct::QuantAct(int activation_bit_i,
     quant_mode = quant_mode_i;
     per_channel = per_channel_i;
 
-    if(!per_channel)
+    if(per_channel)
     {
-        x_min = loadTensor(preload::self_attn__softmax__act__x_min);//temporarily hardcoded for the softmax quantact
-		x_max = loadTensor(preload::self_attn__softmax__act__x_max); //TODO: make it a parameter
-		act_scaling_factor = loadTensor(preload::self_attn__softmax__act__act_scaling_factor);
+		assert(channel_len > 0);
+		x_min = new Tensor<float>(1, channel_len, 0.0f);
+		x_max = new Tensor<float>(1, channel_len, 0.0f);
+		act_scaling_factor = new Tensor<float>(1, channel_len, 0.0f);
+
     }
-    else
-    {
-		//should not get here
-        assert(channel_len > 0);
-        x_min = new Tensor<float>(1,channel_len, 0.0f);
-        x_max = new Tensor<float>(1,channel_len, 0.0f);
-        act_scaling_factor = new Tensor<float>(1,channel_len, 0.0f);
-    }
+	//loading xmin and xmax is done by the set param function
 }
 
 void QuantAct::fix()
@@ -52,14 +47,6 @@ scaled_tuple3d QuantAct::QuantAct_forward(Tensor3d<float>* x,
                               Tensor<float>* specified_min,
                               Tensor<float>* specified_max)
 {
-	printf("QUANTACT_FORWARD START\n");
-	Tensor3d<float>::print(x);
-	Tensor<float>::print(pre_act_scaling_factor);
-	Tensor<float>::print(identity);
-	Tensor<float>::print(identity_scaling_factor);
-	Tensor<float>::print(specified_min);
-	Tensor<float>::print(specified_max);
-
     Tensor3d<float>* x_act = new Tensor3d(x);
     if(identity == nullptr)
     {
@@ -73,10 +60,10 @@ scaled_tuple3d QuantAct::QuantAct_forward(Tensor3d<float>* x,
 	Tensor<float>* local_xmin = new Tensor<float>(1, 1, 0.f);
 	Tensor<float>* local_xmax = new Tensor<float>(1, 1, 0.f);
 
-    if(running_stat)
-    {
-        if(!per_channel)
-        {
+	if (running_stat)
+	{
+		if (!per_channel)
+		{
 			Tensor3d<float>* temp = new Tensor3d<float>(x_act);
 			Tensor3d<float>::min(temp, temp);
 			Tensor3d<float>::toTwoD(temp, local_xmin);
@@ -86,47 +73,47 @@ scaled_tuple3d QuantAct::QuantAct_forward(Tensor3d<float>* x,
 			Tensor3d<float>::max(temp, temp);
 			Tensor3d<float>::toTwoD(temp, local_xmax);
 			delete temp;
-        }
-        else
-        {
-            //TODO: 3d matrix support
-            assert(false);
-        }
-    }
-
-    //Initialization 
-    if(Tensor<float>::eq(x_min, x_max))
-    {
-        Tensor<float>::add(x_min, local_xmin, x_min);
-        Tensor<float>::add(x_max, local_xmax, x_max);
-    }
-    else if(act_range_momentum == -1)
-	{
-		float obj_min = Tensor<float>::one(x_min);
-		float obj_max = Tensor<float>::one(x_max);
-		float localmin = Tensor<float>::one(local_xmin);
-		float localmax = Tensor<float>::one(local_xmax);
-
-		if (localmax > obj_max)
-		{
-			Tensor<float>::set(x_max, 0, 0, localmax);
 		}
-		if (localmin < obj_min)
+		else
 		{
-			Tensor<float>::set(x_min, 0, 0, localmin);
+			//TODO: 3d matrix support
+			assert(false);
 		}
-    }
-    else
-    {
-        //here I am assuming xmin and xmax are 1x1
-        float objmin = Tensor<float>::one(x_min);
-		float localmin = Tensor<float>::one(local_xmin);
-        Tensor<float>::set(x_min, 0,0, objmin*act_range_momentum + localmin*(1-act_range_momentum));
 
-        float objmax = Tensor<float>::one(x_max);
-		float localmax = Tensor<float>::one(local_xmax);
-        Tensor<float>::set(x_max, 0,0, objmax*act_range_momentum + localmax*(1-act_range_momentum));
-    }
+		//Initialization 
+		if (Tensor<float>::eq(x_min, x_max))
+		{
+			Tensor<float>::add(x_min, local_xmin, x_min);
+			Tensor<float>::add(x_max, local_xmax, x_max);
+		}
+		else if (act_range_momentum == -1)
+		{
+			float obj_min = Tensor<float>::one(x_min);
+			float obj_max = Tensor<float>::one(x_max);
+			float localmin = Tensor<float>::one(local_xmin);
+			float localmax = Tensor<float>::one(local_xmax);
+
+			if (localmax > obj_max)
+			{
+				Tensor<float>::set(x_max, 0, 0, localmax);
+			}
+			if (localmin < obj_min)
+			{
+				Tensor<float>::set(x_min, 0, 0, localmin);
+			}
+		}
+		else
+		{
+			//here I am assuming xmin and xmax are 1x1
+			float objmin = Tensor<float>::one(x_min);
+			float localmin = Tensor<float>::one(local_xmin);
+			Tensor<float>::set(x_min, 0, 0, objmin*act_range_momentum + localmin * (1 - act_range_momentum));
+
+			float objmax = Tensor<float>::one(x_max);
+			float localmax = Tensor<float>::one(local_xmax);
+			Tensor<float>::set(x_max, 0, 0, objmax*act_range_momentum + localmax * (1 - act_range_momentum));
+		}
+	}
 
     if(quant_mode == QuantMode::none)
     {
@@ -141,9 +128,7 @@ scaled_tuple3d QuantAct::QuantAct_forward(Tensor3d<float>* x,
     if(specified_max != nullptr) 
     x_min = specified_max;
 
-    float min = Tensor<float>::one(x_min); 
-    float max = Tensor<float>::one(x_max);
-    act_scaling_factor = QuantAct::symmetric_linear_quantization_params(activation_bit, min, max, per_channel);
+    act_scaling_factor = QuantAct::symmetric_linear_quantization_params(activation_bit, x_min, x_max, per_channel);
     
     Tensor3d<float>* quant_act_int = nullptr;
     if(pre_act_scaling_factor == nullptr)
@@ -167,8 +152,8 @@ scaled_tuple3d QuantAct::QuantAct_forward(Tensor3d<float>* x,
 }
 
 Tensor<float>* QuantAct::symmetric_linear_quantization_params(unsigned num_bits,
-                                        float saturation_min,
-                                        float saturation_max,
+                                        Tensor<float>* saturation_min,
+                                        Tensor<float>* saturation_max,
                                         bool per_channel)
 {
     /*
@@ -180,15 +165,29 @@ Tensor<float>* QuantAct::symmetric_linear_quantization_params(unsigned num_bits,
     saturation_max: upper bound for quantization range
     
     */
-    Tensor<float>* scale = new Tensor<float>(1,1,0.f); 
+    Tensor<float>* scale = new Tensor<float>(saturation_min); 
     unsigned n =  (unsigned int)exp2( num_bits - 1 ) - 1;
     if (per_channel)
-    {
-        assert(false);
+    { // saturation min and max are columns
+		for (unsigned i = 0; i < Tensor<float>::getRows(saturation_min); i++)
+		{//custom max loop
+			float x = fabs(Tensor<float>::get(saturation_min, i, 0)); 
+			float y = fabs(Tensor<float>::get(saturation_max, i, 0));
+			if (x > y)
+			{
+				Tensor<float>::set(scale, i, 0, x);
+			}
+			else
+			{
+				Tensor<float>::set(scale, i, 0, y);
+			}
+		}
+		Tensor<float>::clamp(scale, 1e-8f, FLT_MAX, scale);
+		Tensor<float>::div_scalar(scale, (float)n, scale);
     }
     else
-    {
-        Tensor<float>::set(scale,0,0, fmax(fabs(saturation_min), fabs(saturation_max)));
+    {//saturation min and max are one element tensors
+        Tensor<float>::set(scale,0,0, fmax(fabs(Tensor<float>::one(saturation_min)), fabs((Tensor<float>::one(saturation_max)))));
         Tensor<float>::clamp(scale, 1e-8f, FLT_MAX, scale); 
         Tensor<float>::div_scalar(scale, (float)n, scale);
     }
@@ -211,10 +210,10 @@ Tensor3d<float>* QuantAct::symmetric_quant_forward(Tensor3d<float>* x, int k, Te
     return new_quant_x;
 }
 
-Tensor3d<float>* QuantAct::linear_quantize(Tensor3d<float>* x, Tensor<float>* scale, Tensor<float>* zero_point)
+Tensor3d<float>* QuantAct::linear_quantize(Tensor3d<float>* x, Tensor<float>* scale_c, Tensor<float>* zero_point)
 {
     //scale is 1 when x is truely 3d. When x is 2d, scale is also 2d (or at least broadcastable.)
-
+	Tensor<float>* scale = new Tensor(scale_c);
     Tensor<float>::reciprocal(scale, scale);
 	if (Tensor3d<float>::getDepth(x) != 1)
 	{
@@ -326,4 +325,11 @@ Tensor3d<float>* QuantAct::fixedpoint_mul(
     }
 }
 
+
+void QuantAct::set_param(preload x_min_n, preload x_max_n, preload act_scaling_factor_n)
+{
+	x_min = loadTensor(x_min_n);
+	x_max = loadTensor(x_max_n);
+	act_scaling_factor = loadTensor(act_scaling_factor_n);
+}
 

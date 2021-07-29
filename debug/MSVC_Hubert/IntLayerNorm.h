@@ -23,6 +23,7 @@ public:
 	//void set_shift(Tensor3d<float>* y_int); 
 	//void overflow_fallback(Tensor3d<float>* y_int);
 	scaled_tuple3d intlayernorm_forward(Tensor3d<float>* x, Tensor<float>* scaling_factor = nullptr);
+	void set_param(preload shift, preload weight, preload bias);
 
 	QuantMode quant_mode;
 	Tensor<float>* shift;

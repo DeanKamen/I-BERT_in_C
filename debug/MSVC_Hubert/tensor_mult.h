@@ -50,11 +50,11 @@
 #include "tensors.h"
 //this function cannot auto-detect matrix size, it must be entered manually with compile time constants.
 //This is due to dynamic allocation constraints
-template<class T, int A_numRows, int A_numCols, int B_numCols, int DOT_VEC_SIZE = A_numCols, int BLOCK_SIZE = DOT_VEC_SIZE, int RUNNING_SUM_MULT_L = 1>
-void matrix_multiply(Tensor<T>& A, Tensor<T>&B, Tensor<T>& C) {
-	const int COLSA = A_numCols;
-	const int ROWSA = A_numRows;
-	const int COLSB = B_numCols;
+template<class T, int t_rowsA, int t_colsA, int t_colsB, int DOT_VEC_SIZE = t_colsA, int BLOCK_SIZE = DOT_VEC_SIZE, int RUNNING_SUM_MULT_L = 1>
+void matrix_multiply(Tensor<T>* A, Tensor<T>* B, Tensor<T>* C) {
+	const int COLSA = t_colsA;
+	const int ROWSA = t_rowsA;
+	const int COLSB = t_colsB;
 	const int ROWSB = COLSA;
 	const int ROWSC = ROWSA;
 	const int COLSC = COLSB;
@@ -96,11 +96,12 @@ void matrix_multiply(Tensor<T>& A, Tensor<T>&B, Tensor<T>& C) {
 				if ((s + 1) * DOT_VEC_SIZE == COLSA) {
 					rowA = i + 1;
 					colA = (j - COLSC + DOT_VEC_SIZE / BLOCK_SIZE) * BLOCK_SIZE + d;
-				} else {
+				}
+				else {
 					rowA = i;
 					colA = (s + 1) * DOT_VEC_SIZE + (j - COLSC + DOT_VEC_SIZE / BLOCK_SIZE) * BLOCK_SIZE + d;
 				}
-				val = Tensor<T>::get(A,rowA,colA);
+				val = Tensor<T>::get(A, rowA, colA);
 			}
 			A_local_regs[d + DOT_VEC_SIZE - BLOCK_SIZE] = val;
 		}
@@ -108,7 +109,7 @@ void matrix_multiply(Tensor<T>& A, Tensor<T>&B, Tensor<T>& C) {
 		T running_sum = 0.0;
 #pragma unroll
 		for (int d = 0; d < DOT_VEC_SIZE; ++d) {
-			running_sum += A_local_regs_stable[d] * Tensor<T>::get(B,s * DOT_VEC_SIZE + d,j);
+			running_sum += A_local_regs_stable[d] * Tensor<T>::get(B, s * DOT_VEC_SIZE + d, j);
 		}
 		T sum = running_sums_for_col[RUNNING_SUM_MULT_L * COLSC - 1] = (s < RUNNING_SUM_MULT_L ? (T) 0.0 : running_sums_for_col[RUNNING_SUM_MULT_L * COLSC - 1]) + running_sum;
 		T final_sum = sum;
@@ -127,7 +128,8 @@ void matrix_multiply(Tensor<T>& A, Tensor<T>&B, Tensor<T>& C) {
 		// result of the partial addition
 		if (num_iter_per_elem_L > RUNNING_SUM_MULT_L) {
 			running_sums_for_col[RUNNING_SUM_MULT_L * COLSC - 1] = tmp;
-		} else {
+		}
+		else {
 			running_sums_for_col[RUNNING_SUM_MULT_L * COLSC - 1] = (T) 0.0; // MATRIX_ELEMENT_ZERO;
 		}
 
@@ -139,13 +141,14 @@ void matrix_multiply(Tensor<T>& A, Tensor<T>&B, Tensor<T>& C) {
 			if (last_s_itr) {
 				s = 0;
 				i++;
-			} else {
+			}
+			else {
 				s++;
 			}
-		} else {
+		}
+		else {
 			j++;
 		}
 	}
 }
-
 #endif

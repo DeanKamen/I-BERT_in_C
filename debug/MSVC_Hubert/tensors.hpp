@@ -6,7 +6,7 @@
 
 #include "HLS/hls.h"
 #include "HLS/math.h"
-#include "HLS/matrix_mult.h"
+#include "tensor_mult.h"
 #include "HLS/stdio.h"
 #include "tensors.h"
 #include <iostream>
@@ -74,7 +74,9 @@ void Tensor<T>::mul_cross(Tensor<T> *A, Tensor<T> *B, Tensor<T> *C)
 //this function needs to use MACROS or constants known at compile time for sizes.
 //when using multiplies in components, use the below prototype.
 {
-	matrix_multiply<T, MAX_ROWS, MAX_COLS, MAX_COLS, UNITS_PER_MULTIPLY>(A->t_tensor, B->t_tensor, C->t_tensor);
+	matrix_multiply<T, 1, 768, 768>(A, B, C);
+	setRows(C, getRows(A));
+	setCols(C, getCols(B));
 }
 
 template<class T>
@@ -677,8 +679,8 @@ void Tensor<T>::mean(Tensor<T> *A, Tensor<T> *C)
 	{
 		running += get(A, 0, j);
 	}
-	setCols(C, 1);
 	set(C, 0, 0, running / (float)getCols(A));
+	setCols(C, 1);
 }
 
 template<class T>
@@ -784,7 +786,6 @@ void Tensor<T>::tensor_frexp(Tensor<float>* inputs, Tensor<float>* m, Tensor<flo
 template<class T>
 T Tensor<T>::get(Tensor<T> *tensor, const unsigned &row, const unsigned &col)
 {
-    //TODO: add safeguards to check if IN RANGE
     if(tensor->transposed)
     {//in this block everything is flipped because internally, we are treating the matrix as transposed 
         if(row < getRows(tensor) && col < getCols(tensor))
@@ -794,7 +795,7 @@ T Tensor<T>::get(Tensor<T> *tensor, const unsigned &row, const unsigned &col)
         else
         {
             printf("Tensor::get() index [%d][%d] out of range\n", col, row);
-			assert(false);
+			//assert(false);
             return 0;
         }
     }
@@ -807,7 +808,7 @@ T Tensor<T>::get(Tensor<T> *tensor, const unsigned &row, const unsigned &col)
         else
         {
             printf("Tensor::get() index [%d][%d] out of range\n", row, col);
-			assert(false);
+			//assert(false);
             return 0;
         }
     }

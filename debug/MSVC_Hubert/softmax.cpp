@@ -126,7 +126,7 @@ scaled_tuple3d Softmax::softmax_forward(Tensor3d<float>* x, Tensor<float>* scali
 	Tensor3d<float>::mul_scalar(factor, exp2f(32), factor);
 	Tensor3d<float>::floor_tensor(factor, factor);
 
-	Tensor3d<float>::mul_dot(exp_int, factor, exp_int); //TODO: verify this.
+	Tensor3d<float>::mul_dot(exp_int, factor, exp_int);
 	Tensor3d<float>::div_scalar(exp_int, exp2f(float(32-output_bit)), exp_int);
 	Tensor3d<float>::floor_tensor(exp_int, exp_int);
 
@@ -161,4 +161,9 @@ void Softmax::normal_softmax(Tensor3d<float>* src, Tensor3d<float>* dest)
 			}
 		}
 	}
+}
+
+void Softmax::set_param(preload x_min_n, preload x_max_n, preload act_scaling_factor_n)
+{
+	act->set_param(x_min_n, x_max_n, act_scaling_factor_n);
 }

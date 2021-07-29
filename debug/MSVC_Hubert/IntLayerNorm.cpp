@@ -16,9 +16,6 @@ IntLayerNorm::IntLayerNorm(int output_bit_i, bool overflow_handling_i, QuantMode
 		quant_mode = QuantMode::none;
 	}
 
-	shift = loadTensor(preload::self_attn_layer_norm__shift); //TODO: if multiple layerNORMS, make this a parameter
-	weight = loadTensor(preload::self_attn_layer_norm__weight); //TODO: create a new function called set_param in which we pass the weights to load
-	bias = loadTensor(preload::self_attn_layer_norm__bias);
 	output_bit = output_bit_i;
 
 	assert(quant_mode == QuantMode::none); // if this is ever false, write the rest of the program
@@ -47,9 +44,14 @@ scaled_tuple3d IntLayerNorm::intlayernorm_forward(Tensor3d<float>* x, Tensor<flo
 		{
 			Tensor<float>::div_scalar(Tensor3d<float>::get(y, d), Tensor<float>::one(Tensor3d<float>::get(var, d)), Tensor3d<float>::get(x, d));
 		}
+
+		Tensor<float>::transpose(weight);
+		Tensor<float>::transpose(bias);
 		Tensor3d<float>::mul_dot(x, weight, x);
 		Tensor3d<float>::add(x, bias, x);
-		
+		Tensor<float>::transpose(weight);
+		Tensor<float>::transpose(bias);
+
 		scaled_tuple3d returnme;
 		returnme.matrix = x;
 		returnme.scaling_factor = nullptr;
@@ -57,10 +59,18 @@ scaled_tuple3d IntLayerNorm::intlayernorm_forward(Tensor3d<float>* x, Tensor<flo
 	}
 	else
 	{
+		//Hunter didnt write this part for expediency
 		assert(false);
 		scaled_tuple3d bob;
 		bob.matrix = nullptr;
 		bob.scaling_factor = nullptr;
 		return bob;
 	}
+}
+
+void IntLayerNorm::set_param(preload shift_n, preload weight_n, preload bias_n)
+{
+	shift = loadTensor(shift_n); 
+	weight = loadTensor(weight_n);
+	bias = loadTensor(bias_n);
 }

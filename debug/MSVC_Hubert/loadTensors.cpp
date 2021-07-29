@@ -70,10 +70,10 @@ Tensor<float>* loadTensor(preload idx)
     return nullptr;
 }
 
-Tensor3d<float>* loadSoftmax()
+Tensor3d<float>* loadGeneric3d(const char* fname)
 {
 	FILE* f;
-	fopen_s(&f, "bin/softmax_12.bin", "rb");
+	fopen_s(&f, fname, "rb");
 	int str_len;
 	char str[256];
 	int rows, cols, depth;
@@ -106,5 +106,36 @@ Tensor3d<float>* loadSoftmax()
 	}
 
 	return localTensor;
+	fclose(f);
+}
+
+Tensor<float>* loadGeneric2d(const char* fname)
+{
+	FILE* f;
+	fopen_s(&f, fname, "rb");
+	int str_len;
+	char str[256];
+	int rows, cols;
+	float cur;
+	fread((void*)(&str_len), sizeof(str_len), 1, f);
+	fread((void*)(&str), str_len, 1, f);
+	str[str_len] = '\0'; //because its not null terminated
+	fread((void*)(&rows), sizeof(rows), 1, f);
+	fread((void*)(&cols), sizeof(cols), 1, f);
+
+	printf("%d %s (%d, %d)\n", str_len, str, rows, cols);
+
+	int i;
+	//allocate memory
+	Tensor<float>* tensor2d = new Tensor<float>(rows, cols, 0.f);
+	for (i = 0; i < rows*cols; i++)
+	{
+		fread((void*)(&cur), sizeof(cur), 1, f);
+		int row = i / cols; // we are on this row at any given point
+		int col = i % cols;
+		Tensor<float>::set(tensor2d, row, col, cur);
+	}
+
+	return tensor2d;
 	fclose(f);
 }

@@ -7,46 +7,75 @@
 #include "loadTensors.h"
 #include "hubertEnums.h"
 #include "QuantLinear.h"
+#include "HLS/matrix_mult.h"
 
-QuantLinear::QuantLinear(int weight_bit, int bias_bit, bool per_channel, QuantMode quant_mode_i)
+QuantLinear::QuantLinear(int weight_bit_i, int* bias_bit_i, bool per_channel_i, QuantMode quant_mode_i)
 {
 	quant_mode = quant_mode_i;
+	per_channel = per_channel_i;
+	weight_bit = weight_bit_i;
+	bias_bit = bias_bit_i;
+	if (bias_bit == nullptr) {
+		quantize_bias = false;
+	}
+	else {
+		quantize_bias = true;
+	}
 	
 }
 
-scaled_tuple3d QuantLinear::set_param(preload fc_scaling_factor, preload weight_int, preload bias_int)
+void QuantLinear::set_param(preload fc_scaling_factor_n, preload weight_n, preload bias_n, preload bias_int_n)
 {
-	input_scaling_factor = loadTensor(preload::self_attn__softmax__act__x_min);
-	input_scaling_factor = loadTensor(preload::self_attn__softmax__act__x_min);
-	input_scaling_factor = loadTensor(preload::self_attn__softmax__act__x_min);
+	fc_scaling_factor = loadTensor(fc_scaling_factor_n);
+	weight = loadTensor(weight_n);
+	bias = loadTensor(bias_n);
+	bias_int = loadTensor(bias_int_n);
 }
 
 scaled_tuple3d QuantLinear::quantlinear_forward(Tensor3d<float>* x, Tensor<float>* prev_act_scaling_factor)
 {
-	if (quant_mode == QuantMode::none)
-	{
-		normal_gelu(x, x);
-		scaled_tuple3d rm;
-		rm.matrix = x;
-		rm.scaling_factor = nullptr;
-		return rm;
-	}
+	assert(quant_mode == QuantMode::symmetric);
+	int pasf = Tensor<float>::one(prev_act_scaling_factor);
+
+	Tensor<float>* w_min = new Tensor<float>(weight);
+	Tensor<float>* w_max = new Tensor<float>(weight);
+	Tensor<float>::min(w_min, 1, w_min);
+	Tensor<float>::max(w_max, 1, w_max);
+	Tensor<float>* fc_scaling_factor = QuantAct::symmetric_linear_quantization_params(weight_bit, w_min, w_max, per_channel);
+	Tensor3d<float>* weight3d = new Tensor3d<float>(weight);
+
+	// this seems to be able to be loaded but can also be dervied. I will derive it
+	Tensor3d<float>* weight_int = symmetricQuantFunction(weight3d, weight_bit, fc_scaling_factor); 
+	Tensor<float>* bias_scaling_factor = new Tensor<float>(fc_scaling_factor);
+	Tensor<float>::mul_dot(fc_scaling_factor, prev_act_scaling_factor, bias_scaling_factor);
+	Tensor3d<float>* bias3d = new Tensor3d<float>(bias);
+	//Same thing here but it seems that if I load it its incorrect but if I derive it its correct
+	Tensor3d<float> *bias_int_2 = symmetricQuantFunction(bias3d, *bias_bit, bias_scaling_factor);
+	Tensor<float>::transpose(Tensor3d<float>::get(bias_int_2, 0));
+
 	Tensor3d<float>* x_int = new Tensor3d<float>(x);
-	
-	Tensor3d<float>::div_scalar(x_int, Tensor<float>::one(scaling_factor), x_int);
-	Tensor<float>* sigmoid_sf = new Tensor(scaling_factor);
-	Tensor<float>::div_scalar(sigmoid_sf, k, sigmoid_sf);
-	scaled_tuple3d sigmoid = int_erf(x_int, sigmoid_sf);// sigmoid_sf gets put into the sigmoid tuple
-	Tensor<float>* shift_int = new Tensor(sigmoid.scaling_factor);
-	Tensor<float>::reciprocal(sigmoid.scaling_factor, shift_int);
-	Tensor<float>::floor_tensor(shift_int, shift_int);
-	Tensor3d<float>::add_scalar(sigmoid.matrix, Tensor<float>::one(shift_int), sigmoid.matrix);
-	Tensor3d<float>::mul_dot(x_int, sigmoid.matrix, x_int);
-	Tensor<float>::div_scalar(sigmoid.scaling_factor, 2.f, sigmoid.scaling_factor);
-	Tensor<float>::mul_scalar(scaling_factor, Tensor<float>::one(sigmoid.scaling_factor), scaling_factor);
-	Tensor3d<float>::mul_scalar(x_int, Tensor<float>::one(scaling_factor), x_int);
+	Tensor3d<float>::div_scalar(x, Tensor<float>::one(prev_act_scaling_factor), x_int);
+
+	//LINEAR TRANSFORM
+	Tensor3d<float>::linear_mul(x_int, Tensor3d<float>::twoD(weight_int), x_int);
+	Tensor3d<float>::add(x_int, Tensor3d<float>::twoD(bias_int_2), x_int);
+	//end linear transform
+
+	Tensor<float>::transpose(bias_scaling_factor);
+	Tensor3d<float>::mul_dot(x_int, bias_scaling_factor, x_int);
+	Tensor<float>::transpose(bias_scaling_factor);// un- transpose to minimize bugs in the future
 	scaled_tuple3d returnme;
 	returnme.matrix = x_int;
-	returnme.scaling_factor = scaling_factor;
+	returnme.scaling_factor = bias_scaling_factor;
 	return returnme;
+}
+
+Tensor3d<float>* QuantLinear::symmetricQuantFunction(Tensor3d<float>* x, int k, Tensor<float> *specified_scale)
+{
+	Tensor<float>* zero_point = new Tensor<float>(1, 1, 0.);
+	Tensor3d<float>* new_quant_x = new Tensor3d<float>(x);
+	float n = exp2f(float(k - 1)) - 1;
+	new_quant_x = QuantAct::linear_quantize(x, specified_scale, zero_point);
+	Tensor3d<float>::clamp(new_quant_x, -n, n - 1, new_quant_x);
+	return new_quant_x;
 }

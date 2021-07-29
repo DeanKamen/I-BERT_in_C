@@ -16,7 +16,6 @@ IntGELU::IntGELU(QuantMode quant_mode_i, ForceDequantMode force_dequant)
 		quant_mode = QuantMode::none;
 	}
 
-	input_scaling_factor = loadTensor(preload::self_attn__softmax__act__x_min);
 	k = 1.4142f; //  - ln2
 	n = 14; // sufficiently large integer
 	coeff[0] = -0.2888f;
@@ -37,7 +36,8 @@ scaled_tuple3d IntGELU::intgelu_forward(Tensor3d<float>* x, Tensor<float>* scali
 	}
 	Tensor3d<float>* x_int = new Tensor3d<float>(x);
 	
-	Tensor3d<float>::div_scalar(x_int, Tensor<float>::one(scaling_factor), x_int);
+	Tensor<float>::transpose(scaling_factor);// it comes in as a column but is meant to be a row
+	Tensor3d<float>::div_dot(x_int, scaling_factor, x_int);
 	Tensor<float>* sigmoid_sf = new Tensor(scaling_factor);
 	Tensor<float>::div_scalar(sigmoid_sf, k, sigmoid_sf);
 	scaled_tuple3d sigmoid = int_erf(x_int, sigmoid_sf);// sigmoid_sf gets put into the sigmoid tuple
@@ -48,7 +48,8 @@ scaled_tuple3d IntGELU::intgelu_forward(Tensor3d<float>* x, Tensor<float>* scali
 	Tensor3d<float>::mul_dot(x_int, sigmoid.matrix, x_int);
 	Tensor<float>::div_scalar(sigmoid.scaling_factor, 2.f, sigmoid.scaling_factor);
 	Tensor<float>::mul_scalar(scaling_factor, Tensor<float>::one(sigmoid.scaling_factor), scaling_factor);
-	Tensor3d<float>::mul_scalar(x_int, Tensor<float>::one(scaling_factor), x_int);
+	Tensor3d<float>::mul_dot(x_int, scaling_factor, x_int);
+	Tensor<float>::transpose(scaling_factor);//send out as a column again to avoid confusion
 	scaled_tuple3d returnme;
 	returnme.matrix = x_int;
 	returnme.scaling_factor = scaling_factor;

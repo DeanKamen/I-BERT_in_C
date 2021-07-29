@@ -30,6 +30,7 @@ class Tensor{
 
         //math
 		static void mul_cross(Tensor<T> *A, Tensor<T> *B, Tensor<T> *C);
+
 		//dot type (broadcasting)
         static void add(Tensor<T> *A, Tensor<T> *B, Tensor<T> *C);
         static void sub(Tensor<T> *A, Tensor<T> *B, Tensor<T> *C);

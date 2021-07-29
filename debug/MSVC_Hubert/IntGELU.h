@@ -22,7 +22,6 @@ public:
 	void normal_gelu(Tensor3d<float>* x_in, Tensor3d<float>* x_out);
 
 	QuantMode quant_mode;
-	Tensor<float>* input_scaling_factor;
 	float k;
 	int n;
 	float coeff[3];

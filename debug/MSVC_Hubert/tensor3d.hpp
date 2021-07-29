@@ -33,8 +33,8 @@ Tensor3d<T>::Tensor3d(Tensor3d<T> *A) //Takes 2d matrixes from the pointer and c
 template<class T>
 Tensor3d<T>::Tensor3d(Tensor<T> *A) //Takes a 2d matrix and copies it into the first layer.
 {
-	t_numCols = Tensor<T>::getRows(A);
-	t_numRows = Tensor<T>::getCols(A);
+	t_numCols = Tensor<T>::getCols(A);
+	t_numRows = Tensor<T>::getRows(A);
 	t_depth = 1;
 	for (unsigned d = 0; d < MAX_DEPTH; d++)
 	{
@@ -53,6 +53,19 @@ Tensor3d<T>::Tensor3d(void)
 	{
 		set(this, d, nullptr);
 	}
+}
+
+//special multiply
+template<class T> void Tensor3d<T>::linear_mul(Tensor3d<T> *A, Tensor<T> *B, Tensor3d<T> *C)
+{
+	Tensor<T>::transpose(B);
+	for (unsigned d = 0; d < getDepth(A); d++)
+	{
+		Tensor<T>::mul_cross(get(A, d), B, get(C, d));
+	}
+	setCols(C, Tensor<T>::getCols(B));
+	setRows(C, getRows(A));
+	Tensor<T>::transpose(B);
 }
 
 //2d broadcasting across 3d
@@ -227,7 +240,7 @@ template<class T> void Tensor3d<T>::min(Tensor3d<T>* A, int dim, Tensor3d<T> *C)
 	{
 		for (unsigned d = 0; d < getDepth(A); d++)
 		{
-			Tensor<T>::max(get(A, d), dim, get(C, d));
+			Tensor<T>::min(get(A, d), dim, get(C, d));
 		}
 		setCols(C, Tensor<T>::getCols(get(C, 0))); // the rows and cols of the layers were updated
 		setRows(C, Tensor<T>::getRows(get(C, 0))); // but we still need to update the 3d matrix's
@@ -351,6 +364,8 @@ template<class T> void Tensor3d<T>::sum(Tensor3d<T> *A, int dim, Tensor3d<T>* C)
 		{
 			Tensor<T>::sum(get(A, d), dim, get(C, d));
 		}
+		setCols(C, Tensor<T>::getCols(get(C, 0))); // the rows and cols of the layers were updated
+		setRows(C, Tensor<T>::getRows(get(C, 0))); // but we still need to update the 3d matrix's
 	}
 
 	else
@@ -369,6 +384,9 @@ template<class T> void Tensor3d<T>::sum(Tensor3d<T> *A, int dim, Tensor3d<T>* C)
 				running = 0;
 			}
 		}
+		setDepth(C, 1);
+		setCols(C, A->t_numCols);
+		setRows(C, A->t_numRows);
 	}
 }
 
