@@ -5,4 +5,80 @@ c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\tensor_mult.h(90
 c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\tensor_mult.h(110): warning C4068: unknown pragma
 c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\tensor_mult.h(116): warning C4068: unknown pragma
 c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\tensor_mult.h(122): warning C4068: unknown pragma
+  IntLayerNorm.cpp
+c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\tensor_mult.h(79): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\tensor_mult.h(84): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\tensor_mult.h(90): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\tensor_mult.h(110): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\tensor_mult.h(116): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\tensor_mult.h(122): warning C4068: unknown pragma
+  QuantLinear.cpp
+c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\tensor_mult.h(79): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\tensor_mult.h(84): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\tensor_mult.h(90): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\tensor_mult.h(110): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\tensor_mult.h(116): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\tensor_mult.h(122): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\hls\matrix_mult.h(77): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\hls\matrix_mult.h(82): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\hls\matrix_mult.h(88): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\hls\matrix_mult.h(108): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\hls\matrix_mult.h(114): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\hls\matrix_mult.h(120): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\quantlinear.cpp(38): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+  loadTensors.cpp
+c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\tensor_mult.h(79): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\tensor_mult.h(84): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\tensor_mult.h(90): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\tensor_mult.h(110): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\tensor_mult.h(116): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\tensor_mult.h(122): warning C4068: unknown pragma
+  quantact.cpp
+c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\tensor_mult.h(79): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\tensor_mult.h(84): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\tensor_mult.h(90): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\tensor_mult.h(110): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\tensor_mult.h(116): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\tensor_mult.h(122): warning C4068: unknown pragma
+  quantact_testbench.cpp
+c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\tensor_mult.h(79): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\tensor_mult.h(84): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\tensor_mult.h(90): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\tensor_mult.h(110): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\tensor_mult.h(116): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\tensor_mult.h(122): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\testglobals.h(10): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\testglobals.h(15): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\testglobals.h(20): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\testglobals.h(25): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\testglobals.h(30): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\testglobals.h(35): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\testglobals.h(40): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\testglobals.h(45): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\testglobals.h(50): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\testglobals.h(55): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\testglobals.h(60): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\testglobals.h(65): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\testglobals.h(70): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\testglobals.h(75): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\testglobals.h(80): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\testglobals.h(85): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\testglobals.h(90): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\testglobals.h(95): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\testglobals.h(100): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\testglobals.h(105): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\testglobals.h(110): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\testglobals.h(115): warning C4305: 'initializing': truncation from 'double' to 'float'
+  softmax.cpp
+c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\tensor_mult.h(79): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\tensor_mult.h(84): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\tensor_mult.h(90): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\tensor_mult.h(110): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\tensor_mult.h(116): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\debug\msvc_hubert\tensor_mult.h(122): warning C4068: unknown pragma
+  Generating Code...
   MSVC_Hubert.vcxproj -> C:\Users\hunto_efxy22i\jupyterProjects\HUBERT\debug\MSVC_Hubert\x64\Debug\MSVC_Hubert.exe

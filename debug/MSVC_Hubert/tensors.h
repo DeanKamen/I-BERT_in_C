@@ -48,6 +48,7 @@ class Tensor{
         static void min(Tensor<T>* A, int dim, Tensor<T> *C);
 		static void max_scalar(Tensor<T>* A, T compare, Tensor<T> *C);
 		static void min_scalar(Tensor<T>* A, T compare, Tensor<T> *C);
+		static void min_dot(Tensor<T>* A, Tensor<T>* B, Tensor<T> *C);
 		static void abs_tensor(Tensor<T> *A, Tensor<T>* C);
         static void floor_tensor(Tensor<T> *A, Tensor<T> *C);
 		static void exp2_tensor(Tensor<T> *A, Tensor<T> *C);

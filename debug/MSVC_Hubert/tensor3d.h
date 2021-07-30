@@ -54,6 +54,7 @@ class Tensor3d{
 		static void min(Tensor3d<T>* A, Tensor3d<T> *C); 
 		static void max_scalar(Tensor3d<T>* A, T compare, Tensor3d<T> *C);
 		static void min_scalar(Tensor3d<T>* A, T compare, Tensor3d<T> *C);
+		static void min_dot(Tensor3d<T>* A, Tensor<T> *B, Tensor3d<T> *C);
 		static void abs_tensor(Tensor3d<T> *A, Tensor3d<T>* C);
         static void floor_tensor(Tensor3d<T> *A, Tensor3d<T> *C);
 		static void exp2_tensor(Tensor3d<T> *A, Tensor3d<T> *C);

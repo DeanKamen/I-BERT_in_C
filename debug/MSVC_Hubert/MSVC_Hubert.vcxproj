@@ -163,6 +163,7 @@
     <ClInclude Include="IntGELU.h" />
     <ClInclude Include="IntLayerNorm.h" />
     <ClInclude Include="loadTensors.h" />
+    <ClInclude Include="multiheadAttention.h" />
     <ClInclude Include="quantact.h" />
     <ClInclude Include="QuantLinear.h" />
     <ClInclude Include="softmax.h" />
@@ -177,6 +178,7 @@
     <ClCompile Include="IntGELU.cpp" />
     <ClCompile Include="IntLayerNorm.cpp" />
     <ClCompile Include="loadTensors.cpp" />
+    <ClCompile Include="multiheadAttention.cpp" />
     <ClCompile Include="quantact.cpp" />
     <ClCompile Include="quantact_testbench.cpp" />
     <ClCompile Include="QuantLinear.cpp" />

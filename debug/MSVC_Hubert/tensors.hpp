@@ -111,9 +111,9 @@ void Tensor<T>::add(Tensor<T> *A, Tensor<T> *B, Tensor<T> *C)
 
 	//now for the actual math
     unsigned i,j;
-    for (i = 0; i < larger->t_numRows; i++)
+    for (i = 0; i < getRows(larger); i++)
     {
-        for (j = 0; j < larger->t_numCols; j++)
+        for (j = 0; j < getCols(larger); j++)
         {
             Tensor::set(C,i,j,Tensor::get(larger, i, j) + Tensor::get(smaller, i % rowMod, j % colMod));
         }
@@ -152,9 +152,9 @@ void Tensor<T>::sub(Tensor<T> *A, Tensor<T> *B, Tensor<T> *C)
 
 	//now for the actual math
 	unsigned i, j;
-	for (i = 0; i < larger->t_numRows; i++)
+	for (i = 0; i < getRows(larger); i++)
 	{
-		for (j = 0; j < larger->t_numCols; j++)
+		for (j = 0; j < getCols(larger); j++)
 		{
 			Tensor::set(C, i, j, Tensor::get(larger, i, j) - Tensor::get(smaller, i % rowMod, j % colMod));
 		}
@@ -193,9 +193,9 @@ void Tensor<T>::mul_dot(Tensor<T> *A, Tensor<T> *B, Tensor<T> *C)
 
 	//now for the actual math
 	unsigned i, j;
-	for (i = 0; i < larger->t_numRows; i++)
+	for (i = 0; i < getRows(larger); i++)
 	{
-		for (j = 0; j < larger->t_numCols; j++)
+		for (j = 0; j < getCols(larger); j++)
 		{
 			Tensor::set(C, i, j, Tensor::get(larger, i, j) * Tensor::get(smaller, i % rowMod, j % colMod));
 		}
@@ -234,9 +234,9 @@ void Tensor<T>::div_dot(Tensor<T> *A, Tensor<T> *B, Tensor<T> *C)
 
 	//now for the actual math
 	unsigned i, j;
-	for (i = 0; i < larger->t_numRows; i++)
+	for (i = 0; i < getRows(larger); i++)
 	{
-		for (j = 0; j < larger->t_numCols; j++)
+		for (j = 0; j < getCols(larger); j++)
 		{
 			Tensor::set(C, i, j, Tensor::get(larger, i, j) / Tensor::get(smaller, i % rowMod, j % colMod));
 		}
@@ -275,9 +275,9 @@ void Tensor<T>::pow_dot(Tensor<T> *A, Tensor<T> *B, Tensor<T> *C)
 
 	//now for the actual math
 	unsigned i, j;
-	for (i = 0; i < larger->t_numRows; i++)
+	for (i = 0; i < getRows(larger); i++)
 	{
-		for (j = 0; j < larger->t_numCols; j++)
+		for (j = 0; j < getCols(larger); j++)
 		{
 			Tensor::set(C, i, j, pow(Tensor::get(larger, i, j), Tensor::get(smaller, i % rowMod, j % colMod)));
 		}
@@ -288,9 +288,9 @@ template<class T>
 void Tensor<T>::add_scalar(Tensor<T> *A, T B, Tensor<T> *C)
 {
     unsigned i,j;
-    for (i = 0; i < A->t_numRows; i++)
+    for (i = 0; i < getRows(A); i++)
     {
-        for (j = 0; j < A->t_numCols; j++)
+        for (j = 0; j < getCols(A); j++)
         {
             Tensor::set(C,i,j,Tensor::get(A,i,j) + B);
         }
@@ -301,9 +301,9 @@ template<class T>
 void Tensor<T>::mul_scalar(Tensor<T> *A, T B, Tensor<T> *C)
 {
     unsigned i,j;
-    for (i = 0; i < A->t_numRows; i++)
+    for (i = 0; i < getRows(A); i++)
     {
-        for (j = 0; j < A->t_numCols; j++)
+        for (j = 0; j < getCols(A); j++)
         {
             Tensor::set(C,i,j,Tensor::get(A,i,j) * B);
         }
@@ -314,9 +314,9 @@ template<class T>
 void Tensor<T>::sub_scalar(Tensor<T> *A, T B, Tensor<T> *C)
 {
     unsigned i,j;
-    for (i = 0; i < A->t_numRows; i++)
+    for (i = 0; i < getRows(A); i++)
     {
-        for (j = 0; j < A->t_numCols; j++)
+        for (j = 0; j < getCols(A); j++)
         {
             Tensor::set(C,i,j,Tensor::get(A,i,j) - B);
         }
@@ -327,9 +327,9 @@ template<class T>
 void Tensor<T>::sub_scalar(T B, Tensor<T> *A, Tensor<T> *C)
 {
 	unsigned i, j;
-	for (i = 0; i < A->t_numRows; i++)
+	for (i = 0; i < getRows(A); i++)
 	{
-		for (j = 0; j < A->t_numCols; j++)
+		for (j = 0; j < getCols(A); j++)
 		{
 			Tensor::set(C, i, j, B - Tensor::get(A, i, j));
 		}
@@ -340,9 +340,9 @@ template<class T>
 void Tensor<T>::div_scalar(Tensor<T> *A, T B, Tensor<T> *C)
 {
     unsigned i,j;
-    for (i = 0; i < A->t_numRows; i++)
+    for (i = 0; i < getRows(A); i++)
     {
-        for (j = 0; j < A->t_numCols; j++)
+        for (j = 0; j < getCols(A); j++)
         {
             Tensor::set(C,i,j,Tensor::get(A,i,j) / B);
         }
@@ -353,9 +353,9 @@ template<class T>
 void Tensor<T>::pow_scalar(Tensor<T> *A, T B, Tensor<T> *C)
 {// A = B^C, note that there are more efficient functions for 2^X or e^X or 10^X
     unsigned i,j;
-    for (i = 0; i < A->t_numRows; i++)
+    for (i = 0; i < getRows(A); i++)
     {
-        for (j = 0; j < A->t_numCols; j++)
+        for (j = 0; j < getCols(A); j++)
         {
             Tensor::set(C,i,j, pow(Tensor::get(A,i,j), B));
         }
@@ -374,9 +374,9 @@ void Tensor<T>::max(Tensor<T> *A, int dim, Tensor<T> *C)
         unsigned i,j;
         T largest;
         bool first = true;
-        for (i = 0; i < A->t_numCols; i++)
+        for (i = 0; i < getCols(A); i++)
         {
-            for (j = 0; j < A->t_numRows; j++)
+            for (j = 0; j < getRows(A); j++)
             {
                 if(first) 
                 {
@@ -395,16 +395,16 @@ void Tensor<T>::max(Tensor<T> *A, int dim, Tensor<T> *C)
         }
         //i know the dimentions of C, so i set them for safety
         setRows(C, 1);
-        setCols(C, A->t_numCols);
+        setCols(C, getCols(A));
     }
     else
     {
         unsigned i,j;
         T largest;
         bool first = true;
-        for (i = 0; i < A->t_numRows; i++)
+        for (i = 0; i < getRows(A); i++)
         {
-            for (j = 0; j < A->t_numCols; j++)
+            for (j = 0; j < getCols(A); j++)
             {
                 if(first) 
                 {
@@ -421,7 +421,7 @@ void Tensor<T>::max(Tensor<T> *A, int dim, Tensor<T> *C)
 			Tensor<T>::set(C, i, 0, largest);
 			first = true;
         }
-        setRows(C, A->t_numRows);
+        setRows(C, getRows(A));
         setCols(C, 1);
 
     }
@@ -437,9 +437,9 @@ void Tensor<T>::min(Tensor<T> *A, int dim, Tensor<T> *C)
         unsigned i,j;
         T smallest;
         bool first = true;
-        for (i = 0; i < A->t_numCols; i++)
+        for (i = 0; i < getCols(A); i++)
         {
-            for (j = 0; j < A->t_numRows; j++)
+            for (j = 0; j < getRows(A); j++)
             {
                 if(first) 
                 {
@@ -458,16 +458,16 @@ void Tensor<T>::min(Tensor<T> *A, int dim, Tensor<T> *C)
         }
         //I can guarantee the dimentions of the resulting tensor.
         setRows(C, 1);
-        setCols(C, A->t_numCols);
+        setCols(C, getCols(A));
     }
     else
     { //dim ==1
         unsigned i,j;
         T smallest;
         bool first = true;
-        for (i = 0; i < A->t_numRows; i++)
+        for (i = 0; i < getRows(A); i++)
         {
-            for (j = 0; j < A->t_numCols; j++)
+            for (j = 0; j < getCols(A); j++)
             {
                 if(first) 
                 {
@@ -484,7 +484,7 @@ void Tensor<T>::min(Tensor<T> *A, int dim, Tensor<T> *C)
 			Tensor<T>::set(C, i, 0, smallest);
 			first = true;
         }
-        setRows(C, A->t_numRows);
+        setRows(C, getRows(A));
         setCols(C, 1);
 
     }
@@ -494,9 +494,9 @@ template<class T>
 void Tensor<T>::max_scalar(Tensor<T>* A, T compare, Tensor<T> *C)
 { //similar to clamp but more readable
 	unsigned i, j;
-	for (i = 0; i < A->t_numRows; i++)
+	for (i = 0; i < getRows(A); i++)
 	{
-		for (j = 0; j < A->t_numCols; j++)
+		for (j = 0; j < getCols(A); j++)
 		{
 			T mat = Tensor::get(A, i, j);
 			if (mat < compare) { set(C, i, j, compare); }
@@ -508,9 +508,9 @@ template<class T>
 void Tensor<T>::min_scalar(Tensor<T>* A, T compare, Tensor<T> *C)
 {
 	unsigned i, j;
-	for (i = 0; i < A->t_numRows; i++)
+	for (i = 0; i < getRows(A); i++)
 	{
-		for (j = 0; j < A->t_numCols; j++)
+		for (j = 0; j < getCols(A); j++)
 		{
 			T mini = Tensor::get(A, i, j);
 			if (mini > compare) { set(C, i, j, compare); }
@@ -520,12 +520,30 @@ void Tensor<T>::min_scalar(Tensor<T>* A, T compare, Tensor<T> *C)
 }
 
 template<class T>
+void Tensor<T>::min_dot(Tensor<T>* A, Tensor<T>* B, Tensor<T> *C)
+{//element wise min that assumes a and b are the same size
+	assert(sameSize(A, B));
+	unsigned i, j;
+	for (i = 0; i < getRows(A); i++)
+	{
+		for (j = 0; j < getCols(A); j++)
+		{
+			T left = Tensor::get(A, i, j);
+			T right = Tensor::get(B, i, j);
+
+			if (left > right) { set(C, i, j, right); }
+			else { set(C, i, j, left); }
+		}
+	}
+}
+
+template<class T>
 void Tensor<T>::abs_tensor(Tensor<T> *A, Tensor<T>* C)
 {
 	unsigned i, j;
-	for (i = 0; i < A->t_numRows; i++)
+	for (i = 0; i < getRows(A); i++)
 	{
-		for (j = 0; j < A->t_numCols; j++)
+		for (j = 0; j < getCols(A); j++)
 		{
 			T el = Tensor::get(A, i, j);
 			el = abs(el);
@@ -538,9 +556,9 @@ template<class T>
 void Tensor<T>::floor_tensor(Tensor<T> *A, Tensor<T> *C)
 {//does a cast to a float and then floors it.
     unsigned i,j;
-    for (i = 0; i < A->t_numRows; i++)
+    for (i = 0; i < getRows(A); i++)
     {
-        for (j = 0; j < A->t_numCols; j++)
+        for (j = 0; j < getCols(A); j++)
         {
             T temp = Tensor::get(A,i,j);
             temp = floorf((float)temp);
@@ -553,9 +571,9 @@ template<class T>
 void Tensor<T>::exp2_tensor(Tensor<T> *A, Tensor<T> *C)
 {
 	unsigned i, j;
-	for (i = 0; i < A->t_numRows; i++)
+	for (i = 0; i < getRows(A); i++)
 	{
-		for (j = 0; j < A->t_numCols; j++)
+		for (j = 0; j < getCols(A); j++)
 		{
 			Tensor::set(C, i, j, exp2(Tensor::get(A, i, j)));
 		}
@@ -566,9 +584,9 @@ template<class T>
 void Tensor<T>::clamp(Tensor<T> *A, T min, T max, Tensor<T> *C)
 {
     unsigned i,j;
-    for (i = 0; i < A->t_numRows; i++)
+    for (i = 0; i < getRows(A); i++)
     {
-        for (j = 0; j < A->t_numCols; j++)
+        for (j = 0; j < getCols(A); j++)
         {
             T viq = Tensor::get(A,i,j);
             if(viq > max) {set(C,i,j,max);}
@@ -581,9 +599,9 @@ template<class T>
 void Tensor<T>::roundTensor(Tensor<T> *A, Tensor<T> *C)
 {
     unsigned i,j;
-    for (i = 0; i < A->t_numRows; i++)
+    for (i = 0; i < getRows(A); i++)
     {
-        for (j = 0; j < A->t_numCols; j++)
+        for (j = 0; j < getCols(A); j++)
         {
             T roundme = Tensor::get(A,i,j);
             T rounded = round(roundme); //always cast to float
@@ -596,9 +614,9 @@ template<class T>
 void Tensor<T>::reciprocal(Tensor<T> *A, Tensor<T> *C)
 {
     unsigned i,j;
-    for (i = 0; i < A->t_numRows; i++)
+    for (i = 0; i < getRows(A); i++)
     {
-        for (j = 0; j < A->t_numCols; j++)
+        for (j = 0; j < getCols(A); j++)
         {
             T recip = Tensor::get(A,i,j);
             recip = 1.f/recip;
@@ -617,9 +635,9 @@ void Tensor<T>::sum(Tensor<T> *A, int dim, Tensor<T>* C)
 	running = T(0);
 	if (dim == 0)
 	{
-		for (i = 0; i < A->t_numCols; i++)
+		for (i = 0; i < getCols(A); i++)
 		{
-			for (j = 0; j < A->t_numRows; j++)
+			for (j = 0; j < getRows(A); j++)
 			{
 				running += get(A, i, j);
 			}
@@ -628,20 +646,20 @@ void Tensor<T>::sum(Tensor<T> *A, int dim, Tensor<T>* C)
 		}
 		//I can guarantee the dimentions of the resulting tensor.
 		setRows(C, 1);
-		setCols(C, A->t_numCols);
+		setCols(C, getCols(A));
 	}
 	else
 	{ //dim ==1
-		for (i = 0; i < A->t_numRows; i++)
+		for (i = 0; i < getRows(A); i++)
 		{
-			for (j = 0; j < A->t_numCols; j++)
+			for (j = 0; j < getCols(A); j++)
 			{
 				running += get(A, i, j);
 			}
 			Tensor<T>::set(C, i, 0, running);
 			running = 0;
 		}
-		setRows(C, A->t_numRows);
+		setRows(C, getRows(A));
 		setCols(C, 1);
 	}
 }
@@ -650,9 +668,9 @@ template<class T>
 void Tensor<T>::sign(Tensor<T> *A, Tensor<T> *C)
 {
 	unsigned i, j;
-	for (i = 0; i < A->t_numRows; i++)
+	for (i = 0; i < getRows(A); i++)
 	{
-		for (j = 0; j < A->t_numCols; j++)
+		for (j = 0; j < getCols(A); j++)
 		{
 			if (get(A, i, j) < 0)
 			{
@@ -687,9 +705,9 @@ template<class T>
 void Tensor<T>::sqrt_tensor(Tensor<T> *A, Tensor<T> *C)
 {
 	unsigned i, j;
-	for (i = 0; i < A->t_numRows; i++)
+	for (i = 0; i < getRows(A); i++)
 	{
-		for (j = 0; j < A->t_numCols; j++)
+		for (j = 0; j < getCols(A); j++)
 		{
 			set(C, i, j, sqrt(get(A,i,j)));
 		}
@@ -700,9 +718,9 @@ template<class T>
 void Tensor<T>::fill(Tensor<T> *A, T fill)
 {
     unsigned i,j;
-    for (i = 0; i < A->t_numRows; i++)
+    for (i = 0; i < getRows(A); i++)
     {
-        for (j = 0; j < A->t_numCols; j++)
+        for (j = 0; j < getCols(A); j++)
         {
             set(A,i,j, fill);
         }
@@ -717,9 +735,9 @@ void Tensor<T>::view(Tensor<T> *A, const int rows, const int cols, Tensor<T> *sp
     
     //I cant make a local TENSOR! TODO:find a way to make one,  
     unsigned i,j;
-    for (i = 0; i < A->t_numRows; i++)
+    for (i = 0; i < getRows(A); i++)
     {
-        for (j = 0; j < A->t_numCols; j++)
+        for (j = 0; j < getCols(A); j++)
         {
             set(space,i,j, get(A,i,j)); //copy to local tensor space
         }
@@ -739,9 +757,9 @@ void Tensor<T>::view(Tensor<T> *A, const int rows, const int cols, Tensor<T> *sp
     }
     unsigned curNewRow = 0;
     unsigned curNewCol = 0;
-    for (i = 0; i < A->t_numRows; i++)
+    for (i = 0; i < getRows(A); i++)
     {
-        for (j = 0; j < A->t_numCols; j++)
+        for (j = 0; j < getCols(A); j++)
         {
             set(A, curNewRow, curNewCol, get(space,i,j)); //copy from local tensor space
             curNewCol++;
@@ -763,9 +781,9 @@ void Tensor<T>::tensor_frexp(Tensor<float>* inputs, Tensor<float>* m, Tensor<flo
     //reutrns the mantissas and then put the exponents in a seperate tensor.
 	const int MAX_BIT = 31;
     unsigned i,j;
-    for (i = 0; i < inputs->t_numRows; i++)
+    for (i = 0; i < getRows(inputs); i++)
     {
-        for (j = 0; j < inputs->t_numCols; j++)
+        for (j = 0; j < getCols(inputs); j++)
         {
             float m1;
             int e1;
@@ -880,8 +898,8 @@ void Tensor<T>::print(Tensor<T> *self)
 		#endif
 		return;
 	}
-    for (unsigned i = 0; i < self->t_numRows; i++) {
-        for (unsigned j = 0; j < self->t_numCols; j++) {
+    for (unsigned i = 0; i < getRows(self); i++) {
+        for (unsigned j = 0; j < getCols(self); j++) {
             #ifndef HLS_SYNTHESIS
             std::cout << "[" << Tensor::get(self,i,j) << "] ";
             #endif
@@ -893,22 +911,22 @@ void Tensor<T>::print(Tensor<T> *self)
 }
 
 template<class T>
-unsigned Tensor<T>::getRows(Tensor<T> *a)
+unsigned Tensor<T>::getRows(Tensor<T> *A)
 { 
-    if(!a->transposed){
-        return a->t_numRows;
+    if(!A->transposed){
+        return A->t_numRows;
     }else{
-        return a->t_numCols;
+        return A->t_numCols;
     } 
 }
 
 template<class T>
-unsigned Tensor<T>::getCols(Tensor<T> *a)
+unsigned Tensor<T>::getCols(Tensor<T> *A)
 { 
-    if(!a->transposed){
-        return a->t_numCols;
+    if(!A->transposed){
+        return A->t_numCols;
     }else{
-        return a->t_numRows;
+        return A->t_numRows;
     } 
 }
 
@@ -916,9 +934,9 @@ template<class T>
 bool Tensor<T>::eq(Tensor<T> *A, Tensor<T> *B)
 {//returns true if all elements are the same. No broadcasting.
     unsigned i,j;
-    for (i = 0; i < A->t_numRows; i++)
+    for (i = 0; i < getRows(A); i++)
     {
-        for (j = 0; j < A->t_numCols; j++)
+        for (j = 0; j < getCols(A); j++)
         {
             if(get(A,i,j) == get(B,i,j)){continue;}
             else{return false;}
@@ -930,22 +948,22 @@ bool Tensor<T>::eq(Tensor<T> *A, Tensor<T> *B)
 
 //private helper functions
 template<class T>
-void Tensor<T>::setRows(Tensor<T> *a, int num)
+void Tensor<T>::setRows(Tensor<T> *A, int num)
 { 
-    if(!a->transposed){
-        a->t_numRows = num;
+    if(!A->transposed){
+		A->t_numRows = num;
     }else{
-        a->t_numCols = num;
+		A->t_numCols = num;
     } 
 }
 
 template<class T>
-void Tensor<T>::setCols(Tensor<T> *a, int num)
+void Tensor<T>::setCols(Tensor<T> *A, int num)
 { 
-    if(!a->transposed){
-        a->t_numCols = num;
+    if(!A->transposed){
+		A->t_numCols = num;
     }else{
-        a->t_numRows = num;
+		A->t_numRows = num;
     } 
 }
 

@@ -309,6 +309,14 @@ template<class T> void Tensor3d<T>::min_scalar(Tensor3d<T>* A, T compare, Tensor
 	}
 }
 
+template<class T> void Tensor3d<T>::min_dot(Tensor3d<T>* A, Tensor<T> *B, Tensor3d<T> *C)
+{
+	for (unsigned d = 0; d < getDepth(A); d++)
+	{
+		Tensor<T>::min_dot(get(A, d), B, get(C, d));
+	}
+}
+
 template<class T> void Tensor3d<T>::abs_tensor(Tensor3d<T> *A, Tensor3d<T>* C)
 {
 	for (unsigned d = 0; d < getDepth(A); d++)
