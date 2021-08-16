@@ -1,0 +1,454 @@
+﻿  crosstype_tensors.cpp
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(60): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(60): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(63): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(63): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(80): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(80): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(219): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(219): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(65): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(65): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(99): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(99): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(119): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(119): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(125): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(125): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm_xl.h(27): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm_xl.h(30): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm_xl.h(33): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(79): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(84): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(90): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(110): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(116): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(122): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm.h(27): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm.h(30): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm.h(33): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(79): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(84): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(90): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(110): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(116): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(122): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\crosstype_tensors.cpp(203): warning C4018: '<': signed/unsigned mismatch
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\crosstype_tensors.cpp(211): warning C4018: '<': signed/unsigned mismatch
+  IntGELU.cpp
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(60): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(60): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(63): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(63): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(80): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(80): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(219): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(219): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(65): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(65): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(99): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(99): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(119): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(119): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(125): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(125): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm.h(27): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm.h(30): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm.h(33): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(79): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(84): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(90): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(110): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(116): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(122): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm_xl.h(27): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm_xl.h(30): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm_xl.h(33): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(79): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(84): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(90): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(110): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(116): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(122): warning C4068: unknown pragma
+  IntLayerNorm.cpp
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(60): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(60): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(63): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(63): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(80): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(80): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(219): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(219): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(65): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(65): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(99): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(99): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(119): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(119): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(125): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(125): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm.h(27): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm.h(30): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm.h(33): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(79): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(84): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(90): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(110): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(116): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(122): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm_xl.h(27): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm_xl.h(30): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm_xl.h(33): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(79): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(84): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(90): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(110): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(116): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(122): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\intlayernorm.cpp(38): error C2514: 'Tensor3dXL': class has no constructors
+  c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor3dxl.h(14): note: see declaration of 'Tensor3dXL'
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\intlayernorm.cpp(40): error C2514: 'Tensor3dXL': class has no constructors
+  c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor3dxl.h(14): note: see declaration of 'Tensor3dXL'
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\intlayernorm.cpp(48): error C2514: 'Tensor3dXL': class has no constructors
+  c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor3dxl.h(14): note: see declaration of 'Tensor3dXL'
+  loadTensors.cpp
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(60): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(60): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(63): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(63): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(80): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(80): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(219): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(219): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(65): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(65): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(99): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(99): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(119): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(119): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(125): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(125): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm_xl.h(27): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm_xl.h(30): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm_xl.h(33): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(79): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(84): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(90): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(110): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(116): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(122): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm.h(27): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm.h(30): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm.h(33): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(79): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(84): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(90): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(110): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(116): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(122): warning C4068: unknown pragma
+  multiheadAttention.cpp
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(60): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(60): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(63): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(63): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(80): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(80): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(219): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(219): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(65): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(65): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(99): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(99): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(119): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(119): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(125): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(125): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm.h(27): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm.h(30): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm.h(33): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(79): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(84): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(90): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(110): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(116): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(122): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm_xl.h(27): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm_xl.h(30): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm_xl.h(33): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(79): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(84): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(90): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(110): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(116): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(122): warning C4068: unknown pragma
+d:\applications\intel_quartus\21.1\hls\include\hls\matrix_mult.h(71): warning C4068: unknown pragma
+d:\applications\intel_quartus\21.1\hls\include\hls\matrix_mult.h(76): warning C4068: unknown pragma
+d:\applications\intel_quartus\21.1\hls\include\hls\matrix_mult.h(82): warning C4068: unknown pragma
+d:\applications\intel_quartus\21.1\hls\include\hls\matrix_mult.h(101): warning C4068: unknown pragma
+d:\applications\intel_quartus\21.1\hls\include\hls\matrix_mult.h(107): warning C4068: unknown pragma
+d:\applications\intel_quartus\21.1\hls\include\hls\matrix_mult.h(113): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\multiheadattention.cpp(51): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\multiheadattention.cpp(155): error C2514: 'Tensor3d': class has no constructors
+  c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor3d.h(15): note: see declaration of 'Tensor3d'
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\multiheadattention.cpp(184): error C2514: 'Tensor3d': class has no constructors
+  c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor3d.h(15): note: see declaration of 'Tensor3d'
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\multiheadattention.cpp(193): error C2514: 'Tensor3d': class has no constructors
+  c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor3d.h(15): note: see declaration of 'Tensor3d'
+  quantact.cpp
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(60): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(60): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(63): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(63): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(80): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(80): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(219): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(219): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(65): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(65): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(99): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(99): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(119): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(119): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(125): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(125): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm.h(27): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm.h(30): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm.h(33): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(79): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(84): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(90): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(110): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(116): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(122): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm_xl.h(27): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm_xl.h(30): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm_xl.h(33): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(79): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(84): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(90): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(110): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(116): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(122): warning C4068: unknown pragma
+  quantact_testbench.cpp
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(60): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(60): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(63): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(63): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(80): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(80): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(219): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(219): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(65): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(65): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(99): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(99): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(119): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(119): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(125): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(125): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm.h(27): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm.h(30): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm.h(33): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(79): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(84): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(90): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(110): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(116): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(122): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm_xl.h(27): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm_xl.h(30): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm_xl.h(33): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(79): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(84): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(90): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(110): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(116): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(122): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\testglobals.h(10): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\testglobals.h(15): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\testglobals.h(20): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\testglobals.h(25): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\testglobals.h(30): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\testglobals.h(35): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\testglobals.h(40): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\testglobals.h(45): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\testglobals.h(50): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\testglobals.h(55): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\testglobals.h(60): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\testglobals.h(65): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\testglobals.h(70): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\testglobals.h(75): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\testglobals.h(80): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\testglobals.h(85): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\testglobals.h(90): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\testglobals.h(95): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\testglobals.h(100): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\testglobals.h(105): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\testglobals.h(110): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\testglobals.h(115): warning C4305: 'initializing': truncation from 'double' to 'float'
+  quantact_xl.cpp
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(60): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(60): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(63): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(63): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(80): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(80): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(219): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(219): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(65): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(65): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(99): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(99): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(119): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(119): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(125): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(125): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm.h(27): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm.h(30): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm.h(33): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(79): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(84): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(90): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(110): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(116): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(122): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm_xl.h(27): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm_xl.h(30): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm_xl.h(33): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(79): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(84): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(90): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(110): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(116): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(122): warning C4068: unknown pragma
+  QuantLinear.cpp
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(60): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(60): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(63): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(63): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(80): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(80): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(219): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(219): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(65): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(65): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(99): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(99): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(119): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(119): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(125): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(125): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm.h(27): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm.h(30): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm.h(33): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(79): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(84): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(90): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(110): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(116): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(122): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm_xl.h(27): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm_xl.h(30): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm_xl.h(33): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(79): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(84): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(90): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(110): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(116): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(122): warning C4068: unknown pragma
+d:\applications\intel_quartus\21.1\hls\include\hls\matrix_mult.h(71): warning C4068: unknown pragma
+d:\applications\intel_quartus\21.1\hls\include\hls\matrix_mult.h(76): warning C4068: unknown pragma
+d:\applications\intel_quartus\21.1\hls\include\hls\matrix_mult.h(82): warning C4068: unknown pragma
+d:\applications\intel_quartus\21.1\hls\include\hls\matrix_mult.h(101): warning C4068: unknown pragma
+d:\applications\intel_quartus\21.1\hls\include\hls\matrix_mult.h(107): warning C4068: unknown pragma
+d:\applications\intel_quartus\21.1\hls\include\hls\matrix_mult.h(113): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\quantlinear.cpp(49): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+  sentence_encoder_layer.cpp
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(60): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(60): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(63): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(63): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(80): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(80): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(219): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(219): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(65): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(65): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(99): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(99): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(119): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(119): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(125): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(125): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm.h(27): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm.h(30): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm.h(33): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(79): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(84): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(90): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(110): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(116): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(122): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm_xl.h(27): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm_xl.h(30): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm_xl.h(33): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(79): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(84): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(90): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(110): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(116): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(122): warning C4068: unknown pragma
+d:\applications\intel_quartus\21.1\hls\include\hls\matrix_mult.h(71): warning C4068: unknown pragma
+d:\applications\intel_quartus\21.1\hls\include\hls\matrix_mult.h(76): warning C4068: unknown pragma
+d:\applications\intel_quartus\21.1\hls\include\hls\matrix_mult.h(82): warning C4068: unknown pragma
+d:\applications\intel_quartus\21.1\hls\include\hls\matrix_mult.h(101): warning C4068: unknown pragma
+d:\applications\intel_quartus\21.1\hls\include\hls\matrix_mult.h(107): warning C4068: unknown pragma
+d:\applications\intel_quartus\21.1\hls\include\hls\matrix_mult.h(113): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\sentence_encoder_layer.cpp(108): error C2514: 'Tensor3dXL': class has no constructors
+  c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor3dxl.h(14): note: see declaration of 'Tensor3dXL'
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\sentence_encoder_layer.cpp(109): error C2514: 'TensorXL': class has no constructors
+  c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensorxl.h(15): note: see declaration of 'TensorXL'
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\sentence_encoder_layer.cpp(120): error C2514: 'Tensor3dXL': class has no constructors
+  c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor3dxl.h(14): note: see declaration of 'Tensor3dXL'
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\sentence_encoder_layer.cpp(121): error C2514: 'TensorXL': class has no constructors
+  c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensorxl.h(15): note: see declaration of 'TensorXL'
+  softmax.cpp
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(60): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(60): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(63): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(63): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(80): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(80): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(219): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task_x86-64.h(219): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(65): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(65): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(99): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(99): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(119): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(119): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(125): error C3533: a parameter cannot have a type that contains 'auto'
+  d:\applications\intel_quartus\21.1\hls\include\hls\internal\_task.h(125): note: 'auto' in non-type template parameters requires at least '/std:c++17'
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm.h(27): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm.h(30): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm.h(33): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(79): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(84): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(90): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(110): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(116): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(122): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm_xl.h(27): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm_xl.h(30): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm_xl.h(33): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(79): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(84): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(90): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(110): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(116): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(122): warning C4068: unknown pragma
+  Generating Code...
