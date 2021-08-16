@@ -7,6 +7,7 @@
 #define __HUBERT_TENSOR3D_H__
 
 #include "tensors.hpp"
+#include "tensor3dXL.hpp"
 
 /*                TUNING AND OPTIONS                   */
 const unsigned MAX_DEPTH = 22;
@@ -22,10 +23,14 @@ class Tensor3d{
         //constructors
 		Tensor3d(Tensor3d<T> *A); //Takes a 2d matrix and copies it into the first layer.
         Tensor3d(Tensor<T> *A); //Takes a 2d matrix and copies it into the first layer.
+		Tensor3d(int dep, int row, int col, T init);
 		Tensor3d(void); //all depth layers are nullpointer
+		~Tensor3d();
 
 		//special cross multiply
 		static void linear_mul(Tensor3d<T> *A, Tensor<T> *B, Tensor3d<T> *C);
+		static void bmm(Tensor3d<T> *A, Tensor3d<T> *B, Tensor3d<T> *C);
+		static void bmm2(Tensor3d<T> *A, Tensor3d<T> *B, Tensor3d<T> *C);//specialized
 
 		//2d broadcasting across 3d
         static void add(Tensor3d<T> *A, Tensor<T> *B, Tensor3d<T> *C);
@@ -80,6 +85,7 @@ class Tensor3d{
        
 		//helper functions
         static void print(Tensor3d<T>*);
+		static void print_brief(Tensor3d<T>*);
         static unsigned getRows(Tensor3d<T>* a);
         static unsigned getCols(Tensor3d<T>* a);
 		static unsigned getDepth(Tensor3d<T>* a);

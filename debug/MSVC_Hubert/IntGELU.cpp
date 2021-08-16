@@ -24,40 +24,42 @@ IntGELU::IntGELU(QuantMode quant_mode_i, ForceDequantMode force_dequant)
 	coeff[2] /= coeff[0];
 }
 
-scaled_tuple3d IntGELU::intgelu_forward(Tensor3d<float>* x, Tensor<float>* scaling_factor)
+scaled_tuple3dXL IntGELU::intgelu_forward(Tensor3dXL<float>* x, TensorXL<float>* scaling_factor)
 {
+	//assumption: x is 22x1x3072, scaling_factor 1x3072
 	//scaling factor is not a one tensor
 	if (quant_mode == QuantMode::none)
 	{
 		normal_gelu(x, x);
-		scaled_tuple3d rm;
+		scaled_tuple3dXL rm;
 		rm.matrix = x;
 		rm.scaling_factor = nullptr;
 		return rm;
 	}
-	Tensor3d<float>* x_int = new Tensor3d<float>(x);
+	Tensor3dXL<float>* x_int = new Tensor3dXL<float>(x);
 	
-	Tensor<float>::transpose(scaling_factor);// it comes in as a column but is meant to be a row
-	Tensor3d<float>::div_dot(x_int, scaling_factor, x_int);
-	Tensor<float>* sigmoid_sf = new Tensor(scaling_factor);
-	Tensor<float>::div_scalar(sigmoid_sf, k, sigmoid_sf);
-	scaled_tuple3d sigmoid = int_erf(x_int, sigmoid_sf);// sigmoid_sf gets put into the sigmoid tuple
-	Tensor<float>* shift_int = new Tensor(sigmoid.scaling_factor);
-	Tensor<float>::reciprocal(sigmoid.scaling_factor, shift_int);
-	Tensor<float>::floor_tensor(shift_int, shift_int);
-	Tensor3d<float>::add(sigmoid.matrix, shift_int, sigmoid.matrix);
-	Tensor3d<float>::mul_dot(x_int, sigmoid.matrix, x_int);
-	Tensor<float>::div_scalar(sigmoid.scaling_factor, 2.f, sigmoid.scaling_factor);
-	Tensor<float>::mul_dot(scaling_factor, sigmoid.scaling_factor, scaling_factor);
-	Tensor3d<float>::mul_dot(x_int, scaling_factor, x_int);
-	Tensor<float>::transpose(scaling_factor);//send out as a column again to avoid confusion
-	scaled_tuple3d returnme;
+	Tensor3dXL<float>::div_dot(x_int, scaling_factor, x_int);
+	TensorXL<float>* sigmoid_sf = new TensorXL<float>(scaling_factor);
+	TensorXL<float>::div_scalar(sigmoid_sf, k, sigmoid_sf);
+	scaled_tuple3dXL sigmoid = int_erf(x_int, sigmoid_sf);// sigmoid_sf gets put into the sigmoid tuple, so we dont delete singmoid sf
+	TensorXL<float>* shift_int = new TensorXL<float>(sigmoid.scaling_factor);
+	TensorXL<float>::reciprocal(sigmoid.scaling_factor, shift_int);
+	TensorXL<float>::floor_tensor(shift_int, shift_int);
+	Tensor3dXL<float>::add(sigmoid.matrix, shift_int, sigmoid.matrix);
+	delete shift_int;
+	Tensor3dXL<float>::mul_dot(x_int, sigmoid.matrix, x_int);
+	TensorXL<float>::div_scalar(sigmoid.scaling_factor, 2.f, sigmoid.scaling_factor);
+	TensorXL<float>::mul_dot(scaling_factor, sigmoid.scaling_factor, scaling_factor);
+	Tensor3dXL<float>::mul_dot(x_int, scaling_factor, x_int);
+	scaled_tuple3dXL returnme;
 	returnme.matrix = x_int;
 	returnme.scaling_factor = scaling_factor;	
+	Tensor3dXL<float>::print(returnme.matrix);
 	return returnme;
+	//This function allocates memory for its return value.
 }
 
-void IntGELU::normal_gelu(Tensor3d<float>* x_in, Tensor3d<float>* x_out)
+void IntGELU::normal_gelu(Tensor3dXL<float>* x_in, Tensor3dXL<float>* x_out)
 {// since, in the original program, self.activation_fn = nn.GELU(), This will be a replacement for
 	//https://pytorch.org/docs/stable/generated/torch.nn.GELU.html
 	//Im not actually going to write it because it shouldnt be used in replace of i-gelu
@@ -66,44 +68,50 @@ void IntGELU::normal_gelu(Tensor3d<float>* x_in, Tensor3d<float>* x_out)
 }
 
 
-scaled_tuple3d IntGELU::int_erf(Tensor3d<float>* x_int, Tensor<float>* scaling_factor)
+scaled_tuple3dXL IntGELU::int_erf(Tensor3dXL<float>* x_int, TensorXL<float>* scaling_factor)
 {
+	//assumption: x is 22x1x3072, scaling_factor 1x3072
 	//scaling factor is not a one tensor
-	Tensor<float>* b_int = new Tensor<float>(scaling_factor);
-	Tensor<float>::reciprocal(scaling_factor, b_int);
-	Tensor<float>::mul_scalar(b_int, coeff[1], b_int);
-	Tensor<float>::floor_tensor(b_int, b_int);
+	TensorXL<float>* b_int = new TensorXL<float>(scaling_factor);
+	TensorXL<float>::reciprocal(scaling_factor, b_int);
+	TensorXL<float>::mul_scalar(b_int, coeff[1], b_int);
+	TensorXL<float>::floor_tensor(b_int, b_int);
 
-	Tensor<float>* c_int = new Tensor<float>(scaling_factor);
-	Tensor<float>::pow_scalar(scaling_factor, 2, c_int);
-	Tensor<float>::reciprocal(c_int, c_int);
-	Tensor<float>::mul_scalar(c_int, coeff[2], c_int);
-	Tensor<float>::floor_tensor(c_int, c_int);
+	TensorXL<float>* c_int = new TensorXL<float>(scaling_factor);
+	TensorXL<float>::pow_scalar(scaling_factor, 2, c_int);
+	TensorXL<float>::reciprocal(c_int, c_int);
+	TensorXL<float>::mul_scalar(c_int, coeff[2], c_int);
+	TensorXL<float>::floor_tensor(c_int, c_int);
 
-	Tensor3d<float>* sign = new Tensor3d(x_int);
-	Tensor3d<float>::sign(x_int, sign);
-	Tensor3d<float>* abs_int = new Tensor3d(x_int);
-	Tensor3d<float>::abs_tensor(x_int, abs_int);
+	Tensor3dXL<float>* sign = new Tensor3dXL<float>(x_int);
+	Tensor3dXL<float>::sign(x_int, sign);
+	Tensor3dXL<float>* abs_int = new Tensor3dXL<float>(x_int);
+	Tensor3dXL<float>::abs_tensor(x_int, abs_int);
 
 	//negative b
-	Tensor<float>::mul_scalar(b_int, -1, b_int);
-	Tensor3d<float>::min_dot(abs_int, b_int, abs_int);
-	Tensor<float>::mul_scalar(b_int, -1, b_int);
+	TensorXL<float>::mul_scalar(b_int, -1, b_int);
+	Tensor3dXL<float>::min_dot(abs_int, b_int, abs_int);
+	TensorXL<float>::mul_scalar(b_int, -1, b_int);
 	//positive b
-	Tensor3d<float>* y_int = new Tensor3d(abs_int);
-	Tensor3d<float>::add(abs_int, b_int, abs_int); //its okay to overwrite abs int now
-	Tensor3d<float>::pow_scalar(abs_int, 2, abs_int);
-	Tensor3d<float>::add(abs_int, c_int, y_int);
-	Tensor3d<float>::mul_dot(y_int, sign, y_int);
+	Tensor3dXL<float>* y_int = new Tensor3dXL<float>(abs_int);
+	Tensor3dXL<float>::add(abs_int, b_int, abs_int); //its okay to overwrite abs int now
+	Tensor3dXL<float>::pow_scalar(abs_int, 2, abs_int);
+	Tensor3dXL<float>::add(abs_int, c_int, y_int);
+	Tensor3dXL<float>::mul_dot(y_int, sign, y_int);
+	delete b_int;
+	delete c_int;
+	delete sign;
+	delete abs_int;
 	//scaling factor
-	Tensor<float>::pow_scalar(scaling_factor, 2, scaling_factor);
-	Tensor<float>::mul_scalar(scaling_factor, coeff[0], scaling_factor);
-	Tensor3d<float>::div_scalar(y_int, exp2f(float(n)), y_int);
-	Tensor3d<float>::floor_tensor(y_int, y_int);
-	Tensor<float>::mul_scalar(scaling_factor, exp2f(float(n)), scaling_factor);
+	TensorXL<float>::pow_scalar(scaling_factor, 2, scaling_factor);
+	TensorXL<float>::mul_scalar(scaling_factor, coeff[0], scaling_factor);
+	Tensor3dXL<float>::div_scalar(y_int, exp2f(float(n)), y_int);
+	Tensor3dXL<float>::floor_tensor(y_int, y_int);
+	TensorXL<float>::mul_scalar(scaling_factor, exp2f(float(n)), scaling_factor);
 	
-	scaled_tuple3d returnme;
+	scaled_tuple3dXL returnme;
 	returnme.matrix = y_int;
 	returnme.scaling_factor = scaling_factor;
 	return returnme;
+	//this function allocates its own memory for returnme.matrix but assumes scaling factor is already allocated
 }

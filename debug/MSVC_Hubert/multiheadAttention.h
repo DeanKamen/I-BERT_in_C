@@ -11,6 +11,7 @@
 #include "quantact.h"
 #include "QuantLinear.h"
 #include "softmax.h"
+#include "quantact_xl.h"
 
 //multiheadAttention.h implements the multiheadAttention wrapper for HUBERT. Layer 0 only. 
 
@@ -21,8 +22,8 @@ public:
 	multiheadAttention(
 		int embed_dim,
 		int num_heads,
-		int* kdim = nullptr,
-		int* vdim = nullptr,
+		int kdim = -1,
+		int vdim = -1,
 		float dropout = 0.f,
 		bool bias = true,
 		bool add_bias_kv = false,
@@ -32,14 +33,16 @@ public:
 		float q_noise = 0.f,
 		int qn_block_size = 8,
 		QuantMode quant_mode = QuantMode::none,
-		ForceDequantMode force_dequat = ForceDequantMode::none,
+		ForceDequantMode force_dequant = ForceDequantMode::none,
 		bool return_output_scale = false);
+
+	~multiheadAttention();
 	
 	//Forward
-	Tensor3d<float>* multiheadAttention_forward(
-		Tensor3d<float>* query,
-		Tensor<float>* key,
-		Tensor<float> * value,
+	scaled_tuple3dXL multiheadAttention_forward(
+		Tensor3dXL<float>* query,
+		Tensor3dXL<float>* key,
+		Tensor3dXL<float> * value,
 		Tensor<float> *key_padding_mask = nullptr,
 		Tensor<float> *incremental_state = nullptr,
 		bool need_weights = true,
@@ -47,9 +50,9 @@ public:
 		Tensor<float> *attn_mask = nullptr,
 		bool before_softmax = false,
 		bool need_head_wights = false,
-		float* query_scale = nullptr,
-		float* key_scale = nullptr,
-		float* value_scale = nullptr);
+		TensorXL<float>* query_scale = nullptr,
+		TensorXL<float>* key_scale = nullptr,
+		TensorXL<float>* value_scale = nullptr);
 
 	QuantMode quant_mode;
 	ForceDequantMode force_dequant;
@@ -66,18 +69,20 @@ public:
 	bool self_attention;
 	bool add_zero_attn;
 	bool return_output_scale;
+	bool qkv_same_dim;
+	bool encoder_decoder_attention;
 	//no dropout module because they do nothing during inference
 	//quant noise does nothing during inference
 	QuantLinear *k_proj;
 	QuantLinear *v_proj;
 	QuantLinear *q_proj;
-	QuantAct *k_proj_act;
-	QuantAct *v_proj_act;
-	QuantAct *q_proj_act;
-	Softmax softmax;
-	QuantAct attn_probs_act;
-	QuantAct attn_act;
-	QuantLinear out_proj;
+	QuantAct_XL *k_proj_act;
+	QuantAct_XL *v_proj_act;
+	QuantAct_XL *q_proj_act;
+	Softmax *softmax;
+	QuantAct_XL *attn_probs_act;
+	QuantAct_XL *attn_act;
+	QuantLinear *out_proj;
 	Tensor<float>* bias_k;
 	Tensor<float>* bias_v;
 

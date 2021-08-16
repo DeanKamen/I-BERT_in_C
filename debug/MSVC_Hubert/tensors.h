@@ -7,8 +7,8 @@
 #define __HUBERT_TENSORS_H__
 
 /*                TUNING AND OPTIONS                   */
-const unsigned MAX_ROWS = 3072; // based on the max size of numpy arrays in default IBERT (3072)
-const unsigned MAX_COLS = 3072;
+const unsigned MAX_ROWS = 64; // based on the max size of numpy arrays in default IBERT (3072)
+const unsigned MAX_COLS = 64;
 const unsigned UNITS_PER_MULTIPLY= 32; //must be a factor of the MAX_COLS
 typedef double fraction;
 
@@ -24,13 +24,14 @@ class Tensor{
 
     public:
         //constructors
+		Tensor(); //default constructor
         Tensor(unsigned, unsigned, T); //row, column, fill constructor
         Tensor(const unsigned numRows, const unsigned numCols, T** init_pointer);
 		Tensor(Tensor<T> *A);
 
         //math
 		static void mul_cross(Tensor<T> *A, Tensor<T> *B, Tensor<T> *C);
-
+		static void mul_cross_secondary(Tensor<T> *A, Tensor<T> *B, Tensor<T> *C);
 		//dot type (broadcasting)
         static void add(Tensor<T> *A, Tensor<T> *B, Tensor<T> *C);
         static void sub(Tensor<T> *A, Tensor<T> *B, Tensor<T> *C);
@@ -70,9 +71,11 @@ class Tensor{
         //helper functions
         static void transpose(Tensor<T> *a);
         static void print(Tensor<T>*);
+		static void print_brief(Tensor<T>*);
         static unsigned getRows(Tensor<T>* a);
         static unsigned getCols(Tensor<T>* a);
         static bool eq(Tensor<T>* A, Tensor<T>* B);
+		static bool eq_verbose(Tensor<T> *A, Tensor<T> *B);
 
 		//functions that probably shouldnt be used out of this file
 		static void setRows(Tensor<T>* a, int num);

@@ -6,12 +6,27 @@
 
 #include "HLS/hls.h"
 #include "HLS/math.h"
+#include "tensor_mmm.h"
 #include "tensor_mult.h"
 #include "HLS/stdio.h"
 #include "tensors.h"
 #include <iostream>
 
 /*                    DEFINITIONS                      */
+
+template<class T>
+Tensor<T>::Tensor()
+{
+	t_numCols = 0;
+	t_numRows = 0;
+	for (unsigned i = 0; i < MAX_ROWS; i++)
+	{
+		for (unsigned j = 0; j < MAX_COLS; j++)
+		{
+			t_tensor[i][j] = 0; //for safety, we fill with 0, identity over addition and multiplication
+		}
+	}
+}
 
 template<class T>
 Tensor<T>::Tensor(unsigned numRows, unsigned numCols, T init_value)
@@ -74,7 +89,17 @@ void Tensor<T>::mul_cross(Tensor<T> *A, Tensor<T> *B, Tensor<T> *C)
 //this function needs to use MACROS or constants known at compile time for sizes.
 //when using multiplies in components, use the below prototype.
 {
-	matrix_multiply<T, 1, 768, 768>(A, B, C);
+	tensor_mmm<T, 22, 64, 22>(A, B, C);
+	setRows(C, getRows(A));
+	setCols(C, getCols(B));
+}
+
+template<class T>
+void Tensor<T>::mul_cross_secondary(Tensor<T> *A, Tensor<T> *B, Tensor<T> *C)
+//this function needs to use MACROS or constants known at compile time for sizes.
+//when using multiplies in components, use the below prototype.
+{
+	tensor_mmm<T, 22, 22, 64>(A, B, C);
 	setRows(C, getRows(A));
 	setCols(C, getCols(B));
 }
@@ -102,6 +127,11 @@ void Tensor<T>::add(Tensor<T> *A, Tensor<T> *B, Tensor<T> *C)
 		rowMod = 1; //the row is always the 0th index.
 		colMod = getCols(A) + 1;; 
 		flopSize(larger, smaller);
+	}
+	else if(getRows(B) == 1 && getCols(B) == 1)
+	{
+		add_scalar(A, one(B), C);
+		return;
 	}
 	else
 	{
@@ -144,6 +174,11 @@ void Tensor<T>::sub(Tensor<T> *A, Tensor<T> *B, Tensor<T> *C)
 		colMod = getCols(A) + 1;;
 		flopSize(larger, smaller);
 	}
+	else if (getRows(B) == 1 && getCols(B) == 1)
+	{
+		sub_scalar(A, one(B), C);
+		return;
+	}
 	else
 	{
 		printf("incompatible dimenions\n");
@@ -184,6 +219,11 @@ void Tensor<T>::mul_dot(Tensor<T> *A, Tensor<T> *B, Tensor<T> *C)
 		rowMod = 1; //the row is always the 0th index.
 		colMod = getCols(A) + 1;;
 		flopSize(larger, smaller);
+	}
+	else if (getRows(B) == 1 && getCols(B) == 1)
+	{
+		mul_scalar(A, one(B), C);
+		return;
 	}
 	else
 	{
@@ -226,6 +266,11 @@ void Tensor<T>::div_dot(Tensor<T> *A, Tensor<T> *B, Tensor<T> *C)
 		colMod = getCols(A) + 1;;
 		flopSize(larger, smaller);
 	}
+	else if (getRows(B) == 1 && getCols(B) == 1)
+	{
+		div_scalar(A, one(B), C);
+		return;
+	}
 	else
 	{
 		printf("incompatible dimenions\n");
@@ -266,6 +311,11 @@ void Tensor<T>::pow_dot(Tensor<T> *A, Tensor<T> *B, Tensor<T> *C)
 		rowMod = 1; //the row is always the 0th index.
 		colMod = getCols(A) + 1;;
 		flopSize(larger, smaller);
+	}
+	else if (getRows(B) == 1 && getCols(B) == 1)
+	{
+		pow_scalar(A, one(B), C);
+		return;
 	}
 	else
 	{
@@ -605,6 +655,10 @@ void Tensor<T>::roundTensor(Tensor<T> *A, Tensor<T> *C)
         {
             T roundme = Tensor::get(A,i,j);
             T rounded = round(roundme); //always cast to float
+			if (fabs(rounded - roundme) == 0.5f)
+			{// glitch where this should be rounded down
+				rounded = trunc(roundme);
+			}
             Tensor::set(C,i,j, rounded);
         }
     }     
@@ -812,7 +866,7 @@ T Tensor<T>::get(Tensor<T> *tensor, const unsigned &row, const unsigned &col)
         }
         else
         {
-            printf("Tensor::get() index [%d][%d] out of range\n", col, row);
+            //printf("Tensor::get() index [%d][%d] out of range\n", col, row);
 			//assert(false);
             return 0;
         }
@@ -825,7 +879,7 @@ T Tensor<T>::get(Tensor<T> *tensor, const unsigned &row, const unsigned &col)
         }
         else
         {
-            printf("Tensor::get() index [%d][%d] out of range\n", row, col);
+            //printf("Tensor::get() index [%d][%d] out of range\n", row, col);
 			//assert(false);
             return 0;
         }
@@ -844,7 +898,7 @@ void Tensor<T>::set(Tensor<T> *tensor, const unsigned &row, const unsigned &col,
         }
         else
         {
-            printf("Tensor::get() index [%d][%d] out of range\n", col, row);
+            //printf("Tensor::get() index [%d][%d] out of range\n", col, row);
         }
     }
     else
@@ -855,7 +909,7 @@ void Tensor<T>::set(Tensor<T> *tensor, const unsigned &row, const unsigned &col,
         }
         else
         {
-            printf("Tensor::set() index [%d][%d] out of range\n", row, col);
+            //printf("Tensor::set() index [%d][%d] out of range\n", row, col);
         }
     }
 }
@@ -911,6 +965,43 @@ void Tensor<T>::print(Tensor<T> *self)
 }
 
 template<class T>
+void Tensor<T>::print_brief(Tensor<T> *self)
+{
+
+	#ifndef HLS_SYNTHESIS
+	std::cout << "Tensor: " << std::endl;
+	#endif
+	if (self == nullptr)
+	{
+		#ifndef HLS_SYNTHESIS
+		std::cout << "nullptr" << std::endl;
+		#endif
+		return;
+	}
+	for (unsigned i = 0; i < getRows(self); i++) {
+		for (unsigned j = 0; j < getCols(self); j++) {
+			#ifndef HLS_SYNTHESIS
+			std::cout << "[" << Tensor<T>::get(self, i, j) << "] ";
+			#endif
+			if (j == 2 && (getCols(self) - 4 != 1))
+			{
+				printf(" ... "); //one two skip a few... 99 100
+				j = getCols(self) - 4;
+			}
+		}
+		if (i == 2 && (getRows(self) - 4 != 1))
+		{
+			printf("\n ... \n");
+			i = getRows(self) - 4;
+		}
+		#ifndef HLS_SYNTHESIS
+		std::cout << std::endl;
+		#endif
+	}
+}
+
+
+template<class T>
 unsigned Tensor<T>::getRows(Tensor<T> *A)
 { 
     if(!A->transposed){
@@ -943,6 +1034,32 @@ bool Tensor<T>::eq(Tensor<T> *A, Tensor<T> *B)
         }
     }
     return true;  
+}
+
+template<class T>
+bool Tensor<T>::eq_verbose(Tensor<T> *A, Tensor<T> *B)
+{//returns true if all elements are the same. No broadcasting.
+	bool one = false;
+	unsigned i, j;
+	for (i = 0; i < getRows(A); i++)
+	{
+		for (j = 0; j < getCols(A); j++)
+		{
+			if (fabs(get(A, i, j) - get(B, i, j)) > 0.001f)
+			{
+				printf("row %d col %d, LHS is %f, and RHS is %f \n", i, j, get(A, i, j), get(B, i, j));
+				one = true;
+			}
+		}
+	}
+	if (one)
+	{
+		return false;
+	}
+	else
+	{
+		return true;
+	}
 }
 
 

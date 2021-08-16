@@ -156,6 +156,36 @@
     <ClInclude Include="multiheadAttention.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="tensorXL.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tensorXL.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tensor3dXL.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tensor3dXL.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="quantact_xl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="crosstype_tensors.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tensor_mult_xl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sentence_encoder_layer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tensor_mmm_xl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tensor_mmm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="quantact_testbench.cpp">
@@ -180,6 +210,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="multiheadAttention.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="quantact_xl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="crosstype_tensors.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sentence_encoder_layer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

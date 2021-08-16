@@ -10,6 +10,7 @@
 #include "HLS/stdio.h"
 #include "tensors.hpp"
 #include "tensor3d.h"
+#include "tensor3dXL.hpp"
 #include <iostream>
 
 /*                    DEFINITIONS                      */
@@ -44,6 +45,18 @@ Tensor3d<T>::Tensor3d(Tensor<T> *A) //Takes a 2d matrix and copies it into the f
 }
 
 template<class T>
+Tensor3d<T>::Tensor3d(int dep, int row, int col, T init)
+{
+	t_numCols = col;
+	t_numRows = row;
+	t_depth = dep;
+	for (unsigned d = 0; d < dep; d++)
+	{
+		set(this, d, new Tensor<T>(row, col, init));
+	}
+}
+
+template<class T>
 Tensor3d<T>::Tensor3d(void)
 { //if using this in conjuction with append(), make sure to setCols and setRows
 	t_numCols = 0;
@@ -52,6 +65,15 @@ Tensor3d<T>::Tensor3d(void)
 	for (unsigned d = 0; d < MAX_DEPTH; d++)
 	{
 		set(this, d, nullptr);
+	}
+}
+
+template<class T>
+Tensor3d<T>::~Tensor3d()
+{
+	for (unsigned d = 0; d < getDepth(this); d++)
+	{
+		if (nullptr != this->matrix[d]) { delete this->matrix[d]; }
 	}
 }
 
@@ -66,6 +88,34 @@ template<class T> void Tensor3d<T>::linear_mul(Tensor3d<T> *A, Tensor<T> *B, Ten
 	setCols(C, Tensor<T>::getCols(B));
 	setRows(C, getRows(A));
 	Tensor<T>::transpose(B);
+}
+
+template<class T> void Tensor3d<T>::bmm(Tensor3d<T> *A, Tensor3d<T> *B, Tensor3d<T> *C)
+{ //for when they both have the same size. 
+	//We assume B is the same shape as A but compatible to multiply 
+	//assuming a 22x64 * 22x64 but we transpose the second input
+	assert(getCols(A) == getCols(B));
+	for (unsigned d = 0; d < getDepth(A); d++)
+	{
+		Tensor<T> *rhs = get(B, d);
+		Tensor<T>::transpose(rhs);
+		Tensor<T>::mul_cross(get(A, d), rhs, get(C, d));
+		Tensor<T>::transpose(rhs);
+	}
+	setCols(C, getRows(B)); //rows is correct because its un-transposed
+	setRows(C, getRows(A));
+}
+
+template<class T> void Tensor3d<T>::bmm2(Tensor3d<T> *A, Tensor3d<T> *B, Tensor3d<T> *C)
+{ //for when they both have the same size. 
+	//We assume B is already "transposed". Also assuming a 22x22 * 22x64
+	assert(getCols(A) == getRows(B));
+	for (unsigned d = 0; d < getDepth(A); d++)
+	{
+		Tensor<T>::mul_cross_secondary(get(A, d), get(B, d), get(C, d));
+	}
+	setCols(C, getCols(B));
+	setRows(C, getRows(A));
 }
 
 //2d broadcasting across 3d
@@ -428,6 +478,8 @@ template<class T> void Tensor3d<T>::sqrt_tensor(Tensor3d<T> *A, Tensor3d<T>* C)
 //TODO: only if necessary
 //template<class T> Tensor3d<T>:: void tensor_frexp(Tensor<float>* inputs, Tensor<float>* m, Tensor<float>* e){}
 
+
+
 //adressing methods where dep is depth and select the 2d array you want.
 template<class T> T Tensor3d<T>::get(Tensor3d<T> *tensor, const unsigned &row, const unsigned &col, const unsigned &dep)
 {
@@ -546,6 +598,17 @@ template<class T>  void  Tensor3d<T>::print(Tensor3d<T> *A)
 	printf("] End Tensor3d\n");
 }
 
+template<class T>  void  Tensor3d<T>::print_brief(Tensor3d<T> *A)
+{
+	printf("Tensor3d\n[");
+	for (unsigned d = 0; d < getDepth(A); d++)
+	{
+		Tensor<T>::print_brief(get(A, d));
+		printf(",\n");
+	}
+	printf("] End Tensor3d\n");
+}
+
 template<class T> inline unsigned Tensor3d<T>::getRows(Tensor3d<T>* a)
 {
 	return a->t_numRows;
@@ -565,7 +628,7 @@ template<class T> bool Tensor3d<T>::eq(Tensor3d<T>* A, Tensor3d<T>* B)
 {
 	for (unsigned d = 0; d < getDepth(A); d++)
 	{
-		if (!eq(get(A,d), get(B,d)))
+		if (!Tensor<T>::eq_verbose(get(A,d), get(B,d)))
 		{
 			return false;
 		}
@@ -596,14 +659,14 @@ template<class T> bool Tensor3d<T>::sameSize(Tensor3d<T> *A, Tensor<T> *B)
 
 template<class T> bool Tensor3d<T>::sameSize(Tensor3d<T> *A, Tensor3d<T> *B) 
 {
-	return Tensor<T>::getRows(A) == Tensor<T>::getRows(B) && 
-		Tensor<T>::getCols(A) == Tensor<T>::getCols(B) && 
-		Tensor<T>::getDepth(A) == Tensor<T>::getDepth(B);
+	return getRows(A) == getRows(B) && 
+		getCols(A) == getCols(B) && 
+		getDepth(A) == getDepth(B);
 }
 
 template<class T> bool Tensor3d<T>::sameDep(Tensor3d<T> *A, Tensor3d<T> *B)
 {
-	return Tensor<T>::getDepth(A) == Tensor<T>::getDepth(B);
+	return getDepth(A) == getDepth(B);
 }
 
 #endif

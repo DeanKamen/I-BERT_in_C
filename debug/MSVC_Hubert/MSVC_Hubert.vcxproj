@@ -126,6 +126,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="crosstype_tensors.h" />
     <ClInclude Include="HLS\ac_complex.h" />
     <ClInclude Include="HLS\ac_fixed.h" />
     <ClInclude Include="HLS\ac_fixed_math.h" />
@@ -165,23 +166,35 @@
     <ClInclude Include="loadTensors.h" />
     <ClInclude Include="multiheadAttention.h" />
     <ClInclude Include="quantact.h" />
+    <ClInclude Include="quantact_xl.h" />
     <ClInclude Include="QuantLinear.h" />
+    <ClInclude Include="sentence_encoder_layer.h" />
     <ClInclude Include="softmax.h" />
     <ClInclude Include="tensor3d.h" />
     <ClInclude Include="tensor3d.hpp" />
+    <ClInclude Include="tensor3dXL.h" />
+    <ClInclude Include="tensor3dXL.hpp" />
     <ClInclude Include="tensors.h" />
     <ClInclude Include="tensors.hpp" />
+    <ClInclude Include="tensorXL.h" />
+    <ClInclude Include="tensorXL.hpp" />
+    <ClInclude Include="tensor_mmm.h" />
+    <ClInclude Include="tensor_mmm_xl.h" />
     <ClInclude Include="tensor_mult.h" />
+    <ClInclude Include="tensor_mult_xl.h" />
     <ClInclude Include="testglobals.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="crosstype_tensors.cpp" />
     <ClCompile Include="IntGELU.cpp" />
     <ClCompile Include="IntLayerNorm.cpp" />
     <ClCompile Include="loadTensors.cpp" />
     <ClCompile Include="multiheadAttention.cpp" />
     <ClCompile Include="quantact.cpp" />
     <ClCompile Include="quantact_testbench.cpp" />
+    <ClCompile Include="quantact_xl.cpp" />
     <ClCompile Include="QuantLinear.cpp" />
+    <ClCompile Include="sentence_encoder_layer.cpp" />
     <ClCompile Include="softmax.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

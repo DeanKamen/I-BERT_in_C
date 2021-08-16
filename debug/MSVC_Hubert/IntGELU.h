@@ -17,9 +17,9 @@ public:
 	//initializer
 	IntGELU(QuantMode quant_mode = QuantMode::none, ForceDequantMode force_dequant = ForceDequantMode::none);
 	//member functions
-	scaled_tuple3d int_erf(Tensor3d<float>* x_int, Tensor<float>* scaling_factor);
-	scaled_tuple3d intgelu_forward(Tensor3d<float>* x, Tensor<float>* scaling_factor = nullptr);
-	void normal_gelu(Tensor3d<float>* x_in, Tensor3d<float>* x_out);
+	scaled_tuple3dXL int_erf(Tensor3dXL<float>* x_int, TensorXL<float>* scaling_factor);
+	scaled_tuple3dXL intgelu_forward(Tensor3dXL<float>* x, TensorXL<float>* scaling_factor = nullptr);
+	void normal_gelu(Tensor3dXL<float>* x_in, Tensor3dXL<float>* x_out);
 
 	QuantMode quant_mode;
 	float k;

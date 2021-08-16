@@ -9,17 +9,30 @@ enum class QuantMode {none, symmetric};
 
 enum class ForceDequantMode{none, nonlinear, softmax, gelu, layernorm};
 
+struct scaled_tupleXL
+{//to get the most fidelity out of the translation, I make
+ //a struct that emulates the returned tuple of most forwards
+	TensorXL<float>* matrix;
+	TensorXL<float>* scaling_factor;
+};
+
+struct scaled_tuple3dXL
+{//same as scaled_tuple but 3d
+	Tensor3dXL<float>* matrix;
+	TensorXL<float>* scaling_factor;
+};
+
 struct scaled_tuple
 {//to get the most fidelity out of the translation, I make
  //a struct that emulates the returned tuple of most forwards
 	Tensor<float>* matrix;
-	Tensor<float>* scaling_factor;
+	TensorXL<float>* scaling_factor;
 };
 
 struct scaled_tuple3d
 {//same as scaled_tuple but 3d
 	Tensor3d<float>* matrix;
-	Tensor<float>* scaling_factor;
+	TensorXL<float>* scaling_factor;
 };
 
 enum class preload

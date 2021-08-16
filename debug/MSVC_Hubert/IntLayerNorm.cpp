@@ -22,37 +22,45 @@ IntLayerNorm::IntLayerNorm(int output_bit_i, bool overflow_handling_i, QuantMode
 	activation = new QuantAct(output_bit);
 }
 
-scaled_tuple3d IntLayerNorm::intlayernorm_forward(Tensor3d<float>* x, Tensor<float>* scaling_factor)
+IntLayerNorm::~IntLayerNorm()
 {
+	delete activation;
+	delete shift;
+	delete weight;
+	delete bias;
+}
+
+scaled_tuple3dXL IntLayerNorm::intlayernorm_forward(Tensor3dXL<float>* x, TensorXL<float>* scaling_factor)
+{
+	//ASSUMPTION: x is 22x1x768 and scaling factor is 1x1
 	if (quant_mode == QuantMode::none)
 	{
-		Tensor3d<float>* mean = new Tensor3d(x);
-		Tensor3d<float>::mean(x, mean);
-		Tensor3d<float>* y = new Tensor3d(x);
+		Tensor3dXL<float>* mean = new Tensor3dXL(x);
+		Tensor3dXL<float>::mean(x, mean);
+		Tensor3dXL<float>* y = new Tensor3dXL(x);
 		//custom 3d subtraction because none of my functions would work.
-		for (unsigned d = 0; d < Tensor3d<float>::getDepth(y); d++)
+		for (unsigned d = 0; d < Tensor3dXL<float>::getDepth(y); d++)
 		{
-			Tensor<float>::sub_scalar(Tensor3d<float>::get(x, d), Tensor<float>::one(Tensor3d<float>::get(mean,d)), Tensor3d<float>::get(y, d));
+			TensorXL<float>::sub_scalar(Tensor3dXL<float>::get(x, d), TensorXL<float>::one(Tensor3dXL<float>::get(mean,d)), Tensor3dXL<float>::get(y, d));
 		}
-		Tensor3d<float>* var = new Tensor3d(y);
-		Tensor3d<float>::pow_scalar(y, 2, var);
-		Tensor3d<float>::mean(var, var);
-		Tensor3d<float>::add_scalar(var, eps, var);
-		Tensor3d<float>::sqrt_tensor(var, var);
+		delete mean;
+
+		Tensor3dXL<float>* var = new Tensor3dXL(y);
+		Tensor3dXL<float>::pow_scalar(y, 2, var);
+		Tensor3dXL<float>::mean(var, var);
+		Tensor3dXL<float>::add_scalar(var, eps, var);
+		Tensor3dXL<float>::sqrt_tensor(var, var);
 		//a custom div loop
-		for (unsigned d = 0; d < Tensor3d<float>::getDepth(x); d++)
+		for (unsigned d = 0; d < Tensor3dXL<float>::getDepth(x); d++)
 		{
-			Tensor<float>::div_scalar(Tensor3d<float>::get(y, d), Tensor<float>::one(Tensor3d<float>::get(var, d)), Tensor3d<float>::get(x, d));
+			TensorXL<float>::div_scalar(Tensor3dXL<float>::get(y, d), TensorXL<float>::one(Tensor3dXL<float>::get(var, d)), Tensor3dXL<float>::get(x, d));
 		}
+		delete y;
+		delete var;
+		Tensor3dXL<float>::mul_dot(x, weight, x);
+		Tensor3dXL<float>::add(x, bias, x);
 
-		Tensor<float>::transpose(weight);
-		Tensor<float>::transpose(bias);
-		Tensor3d<float>::mul_dot(x, weight, x);
-		Tensor3d<float>::add(x, bias, x);
-		Tensor<float>::transpose(weight);
-		Tensor<float>::transpose(bias);
-
-		scaled_tuple3d returnme;
+		scaled_tuple3dXL returnme;
 		returnme.matrix = x;
 		returnme.scaling_factor = nullptr;
 		return returnme;
@@ -61,7 +69,7 @@ scaled_tuple3d IntLayerNorm::intlayernorm_forward(Tensor3d<float>* x, Tensor<flo
 	{
 		//Hunter didnt write this part for expediency
 		assert(false);
-		scaled_tuple3d bob;
+		scaled_tuple3dXL bob;
 		bob.matrix = nullptr;
 		bob.scaling_factor = nullptr;
 		return bob;
@@ -70,7 +78,7 @@ scaled_tuple3d IntLayerNorm::intlayernorm_forward(Tensor3d<float>* x, Tensor<flo
 
 void IntLayerNorm::set_param(preload shift_n, preload weight_n, preload bias_n)
 {
-	shift = loadTensor(shift_n); 
-	weight = loadTensor(weight_n);
-	bias = loadTensor(bias_n);
+	shift = loadTensorXL(shift_n); 
+	weight = loadTensorXL(weight_n);
+	bias = loadTensorXL(bias_n);
 }
