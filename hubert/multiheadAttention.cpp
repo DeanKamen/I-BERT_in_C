@@ -1,3 +1,4 @@
+//multiheadAttention.cpp, created by Hunter Messner for the HUBERT project
 #include "HLS/hls.h"
 #include "HLS/stdio.h"
 #include "tensors.hpp" 
@@ -138,8 +139,8 @@ scaled_tuple3dXL multiheadAttention::multiheadAttention_forward(
 
 	q = q_proj_act->QuantAct_forward(q.matrix, q.scaling_factor);
 	k = k_proj_act->QuantAct_forward(k.matrix, k.scaling_factor,nullptr, nullptr, nullptr, nullptr, true);
-	Tensor3dXL<float>* kpa_v = loadGeneric3dXL("bin/kpa_verification.bin");
-	Tensor3dXL<float>::eq(kpa_v, k.matrix);
+	//Tensor3dXL<float>* kpa_v = loadGeneric3dXL("bin/kpa_verification.bin");
+	//Tensor3dXL<float>::eq(kpa_v, k.matrix);
 	v = v_proj_act->QuantAct_forward(v.matrix, v.scaling_factor);
 
 	Tensor3dXL<float>::mul_scalar(q.matrix, scaling, q.matrix);
@@ -160,15 +161,16 @@ scaled_tuple3dXL multiheadAttention::multiheadAttention_forward(
 	// using small versions until we transform back
 	Tensor3d<float>* attn_weights = new Tensor3d<float>(12, 22, 22, 0.0f);
 	
-	Tensor3d<float>* qmm_v = loadGeneric3d("bin/qmm_verification.bin");
-	Tensor3d<float>::eq(qmm_v, qT);
-	Tensor3d<float>* kmm_v = loadGeneric3d("bin/kmm_verification.bin");
-	Tensor3d<float>::eq(kmm_v, kT);
-
+	//Tensor3d<float>* qmm_v = loadGeneric3d("bin/qmm_verification.bin");
+	//Tensor3d<float>::eq(qmm_v, qT);
+	//qT = qmm_v;
+	//Tensor3d<float>* kmm_v = loadGeneric3d("bin/kmm_verification.bin");
+	//Tensor3d<float>::eq(kmm_v, kT);
+	//kT = kmm_v;
 	Tensor3d<float>::bmm(qT, kT, attn_weights); 
 	
-	Tensor3d<float>* t_v = loadGeneric3d("bin/aw_verification.bin");
-	Tensor3d<float>::eq(t_v, attn_weights);
+	//Tensor3d<float>* t_v = loadGeneric3d("bin/aw_verification.bin");
+	//Tensor3d<float>::eq(t_v, attn_weights);
 
 	TensorXL<float> *attn_weights_scaling_factor = new TensorXL<float>(1, 1, TensorXL<float>::one(q.scaling_factor));
 	if (q.scaling_factor != nullptr)
@@ -182,7 +184,7 @@ scaled_tuple3dXL multiheadAttention::multiheadAttention_forward(
 	delete attn_weights;
 	attn_weights = softmax_result.matrix;
 	Tensor3d<float>* attn = new Tensor3d(12, 22, 64, 0.0f);
-	Tensor3d<float>::bmm2(attn_weights, vT, attn);//specialed, TODO: could be replaced?
+	Tensor3d<float>::bmm2(attn_weights, vT, attn);//specialized, TODO: could be replaced?
 
 	TensorXL<float>* attn_scaling_factor = new TensorXL<float>(q.scaling_factor);
 	if (attn_scaling_factor != nullptr)

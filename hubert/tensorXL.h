@@ -43,6 +43,7 @@ class TensorXL{
 		//scalar type
         static void add_scalar(TensorXL<T> *A, T B, TensorXL<T> *C);
         static void mul_scalar(TensorXL<T> *A, T B, TensorXL<T> *C);
+		static void mul_scalar_double(TensorXL<T> *A, double B, TensorXL<T> *C);
         static void sub_scalar(TensorXL<T> *A, T B, TensorXL<T> *C);
 		static void sub_scalar(T B, TensorXL<T> *A, TensorXL<T> *C);
         static void div_scalar(TensorXL<T> *A, T B, TensorXL<T> *C);
@@ -58,6 +59,7 @@ class TensorXL{
         static void clamp(TensorXL<T> *A, T min, T max, TensorXL<T> *C);
         static void roundTensor(TensorXL<T> *A, TensorXL<T> *C);
         static void reciprocal(TensorXL<T> *A, TensorXL<T> *C);
+		static void reciprocal(TensorXL<T> *A, T numerator, TensorXL<T> *C);
 		static void sum(TensorXL<T> *A, int dim, TensorXL<T>* C);
 		static void sign(TensorXL<T> *A, TensorXL<T> *C);
 		static void mean(TensorXL<T> *A, TensorXL<T> *C);

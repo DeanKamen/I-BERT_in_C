@@ -14,7 +14,7 @@
 
 Tensor3d<float>* transformFromXL(Tensor3dXL<float> *A, Tensor3d<float> *space)
 {
-	//TODO: the 22x1x768 -> 22x12x64 -> transpose into 12x22x64 transform
+	//the 22x1x768 -> 22x12x64 -> transpose into 12x22x64 transform
 	//q.contiguous().view(tgt_len, bsz * self.num_heads, self.head_dim).transpose(0, 1)
 	//
 	unsigned i, j, d;
@@ -54,7 +54,7 @@ Tensor3d<float>* transformFromXL(Tensor3dXL<float> *A, Tensor3d<float> *space)
 }
 Tensor3dXL<float>* transformToXL(Tensor3d<float> *A, Tensor3d<float> *space)
 {
-	//TODO: the 12x22x64-> 22x12x64 -> 22x1x768 
+	//the 12x22x64-> 22x12x64 -> 22x1x768 transform 
 	//attn = attn.transpose(0,1).contiguous(). view(tgt_len, bsz, embed dim)
 	// Just undoing the previous function
 	unsigned i, j, d;

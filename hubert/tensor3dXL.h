@@ -37,7 +37,7 @@ class Tensor3dXL{
 		static void div_dot(Tensor3dXL<T> *A, TensorXL<T> *B, Tensor3dXL<T> *C);
 		static void pow_dot(Tensor3dXL<T> *A, TensorXL<T> *B, Tensor3dXL<T> *C);
 
-		//3d and 3d. TODO: implement broadcasting for 1 depth 3d arrays.
+		//3d and 3d.
 		static void add(Tensor3dXL<T> *A, Tensor3dXL<T> *B, Tensor3dXL<T> *C);
 		static void sub(Tensor3dXL<T> *A, Tensor3dXL<T> *B, Tensor3dXL<T> *C);
 		static void mul_dot(Tensor3dXL<T> *A, Tensor3dXL<T> *B, Tensor3dXL<T> *C);

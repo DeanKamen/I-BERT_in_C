@@ -1,3 +1,5 @@
+//quantact.cpp, created by Hunter Messner for the HUBERT project
+
 #include "HLS/hls.h"
 #include "HLS/stdio.h"
 #include "tensors.hpp" 
@@ -60,7 +62,7 @@ tuple QuantAct::QuantAct_forward(T3d* x,
                               T2d* specified_min,
                               T2d* specified_max)
 {
-	//identity and x are 22x1x768 or 12x22x22. TODO:make seperte function for 12x22x22
+	//identity and x are 22x1x768 or 12x22x22.
 	//pre_act_scaling factor is 1x768
 	//identity scaling factor is 1x1
     T3d* x_act = new T3d(x);
@@ -92,7 +94,6 @@ tuple QuantAct::QuantAct_forward(T3d* x,
 		}
 		else
 		{
-			//TODO: 3d matrix support
 			assert(false);
 		}
 
@@ -295,7 +296,7 @@ T3d* QuantAct::fixedpoint_mul(
 	delete e;
 
     if(identity != nullptr)
-    {	//TODO: verify functionality, may have to make changes if identity scaling facor is not the correct dimention.
+	{
         T3d* wx_int = new T3d(identity);
         div_type(identity, identity_scaling_factor, identity);
         T3d::roundTensor(identity, wx_int);

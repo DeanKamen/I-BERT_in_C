@@ -1,3 +1,4 @@
+//softmax.h, created by Hunter Messner for the HUBERT project
 #ifndef __HUBERT_SOFTMAX_H__
 #define __HUBERT_SOFTMAX_H__
 

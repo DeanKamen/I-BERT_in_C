@@ -24,6 +24,6 @@ public:
 	QuantMode quant_mode;
 	float k;
 	int n;
-	float coeff[3];
+	double coeff[3];
 };
 #endif

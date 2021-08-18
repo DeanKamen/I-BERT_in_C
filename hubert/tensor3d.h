@@ -38,8 +38,7 @@ class Tensor3d{
 		static void mul_dot(Tensor3d<T> *A, Tensor<T> *B, Tensor3d<T> *C);
 		static void div_dot(Tensor3d<T> *A, Tensor<T> *B, Tensor3d<T> *C);
 		static void pow_dot(Tensor3d<T> *A, Tensor<T> *B, Tensor3d<T> *C);
-
-		//3d and 3d. TODO: implement broadcasting for 1 depth 3d arrays.
+		//3d and 3d
 		static void add(Tensor3d<T> *A, Tensor3d<T> *B, Tensor3d<T> *C);
 		static void sub(Tensor3d<T> *A, Tensor3d<T> *B, Tensor3d<T> *C);
 		static void mul_dot(Tensor3d<T> *A, Tensor3d<T> *B, Tensor3d<T> *C);

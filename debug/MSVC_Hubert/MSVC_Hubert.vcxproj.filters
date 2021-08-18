@@ -135,9 +135,6 @@
     <ClInclude Include="softmax.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="testglobals.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="tensor3d.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>

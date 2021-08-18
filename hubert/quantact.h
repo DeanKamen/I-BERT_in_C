@@ -1,3 +1,4 @@
+//quantact.h, created by Hunter Messner for the HUBERT project
 #ifndef __HUBERT_QUANTACT_H__
 #define __HUBERT_QUANTACT_H__
 
@@ -59,7 +60,6 @@ class QuantAct
     QuantMode quant_mode;
     bool per_channel; //must be false, true implies 3d matrixes
 
-    //TODO: convert to float
     Tensor<float>* x_min;//This is only ever of size one during inference at least
     Tensor<float>* x_max;
     TensorXL<float>* act_scaling_factor;

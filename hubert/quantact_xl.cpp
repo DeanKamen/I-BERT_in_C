@@ -1,3 +1,4 @@
+//quantact_xl.cpp, created by Hunter Messner for the HUBERT project
 #include "HLS/hls.h"
 #include "HLS/stdio.h"
 #include "tensors.hpp" 
@@ -59,7 +60,7 @@ tuple QuantAct_XL::QuantAct_forward(T3d* x,
                               T2d* specified_max,
 							  bool testing)
 {
-	//identity and x are 22x1x768 or 12x22x22. TODO:make seperte function for 12x22x22
+	//identity and x are 22x1x768 or 12x22x22.
 	//pre_act_scaling factor is 1x768
 	//identity scaling factor is 1x1
     T3d* x_act = new T3d(x);
@@ -149,8 +150,8 @@ tuple QuantAct_XL::QuantAct_forward(T3d* x,
     
 	if (testing)
 	{
-		TensorXL<float>* actsf_v = loadGeneric2d("bin/actsf_verification.bin");
-		TensorXL<float>::eq_verbose(actsf_v, act_scaling_factor);
+		//TensorXL<float>* actsf_v = loadGeneric2d("bin/actsf_verification.bin");
+		//TensorXL<float>::eq_verbose(actsf_v, act_scaling_factor);
 	}
 
     T3d* quant_act_int = nullptr;
@@ -165,8 +166,8 @@ tuple QuantAct_XL::QuantAct_forward(T3d* x,
 
 	if (testing)
 	{
-		Tensor3dXL<float>* qai_v = loadGeneric3dXL("bin/qai_verification.bin");
-		Tensor3dXL<float>::eq(qai_v, quant_act_int);
+		//Tensor3dXL<float>* qai_v = loadGeneric3dXL("bin/qai_verification.bin");
+		//Tensor3dXL<float>::eq(qai_v, quant_act_int);
 	}
 
     T2d* correct_output_scale = new T2d(act_scaling_factor);
@@ -176,8 +177,8 @@ tuple QuantAct_XL::QuantAct_forward(T3d* x,
     tuple returnme;
 	if (testing)
 	{
-		Tensor3dXL<float>* qai_v = loadGeneric3dXL("bin/out_verification.bin");
-		Tensor3dXL<float>::eq(qai_v, quant_act_int);
+		//Tensor3dXL<float>* qai_v = loadGeneric3dXL("bin/out_verification.bin");
+		//Tensor3dXL<float>::eq(qai_v, quant_act_int);
 	}
     returnme.matrix = quant_act_int;
     returnme.scaling_factor = act_scaling_factor;

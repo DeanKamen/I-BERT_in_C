@@ -1,10 +1,8 @@
 /*  Systolic array paper matrix multiplay                                 */
 /*  easy to read and more correct matrix multiply                         */
 
-//Modified by HUBERT 
+//Modified by Hunter Messner for the HUBERT project
 
-// This is template library for matrix multiplication. A x B = C
-// template arguments
 
 #ifndef __HUBERT_TENSORMMMXL_H__
 #define __HUBERT_TENSORMMMXL_H__

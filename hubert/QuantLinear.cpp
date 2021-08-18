@@ -1,3 +1,4 @@
+//QuantLinear.cpp, created by Hunter Messner for the HUBERT project
 #include "HLS/hls.h"
 #include "HLS/stdio.h"
 #include "tensors.hpp" 
@@ -62,10 +63,12 @@ tuple QuantLinear::quantlinear_forward(T3d* x, T2d* prev_act_scaling_factor, boo
 	delete space;
 	if (testing)
 	{
-		//TensorXL<float>* wmax_v = loadGeneric2d("bin/wmax_verification.bin");
-		//TensorXL<float>::eq_verbose(wmax_v, w_max);
-		//TensorXL<float>* wmin_v = loadGeneric2d("bin/wmin_verification.bin");
-		//TensorXL<float>::eq_verbose(wmin_v, w_min);
+		TensorXL<float>* weight_v = loadGeneric2d("bin/weight_verification.bin");
+		TensorXL<float>::eq_verbose(weight_v, weight);
+		TensorXL<float>* wmax_v = loadGeneric2d("bin/wmax_verification.bin");
+		TensorXL<float>::eq_verbose(wmax_v, w_max);
+		TensorXL<float>* wmin_v = loadGeneric2d("bin/wmin_verification.bin");
+		TensorXL<float>::eq_verbose(wmin_v, w_min);
 	}
 	T2d* fc_scaling_factor = QuantAct_XL::symmetric_linear_quantization_params(weight_bit, w_min, w_max, per_channel);
 	if (testing)
@@ -113,19 +116,10 @@ tuple QuantLinear::quantlinear_forward(T3d* x, T2d* prev_act_scaling_factor, boo
 	}
 	else
 	{
-		if (T3d::get(x_int, 0, 2, 0) == -1.f && T3d::get(x_int, 0, 1, 0) == -0.f)
-		{
-			T3d::print(x);
-			Tensor3dXL<float>* x_int_v = loadGeneric3dXL("bin/x_int_verification.bin");
-			TensorXL<float>* weight_int_v = loadGeneric2d("bin/weight_int_verification.bin");
-			T3d::eq(x_int_v, x_int);
-			T2d::eq_verbose(weight_int_v, T3d::twoD(weight_int));
-		}
 		T3d* x_int_new_dim = new T3d(T3d::getDepth(x_int), T3d::getRows(x_int), T3d::getRows(weight_int), 0.0f);
 		T3d::linear_mul(x_int, T3d::twoD(weight_int), x_int_new_dim);
 		delete x_int;
 		x_int = x_int_new_dim;
-		//T3d::print(x_int);
 		T3d::add(x_int, T3d::twoD(bias_int_2), x_int);
 	}
 	

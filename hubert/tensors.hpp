@@ -787,7 +787,6 @@ void Tensor<T>::view(Tensor<T> *A, const int rows, const int cols, Tensor<T> *sp
  // currentely only supports (rows, cols) where row and col go from -1 to 3072.
  // reshapes the tensor so that its values fit in a new shape. BE SMART when using this, because the function is dumb
     
-    //I cant make a local TENSOR! TODO:find a way to make one,  
     unsigned i,j;
     for (i = 0; i < getRows(A); i++)
     {
@@ -889,7 +888,7 @@ T Tensor<T>::get(Tensor<T> *tensor, const unsigned &row, const unsigned &col)
 template<class T>
 void Tensor<T>::set(Tensor<T> *tensor, const unsigned &row, const unsigned &col, T val)
 {
-    //TODO: add safeguards to check if IN RANGE
+    //The safeguards for in range access are non fatal. The intel matrix multiply trips them for some reason
     if(tensor->transposed)
     {//in this block everything is flipped because internally, we are treating the matrix as transposed 
         if(row < getRows(tensor) && col < getCols(tensor))

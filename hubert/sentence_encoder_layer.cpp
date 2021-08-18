@@ -1,3 +1,4 @@
+//sentence_encoder_layer.cpp, created by Hunter Messner for the HUBERT project
 #include "HLS/hls.h"
 #include "HLS/stdio.h"
 #include "tensors.hpp" 
@@ -111,24 +112,46 @@ scaled_tuple3dXL sentenceEncoderLayer::sel_forward(
 	t = self_attn->multiheadAttention_forward(t.matrix, t.matrix, t.matrix, self_attn_padding_mask, nullptr, false, false, nullptr, false, false,
 		t.scaling_factor, t.scaling_factor, t.scaling_factor);
 
+	t_v = loadGeneric3dXL("bin/multihead_verification.bin");
+	Tensor3dXL<float>::eq(t_v, t.matrix);
+	t.matrix = t_v;
+
 	t = pre_self_attn_layer_norm_act->QuantAct_forward(t.matrix, t.scaling_factor, residual.matrix, residual.scaling_factor);
 
 	t = self_attn_layer_norm->intlayernorm_forward(t.matrix, t.scaling_factor);
+	t_v = loadGeneric3dXL("bin/ln1_verification.bin");
+	Tensor3dXL<float>::eq(t_v, t.matrix);
+	t.matrix = t_v;
+
 	t = fc1_act->QuantAct_forward(t.matrix, t.scaling_factor);
+	t_v = loadGeneric3dXL("bin/fc1a_verification.bin");
+	Tensor3dXL<float>::eq(t_v, t.matrix);
+	t.matrix = t_v;
+	TensorXL<float>* t_sf = loadGeneric2d("bin/fc1asf_verification.bin");
+	TensorXL<float>::eq_verbose(t_sf, t.scaling_factor);
+	t.scaling_factor = t_sf;
 
 	delete residual.matrix, residual.scaling_factor;
 	residual.matrix = new Tensor3dXL(t.matrix);
 	residual.scaling_factor = new TensorXL(t.scaling_factor);
 
 	t = fc1->quantlinear_forward(t.matrix, t.scaling_factor);
-	//Tensor3dXL<float>* t_v = loadGeneric3dXL("bin/pre_gelu_verification.bin");
-	//Tensor3dXL<float>::eq(t_v, t.matrix);
-	t = activation_fn_approx->intgelu_forward(t.matrix, t.scaling_factor);
-	
-	t = fc2_act->QuantAct_forward(t.matrix, t.scaling_factor);
-	
-	t = fc2->quantlinear_forward(t.matrix, t.scaling_factor);
+	t_v = loadGeneric3dXL("bin/fc1_verification.bin");
+	Tensor3dXL<float>::eq(t_v, t.matrix);
+	t.matrix = t_v;
+	t_sf = loadGeneric2d("bin/fc1sf_verification.bin");
+	TensorXL<float>::eq_verbose(t_sf, t.scaling_factor);
+	t.scaling_factor = t_sf;
 
+	t = activation_fn_approx->intgelu_forward(t.matrix, t.scaling_factor);
+	t_v = loadGeneric3dXL("bin/gelu_verification.bin");
+	Tensor3dXL<float>::eq(t_v, t.matrix);
+	t.matrix = t_v;
+
+	t = fc2_act->QuantAct_forward(t.matrix, t.scaling_factor);
+	t = fc2->quantlinear_forward(t.matrix, t.scaling_factor);
+	t_v = loadGeneric3dXL("bin/fc2_verification.bin");
+	Tensor3dXL<float>::eq(t_v, t.matrix);
 
 	t = pre_final_layer_norm_act->QuantAct_forward(t.matrix, t.scaling_factor, residual.matrix, residual.scaling_factor);
 	t = final_layer_norm->intlayernorm_forward(t.matrix, t.scaling_factor);

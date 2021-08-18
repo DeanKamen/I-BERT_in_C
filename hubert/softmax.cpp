@@ -1,3 +1,4 @@
+//softmax.cpp, created by Hunter Messner for the HUBERT project
 #include "HLS/hls.h"
 #include "HLS/stdio.h"
 #include "tensors.hpp" 
@@ -127,7 +128,6 @@ scaled_tuple3d Softmax::softmax_forward(Tensor3d<float>* x, TensorXL<float>* sca
 	exp = act->QuantAct_forward(exp.matrix, exp.scaling_factor);
 	Tensor3d<float>* exp_int = new Tensor3d<float>(exp.matrix);
 	Tensor3d<float>::div_scalar(exp.matrix, TensorXL<float>::one(exp.scaling_factor), exp_int);
-	//TODO: if performing incorrectly, use 2d exp_int_sum
 	Tensor3d<float>* exp_int_sum = new Tensor3d<float>(exp_int);
 	Tensor3d<float>::sum(exp_int, 1, exp_int_sum);
 

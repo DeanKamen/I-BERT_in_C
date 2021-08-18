@@ -1,3 +1,5 @@
+//IntLayerNorm.cpp, created by Hunter Messner for the HUBERT project
+
 #include "HLS/hls.h"
 #include "HLS/stdio.h"
 #include "tensors.hpp" 

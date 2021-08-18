@@ -182,7 +182,6 @@
     <ClInclude Include="tensor_mmm_xl.h" />
     <ClInclude Include="tensor_mult.h" />
     <ClInclude Include="tensor_mult_xl.h" />
-    <ClInclude Include="testglobals.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="crosstype_tensors.cpp" />

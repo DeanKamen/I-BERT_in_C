@@ -162,7 +162,7 @@ template<class T> void Tensor3dXL<T>::pow_dot(Tensor3dXL<T> *A, TensorXL<T> *B, 
 	}
 }
 
-//3d and 3d. TODO: implement broadcasting for 1 depth 3d arrays.
+//3d and 3d.
 template<class T> void Tensor3dXL<T>::add(Tensor3dXL<T> *A, Tensor3dXL<T> *B, Tensor3dXL<T> *C)
 {
 	for (unsigned d = 0; d < getDepth(A); d++)
@@ -476,10 +476,6 @@ template<class T> void Tensor3dXL<T>::sqrt_tensor(Tensor3dXL<T> *A, Tensor3dXL<T
 		TensorXL<T>::sqrt_tensor(get(A, d), get(C, d));
 	}
 }
-
-//manipulation
-//TODO: only if necessary
-//template<class T> Tensor3dXL<T>:: void tensor_frexp(Tensor<float>* inputs, Tensor<float>* m, Tensor<float>* e){}
 
 //adressing methods where dep is depth and select the 2d array you want.
 template<class T> T Tensor3dXL<T>::get(Tensor3dXL<T> *tensor, const unsigned &row, const unsigned &col, const unsigned &dep)

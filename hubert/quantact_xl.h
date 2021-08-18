@@ -1,3 +1,4 @@
+//quantact_xl.h, created by Hunter Messner for the HUBERT project
 #ifndef __HUBERT_QUANTACT_XL_H__
 #define __HUBERT_QUANTACT_XL_H__
 

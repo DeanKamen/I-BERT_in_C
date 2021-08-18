@@ -14,7 +14,7 @@
 //IntGELU.h implements the GELU layer. 
 
 
-//TODO: There is a branch in the code that requires much more work to write, but it doesnt seem used.
+//There is a branch in the code that requires much more work to write, but it doesnt seem used.
 //commeneted elements and functions would be used in that branch.
 class IntLayerNorm
 {

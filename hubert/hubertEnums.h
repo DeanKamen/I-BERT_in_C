@@ -1,3 +1,5 @@
+//hubert_enums.h, created by Hunter Messner for the HUBERT project
+
 #ifndef __HUBERT_ENUMS_H__
 #define __HUBERT_ENUMS_H__
 
