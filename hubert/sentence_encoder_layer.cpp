@@ -44,13 +44,13 @@ sentenceEncoderLayer::sentenceEncoderLayer( //builds all modules
 
 	activation_fn_approx = new IntGELU(quant_mode, force_dequant);
 	input_act = new QuantAct_XL(act_bit, 0.95f, true, false, -1, quant_mode);
-	input_act->set_param(preload::input_act__x_min, preload::input_act__x_max, preload::input_act__act_scaling_factor);
+	QuantAct_XL::set_param(*input_act, preload::input_act__x_min, preload::input_act__x_max, preload::input_act__act_scaling_factor);
 
 	self_attn = new multiheadAttention(embed_dim, num_attention_heads, -1, -1, dropout, true, false, 
 		false, true, false, q_noise, qn_block_size, quant_mode, force_dequant, true);
 
 	pre_self_attn_layer_norm_act = new QuantAct_XL(ln_bit, 0.95f, true, false, -1, quant_mode);
-	pre_self_attn_layer_norm_act->set_param(preload::pre_self_attn_layer_norm_act__x_min,
+	QuantAct_XL::set_param(*pre_self_attn_layer_norm_act, preload::pre_self_attn_layer_norm_act__x_min,
 		preload::pre_self_attn_layer_norm_act__x_max, preload::pre_self_attn_layer_norm_act__act_scaling_factor);
 
 	self_attn_layer_norm = new IntLayerNorm(ln_output_bit, true, quant_mode, force_dequant);
@@ -58,10 +58,10 @@ sentenceEncoderLayer::sentenceEncoderLayer( //builds all modules
 		preload::self_attn_layer_norm__bias);
 
 	fc1_act = new QuantAct_XL(act_bit, 0.95f, true, false, -1, quant_mode);
-	fc1_act->set_param(preload::fc1_act__x_min, preload::fc1_act__x_max, preload::fc1_act__act_scaling_factor);
+	QuantAct_XL::set_param(*fc1_act, preload::fc1_act__x_min, preload::fc1_act__x_max, preload::fc1_act__act_scaling_factor);
 
 	fc2_act = new QuantAct_XL(act_bit, 0.95f, true, false, -1, quant_mode);
-	fc2_act->set_param(preload::fc2_act__x_min, preload::fc2_act__x_max, preload::fc2_act__act_scaling_factor);
+	QuantAct_XL::set_param(*fc2_act, preload::fc2_act__x_min, preload::fc2_act__x_max, preload::fc2_act__act_scaling_factor);
 
 	fc1 = new QuantLinear(fc_weight_bit, &fc_bias_bit, true, quant_mode);
 	fc1->set_param(preload::fc1__fc_scaling_factor, preload::fc1__weight, preload::fc1__bias);
@@ -70,7 +70,7 @@ sentenceEncoderLayer::sentenceEncoderLayer( //builds all modules
 	fc2->set_param(preload::fc2__fc_scaling_factor, preload::fc2__weight, preload::fc2__bias);
 
 	pre_final_layer_norm_act = new QuantAct_XL(ln_bit, 0.95f, true, false, -1, quant_mode);
-	pre_final_layer_norm_act->set_param(preload::pre_final_layer_norm_act__x_min,
+	QuantAct_XL::set_param(*pre_final_layer_norm_act, preload::pre_final_layer_norm_act__x_min,
 		preload::pre_final_layer_norm_act__x_max, preload::pre_final_layer_norm_act__act_scaling_factor);
 
 	final_layer_norm = new IntLayerNorm(ln_output_bit, true, quant_mode, force_dequant);
@@ -101,7 +101,7 @@ scaled_tuple3dXL sentenceEncoderLayer::sel_forward(
 	Tensor<float>* self_attn_padding_mask)
 {
 	scaled_tuple3dXL t;
-	t = input_act->QuantAct_forward(x, x_scaling_factor);
+	t = QuantAct_XL::QuantAct_forward(*input_act, x, x_scaling_factor);
 	Tensor3dXL<float>* t_v = loadGeneric3dXL("bin/act_verification.bin");
 	Tensor3dXL<float>::eq(t_v, t.matrix);
 
@@ -116,14 +116,14 @@ scaled_tuple3dXL sentenceEncoderLayer::sel_forward(
 	Tensor3dXL<float>::eq(t_v, t.matrix);
 	t.matrix = t_v;
 
-	t = pre_self_attn_layer_norm_act->QuantAct_forward(t.matrix, t.scaling_factor, residual.matrix, residual.scaling_factor);
+	t = QuantAct_XL::QuantAct_forward(*pre_self_attn_layer_norm_act, t.matrix, t.scaling_factor, residual.matrix, residual.scaling_factor);
 
 	t = self_attn_layer_norm->intlayernorm_forward(t.matrix, t.scaling_factor);
 	t_v = loadGeneric3dXL("bin/ln1_verification.bin");
 	Tensor3dXL<float>::eq(t_v, t.matrix);
 	t.matrix = t_v;
 
-	t = fc1_act->QuantAct_forward(t.matrix, t.scaling_factor);
+	t = QuantAct_XL::QuantAct_forward(*fc1_act, t.matrix, t.scaling_factor);
 	t_v = loadGeneric3dXL("bin/fc1a_verification.bin");
 	Tensor3dXL<float>::eq(t_v, t.matrix);
 	t.matrix = t_v;
@@ -148,12 +148,12 @@ scaled_tuple3dXL sentenceEncoderLayer::sel_forward(
 	Tensor3dXL<float>::eq(t_v, t.matrix);
 	t.matrix = t_v;
 
-	t = fc2_act->QuantAct_forward(t.matrix, t.scaling_factor);
+	t = QuantAct_XL::QuantAct_forward(*fc2_act, t.matrix, t.scaling_factor);
 	t = fc2->quantlinear_forward(t.matrix, t.scaling_factor);
 	t_v = loadGeneric3dXL("bin/fc2_verification.bin");
 	Tensor3dXL<float>::eq(t_v, t.matrix);
 
-	t = pre_final_layer_norm_act->QuantAct_forward(t.matrix, t.scaling_factor, residual.matrix, residual.scaling_factor);
+	t = QuantAct_XL::QuantAct_forward(*pre_final_layer_norm_act, t.matrix, t.scaling_factor, residual.matrix, residual.scaling_factor);
 	t = final_layer_norm->intlayernorm_forward(t.matrix, t.scaling_factor);
 
 	Tensor3dXL<float>* fx_v = loadGeneric3dXL("bin/final_x_verification.bin");

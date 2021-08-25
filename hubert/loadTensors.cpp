@@ -5,6 +5,8 @@
 #include <stdlib.h>
 #include "tensorXL.hpp"
 #include "tensor3dXL.hpp"
+#include "tensors.hpp"
+#include "tensor3d.hpp"
 #include "loadTensors.h"
 #include "hubertEnums.h"
 /*
@@ -55,7 +57,7 @@ TensorXL<float>* loadTensorXL(preload idx)
 				fread((void*)(&cur), sizeof(cur), 1, f);
 				int row = i / cols; // we are on this row at any given point
 				int col = i % cols;
-				TensorXL<float>::set(localTensor, row, col, cur);
+				TensorXL<float>::set(*localTensor, row, col, cur);
 			}
             return localTensor;
         }
@@ -164,7 +166,7 @@ Tensor3dXL<float>* loadGeneric3dXL(const char* fname)
 			fread((void*)(&cur), sizeof(cur), 1, f);
 			int row = i / cols; // we are on this row at any given point
 			int col = i % cols;
-			TensorXL<float>::set(oneLayer, row, col, cur);
+			TensorXL<float>::set(*oneLayer, row, col, cur);
 		}
 		Tensor3dXL<float>::append(localTensor, oneLayer);
 	}
@@ -236,7 +238,7 @@ TensorXL<float>* loadGeneric2d(const char* fname)
 		fread((void*)(&cur), sizeof(cur), 1, f);
 		int row = i / cols; // we are on this row at any given point
 		int col = i % cols;
-		TensorXL<float>::set(tensor2d, row, col, cur);
+		TensorXL<float>::set(*tensor2d, row, col, cur);
 	}
 
 	fclose(f);

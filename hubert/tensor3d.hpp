@@ -22,12 +22,12 @@ Tensor3d<T>::Tensor3d(Tensor3d<T> *A) //Takes 2d matrixes from the pointer and c
 	t_depth = getDepth(A);
 	for (unsigned d = 0; d < MAX_DEPTH; d++)
 	{
-		set(this, d, nullptr);
+		matrix[d] = nullptr;
 	}
 	for (unsigned d = 0; d < t_depth; d++)
 	{
 		Tensor<float>* layer = new Tensor<float>(get(A, d));
-		set(this, d, layer);
+		matrix[d] = layer;
 	}
 }
 
@@ -39,9 +39,9 @@ Tensor3d<T>::Tensor3d(Tensor<T> *A) //Takes a 2d matrix and copies it into the f
 	t_depth = 1;
 	for (unsigned d = 0; d < MAX_DEPTH; d++)
 	{
-		set(this, d, nullptr);
+		matrix[d] = nullptr;
 	}
-	set(this, 0, A);
+	matrix[0] = A;
 }
 
 template<class T>
@@ -52,7 +52,7 @@ Tensor3d<T>::Tensor3d(int dep, int row, int col, T init)
 	t_depth = dep;
 	for (unsigned d = 0; d < dep; d++)
 	{
-		set(this, d, new Tensor<T>(row, col, init));
+		matrix[d] = new Tensor<T>(row, col, init);
 	}
 }
 
@@ -64,16 +64,16 @@ Tensor3d<T>::Tensor3d(void)
 	t_depth = 0;
 	for (unsigned d = 0; d < MAX_DEPTH; d++)
 	{
-		set(this, d, nullptr);
+		matrix[d] = nullptr;
 	}
 }
 
 template<class T>
 Tensor3d<T>::~Tensor3d()
 {
-	for (unsigned d = 0; d < getDepth(this); d++)
+	for (unsigned d = 0; d < t_depth; d++)
 	{
-		if (nullptr != this->matrix[d]) { delete this->matrix[d]; }
+		if (nullptr != matrix[d]) { delete matrix[d]; }
 	}
 }
 

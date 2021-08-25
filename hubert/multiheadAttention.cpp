@@ -63,20 +63,20 @@ multiheadAttention::multiheadAttention(
 	//skipped linear layer assignment as I dont use it 
 
 	k_proj_act = new QuantAct_XL(act_bit, 0.95f, true, false, -1, quant_mode);
-	k_proj_act->set_param(preload::self_attn__k_proj_act__x_min, preload::self_attn__k_proj_act__x_max, preload::self_attn__k_proj_act__act_scaling_factor);
+	QuantAct_XL::set_param(*k_proj_act, preload::self_attn__k_proj_act__x_min, preload::self_attn__k_proj_act__x_max, preload::self_attn__k_proj_act__act_scaling_factor);
 	v_proj_act = new QuantAct_XL(act_bit, 0.95f, true, false, -1, quant_mode);
-	v_proj_act->set_param(preload::self_attn__v_proj_act__x_min, preload::self_attn__v_proj_act__x_max, preload::self_attn__v_proj_act__act_scaling_factor);
+	QuantAct_XL::set_param(*v_proj_act, preload::self_attn__v_proj_act__x_min, preload::self_attn__v_proj_act__x_max, preload::self_attn__v_proj_act__act_scaling_factor);
 	q_proj_act = new QuantAct_XL(act_bit, 0.95f, true, false, -1, quant_mode);
-	q_proj_act->set_param(preload::self_attn__q_proj_act__x_min, preload::self_attn__q_proj_act__x_max, preload::self_attn__q_proj_act__act_scaling_factor);
+	QuantAct_XL::set_param(*q_proj_act, preload::self_attn__q_proj_act__x_min, preload::self_attn__q_proj_act__x_max, preload::self_attn__q_proj_act__act_scaling_factor);
 
 	softmax = new Softmax(softmax_output_bit, quant_mode, force_dequant);
 	softmax->set_param(preload::self_attn__softmax__act__x_min,preload::self_attn__softmax__act__x_max,preload::self_attn__softmax__act__act_scaling_factor);
 
 	attn_probs_act = new QuantAct_XL(act_bit, 0.95f, true, false, -1, quant_mode);
-	attn_probs_act->set_param(preload::self_attn__attn_probs_act__x_min, preload::self_attn__attn_probs_act__x_max,preload::self_attn__attn_probs_act__act_scaling_factor);
+	QuantAct_XL::set_param(*attn_probs_act, preload::self_attn__attn_probs_act__x_min, preload::self_attn__attn_probs_act__x_max,preload::self_attn__attn_probs_act__act_scaling_factor);
 
 	attn_act = new QuantAct_XL(act_bit, 0.95f, true, false, -1, quant_mode);
-	attn_act->set_param(preload::self_attn__attn_act__x_min, preload::self_attn__attn_act__x_max, preload::self_attn__attn_act__act_scaling_factor);
+	QuantAct_XL::set_param(*attn_act, preload::self_attn__attn_act__x_min, preload::self_attn__attn_act__x_max, preload::self_attn__attn_act__act_scaling_factor);
 
 	out_proj = new QuantLinear(fc_weight_bit, &fc_bias_bit, true, quant_mode);
 	out_proj->set_param(preload::self_attn__out_proj__fc_scaling_factor, preload::self_attn__out_proj__weight, preload::self_attn__out_proj__bias);
@@ -137,11 +137,11 @@ scaled_tuple3dXL multiheadAttention::multiheadAttention_forward(
 	}
 
 
-	q = q_proj_act->QuantAct_forward(q.matrix, q.scaling_factor);
-	k = k_proj_act->QuantAct_forward(k.matrix, k.scaling_factor,nullptr, nullptr, nullptr, nullptr, true);
+	q = QuantAct_XL::QuantAct_forward(*q_proj_act, q.matrix, q.scaling_factor);
+	k = QuantAct_XL::QuantAct_forward(*k_proj_act, k.matrix, k.scaling_factor,nullptr, nullptr, nullptr, nullptr, true);
 	//Tensor3dXL<float>* kpa_v = loadGeneric3dXL("bin/kpa_verification.bin");
 	//Tensor3dXL<float>::eq(kpa_v, k.matrix);
-	v = v_proj_act->QuantAct_forward(v.matrix, v.scaling_factor);
+	v = v_proj_act->QuantAct_forward(*v_proj_act, v.matrix, v.scaling_factor);
 
 	Tensor3dXL<float>::mul_scalar(q.matrix, scaling, q.matrix);
 	if (q.scaling_factor != nullptr)
@@ -197,7 +197,7 @@ scaled_tuple3dXL multiheadAttention::multiheadAttention_forward(
 	delete space;
 	delete attn;
 	scaled_tuple3dXL attn_t1;
-	attn_t1 = attn_act->QuantAct_forward(attnXL, attn_scaling_factor);
+	attn_t1 = QuantAct_XL::QuantAct_forward(*attn_act, attnXL, attn_scaling_factor);
 	delete attnXL;
 	delete attn_scaling_factor;
 	scaled_tuple3dXL attn_t2;

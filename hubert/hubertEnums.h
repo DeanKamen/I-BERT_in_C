@@ -3,6 +3,8 @@
 #ifndef __HUBERT_ENUMS_H__
 #define __HUBERT_ENUMS_H__
 
+#include "tensorXL.hpp"
+#include "tensor3dXL.hpp"
 #include "tensors.hpp"
 #include "tensor3d.hpp"
 

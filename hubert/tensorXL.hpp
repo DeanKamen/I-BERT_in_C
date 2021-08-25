@@ -18,28 +18,33 @@ TensorXL<T>::TensorXL()
 {
 	t_numCols = 0;
 	t_numRows = 0;
+	null = true;
 }
 
 template<class T>
 TensorXL<T>::TensorXL(unsigned numRows, unsigned numCols, T init_value)
 {
-    t_numCols = numCols;
+	t_numCols = numCols;
     t_numRows = numRows;
-    for (unsigned i = 0; i < getRows(this); i++)
+    for (unsigned i = 0; i < t_numRows; i++)
     { 
+		#ifndef HLS_SYNTHESIS
 		matrix[i] = new T[ROW_SIZE]; //lets allocate some memory
+		#endif
+		
         for (unsigned j = 0; j < ROW_SIZE; j++)
         {
             matrix[i][j] = 0; //for safety, we fill with 0, identity over addition and multiplication
         }
     }
-    for (unsigned i = 0; i < getRows(this); i++)
+    for (unsigned i = 0; i < t_numRows; i++)
     { 
-        for (unsigned j = 0; j < getCols(this); j++)
+        for (unsigned j = 0; j < t_numCols; j++)
         {
             matrix[i][j] = init_value;
         }
     }
+	null = false;
 }
 
 template<class T>
@@ -48,6 +53,7 @@ TensorXL<T>::TensorXL(const unsigned numCols, T* init_pointer)
     t_numCols = numCols;
     t_numRows = 1;
 	matrix[0] = init_pointer;
+	null = false;
 }
 
 template<class T>
@@ -58,25 +64,50 @@ TensorXL<T>::TensorXL(TensorXL<T> *A)
 	transposed = A->transposed;
 	for (unsigned i = 0; i < A->t_numRows; i++)
 	{
-		matrix[i] = new T[ROW_SIZE]; //lets allocate some memory 
+		#ifndef HLS_SYNTHESIS
+		matrix[i] = new T[ROW_SIZE]; //lets allocate some memory
+		#endif
 		for (unsigned j = 0; j < ROW_SIZE; j++)
 		{
 			matrix[i][j] = A->matrix[i][j]; //we dont use get as we want an exact copy
 		}
 	}
+	null = false;
+}
+
+template<class T>
+TensorXL<T>::TensorXL(const TensorXL<T> &A) //copy constructor
+{
+	t_numCols = A.t_numCols;
+	t_numRows = A.t_numRows;
+	transposed = A.transposed;
+	for (unsigned i = 0; i < A.t_numRows; i++)
+	{
+		#ifndef HLS_SYNTHESIS
+		matrix[i] = new T[ROW_SIZE]; //lets allocate some memory
+		#endif
+		for (unsigned j = 0; j < A.t_numCols; j++)
+		{
+			matrix[i][j] = A.matrix[i][j]; //we dont use get as we want an exact copy
+		}
+	}
+	null = false;
 }
 
 template<class T>
 TensorXL<T>::~TensorXL()
 {
-	for (unsigned i = 0; i < this->t_numRows; i++)
+	for (unsigned i = 0; i < t_numRows; i++)
 	{
-		delete matrix[i];
+		#ifndef HLS_SYNTHESIS
+		//delete matrix[i];
+		#endif
 	}
+	null = true;
 }
 
 template<class T>
-void TensorXL<T>::mul_cross(TensorXL<T> *A, TensorXL<T> *B, TensorXL<T> *C)
+void TensorXL<T>::mul_cross(TensorXL<T>& A, TensorXL<T>& B, TensorXL<T>& C)
 //this function needs to use MACROS or constants known at compile time for sizes.
 //when using multiplies in components, use the below prototype.
 {
@@ -85,14 +116,14 @@ void TensorXL<T>::mul_cross(TensorXL<T> *A, TensorXL<T> *B, TensorXL<T> *C)
 	setCols(C, getCols(B));
 }
 template<class T>
-void TensorXL<T>::mul_crossR(TensorXL<T> *A, TensorXL<T> *B, TensorXL<T> *C)
+void TensorXL<T>::mul_crossR(TensorXL<T>& A, TensorXL<T>& B, TensorXL<T>& C)
 {
 	tensor_mmm_xl<T, 1, 768, 3072>(A, B, C);
 	setRows(C, getRows(A));
 	setCols(C, getCols(B));
 }
 template<class T>
-void TensorXL<T>::mul_crossL(TensorXL<T> *A, TensorXL<T> *B, TensorXL<T> *C)
+void TensorXL<T>::mul_crossL(TensorXL<T>& A, TensorXL<T>& B, TensorXL<T>& C)
 {
 	tensor_mmm_xl<T, 1, 3072, 768>(A, B, C);
 	setRows(C, getRows(A));
@@ -101,12 +132,12 @@ void TensorXL<T>::mul_crossL(TensorXL<T> *A, TensorXL<T> *B, TensorXL<T> *C)
 
 
 template<class T>
-void TensorXL<T>::add(TensorXL<T> *A, TensorXL<T> *B, TensorXL<T> *C)
+void TensorXL<T>::add(TensorXL<T>& A, TensorXL<T>& B, TensorXL<T>& C)
 {
 	int rowMod;
 	int colMod;
-	TensorXL<T>* larger = A; //more rows or cols
-	TensorXL<T>* smaller = B; //one row or one col
+	TensorXL<T>* larger = &A; //more rows or cols
+	TensorXL<T>* smaller = &B; //one row or one col
 	if (sameSize(A, B))
 	{//exactly the same size.
 		rowMod = getRows(A) + 1; //these mods do NOT affect the iterator
@@ -131,28 +162,28 @@ void TensorXL<T>::add(TensorXL<T> *A, TensorXL<T> *B, TensorXL<T> *C)
 	}
 	else
 	{
-		printf("incompatible dimenions\n");
-		assert(false);
+		//printf("incompatible dimenions\n");
+		//assert(false);
 	}
 
 	//now for the actual math
     unsigned i,j;
-    for (i = 0; i < getRows(larger); i++)
+    for (i = 0; i < getRows(*larger); i++)
     {
-        for (j = 0; j < getCols(larger); j++)
+        for (j = 0; j < getCols(*larger); j++)
         {
-            TensorXL::set(C,i,j,TensorXL::get(larger, i, j) + TensorXL::get(smaller, i % rowMod, j % colMod));
+            TensorXL::set(C,i,j,TensorXL::get(*larger, i, j) + TensorXL::get(*smaller, i % rowMod, j % colMod));
         }
     }
 }
 
 template<class T>
-void TensorXL<T>::sub(TensorXL<T> *A, TensorXL<T> *B, TensorXL<T> *C)
+void TensorXL<T>::sub(TensorXL<T>& A, TensorXL<T>& B, TensorXL<T>& C)
 {
 	int rowMod;
 	int colMod;
-	TensorXL<T>* larger = A; //more rows or cols
-	TensorXL<T>* smaller = B; //one row or one col
+	TensorXL<T>* larger = &A; //more rows or cols
+	TensorXL<T>* smaller = &B; //one row or one col
 	if (sameSize(A, B))
 	{//exactly the same size.
 		rowMod = getRows(A) + 1; //these mods do NOT affect the iterator
@@ -177,28 +208,28 @@ void TensorXL<T>::sub(TensorXL<T> *A, TensorXL<T> *B, TensorXL<T> *C)
 	}
 	else
 	{
-		printf("incompatible dimenions\n");
-		assert(false);
+		//printf("incompatible dimenions\n");
+		//assert(false);
 	}
 
 	//now for the actual math
 	unsigned i, j;
-	for (i = 0; i < getRows(larger); i++)
+	for (i = 0; i < getRows(*larger); i++)
 	{
-		for (j = 0; j < getCols(larger); j++)
+		for (j = 0; j < getCols(*larger); j++)
 		{
-			TensorXL::set(C, i, j, TensorXL::get(larger, i, j) - TensorXL::get(smaller, i % rowMod, j % colMod));
+			TensorXL::set(C, i, j, TensorXL::get(*larger, i, j) - TensorXL::get(*smaller, i % rowMod, j % colMod));
 		}
 	}
 }
 
 template<class T>
-void TensorXL<T>::mul_dot(TensorXL<T> *A, TensorXL<T> *B, TensorXL<T> *C)
+void TensorXL<T>::mul_dot(TensorXL<T>& A, TensorXL<T>& B, TensorXL<T>& C)
 {
 	int rowMod;
 	int colMod;
-	TensorXL<T>* larger = A; //more rows or cols
-	TensorXL<T>* smaller = B; //one row or one col
+	TensorXL<T> *larger = &A; //more rows or cols
+	TensorXL<T> *smaller = &B; //one row or one col
 	if (sameSize(A, B))
 	{//exactly the same size.
 		rowMod = getRows(A) + 1; //these mods do NOT affect the iterator
@@ -223,28 +254,28 @@ void TensorXL<T>::mul_dot(TensorXL<T> *A, TensorXL<T> *B, TensorXL<T> *C)
 	}
 	else
 	{
-		printf("incompatible dimenions\n");
-		assert(false);
+		//printf("incompatible dimenions\n");
+		//assert(false);
 	}
 
 	//now for the actual math
 	unsigned i, j;
-	for (i = 0; i < getRows(larger); i++)
+	for (i = 0; i < getRows(*larger); i++)
 	{
-		for (j = 0; j < getCols(larger); j++)
+		for (j = 0; j < getCols(*larger); j++)
 		{
-			TensorXL::set(C, i, j, TensorXL::get(larger, i, j) * TensorXL::get(smaller, i % rowMod, j % colMod));
+			TensorXL::set(C, i, j, TensorXL::get(*larger, i, j) * TensorXL::get(*smaller, i % rowMod, j % colMod));
 		}
 	}
 }
 
 template<class T>
-void TensorXL<T>::div_dot(TensorXL<T> *A, TensorXL<T> *B, TensorXL<T> *C)
+void TensorXL<T>::div_dot(TensorXL<T>& A, TensorXL<T>& B, TensorXL<T>& C)
 {
 	int rowMod;
 	int colMod;
-	TensorXL<T>* larger = A; //more rows or cols
-	TensorXL<T>* smaller = B; //one row or one col
+	TensorXL<T> *larger = &A; //more rows or cols
+	TensorXL<T> *smaller = &B; //one row or one col
 	if (sameSize(A, B))
 	{//exactly the same size.
 		rowMod = getRows(A) + 1; //these mods do NOT affect the iterator
@@ -269,28 +300,28 @@ void TensorXL<T>::div_dot(TensorXL<T> *A, TensorXL<T> *B, TensorXL<T> *C)
 	}
 	else
 	{
-		printf("incompatible dimenions\n");
-		assert(false);
+		//printf("incompatible dimenions\n");
+		//assert(false);
 	}
 
 	//now for the actual math
 	unsigned i, j;
-	for (i = 0; i < getRows(larger); i++)
+	for (i = 0; i < getRows(*larger); i++)
 	{
-		for (j = 0; j < getCols(larger); j++)
+		for (j = 0; j < getCols(*larger); j++)
 		{
-			TensorXL::set(C, i, j, TensorXL::get(larger, i, j) / TensorXL::get(smaller, i % rowMod, j % colMod));
+			TensorXL::set(C, i, j, TensorXL::get(*larger, i, j) / TensorXL::get(*smaller, i % rowMod, j % colMod));
 		}
 	}
 }
 
 template<class T>
-void TensorXL<T>::pow_dot(TensorXL<T> *A, TensorXL<T> *B, TensorXL<T> *C)
+void TensorXL<T>::pow_dot(TensorXL<T>& A, TensorXL<T>& B, TensorXL<T>& C)
 {// A = B^C, note that there are more efficient functions for 2^X or e^X or 10^X
 	int rowMod;
 	int colMod;
-	TensorXL<T>* larger = A; //more rows or cols
-	TensorXL<T>* smaller = B; //one row or one col
+	TensorXL<T> *larger = &A; //more rows or cols
+	TensorXL<T> *smaller = &B; //one row or one col
 	if (sameSize(A, B))
 	{//exactly the same size.
 		rowMod = getRows(A) + 1; //these mods do NOT affect the iterator
@@ -315,23 +346,23 @@ void TensorXL<T>::pow_dot(TensorXL<T> *A, TensorXL<T> *B, TensorXL<T> *C)
 	}
 	else
 	{
-		printf("incompatible dimenions\n");
-		assert(false);
+		//printf("incompatible dimenions\n");
+		//assert(false);
 	}
 
 	//now for the actual math
 	unsigned i, j;
-	for (i = 0; i < getRows(larger); i++)
+	for (i = 0; i < getRows(*larger); i++)
 	{
-		for (j = 0; j < getCols(larger); j++)
+		for (j = 0; j < getCols(*larger); j++)
 		{
-			TensorXL::set(C, i, j, pow(TensorXL::get(larger, i, j), TensorXL::get(smaller, i % rowMod, j % colMod)));
+			TensorXL::set(C, i, j, pow(TensorXL::get(*larger, i, j), TensorXL::get(*smaller, i % rowMod, j % colMod)));
 		}
 	}
 }
 
 template<class T>
-void TensorXL<T>::add_scalar(TensorXL<T> *A, T B, TensorXL<T> *C)
+void TensorXL<T>::add_scalar(TensorXL<T>& A, T B, TensorXL<T>& C)
 {
     unsigned i,j;
     for (i = 0; i < getRows(A); i++)
@@ -344,7 +375,7 @@ void TensorXL<T>::add_scalar(TensorXL<T> *A, T B, TensorXL<T> *C)
 }
 
 template<class T>
-void TensorXL<T>::mul_scalar(TensorXL<T> *A, T B, TensorXL<T> *C)
+void TensorXL<T>::mul_scalar(TensorXL<T>& A, T B, TensorXL<T>& C)
 {
     unsigned i,j;
     for (i = 0; i < getRows(A); i++)
@@ -357,7 +388,7 @@ void TensorXL<T>::mul_scalar(TensorXL<T> *A, T B, TensorXL<T> *C)
 }
 
 template<class T>
-void TensorXL<T>::mul_scalar_double(TensorXL<T> *A, double B, TensorXL<T> *C)
+void TensorXL<T>::mul_scalar_double(TensorXL<T>& A, double B, TensorXL<T>& C)
 {
 	unsigned i, j;
 	for (i = 0; i < getRows(A); i++)
@@ -370,7 +401,7 @@ void TensorXL<T>::mul_scalar_double(TensorXL<T> *A, double B, TensorXL<T> *C)
 }
 
 template<class T>
-void TensorXL<T>::sub_scalar(TensorXL<T> *A, T B, TensorXL<T> *C)
+void TensorXL<T>::sub_scalar(TensorXL<T>& A, T B, TensorXL<T>& C)
 {
     unsigned i,j;
     for (i = 0; i < getRows(A); i++)
@@ -383,7 +414,7 @@ void TensorXL<T>::sub_scalar(TensorXL<T> *A, T B, TensorXL<T> *C)
 }
 
 template<class T>
-void TensorXL<T>::sub_scalar(T B, TensorXL<T> *A, TensorXL<T> *C)
+void TensorXL<T>::sub_scalar(T B, TensorXL<T>& A, TensorXL<T>& C)
 {
 	unsigned i, j;
 	for (i = 0; i < getRows(A); i++)
@@ -396,7 +427,7 @@ void TensorXL<T>::sub_scalar(T B, TensorXL<T> *A, TensorXL<T> *C)
 }
 
 template<class T>
-void TensorXL<T>::div_scalar(TensorXL<T> *A, T B, TensorXL<T> *C)
+void TensorXL<T>::div_scalar(TensorXL<T>& A, T B, TensorXL<T>& C)
 {
     unsigned i,j;
     for (i = 0; i < getRows(A); i++)
@@ -409,7 +440,7 @@ void TensorXL<T>::div_scalar(TensorXL<T> *A, T B, TensorXL<T> *C)
 }
 
 template<class T>
-void TensorXL<T>::pow_scalar(TensorXL<T> *A, T B, TensorXL<T> *C)
+void TensorXL<T>::pow_scalar(TensorXL<T>& A, T B, TensorXL<T>& C)
 {// A = B^C, note that there are more efficient functions for 2^X or e^X or 10^X
     unsigned i,j;
     for (i = 0; i < getRows(A); i++)
@@ -422,7 +453,7 @@ void TensorXL<T>::pow_scalar(TensorXL<T> *A, T B, TensorXL<T> *C)
 }
 
 template<class T>
-void TensorXL<T>::max(TensorXL<T> *A, int dim, TensorXL<T> *C)
+void TensorXL<T>::max(TensorXL<T>& A, int dim, TensorXL<T>& C)
 //functions similar to https://pytorch.org/docs/stable/generated/torch.max.html#torch.max
 //but only works on 2d TensorXLs and only returns a TensorXL with the maximums, no indexes. 
 //dim=0 means you find the biggest in each column,
@@ -486,7 +517,7 @@ void TensorXL<T>::max(TensorXL<T> *A, int dim, TensorXL<T> *C)
     }
 }
 template<class T>
-void TensorXL<T>::min(TensorXL<T> *A, int dim, TensorXL<T> *C)
+void TensorXL<T>::min(TensorXL<T>& A, int dim, TensorXL<T>& C)
 //virtually same code as MAX
 //dim=0 means you find the smallest in each column,
 //dim=1 means you find the smallest in each row. 
@@ -550,7 +581,7 @@ void TensorXL<T>::min(TensorXL<T> *A, int dim, TensorXL<T> *C)
 }
 
 template<class T>
-void TensorXL<T>::max_scalar(TensorXL<T>* A, T compare, TensorXL<T> *C)
+void TensorXL<T>::max_scalar(TensorXL<T>& A, T compare, TensorXL<T>& C)
 { //similar to clamp but more readable
 	unsigned i, j;
 	for (i = 0; i < getRows(A); i++)
@@ -564,7 +595,7 @@ void TensorXL<T>::max_scalar(TensorXL<T>* A, T compare, TensorXL<T> *C)
 	}
 }
 template<class T>
-void TensorXL<T>::min_scalar(TensorXL<T>* A, T compare, TensorXL<T> *C)
+void TensorXL<T>::min_scalar(TensorXL<T>& A, T compare, TensorXL<T>& C)
 {
 	unsigned i, j;
 	for (i = 0; i < getRows(A); i++)
@@ -579,9 +610,9 @@ void TensorXL<T>::min_scalar(TensorXL<T>* A, T compare, TensorXL<T> *C)
 }
 
 template<class T>
-void TensorXL<T>::min_dot(TensorXL<T>* A, TensorXL<T>* B, TensorXL<T> *C)
+void TensorXL<T>::min_dot(TensorXL<T>& A, TensorXL<T>& B, TensorXL<T>& C)
 {//element wise min that assumes a and b are the same size
-	assert(sameSize(A, B));
+	//assert(sameSize(A, B));
 	unsigned i, j;
 	for (i = 0; i < getRows(A); i++)
 	{
@@ -597,7 +628,7 @@ void TensorXL<T>::min_dot(TensorXL<T>* A, TensorXL<T>* B, TensorXL<T> *C)
 }
 
 template<class T>
-void TensorXL<T>::abs_tensor(TensorXL<T> *A, TensorXL<T>* C)
+void TensorXL<T>::abs_tensor(TensorXL<T>& A, TensorXL<T>& C)
 {
 	unsigned i, j;
 	for (i = 0; i < getRows(A); i++)
@@ -612,7 +643,7 @@ void TensorXL<T>::abs_tensor(TensorXL<T> *A, TensorXL<T>* C)
 }
 
 template<class T>
-void TensorXL<T>::floor_tensor(TensorXL<T> *A, TensorXL<T> *C)
+void TensorXL<T>::floor_tensor(TensorXL<T>& A, TensorXL<T>& C)
 {//does a cast to a float and then floors it.
     unsigned i,j;
     for (i = 0; i < getRows(A); i++)
@@ -627,7 +658,7 @@ void TensorXL<T>::floor_tensor(TensorXL<T> *A, TensorXL<T> *C)
 }
 
 template<class T>
-void TensorXL<T>::exp2_tensor(TensorXL<T> *A, TensorXL<T> *C)
+void TensorXL<T>::exp2_tensor(TensorXL<T>& A, TensorXL<T>& C)
 {
 	unsigned i, j;
 	for (i = 0; i < getRows(A); i++)
@@ -640,7 +671,7 @@ void TensorXL<T>::exp2_tensor(TensorXL<T> *A, TensorXL<T> *C)
 }
 
 template<class T>
-void TensorXL<T>::clamp(TensorXL<T> *A, T min, T max, TensorXL<T> *C)
+void TensorXL<T>::clamp(TensorXL<T>& A, T min, T max, TensorXL<T>& C)
 {
     unsigned i,j;
     for (i = 0; i < getRows(A); i++)
@@ -655,7 +686,7 @@ void TensorXL<T>::clamp(TensorXL<T> *A, T min, T max, TensorXL<T> *C)
 }
 
 template<class T>
-void TensorXL<T>::roundTensor(TensorXL<T> *A, TensorXL<T> *C)
+void TensorXL<T>::roundTensor(TensorXL<T>& A, TensorXL<T>& C)
 {
     unsigned i,j;
     for (i = 0; i < getRows(A); i++)
@@ -680,7 +711,7 @@ void TensorXL<T>::roundTensor(TensorXL<T> *A, TensorXL<T> *C)
 }
 
 template<class T>
-void TensorXL<T>::reciprocal(TensorXL<T> *A, TensorXL<T> *C)
+void TensorXL<T>::reciprocal(TensorXL<T>& A, TensorXL<T>& C)
 {
     unsigned i,j;
     for (i = 0; i < getRows(A); i++)
@@ -695,7 +726,7 @@ void TensorXL<T>::reciprocal(TensorXL<T> *A, TensorXL<T> *C)
 }
 
 template<class T>
-void TensorXL<T>::reciprocal(TensorXL<T> *A, T numerator, TensorXL<T> *C)
+void TensorXL<T>::reciprocal(TensorXL<T>& A, T numerator, TensorXL<T>& C)
 {
 	unsigned i, j;
 	for (i = 0; i < getRows(A); i++)
@@ -710,7 +741,7 @@ void TensorXL<T>::reciprocal(TensorXL<T> *A, T numerator, TensorXL<T> *C)
 }
 
 template<class T>
-void TensorXL<T>::sum(TensorXL<T> *A, int dim, TensorXL<T>* C)
+void TensorXL<T>::sum(TensorXL<T>& A, int dim, TensorXL<T>& C)
 {
 //dim=0 means you find the sum of each column,
 //dim=1 means you find the sum of each row. 
@@ -749,7 +780,7 @@ void TensorXL<T>::sum(TensorXL<T> *A, int dim, TensorXL<T>* C)
 }
 
 template<class T>
-void TensorXL<T>::sign(TensorXL<T> *A, TensorXL<T> *C)
+void TensorXL<T>::sign(TensorXL<T>& A, TensorXL<T>& C)
 {
 	unsigned i, j;
 	for (i = 0; i < getRows(A); i++)
@@ -773,9 +804,9 @@ void TensorXL<T>::sign(TensorXL<T> *A, TensorXL<T> *C)
 }
 
 template<class T> 
-void TensorXL<T>::mean(TensorXL<T> *A, TensorXL<T> *C)
+void TensorXL<T>::mean(TensorXL<T>& A, TensorXL<T>& C)
 {// assume a row vector. can be expanded upon like max and min to work along multiple dimentions
-	assert(getRows(A) == 1);
+	//assert(getRows(A) == 1);
 	float running = 0.f;
 	for (unsigned j = 0; j < getCols(A); j++)
 	{
@@ -786,7 +817,7 @@ void TensorXL<T>::mean(TensorXL<T> *A, TensorXL<T> *C)
 }
 
 template<class T>
-void TensorXL<T>::sqrt_tensor(TensorXL<T> *A, TensorXL<T> *C)
+void TensorXL<T>::sqrt_tensor(TensorXL<T>& A, TensorXL<T>& C)
 {
 	unsigned i, j;
 	for (i = 0; i < getRows(A); i++)
@@ -799,7 +830,7 @@ void TensorXL<T>::sqrt_tensor(TensorXL<T> *A, TensorXL<T> *C)
 }
 /****************************************************manipulation****************************************************/
 template<class T>
-void TensorXL<T>::fill(TensorXL<T> *A, T fill)
+void TensorXL<T>::fill(TensorXL<T>& A, T fill)
 {
     unsigned i,j;
     for (i = 0; i < getRows(A); i++)
@@ -813,7 +844,7 @@ void TensorXL<T>::fill(TensorXL<T> *A, T fill)
 
 
 template<class T>
-void TensorXL<T>::tensor_frexp(TensorXL<float>* inputs, TensorXL<float>* m, TensorXL<float>* e)
+void TensorXL<T>::tensor_frexp(TensorXL<float>& inputs, TensorXL<float>& m, TensorXL<float>& e)
 {
     //I am writing this one myself as I dont have access to numpy
     //C has a function called frexp, so I am just applying it to ever element in a matrix.
@@ -841,14 +872,14 @@ void TensorXL<T>::tensor_frexp(TensorXL<float>* inputs, TensorXL<float>* m, Tens
 }
 
 template<class T>
-void TensorXL<T>::addRow(TensorXL<T> *A, T* init)
+void TensorXL<T>::addRow(TensorXL<T>& A, T* init)
 {//Take a row and add it here. No copy
-	A->matrix[getRows(A)] = init;
-	A->t_numRows += 1;
+	A.matrix[getRows(A)] = init;
+	A.t_numRows += 1;
 }
 
 template<class T>
-void TensorXL<T>::hardTranspose(TensorXL<T> *a, TensorXL<T> *space)
+void TensorXL<T>::hardTranspose(TensorXL<T>& a, TensorXL<T>& space)
 {
 	int i;
 	int j;
@@ -877,13 +908,13 @@ void TensorXL<T>::hardTranspose(TensorXL<T> *a, TensorXL<T> *space)
 
 /****************************************************adressing methods****************************************************/
 template<class T>
-T TensorXL<T>::get(TensorXL<T> *tensor, const unsigned &row, const unsigned &col)
+T TensorXL<T>::get(TensorXL<T>& tensor, const unsigned &row, const unsigned &col)
 {
-    if(tensor->transposed)
+    if(tensor.transposed)
     {//in this block everything is flipped because internally, we are treating the matrix as transposed 
         if(row < getRows(tensor) && col < getCols(tensor))
         {
-            return tensor->matrix[col][row];
+            return tensor.matrix[col][row];
         }
         else
         {
@@ -896,7 +927,7 @@ T TensorXL<T>::get(TensorXL<T> *tensor, const unsigned &row, const unsigned &col
     {// in this block everything is normal
         if(row < getRows(tensor) && col < getCols(tensor))
         {
-            return tensor->matrix[row][col];
+            return tensor.matrix[row][col];
         }
         else
         {
@@ -908,14 +939,14 @@ T TensorXL<T>::get(TensorXL<T> *tensor, const unsigned &row, const unsigned &col
 }
 
 template<class T>
-void TensorXL<T>::set(TensorXL<T> *tensor, const unsigned &row, const unsigned &col, T val)
+void TensorXL<T>::set(TensorXL<T>& tensor, const unsigned &row, const unsigned &col, T val)
 {
 	//The safeguards for in range access are non fatal. The intel matrix multiply trips them for some reason
-    if(tensor->transposed)
+    if(tensor.transposed)
     {//in this block everything is flipped because internally, we are treating the matrix as transposed 
         if(row < getRows(tensor) && col < getCols(tensor))
         {
-           tensor->matrix[col][row] = val;
+           tensor.matrix[col][row] = val;
         }
         else
         {
@@ -926,7 +957,7 @@ void TensorXL<T>::set(TensorXL<T> *tensor, const unsigned &row, const unsigned &
     {// in this block everything is normal
         if(row < getRows(tensor) && col < getCols(tensor))
         {
-            tensor->matrix[row][col] = val;
+            tensor.matrix[row][col] = val;
         }
         else
         {
@@ -936,7 +967,7 @@ void TensorXL<T>::set(TensorXL<T> *tensor, const unsigned &row, const unsigned &
 }
 
 template<class T>
-T TensorXL<T>::one(TensorXL<T> *A)
+T TensorXL<T>::one(TensorXL<T>& A)
 {//demotes a tensor to a primitive type (typically float)
 	if (TensorXL<float>::getRows(A) == 1 && TensorXL<float>::getCols(A) == 1)
 	{
@@ -944,35 +975,28 @@ T TensorXL<T>::one(TensorXL<T> *A)
 	}
 	else
 	{
-		printf("1x1 matrix asssumption failed");
-		assert(false);
+		//printf("1x1 matrix asssumption failed");
+		//assert(false);
 		return 0;
 	}
 }
 
 //helper functions
 template<class T>
-void TensorXL<T>::transpose(TensorXL<T> *a)
+void TensorXL<T>::transpose(TensorXL<T>& a)
 {
     //simply change a variable to address the matrix differently a[i][j] becomes a[j][i]
     //This requires the user to use get() rather than direct addressing
-    a->transposed= !a->transposed;
+    a.transposed= !a.transposed;
 }
 
 template<class T>
-void TensorXL<T>::print(TensorXL<T> *self)
+void TensorXL<T>::print(TensorXL<T>& self)
 {
 	
     #ifndef HLS_SYNTHESIS
     std::cout << "Tensor: " << std::endl;
 	#endif
-	if (self == nullptr)
-	{
-		#ifndef HLS_SYNTHESIS
-		std::cout << "nullptr" << std::endl;
-		#endif
-		return;
-	}
     for (unsigned i = 0; i < getRows(self); i++) {
         for (unsigned j = 0; j < getCols(self); j++) {
             #ifndef HLS_SYNTHESIS
@@ -996,27 +1020,27 @@ void TensorXL<T>::print(TensorXL<T> *self)
 }
 
 template<class T>
-unsigned TensorXL<T>::getRows(TensorXL<T> *A)
+unsigned TensorXL<T>::getRows(TensorXL<T>& A)
 { 
-    if(!A->transposed){
-        return A->t_numRows;
+    if(!A.transposed){
+        return A.t_numRows;
     }else{
-        return A->t_numCols;
+        return A.t_numCols;
     } 
 }
 
 template<class T>
-unsigned TensorXL<T>::getCols(TensorXL<T> *A)
+unsigned TensorXL<T>::getCols(TensorXL<T>& A)
 { 
-    if(!A->transposed){
-        return A->t_numCols;
+    if(!A.transposed){
+        return A.t_numCols;
     }else{
-        return A->t_numRows;
+        return A.t_numRows;
     } 
 }
 
 template<class T>
-bool TensorXL<T>::eq_verbose(TensorXL<T> *A, TensorXL<T> *B)
+bool TensorXL<T>::eq_verbose(TensorXL<T>& A, TensorXL<T>& B)
 {//returns true if all elements are the same. No broadcasting.
 	bool one = false;
     unsigned i,j;
@@ -1042,7 +1066,7 @@ bool TensorXL<T>::eq_verbose(TensorXL<T> *A, TensorXL<T> *B)
 }
 
 template<class T>
-bool TensorXL<T>::eq(TensorXL<T> *A, TensorXL<T> *B)
+bool TensorXL<T>::eq(TensorXL<T>& A, TensorXL<T>& B)
 {//returns true if all elements are the same. No broadcasting.
 	unsigned i, j;
 	for (i = 0; i < getRows(A); i++)
@@ -1061,48 +1085,48 @@ bool TensorXL<T>::eq(TensorXL<T> *A, TensorXL<T> *B)
 
 //private helper functions
 template<class T>
-void TensorXL<T>::setRows(TensorXL<T> *A, int num)
+void TensorXL<T>::setRows(TensorXL<T>& A, int num)
 { 
-    if(!A->transposed){
-		A->t_numRows = num;
+    if(!A.transposed){
+		A.t_numRows = num;
     }else{
-		A->t_numCols = num;
+		A.t_numCols = num;
     } 
 }
 
 template<class T>
-void TensorXL<T>::setCols(TensorXL<T> *A, int num)
+void TensorXL<T>::setCols(TensorXL<T>& A, int num)
 { 
-    if(!A->transposed){
-		A->t_numCols = num;
+    if(!A.transposed){
+		A.t_numCols = num;
     }else{
-		A->t_numRows = num;
+		A.t_numRows = num;
     } 
 }
 
 template<class T>
-bool TensorXL<T>::sameSize(TensorXL<T> *A, TensorXL<T> *B)
+bool TensorXL<T>::sameSize(TensorXL<T>& A, TensorXL<T>& B)
 {
 	return TensorXL<float>::getRows(A) == TensorXL<float>::getRows(B) && TensorXL<float>::getCols(A) == TensorXL<float>::getCols(B);
 }
 
 template<class T>
-bool TensorXL<T>::sameRows(TensorXL<T> *A, TensorXL<T> *B)
+bool TensorXL<T>::sameRows(TensorXL<T>& A, TensorXL<T>& B)
 {
 	return TensorXL<float>::getRows(A) == TensorXL<float>::getRows(B);
 }
 
 template<class T>
-bool TensorXL<T>::sameCols(TensorXL<T> *A, TensorXL<T> *B)
+bool TensorXL<T>::sameCols(TensorXL<T>& A, TensorXL<T>& B)
 {
 	return TensorXL<float>::getCols(A) == TensorXL<float>::getCols(B);
 }
 
 template<class T>
-void TensorXL<T>::flopSize(TensorXL<T> *lhs, TensorXL<T> *rhs)
+void TensorXL<T>::flopSize(TensorXL<T>* lhs, TensorXL<T>* rhs)
 {//At the end of this function lhs will always point to the larger of the two tensors
-	assert(sameRows(lhs,rhs) || sameCols(lhs,rhs)); //we assume that the tensors share one dimention
-	if (getCols(lhs) < getCols(rhs) || getRows(lhs) < getRows(rhs))
+	//assert(sameRows(lhs,rhs) || sameCols(lhs,rhs)); //we assume that the tensors share one dimention
+	if (getCols(*lhs) < getCols(*rhs) || getRows(*lhs) < getRows(*rhs))
 	{
 		TensorXL<T>* temp = lhs;
 		lhs = rhs;
@@ -1110,7 +1134,7 @@ void TensorXL<T>::flopSize(TensorXL<T> *lhs, TensorXL<T> *rhs)
 	}
 }
 
-template<class T> void TensorXL<T>::copy(TensorXL<T> *A, TensorXL<T> *C)
+template<class T> void TensorXL<T>::copy(TensorXL<T>& A, TensorXL<T>& C)
 {
 	for (unsigned i = 0; i < getRows(A); i++)
 	{

@@ -16,11 +16,14 @@ class Tensor3dXL{
         unsigned int t_numRows;
         unsigned int t_numCols;
 		unsigned int t_depth;
-        TensorXL<T>* matrix[MAX_DEPTH_XL]; 
+		bool null;
+		
+		TensorXL<T> matrix[MAX_DEPTH_XL];
 
     public:
         //constructors
 		Tensor3dXL(Tensor3dXL<T> *A); //Takes a 3d matrix and copies it.
+		Tensor3dXL(Tensor3dXL<T> &A); //copy constructor
         Tensor3dXL(TensorXL<T> *A); //Takes a 2d matrix and copies it into the first layer.
 		Tensor3dXL(int dep, int row, int col, T init);
 		Tensor3dXL(void); //all depth layers are nullpointer
@@ -76,6 +79,7 @@ class Tensor3dXL{
         static T get(Tensor3dXL<T> *tensor, const unsigned &row, const unsigned &col, const unsigned &dep);
         static void set(Tensor3dXL<T> *tensor, const unsigned &row, const unsigned &col, const unsigned &dep, T val);
 		static TensorXL<T>* get(Tensor3dXL<T> *tensor, const unsigned &dep);
+		static TensorXL<T>* get(Tensor3dXL<T> &tensor, const unsigned &dep);
 		static void set(Tensor3dXL<T> *tensor, const unsigned &dep, TensorXL<T>* slice);
 		static TensorXL<T>* twoD(Tensor3dXL<T>*); //analog to one for 2d Tensors, but checks for ONE layer 
 		static void toTwoD(Tensor3dXL<T> *A, TensorXL<T> *C);//takes a tensor that is YxZx1, Yx1xZ, or 1xYxZ and returns the 2d matrix
@@ -86,6 +90,9 @@ class Tensor3dXL{
         static unsigned getRows(Tensor3dXL<T>* a);
         static unsigned getCols(Tensor3dXL<T>* a);
 		static unsigned getDepth(Tensor3dXL<T>* a);
+		static unsigned getRows(const Tensor3dXL<T> &a);
+		static unsigned getCols(const Tensor3dXL<T> &a);
+		static unsigned getDepth(const Tensor3dXL<T> &a);
         static bool eq(Tensor3dXL<T>* A, Tensor3dXL<T>* B);
 
 		static void setRows(Tensor3dXL<T>* a, int num);

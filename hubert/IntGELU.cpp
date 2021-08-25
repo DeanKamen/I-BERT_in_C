@@ -45,8 +45,6 @@ scaled_tuple3dXL IntGELU::intgelu_forward(Tensor3dXL<float>* x, TensorXL<float>*
 	TensorXL<float>* sigmoid_sf = new TensorXL<float>(scaling_factor);
 	TensorXL<float>::div_scalar(sigmoid_sf, k, sigmoid_sf);
 	scaled_tuple3dXL sigmoid = int_erf(x_int, sigmoid_sf);// sigmoid_sf gets put into the sigmoid tuple, so we dont delete singmoid sf
-	//Tensor3dXL<float>* s_v = loadGeneric3dXL("bin/sigma_verification.bin");
-	//Tensor3dXL<float>::eq(s_v, sigmoid.matrix);
 
 	TensorXL<float>* shift_int = new TensorXL<float>(sigmoid.scaling_factor);
 	TensorXL<float>::reciprocal(sigmoid.scaling_factor, shift_int);
