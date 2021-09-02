@@ -13,9 +13,9 @@ typedef Tensor3dXL<float> T3d;
 typedef TensorXL<float> T2d;
 typedef scaled_tuple3dXL tuple;
 
-TensorXL<float> x_min;//This is only ever of size one during inference at least
-TensorXL<float> x_max;
-TensorXL<float> act_scaling_factor;
+TensorXL<float> x_min_xl;//This is only ever of size one during inference at least
+TensorXL<float> x_max_xl;
+TensorXL<float> act_scaling_factor_xl;
 
 QuantAct_XL::QuantAct_XL(int activation_bit_i, 
              float act_range_momentum_i,
@@ -33,9 +33,9 @@ QuantAct_XL::QuantAct_XL(int activation_bit_i,
     if(per_channel)
     {
 		//assert(channel_len > 0);
-		x_min = T2d(1, channel_len, 0.0f);
-		x_max = T2d(1, channel_len, 0.0f);
-		act_scaling_factor = T2d(1, channel_len, 0.0f);
+		x_min_xl = T2d(1, channel_len, 0.0f);
+		x_max_xl = T2d(1, channel_len, 0.0f);
+		act_scaling_factor_xl = T2d(1, channel_len, 0.0f);
 
     }
 	//loading xmin and xmax is done by the set param function
@@ -74,7 +74,7 @@ QuantAct_XL::~QuantAct_XL()
     }
     else
     {
-        T3d::add(&x, &identity, &x_act);
+        T3d::add(x, identity, x_act);
     }
 
 	T2d local_xmin(1, 1, 0.f);
@@ -85,51 +85,50 @@ QuantAct_XL::~QuantAct_XL()
 		if (!self.per_channel)
 		{
 			T3d temp(x_act);
-			T3d::min(&temp, &temp);
-			T3d::toTwoD(&temp, &local_xmin);
+			T3d::min(temp, temp);
+			T3d::toTwoD(temp, local_xmin);
 
 			T3d temp2(x_act);
-			T3d::max(&temp2, &temp2);
-			T3d::toTwoD(&temp2, &local_xmax);
+			T3d::max(temp2, temp2);
+			T3d::toTwoD(temp2, local_xmax);
 		}
 		else
 		{
-			//TODO: 3d matrix support
 			//assert(false);
 		}
 
 		//Initialization 
-		if (T2d::eq(x_min, x_max))
+		if (T2d::eq(x_min_xl, x_max_xl))
 		{
-			T2d::add(x_min, local_xmin, x_min);
-			T2d::add(x_max, local_xmax, x_max);
+			T2d::add(x_min_xl, local_xmin, x_min_xl);
+			T2d::add(x_max_xl, local_xmax, x_max_xl);
 		}
 		else if (self.act_range_momentum == -1)
 		{
-			float obj_min = T2d::one(x_min);
-			float obj_max = T2d::one(x_max);
+			float obj_min = T2d::one(x_min_xl);
+			float obj_max = T2d::one(x_max_xl);
 			float localmin = T2d::one(local_xmin);
 			float localmax = T2d::one(local_xmax);
 
 			if (localmax > obj_max)
 			{
-				T2d::set(x_max, 0, 0, localmax);
+				T2d::set(x_max_xl, 0, 0, localmax);
 			}
 			if (localmin < obj_min)
 			{
-				T2d::set(x_min, 0, 0, localmin);
+				T2d::set(x_min_xl, 0, 0, localmin);
 			}
 		}
 		else
 		{
 			//here I am assuming xmin and xmax are 1x1
-			float objmin = T2d::one(x_min);
+			float objmin = T2d::one(x_min_xl);
 			float localmin = T2d::one(local_xmin);
-			T2d::set(x_min, 0, 0, objmin*self.act_range_momentum + localmin * (1 - self.act_range_momentum));
+			T2d::set(x_min_xl, 0, 0, objmin*self.act_range_momentum + localmin * (1 - self.act_range_momentum));
 
-			float objmax = T2d::one(x_max);
+			float objmax = T2d::one(x_max_xl);
 			float localmax = T2d::one(local_xmax);
-			T2d::set(x_max, 0, 0, objmax*self.act_range_momentum + localmax * (1 - self.act_range_momentum));
+			T2d::set(x_max_xl, 0, 0, objmax*self.act_range_momentum + localmax * (1 - self.act_range_momentum));
 		}
 	}
 
@@ -142,11 +141,11 @@ QuantAct_XL::~QuantAct_XL()
     }
 
     if(!specified_min.null) 
-		x_min = specified_min;
+		x_min_xl = specified_min;
     if(!specified_max.null) 
-		x_min = specified_max;
+		x_min_xl = specified_max;
 
-	act_scaling_factor = *QuantAct_XL::symmetric_linear_quantization_params(self.activation_bit, x_min, x_max, self.per_channel);
+	act_scaling_factor_xl = *QuantAct_XL::symmetric_linear_quantization_params(self.activation_bit, x_min_xl, x_max_xl, self.per_channel);
     
 	if (testing)
 	{
@@ -157,11 +156,11 @@ QuantAct_XL::~QuantAct_XL()
     T3d* quant_act_int = nullptr;
     if(pre_act_scaling_factor.null)
     {
-        quant_act_int = QuantAct_XL::symmetric_quant_forward(x, self.activation_bit, act_scaling_factor);
+        quant_act_int = QuantAct_XL::symmetric_quant_forward(x, self.activation_bit, act_scaling_factor_xl);
     }
     else
     {
-        quant_act_int = fixedpoint_mul(x, pre_act_scaling_factor, self.activation_bit, self.quant_mode, act_scaling_factor, identity, identity_scaling_factor);
+        quant_act_int = fixedpoint_mul(x, pre_act_scaling_factor, self.activation_bit, self.quant_mode, act_scaling_factor_xl, identity, identity_scaling_factor);
     }
 
 	if (testing)
@@ -170,9 +169,9 @@ QuantAct_XL::~QuantAct_XL()
 		//Tensor3dXL<float>::eq(qai_v, quant_act_int);
 	}
 
-    T2d correct_output_scale(act_scaling_factor);
+    T2d correct_output_scale(act_scaling_factor_xl);
 	//correct output scale has just one element while quant act int has 2
-    T3d::mul_scalar(quant_act_int, T2d::one(correct_output_scale), quant_act_int);
+    T3d::mul_scalar(*quant_act_int, T2d::one(correct_output_scale), *quant_act_int);
     tuple returnme;
 	if (testing)
 	{
@@ -180,11 +179,11 @@ QuantAct_XL::~QuantAct_XL()
 		//Tensor3dXL<float>::eq(qai_v, quant_act_int);
 	}
     returnme.matrix = quant_act_int;
-    returnme.scaling_factor = &act_scaling_factor; //global variables persist outside this function
+    returnme.scaling_factor = &act_scaling_factor_xl; //global variables persist outside this function
     return returnme;
 }
 
-T2d scale;
+T2d scale_xl;
 T2d* QuantAct_XL::symmetric_linear_quantization_params(unsigned num_bits,
                                         T2d& saturation_min,
                                         T2d& saturation_max,
@@ -200,7 +199,7 @@ T2d* QuantAct_XL::symmetric_linear_quantization_params(unsigned num_bits,
     
     */
 
-    scale = T2d(saturation_min); 
+    scale_xl = T2d(saturation_min);
     unsigned n =  (unsigned int)exp2( num_bits - 1 ) - 1;
     if (per_channel)
     { // saturation min and max are Rows
@@ -210,23 +209,23 @@ T2d* QuantAct_XL::symmetric_linear_quantization_params(unsigned num_bits,
 			float y = fabs(T2d::get(saturation_max, 0, i));
 			if (x > y)
 			{
-				T2d::set(scale, 0, i, x);
+				T2d::set(scale_xl, 0, i, x);
 			}
 			else
 			{
-				T2d::set(scale, 0, i, y);
+				T2d::set(scale_xl, 0, i, y);
 			}
 		}
-		T2d::clamp(scale, 1e-8f, FLT_MAX, scale);
-		T2d::div_scalar(scale, (float)n, scale);
+		T2d::clamp(scale_xl, 1e-8f, FLT_MAX, scale_xl);
+		T2d::div_scalar(scale_xl, (float)n, scale_xl);
     }
     else
     {//saturation min and max are one element tensors
-        T2d::set(scale,0,0, fmax(fabs(T2d::one(saturation_min)), fabs((T2d::one(saturation_max)))));
-        T2d::clamp(scale, 1e-8f, FLT_MAX, scale); 
-        T2d::div_scalar(scale, (float)n, scale);
+        T2d::set(scale_xl,0,0, fmax(fabs(T2d::one(saturation_min)), fabs((T2d::one(saturation_max)))));
+        T2d::clamp(scale_xl, 1e-8f, FLT_MAX, scale_xl);
+        T2d::div_scalar(scale_xl, (float)n, scale_xl);
     }
-    return &scale;
+    return &scale_xl;
 }
 
 T3d* QuantAct_XL::symmetric_quant_forward(T3d &x, int k, T2d& specified_scale)
@@ -241,32 +240,32 @@ T3d* QuantAct_XL::symmetric_quant_forward(T3d &x, int k, T2d& specified_scale)
     float n = exp2f(float(k - 1)) - 1;
 
     T3d* new_quant_x = QuantAct_XL::linear_quantize(x, *scale, zero_point);
-    T3d::clamp(new_quant_x, -n, n-1, new_quant_x);
+    T3d::clamp(*new_quant_x, -n, n-1, *new_quant_x);
     return new_quant_x;
 }
 
-T3d x;
+T3d x_xl;
 T3d* QuantAct_XL::linear_quantize(T3d &x_c, T2d &scale_c, T2d &zero_point)
 {
     //scale is 1 when x is truely 3d. When x is 2d, scale is also 2d (or at least broadcastable.)
 	T2d scale(scale_c);
-	x = T3d(x_c);
+	x_xl = T3d(x_c);
 	T2d::reciprocal(scale, scale);
-	if (T3d::getDepth(x) != 1)
+	if (T3d::getDepth(x_xl) != 1)
 	{
-		T3d::mul_scalar(&x, T2d::one(scale), &x);
+		T3d::mul_scalar(x_xl, T2d::one(scale), x_xl);
 	}
 	else
 	{
-		T3d::mul_dot(&x, &scale, &x);
+		T3d::mul_dot(x_xl, scale, x_xl);
 	}
-    T3d::add_scalar(&x, T2d::one(zero_point), &x);
-    T3d::roundTensor(&x, &x);
+    T3d::add_scalar(x_xl, T2d::one(zero_point), x_xl);
+    T3d::roundTensor(x_xl, x_xl);
 	
-    return &x;
+    return &x_xl;
 }
 
-T3d output;
+T3d output_xl;
 T3d* QuantAct_XL::fixedpoint_mul(
         T3d &pre_act,
         T2d &pre_act_scaling_factor,
@@ -288,8 +287,8 @@ T3d* QuantAct_XL::fixedpoint_mul(
     T2d space = T2d(1,1,0.f);
 
     T3d z_int(pre_act);
-    T3d::div_dot(&pre_act, &pre_act_scaling_factor, &z_int); 
-    T3d::roundTensor(&z_int, &z_int);
+    T3d::div_dot(pre_act, pre_act_scaling_factor, z_int); 
+    T3d::roundTensor(z_int, z_int);
 
     //the following is in double precision in the code, but I did not make it double precision here
     T2d _A(pre_act_scaling_factor);
@@ -300,19 +299,19 @@ T3d* QuantAct_XL::fixedpoint_mul(
     T2d m(new_scale);
     T2d e(new_scale);
     T2d::tensor_frexp(new_scale, m, e);
-    output = T3d(z_int);
+    output_xl = T3d(z_int);
 	
-	T2d twos(T3d::getRows(output), T3d::getCols(output), 2.0f);
+	T2d twos(T3d::getRows(output_xl), T3d::getCols(output_xl), 2.0f);
 	T2d::pow_dot(twos, e, twos); //use twos as temp storage
-	T3d::div_dot(&output, &twos, &output);
-    T3d::mul_dot(&output, &m, &output);
-    T3d::roundTensor(&output, &output);
+	T3d::div_dot(output_xl, twos, output_xl);
+    T3d::mul_dot(output_xl, m, output_xl);
+    T3d::roundTensor(output_xl, output_xl);
 
     if(!identity.null)
     {
         T3d wx_int(identity);
-        T3d::div_dot(&identity, &identity_scaling_factor, &identity);
-        T3d::roundTensor(&identity, &wx_int);
+        T3d::div_dot(identity, identity_scaling_factor, identity);
+        T3d::roundTensor(identity, wx_int);
 
         _A = T2d(identity_scaling_factor);
         _B = T2d(z_scaling_factor);
@@ -323,36 +322,36 @@ T3d* QuantAct_XL::fixedpoint_mul(
         T2d::tensor_frexp(new_scale, m1, e1);
 
         T3d output1(wx_int);
-        T3d::mul_dot(&wx_int, &m1, &output1);
+        T3d::mul_dot(wx_int, m1, output1);
 		twos = T2d(T3d::getRows(output1), T3d::getCols(output1), 2.0f);
         T2d::pow_dot(twos, e1, e1); //use e1 as temp storage
-        T3d::div_dot(&output1, &e1, &output1);
-        T3d::roundTensor(&output1, &output1);
-        T3d::add(&output, &output1, &output);
+        T3d::div_dot(output1, e1, output1);
+        T3d::roundTensor(output1, output1);
+        T3d::add(output_xl, output1, output_xl);
     }
 
     if( bit_num == 4 || bit_num == 8 || bit_num == 16)
     {
         if(quant_mode == QuantMode::symmetric)
         {
-            T3d::clamp(&output, -n-1, n, &output);
-            return &output;
+            T3d::clamp(output_xl, -n-1, n, output_xl);
+            return &output_xl;
         }
         else{
-            T3d::clamp(&output, 0, n, &output);
-            return &output;
+            T3d::clamp(output_xl, 0, n, output_xl);
+            return &output_xl;
         }
     }
     else{
-        return &output;
+        return &output_xl;
     }
 }
 
 
 void QuantAct_XL::set_param(QuantAct_XL &self, preload x_min_n, preload x_max_n, preload act_scaling_factor_n)
 {
-	x_min = *loadTensorXL(x_min_n);
-	x_max = *loadTensorXL(x_max_n);
-	act_scaling_factor = *loadTensorXL(act_scaling_factor_n);
+	x_min_xl = *loadTensorXL(x_min_n);
+	x_max_xl = *loadTensorXL(x_max_n);
+	act_scaling_factor_xl = *loadTensorXL(act_scaling_factor_n);
 }
 

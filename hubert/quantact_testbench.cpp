@@ -32,7 +32,7 @@ void exampleclass::setme(exampleclass* inst, TensorXL<float> &x_max, Tensor3dXL<
 {
 	inst->member_var = set;
 	TensorXL<float>::set(x_max, 0, 0, 0.f);
-	Tensor3dXL<float>::set(&x_min, 0, 0, 0, 0.f);
+	Tensor3dXL<float>::set(x_min, 0, 0, 0, 0.f);
 }
 
 exampleclass::exampleclass(int init)
@@ -67,7 +67,7 @@ int main()
 	TensorXL<float> nullb;
 	Tensor3dXL<float> null3;
 	result1 = QuantAct_XL::QuantAct_forward(testQuantAct, *matrix3d_testdata, *quantact_scaling_factor, null3, nullb, nullb, nullb);
-	Tensor3dXL<float>::print(result1.matrix);
+	Tensor3dXL<float>::print(*result1.matrix);
 	delete matrix3d_testdata, quantact_scaling_factor;
 
 	//QuantAct + softmax verification

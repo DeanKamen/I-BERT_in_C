@@ -1,4 +1,163 @@
-﻿  quantact_xl.cpp
+﻿  IntGELU.cpp
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm.h(24): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm.h(27): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm.h(30): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(79): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(84): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(90): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(110): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(116): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(122): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm_xl.h(25): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm_xl.h(28): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm_xl.h(31): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(79): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(84): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(90): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(110): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(116): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(122): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\intgelu.cpp(71): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\intgelu.cpp(76): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\intgelu.cpp(100): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+  IntLayerNorm.cpp
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm.h(24): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm.h(27): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm.h(30): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(79): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(84): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(90): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(110): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(116): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(122): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm_xl.h(25): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm_xl.h(28): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm_xl.h(31): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(79): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(84): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(90): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(110): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(116): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(122): warning C4068: unknown pragma
+  QuantLinear.cpp
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm.h(24): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm.h(27): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm.h(30): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(79): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(84): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(90): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(110): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(116): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(122): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm_xl.h(25): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm_xl.h(28): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm_xl.h(31): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(79): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(84): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(90): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(110): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(116): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(122): warning C4068: unknown pragma
+d:\applications\intel_quartus\21.1\hls\include\hls\matrix_mult.h(71): warning C4068: unknown pragma
+d:\applications\intel_quartus\21.1\hls\include\hls\matrix_mult.h(76): warning C4068: unknown pragma
+d:\applications\intel_quartus\21.1\hls\include\hls\matrix_mult.h(82): warning C4068: unknown pragma
+d:\applications\intel_quartus\21.1\hls\include\hls\matrix_mult.h(101): warning C4068: unknown pragma
+d:\applications\intel_quartus\21.1\hls\include\hls\matrix_mult.h(107): warning C4068: unknown pragma
+d:\applications\intel_quartus\21.1\hls\include\hls\matrix_mult.h(113): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\quantlinear.cpp(55): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensorxl.hpp(889): warning C4018: '<': signed/unsigned mismatch
+  c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensorxl.hpp(883): note: while compiling class template member function 'void TensorXL<float>::hardTranspose(TensorXL<float> &,TensorXL<float> &)'
+  c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\quantlinear.cpp(66): note: see reference to function template instantiation 'void TensorXL<float>::hardTranspose(TensorXL<float> &,TensorXL<float> &)' being compiled
+  c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensorxl.hpp(972): note: see reference to class template instantiation 'TensorXL<float>' being compiled
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensorxl.hpp(891): warning C4018: '<': signed/unsigned mismatch
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensorxl.hpp(900): warning C4018: '<': signed/unsigned mismatch
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensorxl.hpp(902): warning C4018: '<': signed/unsigned mismatch
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor3dxl.hpp(61): warning C4018: '<': signed/unsigned mismatch
+  c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor3dxl.hpp(57): note: while compiling class template member function 'Tensor3dXL<float>::Tensor3dXL(int,int,int,T)'
+          with
+          [
+              T=float
+          ]
+  c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\quantlinear.cpp(88): note: see reference to function template instantiation 'Tensor3dXL<float>::Tensor3dXL(int,int,int,T)' being compiled
+          with
+          [
+              T=float
+          ]
+  c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\quantlinear.cpp(49): note: see reference to class template instantiation 'Tensor3dXL<float>' being compiled
+  multiheadAttention.cpp
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm.h(24): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm.h(27): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm.h(30): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(79): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(84): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(90): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(110): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(116): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(122): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm_xl.h(25): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm_xl.h(28): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm_xl.h(31): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(79): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(84): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(90): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(110): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(116): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(122): warning C4068: unknown pragma
+d:\applications\intel_quartus\21.1\hls\include\hls\matrix_mult.h(71): warning C4068: unknown pragma
+d:\applications\intel_quartus\21.1\hls\include\hls\matrix_mult.h(76): warning C4068: unknown pragma
+d:\applications\intel_quartus\21.1\hls\include\hls\matrix_mult.h(82): warning C4068: unknown pragma
+d:\applications\intel_quartus\21.1\hls\include\hls\matrix_mult.h(101): warning C4068: unknown pragma
+d:\applications\intel_quartus\21.1\hls\include\hls\matrix_mult.h(107): warning C4068: unknown pragma
+d:\applications\intel_quartus\21.1\hls\include\hls\matrix_mult.h(113): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\multiheadattention.cpp(55): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor3d.hpp(55): warning C4018: '<': signed/unsigned mismatch
+  c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor3d.hpp(51): note: while compiling class template member function 'Tensor3d<float>::Tensor3d(int,int,int,T)'
+          with
+          [
+              T=float
+          ]
+  c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\multiheadattention.cpp(160): note: see reference to function template instantiation 'Tensor3d<float>::Tensor3d(int,int,int,T)' being compiled
+          with
+          [
+              T=float
+          ]
+  c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\multiheadattention.cpp(160): note: see reference to class template instantiation 'Tensor3d<float>' being compiled
+  quantact.cpp
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm.h(24): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm.h(27): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm.h(30): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(79): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(84): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(90): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(110): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(116): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(122): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm_xl.h(25): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm_xl.h(28): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm_xl.h(31): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(79): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(84): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(90): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(110): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(116): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(122): warning C4068: unknown pragma
+  quantact_xl.cpp
 c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm_xl.h(25): warning C4068: unknown pragma
 c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm_xl.h(28): warning C4068: unknown pragma
 c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm_xl.h(31): warning C4068: unknown pragma
@@ -17,4 +176,65 @@ c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(122): warning
 c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm.h(24): warning C4068: unknown pragma
 c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm.h(27): warning C4068: unknown pragma
 c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm.h(30): warning C4068: unknown pragma
+  sentence_encoder_layer.cpp
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm.h(24): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm.h(27): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm.h(30): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(79): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(84): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(90): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(110): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(116): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(122): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm_xl.h(25): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm_xl.h(28): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm_xl.h(31): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(79): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(84): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(90): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(110): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(116): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(122): warning C4068: unknown pragma
+d:\applications\intel_quartus\21.1\hls\include\hls\matrix_mult.h(71): warning C4068: unknown pragma
+d:\applications\intel_quartus\21.1\hls\include\hls\matrix_mult.h(76): warning C4068: unknown pragma
+d:\applications\intel_quartus\21.1\hls\include\hls\matrix_mult.h(82): warning C4068: unknown pragma
+d:\applications\intel_quartus\21.1\hls\include\hls\matrix_mult.h(101): warning C4068: unknown pragma
+d:\applications\intel_quartus\21.1\hls\include\hls\matrix_mult.h(107): warning C4068: unknown pragma
+d:\applications\intel_quartus\21.1\hls\include\hls\matrix_mult.h(113): warning C4068: unknown pragma
+  softmax.cpp
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm.h(24): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm.h(27): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm.h(30): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(79): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(84): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(90): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(110): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(116): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult.h(122): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm_xl.h(25): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm_xl.h(28): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mmm_xl.h(31): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(79): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(84): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(90): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(110): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(116): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor_mult_xl.h(122): warning C4068: unknown pragma
+  Generating Code...
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor3d.hpp(516): warning C4172: returning address of local variable or temporary: nullone
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor3dxl.hpp(29): warning C4717: 'Tensor3dXL<float>::Tensor3dXL<float>': recursive on all control paths, function will cause runtime stack overflow
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor3dxl.hpp(522): warning C4172: returning address of local variable or temporary: nullone
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor3dxl.hpp(29): warning C4717: 'Tensor3dXL<float>::Tensor3dXL<float>': recursive on all control paths, function will cause runtime stack overflow
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor3dxl.hpp(522): warning C4172: returning address of local variable or temporary: nullone
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\quantact.cpp(322): warning C4172: returning address of local variable or temporary: output
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\quantact.cpp(326): warning C4172: returning address of local variable or temporary: output
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\quantact.cpp(330): warning C4172: returning address of local variable or temporary: output
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor3d.hpp(516): warning C4172: returning address of local variable or temporary: nullone
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor3dxl.hpp(522): warning C4172: returning address of local variable or temporary: nullone
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor3dxl.hpp(29): warning C4717: 'Tensor3dXL<float>::Tensor3dXL<float>': recursive on all control paths, function will cause runtime stack overflow
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor3d.hpp(516): warning C4172: returning address of local variable or temporary: nullone
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor3dxl.hpp(522): warning C4172: returning address of local variable or temporary: nullone
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor3dxl.hpp(29): warning C4717: 'Tensor3dXL<float>::Tensor3dXL<float>': recursive on all control paths, function will cause runtime stack overflow
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor3dxl.hpp(522): warning C4172: returning address of local variable or temporary: nullone
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor3dxl.hpp(522): warning C4172: returning address of local variable or temporary: nullone
   hubert.vcxproj -> C:\Users\hunto_efxy22i\jupyterProjects\HUBERT\x64\Debug\hubert.exe

@@ -24,16 +24,13 @@ public:
 	~QuantLinear();
 	//member functions
 	void set_param(preload fc_scaling_factor, preload weight, preload bias);
-	tuple quantlinear_forward(T3d* x, T2d* prev_act_scaling_factor = nullptr, bool testing = false);
-	T3d* symmetricQuantFunction(T3d* x, int k, T2d *specified_scale = nullptr);
+	static tuple quantlinear_forward(QuantLinear &self, T3d& x, T2d& prev_act_scaling_factor, bool testing = false);
+	static T3d* symmetricQuantFunction(T3d& x, int k, T2d& specified_scale);
 
 	QuantMode quant_mode;
 	int weight_bit;
 	bool per_channel;
 	int* bias_bit;
 	bool quantize_bias;
-	T2d* fc_scaling_factor;
-	T2d* weight;
-	T2d* bias;
 };
 #endif

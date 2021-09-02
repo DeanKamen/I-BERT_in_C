@@ -12,7 +12,8 @@
 #include "tensor3dXL.hpp"
 #include "tensor3d.hpp"
 
-Tensor3d<float>* transformFromXL(Tensor3dXL<float> *A, Tensor3d<float> *space)
+Tensor3d<float> newB;
+Tensor3d<float>* transformFromXL(Tensor3dXL<float> &A, Tensor3d<float> &space)
 {
 	//the 22x1x768 -> 22x12x64 -> transpose into 12x22x64 transform
 	//q.contiguous().view(tgt_len, bsz * self.num_heads, self.head_dim).transpose(0, 1)
@@ -23,7 +24,7 @@ Tensor3d<float>* transformFromXL(Tensor3dXL<float> *A, Tensor3d<float> *space)
 	int m = 12;
 	int n = 64;
 	int rowTrack = 0;
-	assert(Tensor3d<float>::getDepth(space) == l && Tensor3d<float>::getRows(space) == m && Tensor3d<float>::getCols(space) == n);
+	//assert(Tensor3d<float>::getDepth(space) == l && Tensor3d<float>::getRows(space) == m && Tensor3d<float>::getCols(space) == n);
 	for (d = 0; d < Tensor3d<float>::getDepth(space); d++)
 	{
 		rowTrack = 0;
@@ -38,7 +39,7 @@ Tensor3d<float>* transformFromXL(Tensor3dXL<float> *A, Tensor3d<float> *space)
 	}
 	//Now space is 22x12x64, and I will transpose to 12x22x64
 
-	Tensor3d<float>* newB = new Tensor3d<float>(12,22,64, 0.f);
+	newB = Tensor3d<float>(12,22,64, 0.f);
 	for (d = 0; d < Tensor3d<float>::getDepth(space); d++)
 	{
 		for (i = 0; i < Tensor3d<float>::getRows(space); i++)
@@ -50,9 +51,11 @@ Tensor3d<float>* transformFromXL(Tensor3dXL<float> *A, Tensor3d<float> *space)
 		}
 	}
 
-	return newB;
+	return &newB;
 }
-Tensor3dXL<float>* transformToXL(Tensor3d<float> *A, Tensor3d<float> *space)
+
+Tensor3dXL<float> exL;
+Tensor3dXL<float>* transformToXL(Tensor3d<float> &A, Tensor3d<float> &space)
 {
 	//the 12x22x64-> 22x12x64 -> 22x1x768 transform 
 	//attn = attn.transpose(0,1).contiguous(). view(tgt_len, bsz, embed dim)
@@ -78,7 +81,7 @@ Tensor3dXL<float>* transformToXL(Tensor3d<float> *A, Tensor3d<float> *space)
 		}
 	}
 	//Now space is 22x12x64, and I will stretch to 22x1x768
-	Tensor3dXL<float>* exL = new Tensor3dXL<float>(22, 1, 768, 0.0f);
+	exL = Tensor3dXL<float>(22, 1, 768, 0.0f);
 
 	for (d = 0; d < Tensor3d<float>::getDepth(space); d++)
 	{
@@ -93,31 +96,31 @@ Tensor3dXL<float>* transformToXL(Tensor3d<float> *A, Tensor3d<float> *space)
 		}
 	}
 	
-	return exL;
+	return &exL;
 }
 
 
-bool sameSize(Tensor<float> *A, TensorXL<float> *B)
+bool sameSize(Tensor<float> &A, TensorXL<float> &B)
 {
 	return Tensor<float>::getRows(A) == TensorXL<float>::getRows(B) && Tensor<float>::getCols(A) == TensorXL<float>::getCols(B);
 }
 
-bool sameRows(Tensor<float> *A, TensorXL<float> *B)
+bool sameRows(Tensor<float> &A, TensorXL<float> &B)
 {
 	return Tensor<float>::getRows(A) == TensorXL<float>::getRows(B);
 }
 
-bool sameCols(Tensor<float> *A, TensorXL<float> *B)
+bool sameCols(Tensor<float> &A, TensorXL<float> &B)
 {
 	return Tensor<float>::getCols(A) == TensorXL<float>::getCols(B);
 }
 
-void mul_type(Tensor<float> *A, TensorXL<float> *B, Tensor<float> *C)
+void mul_type(Tensor<float> &A, TensorXL<float> &B, Tensor<float> &C)
 {
 	int rowMod;
 	int colMod;
-	Tensor<float>* larger = A; //more rows or cols
-	TensorXL<float>* smaller = B; //one row or one col
+	Tensor<float>* larger = &A; //more rows or cols
+	TensorXL<float>* smaller = &B; //one row or one col
 	if (sameSize(A, B))
 	{//exactly the same size.
 		rowMod = Tensor<float>::getRows(A) + 1; //these mods do NOT affect the iterator
@@ -146,21 +149,21 @@ void mul_type(Tensor<float> *A, TensorXL<float> *B, Tensor<float> *C)
 
 	//now for the actual math
 	unsigned i, j;
-	for (i = 0; i < Tensor<float>::getRows(larger); i++)
+	for (i = 0; i < Tensor<float>::getRows(*larger); i++)
 	{
-		for (j = 0; j < Tensor<float>::getCols(larger); j++)
+		for (j = 0; j < Tensor<float>::getCols(*larger); j++)
 		{
-			Tensor<float>::set(C, i, j, Tensor<float>::get(larger, i, j) * TensorXL<float>::get(smaller, i % rowMod, j % colMod));
+			Tensor<float>::set(C, i, j, Tensor<float>::get(*larger, i, j) * TensorXL<float>::get(*smaller, i % rowMod, j % colMod));
 		}
 	}
 }
 
-void div_type(Tensor<float> *A, TensorXL<float> *B, Tensor<float> *C)
+void div_type(Tensor<float> &A, TensorXL<float> &B, Tensor<float> &C)
 {
 	int rowMod;
 	int colMod;
-	Tensor<float>* larger = A; //more rows or cols
-	TensorXL<float>* smaller = B; //one row or one col
+	Tensor<float>* larger = &A; //more rows or cols
+	TensorXL<float>* smaller = &B; //one row or one col
 	if (sameSize(A, B))
 	{//exactly the same size.
 		rowMod = Tensor<float>::getRows(A) + 1; //these mods do NOT affect the iterator
@@ -189,16 +192,16 @@ void div_type(Tensor<float> *A, TensorXL<float> *B, Tensor<float> *C)
 
 	//now for the actual math
 	unsigned i, j;
-	for (i = 0; i < Tensor<float>::getRows(larger); i++)
+	for (i = 0; i < Tensor<float>::getRows(*larger); i++)
 	{
-		for (j = 0; j < Tensor<float>::getCols(larger); j++)
+		for (j = 0; j < Tensor<float>::getCols(*larger); j++)
 		{
-			Tensor<float>::set(C, i, j, Tensor<float>::get(larger, i, j) / TensorXL<float>::get(smaller, i % rowMod, j % colMod));
+			Tensor<float>::set(C, i, j, Tensor<float>::get(*larger, i, j) / TensorXL<float>::get(*smaller, i % rowMod, j % colMod));
 		}
 	}
 }
 
-void mul_type(Tensor3d<float> *A, TensorXL<float> *B, Tensor3d<float> *C)//3d ops
+void mul_type(Tensor3d<float> &A, TensorXL<float> &B, Tensor3d<float> &C)//3d ops
 {
 	for (int d = 0; d < Tensor3d<float>::getDepth(A); d++)
 	{
@@ -206,7 +209,7 @@ void mul_type(Tensor3d<float> *A, TensorXL<float> *B, Tensor3d<float> *C)//3d op
 	}
 }
 
-void div_type(Tensor3d<float> *A, TensorXL<float> *B, Tensor3d<float> *C)
+void div_type(Tensor3d<float> &A, TensorXL<float> &B, Tensor3d<float> &C)
 {
 	for (int d = 0; d < Tensor3d<float>::getDepth(A); d++)
 	{

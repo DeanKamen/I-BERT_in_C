@@ -25,31 +25,34 @@ class QuantAct
 	~QuantAct();
 
     //other functions
-	scaled_tuple3d QuantAct_forward(Tensor3d<float>* x,
-        TensorXL<float>* pre_act_scaling_factor = nullptr,
-        Tensor3d<float>* identity = nullptr,
-        TensorXL<float>* identity_scaling_factor = nullptr,
-        Tensor<float>* specified_min = nullptr,
-        Tensor<float>* specified_max = nullptr);
+	static scaled_tuple3d QuantAct_forward(
+		QuantAct &self,
+		Tensor3d<float>& x,
+        TensorXL<float>& pre_act_scaling_factor,
+        Tensor3d<float>& identity,
+        TensorXL<float>& identity_scaling_factor,
+        Tensor<float>& specified_min,
+        Tensor<float>& specified_max);
 
     void fix();
     void unfix();
 
-    static TensorXL<float>* symmetric_linear_quantization_params(unsigned num_bits,
-                                        Tensor<float>* saturation_min,
-                                        Tensor<float>* saturation_max,
-                                        bool per_channel=false);
+    static TensorXL<float>* symmetric_linear_quantization_params(
+		unsigned num_bits,
+        Tensor<float>& saturation_min,
+        Tensor<float>& saturation_max,
+        bool per_channel=false);
 
-    Tensor3d<float>* symmetric_quant_forward(Tensor3d<float>* x, int k, TensorXL<float>* specified_scale);
-    static Tensor3d<float>* linear_quantize(Tensor3d<float> *x, TensorXL<float>* scale, TensorXL<float>* zero_point);
-    Tensor3d<float>* fixedpoint_mul(
-        Tensor3d<float>* pre_act,
-        TensorXL<float>* pre_act_scaling_factor,
+    static Tensor3d<float>* symmetric_quant_forward(QuantAct &self, Tensor3d<float>& x, int k, TensorXL<float>& specified_scale);
+    static Tensor3d<float>* linear_quantize(Tensor3d<float>& x, TensorXL<float>& scale, TensorXL<float>& zero_point);
+    static Tensor3d<float>* fixedpoint_mul(
+        Tensor3d<float>& pre_act,
+        TensorXL<float>& pre_act_scaling_factor,
         int bit_num,
         QuantMode quant_mode,
-        TensorXL<float>* z_scaling_factor,
-        Tensor3d<float>* identity = nullptr,
-        TensorXL<float>* identity_scaling_factor = nullptr
+        TensorXL<float>& z_scaling_factor,
+        Tensor3d<float>& identity,
+        TensorXL<float>& identity_scaling_factor
     );
 	void set_param(preload x_min_n, preload x_max_n, preload act_scaling_factor_n);
 
@@ -59,10 +62,6 @@ class QuantAct
     bool running_stat;
     QuantMode quant_mode;
     bool per_channel; //must be false, true implies 3d matrixes
-
-    Tensor<float>* x_min;//This is only ever of size one during inference at least
-    Tensor<float>* x_max;
-    TensorXL<float>* act_scaling_factor;
 };
 
 #endif

@@ -16,6 +16,8 @@ The file structure is as follows
 numrows*numcols floats following that.
 Then onto the next array
 */
+
+//used in the testbench. Can use dynamic memory allocation
 TensorXL<float>* loadTensorXL(preload idx)
 {
     FILE* f;
@@ -117,7 +119,7 @@ Tensor<float>* loadTensor(preload idx)
 				fread((void*)(&cur), sizeof(cur), 1, f);
 				int row = i / cols; // we are on this row at any given point
 				int col = i % cols;
-				Tensor<float>::set(localTensor, row, col, cur);
+				Tensor<float>::set(*localTensor, row, col, cur);
 			}
 			return localTensor;
 		}
@@ -154,8 +156,8 @@ Tensor3dXL<float>* loadGeneric3dXL(const char* fname)
 	printf("%d %s (%d, %d, %d)\n", str_len, str, depth , rows, cols);
 
 	Tensor3dXL<float>* localTensor = new Tensor3dXL<float>();
-	Tensor3dXL<float>::setRows(localTensor, rows);
-	Tensor3dXL<float>::setCols(localTensor, cols);
+	Tensor3dXL<float>::setRows(*localTensor, rows);
+	Tensor3dXL<float>::setCols(*localTensor, cols);
 	int i;
 	for (int d = 0; d < depth; d++)
 	{
@@ -168,7 +170,7 @@ Tensor3dXL<float>* loadGeneric3dXL(const char* fname)
 			int col = i % cols;
 			TensorXL<float>::set(*oneLayer, row, col, cur);
 		}
-		Tensor3dXL<float>::append(localTensor, oneLayer);
+		Tensor3dXL<float>::append(*localTensor, *oneLayer);
 	}
 
 	fclose(f);
@@ -193,8 +195,8 @@ Tensor3d<float>* loadGeneric3d(const char* fname)
 	printf("%d %s (%d, %d, %d)\n", str_len, str, depth, rows, cols);
 
 	Tensor3d<float>* localTensor = new Tensor3d<float>();
-	Tensor3d<float>::setRows(localTensor, rows);
-	Tensor3d<float>::setCols(localTensor, cols);
+	Tensor3d<float>::setRows(*localTensor, rows);
+	Tensor3d<float>::setCols(*localTensor, cols);
 	int i;
 	for (int d = 0; d < depth; d++)
 	{
@@ -205,9 +207,9 @@ Tensor3d<float>* loadGeneric3d(const char* fname)
 			fread((void*)(&cur), sizeof(cur), 1, f);
 			int row = i / cols; // we are on this row at any given point
 			int col = i % cols;
-			Tensor<float>::set(oneLayer, row, col, cur);
+			Tensor<float>::set(*oneLayer, row, col, cur);
 		}
-		Tensor3d<float>::append(localTensor, oneLayer);
+		Tensor3d<float>::append(*localTensor, *oneLayer);
 	}
 
 	fclose(f);

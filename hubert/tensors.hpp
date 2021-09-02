@@ -26,6 +26,7 @@ Tensor<T>::Tensor()
 			t_tensor[i][j] = 0; //for safety, we fill with 0, identity over addition and multiplication
 		}
 	}
+	null = true;
 }
 
 template<class T>
@@ -47,6 +48,7 @@ Tensor<T>::Tensor(unsigned numRows, unsigned numCols, T init_value)
             t_tensor[i][j] = init_value;
         }
     }
+	null = false;
 }
 template<class T>
 Tensor<T>::Tensor(const unsigned numRows, const unsigned numCols, T** init_pointer)
@@ -67,6 +69,7 @@ Tensor<T>::Tensor(const unsigned numRows, const unsigned numCols, T** init_point
             t_tensor[i][j] = init_pointer[i][j];
         }
     }
+	null = false;
 }
 
 template<class T>
@@ -82,10 +85,11 @@ Tensor<T>::Tensor(Tensor<T> *A)
 			t_tensor[i][j] = A->t_tensor[i][j]; //we dont use get as we want an exact copy
 		}
 	}
+	null = A->null;
 }
 
 template<class T>
-void Tensor<T>::mul_cross(Tensor<T> *A, Tensor<T> *B, Tensor<T> *C)
+void Tensor<T>::mul_cross(Tensor<T> &A, Tensor<T> &B, Tensor<T> &C)
 //this function needs to use MACROS or constants known at compile time for sizes.
 //when using multiplies in components, use the below prototype.
 {
@@ -95,7 +99,7 @@ void Tensor<T>::mul_cross(Tensor<T> *A, Tensor<T> *B, Tensor<T> *C)
 }
 
 template<class T>
-void Tensor<T>::mul_cross_secondary(Tensor<T> *A, Tensor<T> *B, Tensor<T> *C)
+void Tensor<T>::mul_cross_secondary(Tensor<T> &A, Tensor<T> &B, Tensor<T> &C)
 //this function needs to use MACROS or constants known at compile time for sizes.
 //when using multiplies in components, use the below prototype.
 {
@@ -105,12 +109,12 @@ void Tensor<T>::mul_cross_secondary(Tensor<T> *A, Tensor<T> *B, Tensor<T> *C)
 }
 
 template<class T>
-void Tensor<T>::add(Tensor<T> *A, Tensor<T> *B, Tensor<T> *C)
+void Tensor<T>::add(Tensor<T> &A, Tensor<T> &B, Tensor<T> &C)
 {
 	int rowMod;
 	int colMod;
-	Tensor<T>* larger = A; //more rows or cols
-	Tensor<T>* smaller = B; //one row or one col
+	Tensor<T>* larger = &A; //more rows or cols
+	Tensor<T>* smaller = &B; //one row or one col
 	if (sameSize(A, B))
 	{//exactly the same size.
 		rowMod = getRows(A) + 1; //these mods do NOT affect the iterator
@@ -141,22 +145,22 @@ void Tensor<T>::add(Tensor<T> *A, Tensor<T> *B, Tensor<T> *C)
 
 	//now for the actual math
     unsigned i,j;
-    for (i = 0; i < getRows(larger); i++)
+    for (i = 0; i < getRows(*larger); i++)
     {
-        for (j = 0; j < getCols(larger); j++)
+        for (j = 0; j < getCols(*larger); j++)
         {
-            Tensor::set(C,i,j,Tensor::get(larger, i, j) + Tensor::get(smaller, i % rowMod, j % colMod));
+            Tensor::set(C,i,j,Tensor::get(*larger, i, j) + Tensor::get(*smaller, i % rowMod, j % colMod));
         }
     }
 }
 
 template<class T>
-void Tensor<T>::sub(Tensor<T> *A, Tensor<T> *B, Tensor<T> *C)
+void Tensor<T>::sub(Tensor<T> &A, Tensor<T> &B, Tensor<T> &C)
 {
 	int rowMod;
 	int colMod;
-	Tensor<T>* larger = A; //more rows or cols
-	Tensor<T>* smaller = B; //one row or one col
+	Tensor<T>* larger = &A; //more rows or cols
+	Tensor<T>* smaller = &B; //one row or one col
 	if (sameSize(A, B))
 	{//exactly the same size.
 		rowMod = getRows(A) + 1; //these mods do NOT affect the iterator
@@ -187,22 +191,22 @@ void Tensor<T>::sub(Tensor<T> *A, Tensor<T> *B, Tensor<T> *C)
 
 	//now for the actual math
 	unsigned i, j;
-	for (i = 0; i < getRows(larger); i++)
+	for (i = 0; i < getRows(*larger); i++)
 	{
-		for (j = 0; j < getCols(larger); j++)
+		for (j = 0; j < getCols(*larger); j++)
 		{
-			Tensor::set(C, i, j, Tensor::get(larger, i, j) - Tensor::get(smaller, i % rowMod, j % colMod));
+			Tensor::set(C, i, j, Tensor::get(*larger, i, j) - Tensor::get(*smaller, i % rowMod, j % colMod));
 		}
 	}
 }
 
 template<class T>
-void Tensor<T>::mul_dot(Tensor<T> *A, Tensor<T> *B, Tensor<T> *C)
+void Tensor<T>::mul_dot(Tensor<T> &A, Tensor<T> &B, Tensor<T> &C)
 {
 	int rowMod;
 	int colMod;
-	Tensor<T>* larger = A; //more rows or cols
-	Tensor<T>* smaller = B; //one row or one col
+	Tensor<T>* larger = &A; //more rows or cols
+	Tensor<T>* smaller = &B; //one row or one col
 	if (sameSize(A, B))
 	{//exactly the same size.
 		rowMod = getRows(A) + 1; //these mods do NOT affect the iterator
@@ -233,22 +237,22 @@ void Tensor<T>::mul_dot(Tensor<T> *A, Tensor<T> *B, Tensor<T> *C)
 
 	//now for the actual math
 	unsigned i, j;
-	for (i = 0; i < getRows(larger); i++)
+	for (i = 0; i < getRows(*larger); i++)
 	{
-		for (j = 0; j < getCols(larger); j++)
+		for (j = 0; j < getCols(*larger); j++)
 		{
-			Tensor::set(C, i, j, Tensor::get(larger, i, j) * Tensor::get(smaller, i % rowMod, j % colMod));
+			Tensor::set(C, i, j, Tensor::get(*larger, i, j) * Tensor::get(*smaller, i % rowMod, j % colMod));
 		}
 	}
 }
 
 template<class T>
-void Tensor<T>::div_dot(Tensor<T> *A, Tensor<T> *B, Tensor<T> *C)
+void Tensor<T>::div_dot(Tensor<T> &A, Tensor<T> &B, Tensor<T> &C)
 {
 	int rowMod;
 	int colMod;
-	Tensor<T>* larger = A; //more rows or cols
-	Tensor<T>* smaller = B; //one row or one col
+	Tensor<T>* larger = &A; //more rows or cols
+	Tensor<T>* smaller = &B; //one row or one col
 	if (sameSize(A, B))
 	{//exactly the same size.
 		rowMod = getRows(A) + 1; //these mods do NOT affect the iterator
@@ -279,22 +283,22 @@ void Tensor<T>::div_dot(Tensor<T> *A, Tensor<T> *B, Tensor<T> *C)
 
 	//now for the actual math
 	unsigned i, j;
-	for (i = 0; i < getRows(larger); i++)
+	for (i = 0; i < getRows(*larger); i++)
 	{
-		for (j = 0; j < getCols(larger); j++)
+		for (j = 0; j < getCols(*larger); j++)
 		{
-			Tensor::set(C, i, j, Tensor::get(larger, i, j) / Tensor::get(smaller, i % rowMod, j % colMod));
+			Tensor::set(C, i, j, Tensor::get(*larger, i, j) / Tensor::get(*smaller, i % rowMod, j % colMod));
 		}
 	}
 }
 
 template<class T>
-void Tensor<T>::pow_dot(Tensor<T> *A, Tensor<T> *B, Tensor<T> *C)
+void Tensor<T>::pow_dot(Tensor<T> &A, Tensor<T> &B, Tensor<T> &C)
 {// A = B^C, note that there are more efficient functions for 2^X or e^X or 10^X
 	int rowMod;
 	int colMod;
-	Tensor<T>* larger = A; //more rows or cols
-	Tensor<T>* smaller = B; //one row or one col
+	Tensor<T>* larger = &A; //more rows or cols
+	Tensor<T>* smaller = &B; //one row or one col
 	if (sameSize(A, B))
 	{//exactly the same size.
 		rowMod = getRows(A) + 1; //these mods do NOT affect the iterator
@@ -335,7 +339,7 @@ void Tensor<T>::pow_dot(Tensor<T> *A, Tensor<T> *B, Tensor<T> *C)
 }
 
 template<class T>
-void Tensor<T>::add_scalar(Tensor<T> *A, T B, Tensor<T> *C)
+void Tensor<T>::add_scalar(Tensor<T> &A, T B, Tensor<T> &C)
 {
     unsigned i,j;
     for (i = 0; i < getRows(A); i++)
@@ -348,7 +352,7 @@ void Tensor<T>::add_scalar(Tensor<T> *A, T B, Tensor<T> *C)
 }
 
 template<class T>
-void Tensor<T>::mul_scalar(Tensor<T> *A, T B, Tensor<T> *C)
+void Tensor<T>::mul_scalar(Tensor<T> &A, T B, Tensor<T> &C)
 {
     unsigned i,j;
     for (i = 0; i < getRows(A); i++)
@@ -361,7 +365,7 @@ void Tensor<T>::mul_scalar(Tensor<T> *A, T B, Tensor<T> *C)
 }
 
 template<class T>
-void Tensor<T>::sub_scalar(Tensor<T> *A, T B, Tensor<T> *C)
+void Tensor<T>::sub_scalar(Tensor<T> &A, T B, Tensor<T> &C)
 {
     unsigned i,j;
     for (i = 0; i < getRows(A); i++)
@@ -374,7 +378,7 @@ void Tensor<T>::sub_scalar(Tensor<T> *A, T B, Tensor<T> *C)
 }
 
 template<class T>
-void Tensor<T>::sub_scalar(T B, Tensor<T> *A, Tensor<T> *C)
+void Tensor<T>::sub_scalar(T B, Tensor<T> &A, Tensor<T> &C)
 {
 	unsigned i, j;
 	for (i = 0; i < getRows(A); i++)
@@ -387,7 +391,7 @@ void Tensor<T>::sub_scalar(T B, Tensor<T> *A, Tensor<T> *C)
 }
 
 template<class T>
-void Tensor<T>::div_scalar(Tensor<T> *A, T B, Tensor<T> *C)
+void Tensor<T>::div_scalar(Tensor<T> &A, T B, Tensor<T> &C)
 {
     unsigned i,j;
     for (i = 0; i < getRows(A); i++)
@@ -400,7 +404,7 @@ void Tensor<T>::div_scalar(Tensor<T> *A, T B, Tensor<T> *C)
 }
 
 template<class T>
-void Tensor<T>::pow_scalar(Tensor<T> *A, T B, Tensor<T> *C)
+void Tensor<T>::pow_scalar(Tensor<T> &A, T B, Tensor<T> &C)
 {// A = B^C, note that there are more efficient functions for 2^X or e^X or 10^X
     unsigned i,j;
     for (i = 0; i < getRows(A); i++)
@@ -413,7 +417,7 @@ void Tensor<T>::pow_scalar(Tensor<T> *A, T B, Tensor<T> *C)
 }
 
 template<class T>
-void Tensor<T>::max(Tensor<T> *A, int dim, Tensor<T> *C)
+void Tensor<T>::max(Tensor<T> &A, int dim, Tensor<T> &C)
 //functions similar to https://pytorch.org/docs/stable/generated/torch.max.html#torch.max
 //but only works on 2d tensors and only returns a tensor with the maximums, no indexes. 
 //dim=0 means you find the biggest in each column,
@@ -477,7 +481,7 @@ void Tensor<T>::max(Tensor<T> *A, int dim, Tensor<T> *C)
     }
 }
 template<class T>
-void Tensor<T>::min(Tensor<T> *A, int dim, Tensor<T> *C)
+void Tensor<T>::min(Tensor<T> &A, int dim, Tensor<T> &C)
 //virtually same code as MAX
 //dim=0 means you find the smallest in each column,
 //dim=1 means you find the smallest in each row. 
@@ -541,7 +545,7 @@ void Tensor<T>::min(Tensor<T> *A, int dim, Tensor<T> *C)
 }
 
 template<class T>
-void Tensor<T>::max_scalar(Tensor<T>* A, T compare, Tensor<T> *C)
+void Tensor<T>::max_scalar(Tensor<T> &A, T compare, Tensor<T> &C)
 { //similar to clamp but more readable
 	unsigned i, j;
 	for (i = 0; i < getRows(A); i++)
@@ -555,7 +559,7 @@ void Tensor<T>::max_scalar(Tensor<T>* A, T compare, Tensor<T> *C)
 	}
 }
 template<class T>
-void Tensor<T>::min_scalar(Tensor<T>* A, T compare, Tensor<T> *C)
+void Tensor<T>::min_scalar(Tensor<T> &A, T compare, Tensor<T> &C)
 {
 	unsigned i, j;
 	for (i = 0; i < getRows(A); i++)
@@ -570,7 +574,7 @@ void Tensor<T>::min_scalar(Tensor<T>* A, T compare, Tensor<T> *C)
 }
 
 template<class T>
-void Tensor<T>::min_dot(Tensor<T>* A, Tensor<T>* B, Tensor<T> *C)
+void Tensor<T>::min_dot(Tensor<T> &A, Tensor<T> &B, Tensor<T> &C)
 {//element wise min that assumes a and b are the same size
 	assert(sameSize(A, B));
 	unsigned i, j;
@@ -588,7 +592,7 @@ void Tensor<T>::min_dot(Tensor<T>* A, Tensor<T>* B, Tensor<T> *C)
 }
 
 template<class T>
-void Tensor<T>::abs_tensor(Tensor<T> *A, Tensor<T>* C)
+void Tensor<T>::abs_tensor(Tensor<T> &A, Tensor<T> &C)
 {
 	unsigned i, j;
 	for (i = 0; i < getRows(A); i++)
@@ -603,7 +607,7 @@ void Tensor<T>::abs_tensor(Tensor<T> *A, Tensor<T>* C)
 }
 
 template<class T>
-void Tensor<T>::floor_tensor(Tensor<T> *A, Tensor<T> *C)
+void Tensor<T>::floor_tensor(Tensor<T> &A, Tensor<T> &C)
 {//does a cast to a float and then floors it.
     unsigned i,j;
     for (i = 0; i < getRows(A); i++)
@@ -618,7 +622,7 @@ void Tensor<T>::floor_tensor(Tensor<T> *A, Tensor<T> *C)
 }
 
 template<class T>
-void Tensor<T>::exp2_tensor(Tensor<T> *A, Tensor<T> *C)
+void Tensor<T>::exp2_tensor(Tensor<T> &A, Tensor<T> &C)
 {
 	unsigned i, j;
 	for (i = 0; i < getRows(A); i++)
@@ -631,7 +635,7 @@ void Tensor<T>::exp2_tensor(Tensor<T> *A, Tensor<T> *C)
 }
 
 template<class T>
-void Tensor<T>::clamp(Tensor<T> *A, T min, T max, Tensor<T> *C)
+void Tensor<T>::clamp(Tensor<T> &A, T min, T max, Tensor<T> &C)
 {
     unsigned i,j;
     for (i = 0; i < getRows(A); i++)
@@ -646,7 +650,7 @@ void Tensor<T>::clamp(Tensor<T> *A, T min, T max, Tensor<T> *C)
 }
 
 template<class T>
-void Tensor<T>::roundTensor(Tensor<T> *A, Tensor<T> *C)
+void Tensor<T>::roundTensor(Tensor<T> &A, Tensor<T> &C)
 {
     unsigned i,j;
     for (i = 0; i < getRows(A); i++)
@@ -665,7 +669,7 @@ void Tensor<T>::roundTensor(Tensor<T> *A, Tensor<T> *C)
 }
 
 template<class T>
-void Tensor<T>::reciprocal(Tensor<T> *A, Tensor<T> *C)
+void Tensor<T>::reciprocal(Tensor<T> &A, Tensor<T> &C)
 {
     unsigned i,j;
     for (i = 0; i < getRows(A); i++)
@@ -680,7 +684,7 @@ void Tensor<T>::reciprocal(Tensor<T> *A, Tensor<T> *C)
 }
 
 template<class T>
-void Tensor<T>::sum(Tensor<T> *A, int dim, Tensor<T>* C)
+void Tensor<T>::sum(Tensor<T> &A, int dim, Tensor<T> &C)
 {
 //dim=0 means you find the sum of each column,
 //dim=1 means you find the sum of each row. 
@@ -719,7 +723,7 @@ void Tensor<T>::sum(Tensor<T> *A, int dim, Tensor<T>* C)
 }
 
 template<class T>
-void Tensor<T>::sign(Tensor<T> *A, Tensor<T> *C)
+void Tensor<T>::sign(Tensor<T> &A, Tensor<T> &C)
 {
 	unsigned i, j;
 	for (i = 0; i < getRows(A); i++)
@@ -743,7 +747,7 @@ void Tensor<T>::sign(Tensor<T> *A, Tensor<T> *C)
 }
 
 template<class T> 
-void Tensor<T>::mean(Tensor<T> *A, Tensor<T> *C)
+void Tensor<T>::mean(Tensor<T> &A, Tensor<T> &C)
 {// assume a row vector. can be expanded upon like max and min to work along multiple dimentions
 	assert(getRows(A) == 1);
 	float running = 0.f;
@@ -756,7 +760,7 @@ void Tensor<T>::mean(Tensor<T> *A, Tensor<T> *C)
 }
 
 template<class T>
-void Tensor<T>::sqrt_tensor(Tensor<T> *A, Tensor<T> *C)
+void Tensor<T>::sqrt_tensor(Tensor<T> &A, Tensor<T> &C)
 {
 	unsigned i, j;
 	for (i = 0; i < getRows(A); i++)
@@ -769,7 +773,7 @@ void Tensor<T>::sqrt_tensor(Tensor<T> *A, Tensor<T> *C)
 }
 /****************************************************manipulation****************************************************/
 template<class T>
-void Tensor<T>::fill(Tensor<T> *A, T fill)
+void Tensor<T>::fill(Tensor<T> &A, T fill)
 {
     unsigned i,j;
     for (i = 0; i < getRows(A); i++)
@@ -782,7 +786,7 @@ void Tensor<T>::fill(Tensor<T> *A, T fill)
 }
 
 template<class T>
-void Tensor<T>::view(Tensor<T> *A, const int rows, const int cols, Tensor<T> *space)
+void Tensor<T>::view(Tensor<T> &A, const int rows, const int cols, Tensor<T> &space)
 {// a PRIMITIVE implementation of https://pytorch.org/docs/stable/generated/torch.Tensor.view.html?highlight=view#torch.Tensor.view
  // currentely only supports (rows, cols) where row and col go from -1 to 3072.
  // reshapes the tensor so that its values fit in a new shape. BE SMART when using this, because the function is dumb
@@ -826,7 +830,7 @@ void Tensor<T>::view(Tensor<T> *A, const int rows, const int cols, Tensor<T> *sp
 }
 
 template<class T>
-void Tensor<T>::tensor_frexp(Tensor<float>* inputs, Tensor<float>* m, Tensor<float>* e)
+void Tensor<T>::tensor_frexp(Tensor<float>& inputs, Tensor<float>& m, Tensor<float>& e)
 {
     //I am writing this one myself as I dont have access to numpy
     //C has a function called frexp, so I am just applying it to ever element in a matrix.
@@ -855,13 +859,13 @@ void Tensor<T>::tensor_frexp(Tensor<float>* inputs, Tensor<float>* m, Tensor<flo
 
 /****************************************************adressing methods****************************************************/
 template<class T>
-T Tensor<T>::get(Tensor<T> *tensor, const unsigned &row, const unsigned &col)
+T Tensor<T>::get(Tensor<T> &tensor, const unsigned &row, const unsigned &col)
 {
-    if(tensor->transposed)
+    if(tensor.transposed)
     {//in this block everything is flipped because internally, we are treating the matrix as transposed 
         if(row < getRows(tensor) && col < getCols(tensor))
         {
-            return tensor->t_tensor[col][row];
+            return tensor.t_tensor[col][row];
         }
         else
         {
@@ -874,7 +878,7 @@ T Tensor<T>::get(Tensor<T> *tensor, const unsigned &row, const unsigned &col)
     {// in this block everything is normal
         if(row < getRows(tensor) && col < getCols(tensor))
         {
-            return tensor->t_tensor[row][col];
+            return tensor.t_tensor[row][col];
         }
         else
         {
@@ -886,14 +890,14 @@ T Tensor<T>::get(Tensor<T> *tensor, const unsigned &row, const unsigned &col)
 }
 
 template<class T>
-void Tensor<T>::set(Tensor<T> *tensor, const unsigned &row, const unsigned &col, T val)
+void Tensor<T>::set(Tensor<T> &tensor, const unsigned &row, const unsigned &col, T val)
 {
     //The safeguards for in range access are non fatal. The intel matrix multiply trips them for some reason
-    if(tensor->transposed)
+    if(tensor.transposed)
     {//in this block everything is flipped because internally, we are treating the matrix as transposed 
         if(row < getRows(tensor) && col < getCols(tensor))
         {
-           tensor->t_tensor[col][row] = val;
+           tensor.t_tensor[col][row] = val;
         }
         else
         {
@@ -904,7 +908,7 @@ void Tensor<T>::set(Tensor<T> *tensor, const unsigned &row, const unsigned &col,
     {// in this block everything is normal
         if(row < getRows(tensor) && col < getCols(tensor))
         {
-            tensor->t_tensor[row][col] = val;
+            tensor.t_tensor[row][col] = val;
         }
         else
         {
@@ -914,7 +918,7 @@ void Tensor<T>::set(Tensor<T> *tensor, const unsigned &row, const unsigned &col,
 }
 
 template<class T>
-T Tensor<T>::one(Tensor<T> *A)
+T Tensor<T>::one(Tensor<T> &A)
 {//demotes a tensor to a primitive type (typically float)
 	if (Tensor<float>::getRows(A) == 1 && Tensor<float>::getCols(A) == 1)
 	{
@@ -922,23 +926,23 @@ T Tensor<T>::one(Tensor<T> *A)
 	}
 	else
 	{
-		printf("1x1 matrix asssumption failed");
-		assert(false);
+		//printf("1x1 matrix asssumption failed");
+		//assert(false);
 		return 0;
 	}
 }
 
 //helper functions
 template<class T>
-void Tensor<T>::transpose(Tensor<T> *a)
+void Tensor<T>::transpose(Tensor<T> &a)
 {
     //simply change a variable to address the matrix differently a[i][j] becomes a[j][i]
     //This requires the user to use get() rather than direct addressing
-    a->transposed= !a->transposed;
+    a.transposed= !a.transposed;
 }
 
 template<class T>
-void Tensor<T>::print(Tensor<T> *self)
+void Tensor<T>::print(Tensor<T> &self)
 {
 	
     #ifndef HLS_SYNTHESIS
@@ -964,7 +968,7 @@ void Tensor<T>::print(Tensor<T> *self)
 }
 
 template<class T>
-void Tensor<T>::print_brief(Tensor<T> *self)
+void Tensor<T>::print_brief(Tensor<T> &self)
 {
 
 	#ifndef HLS_SYNTHESIS
@@ -1001,27 +1005,27 @@ void Tensor<T>::print_brief(Tensor<T> *self)
 
 
 template<class T>
-unsigned Tensor<T>::getRows(Tensor<T> *A)
+unsigned Tensor<T>::getRows(Tensor<T> &A)
 { 
-    if(!A->transposed){
-        return A->t_numRows;
+    if(!A.transposed){
+        return A.t_numRows;
     }else{
-        return A->t_numCols;
+        return A.t_numCols;
     } 
 }
 
 template<class T>
-unsigned Tensor<T>::getCols(Tensor<T> *A)
+unsigned Tensor<T>::getCols(Tensor<T> &A)
 { 
-    if(!A->transposed){
-        return A->t_numCols;
+    if(!A.transposed){
+        return A.t_numCols;
     }else{
-        return A->t_numRows;
+        return A.t_numRows;
     } 
 }
 
 template<class T>
-bool Tensor<T>::eq(Tensor<T> *A, Tensor<T> *B)
+bool Tensor<T>::eq(Tensor<T> &A, Tensor<T> &B)
 {//returns true if all elements are the same. No broadcasting.
     unsigned i,j;
     for (i = 0; i < getRows(A); i++)
@@ -1036,7 +1040,7 @@ bool Tensor<T>::eq(Tensor<T> *A, Tensor<T> *B)
 }
 
 template<class T>
-bool Tensor<T>::eq_verbose(Tensor<T> *A, Tensor<T> *B)
+bool Tensor<T>::eq_verbose(Tensor<T> &A, Tensor<T> &B)
 {//returns true if all elements are the same. No broadcasting.
 	bool one = false;
 	unsigned i, j;
@@ -1064,39 +1068,39 @@ bool Tensor<T>::eq_verbose(Tensor<T> *A, Tensor<T> *B)
 
 //private helper functions
 template<class T>
-void Tensor<T>::setRows(Tensor<T> *A, int num)
+void Tensor<T>::setRows(Tensor<T> &A, int num)
 { 
-    if(!A->transposed){
-		A->t_numRows = num;
+    if(!A.transposed){
+		A.t_numRows = num;
     }else{
-		A->t_numCols = num;
+		A.t_numCols = num;
     } 
 }
 
 template<class T>
-void Tensor<T>::setCols(Tensor<T> *A, int num)
+void Tensor<T>::setCols(Tensor<T> &A, int num)
 { 
-    if(!A->transposed){
-		A->t_numCols = num;
+    if(!A.transposed){
+		A.t_numCols = num;
     }else{
-		A->t_numRows = num;
+		A.t_numRows = num;
     } 
 }
 
 template<class T>
-bool Tensor<T>::sameSize(Tensor<T> *A, Tensor<T> *B)
+bool Tensor<T>::sameSize(Tensor<T> &A, Tensor<T> &B)
 {
 	return Tensor<float>::getRows(A) == Tensor<float>::getRows(B) && Tensor<float>::getCols(A) == Tensor<float>::getCols(B);
 }
 
 template<class T>
-bool Tensor<T>::sameRows(Tensor<T> *A, Tensor<T> *B)
+bool Tensor<T>::sameRows(Tensor<T> &A, Tensor<T> &B)
 {
 	return Tensor<float>::getRows(A) == Tensor<float>::getRows(B);
 }
 
 template<class T>
-bool Tensor<T>::sameCols(Tensor<T> *A, Tensor<T> *B)
+bool Tensor<T>::sameCols(Tensor<T> &A, Tensor<T> &B)
 {
 	return Tensor<float>::getCols(A) == Tensor<float>::getCols(B);
 }
@@ -1104,8 +1108,8 @@ bool Tensor<T>::sameCols(Tensor<T> *A, Tensor<T> *B)
 template<class T>
 void Tensor<T>::flopSize(Tensor<T> *lhs, Tensor<T> *rhs)
 {//At the end of this function lhs will always point to the larger of the two tensors
-	assert(sameRows(lhs,rhs) || sameCols(lhs,rhs)); //we assume that the tensors share one dimention
-	if (getCols(lhs) < getCols(rhs) || getRows(lhs) < getRows(rhs))
+	//assert(sameRows(lhs,rhs) || sameCols(lhs,rhs)); //we assume that the tensors share one dimention
+	if (getCols(*lhs) < getCols(*rhs) || getRows(*lhs) < getRows(*rhs))
 	{
 		Tensor<T>* temp = lhs;
 		lhs = rhs;
@@ -1113,7 +1117,7 @@ void Tensor<T>::flopSize(Tensor<T> *lhs, Tensor<T> *rhs)
 	}
 }
 
-template<class T> void Tensor<T>::copy(Tensor<T> *A, Tensor<T> *C)
+template<class T> void Tensor<T>::copy(Tensor<T> &A, Tensor<T> &C)
 {
 	for (unsigned i = 0; i < getRows(A); i++)
 	{

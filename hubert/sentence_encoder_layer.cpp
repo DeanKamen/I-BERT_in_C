@@ -95,68 +95,45 @@ sentenceEncoderLayer::~sentenceEncoderLayer()
 
 
 scaled_tuple3dXL sentenceEncoderLayer::sel_forward(
-	Tensor3dXL<float>* x,
-	TensorXL<float>* x_scaling_factor,
-	TensorXL<float>* self_attn_mask,
-	Tensor<float>* self_attn_padding_mask)
+	sentenceEncoderLayer &self,
+	Tensor3dXL<float>& x,
+	TensorXL<float>& x_scaling_factor,
+	TensorXL<float>& self_attn_mask,
+	Tensor<float>& self_attn_padding_mask)
 {
+	T3d null3d;
+	T2d null2d;
+	Tensor<float> null2ds;
+
 	scaled_tuple3dXL t;
-	t = QuantAct_XL::QuantAct_forward(*input_act, x, x_scaling_factor);
-	Tensor3dXL<float>* t_v = loadGeneric3dXL("bin/act_verification.bin");
-	Tensor3dXL<float>::eq(t_v, t.matrix);
+	t = QuantAct_XL::QuantAct_forward(*self.input_act, x, x_scaling_factor, null3d, null2d, null2d, null2d);
 
 	scaled_tuple3dXL residual;
-	residual.matrix = new Tensor3dXL(t.matrix);
-	residual.scaling_factor = new TensorXL(t.scaling_factor);
+	T3d res_matrix(t.matrix);
+	residual.matrix = &res_matrix;
+	T2d res_sf(t.scaling_factor);
+	residual.scaling_factor = &res_sf;
 	
-	t = self_attn->multiheadAttention_forward(t.matrix, t.matrix, t.matrix, self_attn_padding_mask, nullptr, false, false, nullptr, false, false,
-		t.scaling_factor, t.scaling_factor, t.scaling_factor);
+	t = multiheadAttention::multiheadAttention_forward(*self.self_attn, *t.matrix, *t.matrix, *t.matrix, self_attn_padding_mask, null2ds, null2ds, null2d, null2d, null2d, false);
+	t = QuantAct_XL::QuantAct_forward(*self.pre_self_attn_layer_norm_act, *t.matrix, *t.scaling_factor, *residual.matrix, *residual.scaling_factor, null2d, null2d);
 
-	t_v = loadGeneric3dXL("bin/multihead_verification.bin");
-	Tensor3dXL<float>::eq(t_v, t.matrix);
-	t.matrix = t_v;
+	t = IntLayerNorm::intlayernorm_forward(*self.self_attn_layer_norm, *t.matrix, *t.scaling_factor);
 
-	t = QuantAct_XL::QuantAct_forward(*pre_self_attn_layer_norm_act, t.matrix, t.scaling_factor, residual.matrix, residual.scaling_factor);
+	t = QuantAct_XL::QuantAct_forward(*self.fc1_act, *t.matrix, *t.scaling_factor, null3d, null2d, null2d, null2d);
 
-	t = self_attn_layer_norm->intlayernorm_forward(t.matrix, t.scaling_factor);
-	t_v = loadGeneric3dXL("bin/ln1_verification.bin");
-	Tensor3dXL<float>::eq(t_v, t.matrix);
-	t.matrix = t_v;
+	res_matrix = T3d(t.matrix);
+	residual.matrix = &res_matrix;
+	res_sf = T2d(t.scaling_factor);
+	residual.scaling_factor = &res_sf;
 
-	t = QuantAct_XL::QuantAct_forward(*fc1_act, t.matrix, t.scaling_factor);
-	t_v = loadGeneric3dXL("bin/fc1a_verification.bin");
-	Tensor3dXL<float>::eq(t_v, t.matrix);
-	t.matrix = t_v;
-	TensorXL<float>* t_sf = loadGeneric2d("bin/fc1asf_verification.bin");
-	TensorXL<float>::eq_verbose(t_sf, t.scaling_factor);
-	t.scaling_factor = t_sf;
+	t = QuantLinear::quantlinear_forward(*self.fc1, *t.matrix, *t.scaling_factor);
 
-	delete residual.matrix, residual.scaling_factor;
-	residual.matrix = new Tensor3dXL(t.matrix);
-	residual.scaling_factor = new TensorXL(t.scaling_factor);
+	t = IntGELU::intgelu_forward(*self.activation_fn_approx, *t.matrix, *t.scaling_factor);
 
-	t = fc1->quantlinear_forward(t.matrix, t.scaling_factor);
-	t_v = loadGeneric3dXL("bin/fc1_verification.bin");
-	Tensor3dXL<float>::eq(t_v, t.matrix);
-	t.matrix = t_v;
-	t_sf = loadGeneric2d("bin/fc1sf_verification.bin");
-	TensorXL<float>::eq_verbose(t_sf, t.scaling_factor);
-	t.scaling_factor = t_sf;
+	t = QuantAct_XL::QuantAct_forward(*self.fc2_act, *t.matrix, *t.scaling_factor, null3d, null2d, null2d, null2d);
+	t = QuantLinear::quantlinear_forward(*self.fc2, *t.matrix, *t.scaling_factor);
 
-	t = activation_fn_approx->intgelu_forward(t.matrix, t.scaling_factor);
-	t_v = loadGeneric3dXL("bin/gelu_verification.bin");
-	Tensor3dXL<float>::eq(t_v, t.matrix);
-	t.matrix = t_v;
-
-	t = QuantAct_XL::QuantAct_forward(*fc2_act, t.matrix, t.scaling_factor);
-	t = fc2->quantlinear_forward(t.matrix, t.scaling_factor);
-	t_v = loadGeneric3dXL("bin/fc2_verification.bin");
-	Tensor3dXL<float>::eq(t_v, t.matrix);
-
-	t = QuantAct_XL::QuantAct_forward(*pre_final_layer_norm_act, t.matrix, t.scaling_factor, residual.matrix, residual.scaling_factor);
-	t = final_layer_norm->intlayernorm_forward(t.matrix, t.scaling_factor);
-
-	Tensor3dXL<float>* fx_v = loadGeneric3dXL("bin/final_x_verification.bin");
-	Tensor3dXL<float>::eq(fx_v, t.matrix);
+	t = QuantAct_XL::QuantAct_forward(*self.pre_final_layer_norm_act, *t.matrix, *t.scaling_factor, *residual.matrix, *residual.scaling_factor, null2d, null2d);
+	t = IntLayerNorm::intlayernorm_forward(*self.final_layer_norm, *t.matrix, *t.scaling_factor);
 	return t;
 }	

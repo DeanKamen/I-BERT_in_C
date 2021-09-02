@@ -39,20 +39,22 @@ public:
 	~multiheadAttention();
 	
 	//Forward
-	scaled_tuple3dXL multiheadAttention_forward(
-		Tensor3dXL<float>* query,
-		Tensor3dXL<float>* key,
-		Tensor3dXL<float> * value,
-		Tensor<float> *key_padding_mask = nullptr,
-		Tensor<float> *incremental_state = nullptr,
+	static scaled_tuple3dXL multiheadAttention_forward(
+		multiheadAttention &self,
+		Tensor3dXL<float> &query,
+		Tensor3dXL<float> &key,
+		Tensor3dXL<float>  &value,
+		Tensor<float> &key_padding_mask ,
+		Tensor<float> &incremental_state,
+		Tensor<float> &attn_mask,
+		TensorXL<float>& query_scale,
+		TensorXL<float>& key_scale,
+		TensorXL<float>& value_scale,
 		bool need_weights = true,
 		bool static_kv = false,
-		Tensor<float> *attn_mask = nullptr,
 		bool before_softmax = false,
-		bool need_head_wights = false,
-		TensorXL<float>* query_scale = nullptr,
-		TensorXL<float>* key_scale = nullptr,
-		TensorXL<float>* value_scale = nullptr);
+		bool need_head_wights = false
+		);
 
 	QuantMode quant_mode;
 	ForceDequantMode force_dequant;
@@ -83,8 +85,5 @@ public:
 	QuantAct_XL *attn_probs_act;
 	QuantAct_XL *attn_act;
 	QuantLinear *out_proj;
-	Tensor<float>* bias_k;
-	Tensor<float>* bias_v;
-
 };
 #endif

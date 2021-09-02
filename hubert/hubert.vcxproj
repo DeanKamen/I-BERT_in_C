@@ -125,9 +125,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="crosstype_tensors.cpp" />
+    <ClCompile Include="IntGELU.cpp" />
+    <ClCompile Include="IntLayerNorm.cpp" />
     <ClCompile Include="loadTensors.cpp" />
+    <ClCompile Include="multiheadAttention.cpp" />
+    <ClCompile Include="quantact.cpp" />
     <ClCompile Include="quantact_testbench.cpp" />
     <ClCompile Include="quantact_xl.cpp" />
+    <ClCompile Include="QuantLinear.cpp" />
+    <ClCompile Include="sentence_encoder_layer.cpp" />
+    <ClCompile Include="softmax.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="crosstype_tensors.h" />

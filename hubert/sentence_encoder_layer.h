@@ -41,11 +41,12 @@ public:
 	~sentenceEncoderLayer();
 	
 	//Forward
-	scaled_tuple3dXL sel_forward(
-		Tensor3dXL<float>* x,
-		TensorXL<float>* x_scaling_factor,
-		TensorXL<float>* self_attn_mask = nullptr,
-		Tensor<float>* self_attn_padding_mask = nullptr);
+	static scaled_tuple3dXL sel_forward(
+		sentenceEncoderLayer &self,
+		Tensor3dXL<float>& x,
+		TensorXL<float>& x_scaling_factor,
+		TensorXL<float>& self_attn_mask,
+		Tensor<float>& self_attn_padding_mask);
 
 	QuantMode quant_mode;
 	ForceDequantMode force_dequant;

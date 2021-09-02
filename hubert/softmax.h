@@ -17,12 +17,12 @@ public:
 	Softmax(int output_bit, QuantMode quant_mode = QuantMode::none, ForceDequantMode force_dequant = ForceDequantMode::none);
 	~Softmax();
 	//member functions
-	scaled_tuple3d int_polynomial(Tensor3d<float>* x_int, TensorXL<float>* scaling_factor);
-	scaled_tuple3d int_exp(Tensor3d<float>* x_int, TensorXL<float>* scaling_factor);
-	scaled_tuple3d softmax_forward(Tensor3d<float>* x_int, TensorXL<float>* scaling_factor);
+	static scaled_tuple3d int_polynomial(Softmax &self, Tensor3d<float>& x_int, TensorXL<float>& scaling_factor);
+	static scaled_tuple3d int_exp(Softmax &self, Tensor3d<float>& x_int, TensorXL<float>& scaling_factor);
+	static scaled_tuple3d softmax_forward(Softmax &self, Tensor3d<float>& x_int, TensorXL<float>& scaling_factor);
 	void set_param(preload x_min_n, preload x_max_n, preload act_scaling_factor_n);
 
-	void normal_softmax(Tensor3d<float>* row, Tensor3d<float>* dest);
+	static void normal_softmax(Softmax &self, Tensor3d<float>& row, Tensor3d<float>& dest);
 
 	int output_bit;
 	QuantMode quant_mode;

@@ -22,20 +22,12 @@ public:
 	//initializer
 	IntLayerNorm(int output_bit, bool overflow_handling = true, QuantMode quant_mode = QuantMode::none, ForceDequantMode force_dequant = ForceDequantMode::none);
 	~IntLayerNorm();
-	//member functions
-	//void set_shift(Tensor3d<float>* y_int); 
-	//void overflow_fallback(Tensor3d<float>* y_int);
-	scaled_tuple3dXL intlayernorm_forward(Tensor3dXL<float>* x, TensorXL<float>* scaling_factor = nullptr);
+	static scaled_tuple3dXL intlayernorm_forward(IntLayerNorm& self, Tensor3dXL<float>& x, TensorXL<float>& scaling_factor);
 	void set_param(preload shift, preload weight, preload bias);
-
+	QuantAct* activation;
 	QuantMode quant_mode;
-	TensorXL<float>* shift;
-	TensorXL<float>* weight;
-	TensorXL<float>* bias;
 	bool overflow_handling;
 	int output_bit;
-	//Tensor<float>* dim_sqrt;
-	QuantAct* activation;
 	float eps = 1e-5f;
 };
 #endif

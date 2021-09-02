@@ -22,8 +22,8 @@ Tensor3dXL<T>::Tensor3dXL(Tensor3dXL<T> *A) //Takes 2d matrixes from the pointer
 	t_depth = getDepth(A);
 	for (unsigned d = 0; d < t_depth; d++)
 	{
-		TensorXL<float>* layer = new TensorXL<float>(get(A, d));
-		matrix[d] = layer;
+		static TensorXL<float> layer(get(*A, d)); //TODO: almost certainly wrong. Dont care right now
+		matrix[d] = &layer;
 	}
 	null = false;
 }
@@ -36,8 +36,8 @@ Tensor3dXL<T>::Tensor3dXL(Tensor3dXL<T> &A)
 	t_depth = getDepth(A);
 	for (unsigned d = 0; d < t_depth; d++)
 	{
-		TensorXL<float>* layer = new TensorXL<float>(get(A, d));
-		matrix[d] = layer;
+		static TensorXL<float> layer(get(A, d));//TODO: almost certainly wrong. Dont care right now
+		matrix[d] = &layer;
 	}
 	null = false;
 }
@@ -60,7 +60,8 @@ Tensor3dXL<T>::Tensor3dXL(int dep, int row, int col, T init)
 	t_depth = dep;
 	for (unsigned d = 0; d < dep; d++)
 	{
-		matrix[d] = new TensorXL<T>(row, col, init);
+		static TensorXL<float> layer(row, col, init);//TODO: almost certainly wrong. Dont care right now
+		matrix[d] = &layer;
 	}
 	null = false;
 }
@@ -87,28 +88,28 @@ Tensor3dXL<T>::~Tensor3dXL()
 }
 
 //special multiply
-template<class T> void Tensor3dXL<T>::linear_mul(Tensor3dXL<T> *A, TensorXL<T> *B, Tensor3dXL<T> *C)
+template<class T> void Tensor3dXL<T>::linear_mul(Tensor3dXL<T> &A, TensorXL<T> &B, Tensor3dXL<T> &C)
 {
 	TensorXL<T>::transpose(B);
 	if (getCols(A) > 768)
 	{
 		for (unsigned d = 0; d < getDepth(A); d++)
 		{
-			TensorXL<T>::mul_crossL(*get(A, d), B, *get(C, d));
+			TensorXL<T>::mul_crossL(get(A, d), B, get(C, d));
 		}
 	}
 	else if (TensorXL<T>::getCols(B) > 768)
 	{
 		for (unsigned d = 0; d < getDepth(A); d++)
 		{
-			TensorXL<T>::mul_crossR(*get(A, d), B, *get(C, d));
+			TensorXL<T>::mul_crossR(get(A, d), B, get(C, d));
 		}
 	}
 	else
 	{
 		for (unsigned d = 0; d < getDepth(A); d++)
 		{
-			TensorXL<T>::mul_cross(*get(A, d), B, *get(C, d));
+			TensorXL<T>::mul_cross(get(A, d), B, get(C, d));
 		}
 	}
 
@@ -117,13 +118,13 @@ template<class T> void Tensor3dXL<T>::linear_mul(Tensor3dXL<T> *A, TensorXL<T> *
 	TensorXL<T>::transpose(B);
 }
 
-template<class T> void Tensor3dXL<T>::bmm(Tensor3dXL<T> *A, Tensor3dXL<T> *B, Tensor3dXL<T> *C)
+template<class T> void Tensor3dXL<T>::bmm(Tensor3dXL<T> &A, Tensor3dXL<T> &B, Tensor3dXL<T> &C)
 { //for when they both have the same size
 	for (unsigned d = 0; d < getDepth(A); d++)
 	{
-		TensorXL<T> *rhs = *get(B, d);
+		TensorXL<T> rhs = get(B, d);
 		TensorXL<T>::transpose(rhs);
-		TensorXL<T>::mul_cross(*get(A, d), rhs, *get(C, d));
+		TensorXL<T>::mul_cross(get(A, d), rhs, get(C, d));
 		TensorXL<T>::transpose(rhs);
 	}
 	setCols(C, getCols(B));
@@ -131,148 +132,148 @@ template<class T> void Tensor3dXL<T>::bmm(Tensor3dXL<T> *A, Tensor3dXL<T> *B, Te
 }
 
 //2d broadcasting across 3d
-template<class T> void Tensor3dXL<T>::add(Tensor3dXL<T> *A, TensorXL<T> *B, Tensor3dXL<T> *C)
+template<class T> void Tensor3dXL<T>::add(Tensor3dXL<T> &A, TensorXL<T> &B, Tensor3dXL<T> &C)
 {
 	//defer error checking to a layer by layer basis. 
 	for (unsigned d = 0; d < getDepth(A); d++)
 	{
-		TensorXL<T>::add(*get(A, d), *B, *get(C, d));
+		TensorXL<T>::add(get(A, d), B, get(C, d));
 	}
 }
 
-template<class T> void Tensor3dXL<T>::sub(Tensor3dXL<T> *A, TensorXL<T> *B, Tensor3dXL<T> *C)
+template<class T> void Tensor3dXL<T>::sub(Tensor3dXL<T> &A, TensorXL<T> &B, Tensor3dXL<T> &C)
 {
 	for (unsigned d = 0; d < getDepth(A); d++)
 	{
-		TensorXL<T>::sub(*get(A, d), *B, *get(C, d));
+		TensorXL<T>::sub(get(A, d), B, get(C, d));
 	}
 }
-template<class T> void Tensor3dXL<T>::mul_dot(Tensor3dXL<T> *A, TensorXL<T> *B, Tensor3dXL<T> *C)
+template<class T> void Tensor3dXL<T>::mul_dot(Tensor3dXL<T> &A, TensorXL<T> &B, Tensor3dXL<T> &C)
 {
 	for (unsigned d = 0; d < getDepth(A); d++)
 	{
-		TensorXL<T>::mul_dot(*get(A, d), *B, *get(C, d));
-	}
-}
-
-template<class T> void Tensor3dXL<T>::div_dot(Tensor3dXL<T> *A, TensorXL<T> *B, Tensor3dXL<T> *C)
-{
-	for (unsigned d = 0; d < getDepth(A); d++)
-	{
-		TensorXL<T>::div_dot(*get(A, d), *B, *get(C, d));
+		TensorXL<T>::mul_dot(get(A, d), B, get(C, d));
 	}
 }
 
-template<class T> void Tensor3dXL<T>::pow_dot(Tensor3dXL<T> *A, TensorXL<T> *B, Tensor3dXL<T> *C)
+template<class T> void Tensor3dXL<T>::div_dot(Tensor3dXL<T> &A, TensorXL<T> &B, Tensor3dXL<T> &C)
 {
 	for (unsigned d = 0; d < getDepth(A); d++)
 	{
-		TensorXL<T>::pow_dot(*get(A, d), *B, *get(C, d));
+		TensorXL<T>::div_dot(get(A, d), B, get(C, d));
+	}
+}
+
+template<class T> void Tensor3dXL<T>::pow_dot(Tensor3dXL<T> &A, TensorXL<T> &B, Tensor3dXL<T> &C)
+{
+	for (unsigned d = 0; d < getDepth(A); d++)
+	{
+		TensorXL<T>::pow_dot(get(A, d), B, get(C, d));
 	}
 }
 
 //3d and 3d.
-template<class T> void Tensor3dXL<T>::add(Tensor3dXL<T> *A, Tensor3dXL<T> *B, Tensor3dXL<T> *C)
+template<class T> void Tensor3dXL<T>::add(Tensor3dXL<T> &A, Tensor3dXL<T> &B, Tensor3dXL<T> &C)
 {
 	for (unsigned d = 0; d < getDepth(A); d++)
 	{
-		TensorXL<T>::add(*get(A, d), *get(B, d), *get(C, d));
+		TensorXL<T>::add(get(A, d), get(B, d), get(C, d));
 	}
 }
-template<class T> void Tensor3dXL<T>::sub(Tensor3dXL<T> *A, Tensor3dXL<T> *B, Tensor3dXL<T> *C)
+template<class T> void Tensor3dXL<T>::sub(Tensor3dXL<T> &A, Tensor3dXL<T> &B, Tensor3dXL<T> &C)
 {
 	for (unsigned d = 0; d < getDepth(A); d++)
 	{
-		TensorXL<T>::sub(*get(A, d), *get(B, d), *get(C, d));
+		TensorXL<T>::sub(get(A, d), get(B, d), get(C, d));
 	}
 }
-template<class T> void Tensor3dXL<T>::mul_dot(Tensor3dXL<T> *A, Tensor3dXL<T> *B, Tensor3dXL<T> *C)
+template<class T> void Tensor3dXL<T>::mul_dot(Tensor3dXL<T> &A, Tensor3dXL<T> &B, Tensor3dXL<T> &C)
 {
 	for (unsigned d = 0; d < getDepth(A); d++)
 	{
-		TensorXL<T>::mul_dot(*get(A, d), *get(B, d), *get(C, d));
+		TensorXL<T>::mul_dot(get(A, d), get(B, d), get(C, d));
 	}
 }
-template<class T> void Tensor3dXL<T>::div_dot(Tensor3dXL<T> *A, Tensor3dXL<T> *B, Tensor3dXL<T> *C)
+template<class T> void Tensor3dXL<T>::div_dot(Tensor3dXL<T> &A, Tensor3dXL<T> &B, Tensor3dXL<T> &C)
 {
 	for (unsigned d = 0; d < getDepth(A); d++)
 	{
-		TensorXL<T>::div_dot(*get(A, d), *get(B, d), *get(C, d));
+		TensorXL<T>::div_dot(get(A, d), get(B, d), get(C, d));
 	}
 }
-template<class T> void Tensor3dXL<T>::pow_dot(Tensor3dXL<T> *A, Tensor3dXL<T> *B, Tensor3dXL<T> *C)
+template<class T> void Tensor3dXL<T>::pow_dot(Tensor3dXL<T> &A, Tensor3dXL<T> &B, Tensor3dXL<T> &C)
 {
 	for (unsigned d = 0; d < getDepth(A); d++)
 	{
-		TensorXL<T>::pow_dot(*get(A, d), *get(B, d), *get(C, d));
+		TensorXL<T>::pow_dot(get(A, d), get(B, d), get(C, d));
 	}
 }
 
 //scalar type
-template<class T> void Tensor3dXL<T>::add_scalar(Tensor3dXL<T> *A, T B, Tensor3dXL<T> *C)
+template<class T> void Tensor3dXL<T>::add_scalar(Tensor3dXL<T> &A, T B, Tensor3dXL<T> &C)
 {
 	for (unsigned d = 0; d < getDepth(A); d++)
 	{
-		TensorXL<T>::add_scalar(*get(A, d), B, *get(C, d));
+		TensorXL<T>::add_scalar(get(A, d), B, get(C, d));
 	}
 }
 
-template<class T> void Tensor3dXL<T>::mul_scalar(Tensor3dXL<T> *A, T B, Tensor3dXL<T> *C)
+template<class T> void Tensor3dXL<T>::mul_scalar(Tensor3dXL<T> &A, T B, Tensor3dXL<T> &C)
 {
 	for (unsigned d = 0; d < getDepth(A); d++)
 	{
-		TensorXL<T>::mul_scalar(*get(A, d), B, *get(C, d));
+		TensorXL<T>::mul_scalar(get(A, d), B, get(C, d));
 	}
 }
-template<class T> void Tensor3dXL<T>::sub_scalar(Tensor3dXL<T> *A, T B, Tensor3dXL<T> *C)
+template<class T> void Tensor3dXL<T>::sub_scalar(Tensor3dXL<T> &A, T B, Tensor3dXL<T> &C)
 {
 	for (unsigned d = 0; d < getDepth(A); d++)
 	{
-		TensorXL<T>::sub_scalar(*get(A, d), *B, *get(C, d));
+		TensorXL<T>::sub_scalar(get(A, d), B, get(C, d));
 	}
 }
-template<class T> void Tensor3dXL<T>::sub_scalar(T B, Tensor3dXL<T> *A, Tensor3dXL<T> *C)
+template<class T> void Tensor3dXL<T>::sub_scalar(T B, Tensor3dXL<T> &A, Tensor3dXL<T> &C)
 {
 	for (unsigned d = 0; d < getDepth(A); d++)
 	{
-		TensorXL<T>::sub_scalar(*B, *get(A, d), *get(C, d));
+		TensorXL<T>::sub_scalar(B, get(A, d), get(C, d));
 	}
 }
-template<class T> void Tensor3dXL<T>::div_scalar(Tensor3dXL<T> *A, T B, Tensor3dXL<T> *C)
+template<class T> void Tensor3dXL<T>::div_scalar(Tensor3dXL<T> &A, T B, Tensor3dXL<T> &C)
 {
 	for (unsigned d = 0; d < getDepth(A); d++)
 	{
-		TensorXL<T>::div_scalar(*get(A, d), *B, *get(C, d));
+		TensorXL<T>::div_scalar(get(A, d), B, get(C, d));
 	}
 }
-template<class T> void Tensor3dXL<T>::pow_scalar(Tensor3dXL<T> *A, T B, Tensor3dXL<T> *C)
+template<class T> void Tensor3dXL<T>::pow_scalar(Tensor3dXL<T> &A, T B, Tensor3dXL<T> &C)
 {
 	for (unsigned d = 0; d < getDepth(A); d++)
 	{
-		TensorXL<T>::pow_scalar(*get(A, d), *B, *get(C, d));
+		TensorXL<T>::pow_scalar(get(A, d), B, get(C, d));
 	}
 }
-template<class T> void Tensor3dXL<T>::max(Tensor3dXL<T>* A, int dim, Tensor3dXL<T> *C)
+template<class T> void Tensor3dXL<T>::max(Tensor3dXL<T> &A, int dim, Tensor3dXL<T> &C)
 {
 	if (dim == 0 || dim == 1)
 	{
 		for (unsigned d = 0; d < getDepth(A); d++)
 		{
-			TensorXL<T>::max(*get(A, d), dim, *get(C, d));
+			TensorXL<T>::max(get(A, d), dim, get(C, d));
 		}
-		setCols(C, TensorXL<T>::getCols(*get(C, 0))); // the rows and cols of the layers were updated
-		setRows(C, TensorXL<T>::getRows(*get(C, 0))); // but we still need to update the 3d matrix's
+		setCols(C, TensorXL<T>::getCols(get(C, 0))); // the rows and cols of the layers were updated
+		setRows(C, TensorXL<T>::getRows(get(C, 0))); // but we still need to update the 3d matrix's
 	}
 	else //dim ==2
 	{
 		unsigned i, j;
 		T largest;
 		bool first = true;
-		for (i = 0; i < A->t_numCols; i++)
+		for (i = 0; i < A.t_numCols; i++)
 		{
-			for (j = 0; j < A->t_numRows; j++)
+			for (j = 0; j < A.t_numRows; j++)
 			{
-				for (unsigned d = 0; d < A->t_depth; d++)
+				for (unsigned d = 0; d < A.t_depth; d++)
 				{
 					if (first)
 					{
@@ -292,31 +293,31 @@ template<class T> void Tensor3dXL<T>::max(Tensor3dXL<T>* A, int dim, Tensor3dXL<
 		}
 		//i know the dimentions of C, so i set them for safety
 		setDepth(C, 1);
-		setCols(C, A->t_numCols);
-		setRows(C, A->t_numRows);
+		setCols(C, A.t_numCols);
+		setRows(C, A.t_numRows);
 	}
 }
-template<class T> void Tensor3dXL<T>::min(Tensor3dXL<T>* A, int dim, Tensor3dXL<T> *C)
+template<class T> void Tensor3dXL<T>::min(Tensor3dXL<T> &A, int dim, Tensor3dXL<T> &C)
 {
 	if (dim == 0 || dim == 1)
 	{
 		for (unsigned d = 0; d < getDepth(A); d++)
 		{
-			TensorXL<T>::min(*get(A, d), dim, *get(C, d));
+			TensorXL<T>::min(get(A, d), dim, get(C, d));
 		}
-		setCols(C, TensorXL<T>::getCols(*get(C, 0))); // the rows and cols of the layers were updated
-		setRows(C, TensorXL<T>::getRows(*get(C, 0))); // but we still need to update the 3d matrix's
+		setCols(C, TensorXL<T>::getCols(get(C, 0))); // the rows and cols of the layers were updated
+		setRows(C, TensorXL<T>::getRows(get(C, 0))); // but we still need to update the 3d matrix's
 	}
 	else //dim ==2
 	{
 		unsigned i, j;
 		T smallest;
 		bool first = true;
-		for (i = 0; i < A->t_numCols; i++)
+		for (i = 0; i < A.t_numCols; i++)
 		{
-			for (j = 0; j < A->t_numRows; j++)
+			for (j = 0; j < A.t_numRows; j++)
 			{
-				for (unsigned d = 0; d < A->t_depth; d++)
+				for (unsigned d = 0; d < A.t_depth; d++)
 				{
 					if (first)
 					{
@@ -336,103 +337,103 @@ template<class T> void Tensor3dXL<T>::min(Tensor3dXL<T>* A, int dim, Tensor3dXL<
 		}
 		//i know the dimentions of C, so i set them for safety
 		setDepth(C, 1);
-		setCols(C, A->t_numCols);
-		setRows(C, A->t_numRows);
+		setCols(C, A.t_numCols);
+		setRows(C, A.t_numRows);
 	}
 }
 
-template<class T> void Tensor3dXL<T>::max(Tensor3dXL<T>* A, Tensor3dXL<T> *C) // full collapse
+template<class T> void Tensor3dXL<T>::max(Tensor3dXL<T>& A, Tensor3dXL<T> &C) // full collapse
 {
 	Tensor3dXL<T>::max(A, 0, A);
 	Tensor3dXL<T>::max(A, 1, A);
 	Tensor3dXL<T>::max(A, 2, A);
 }
 
-template<class T> void Tensor3dXL<T>::min(Tensor3dXL<T>* A, Tensor3dXL<T> *C)
+template<class T> void Tensor3dXL<T>::min(Tensor3dXL<T> &A, Tensor3dXL<T> &C)
 {
 	Tensor3dXL<T>::min(A, 0, A);
 	Tensor3dXL<T>::min(A, 1, A);
 	Tensor3dXL<T>::min(A, 2, A);
 }
 
-template<class T> void Tensor3dXL<T>::max_scalar(Tensor3dXL<T>* A, T compare, Tensor3dXL<T> *C)
+template<class T> void Tensor3dXL<T>::max_scalar(Tensor3dXL<T> &A, T compare, Tensor3dXL<T> &C)
 {
 	for (unsigned d = 0; d < getDepth(A); d++)
 	{
-		TensorXL<T>::max_scalar(*get(A, d), compare, *get(C, d));
+		TensorXL<T>::max_scalar(get(A, d), compare, get(C, d));
 	}
 }
 
-template<class T> void Tensor3dXL<T>::min_scalar(Tensor3dXL<T>* A, T compare, Tensor3dXL<T> *C)
+template<class T> void Tensor3dXL<T>::min_scalar(Tensor3dXL<T> &A, T compare, Tensor3dXL<T> &C)
 {
 	for (unsigned d = 0; d < getDepth(A); d++)
 	{
-		TensorXL<T>::min_scalar(*get(A, d), compare, *get(C, d));
+		TensorXL<T>::min_scalar(get(A, d), compare, get(C, d));
 	}
 }
 
-template<class T> void Tensor3dXL<T>::min_dot(Tensor3dXL<T>* A, TensorXL<T> *B, Tensor3dXL<T> *C)
+template<class T> void Tensor3dXL<T>::min_dot(Tensor3dXL<T> &A, TensorXL<T> &B, Tensor3dXL<T> &C)
 {
 	for (unsigned d = 0; d < getDepth(A); d++)
 	{
-		TensorXL<T>::min_dot(*get(A, d), B, *get(C, d));
+		TensorXL<T>::min_dot(get(A, d), B, get(C, d));
 	}
 }
 
-template<class T> void Tensor3dXL<T>::abs_tensor(Tensor3dXL<T> *A, Tensor3dXL<T>* C)
+template<class T> void Tensor3dXL<T>::abs_tensor(Tensor3dXL<T> &A, Tensor3dXL<T> &C)
 {
 	for (unsigned d = 0; d < getDepth(A); d++)
 	{
-		TensorXL<T>::abs_tensor(*get(A, d), *get(C, d));
+		TensorXL<T>::abs_tensor(get(A, d), get(C, d));
 	}
 }
 
-template<class T> void Tensor3dXL<T>::floor_tensor(Tensor3dXL<T> *A, Tensor3dXL<T> *C)
+template<class T> void Tensor3dXL<T>::floor_tensor(Tensor3dXL<T> &A, Tensor3dXL<T> &C)
 {
 	for (unsigned d = 0; d < getDepth(A); d++)
 	{
-		TensorXL<T>::floor_tensor(*get(A, d), *get(C, d));
+		TensorXL<T>::floor_tensor(get(A, d), get(C, d));
 	}
 }
 
-template<class T> void Tensor3dXL<T>::exp2_tensor(Tensor3dXL<T> *A, Tensor3dXL<T> *C)
+template<class T> void Tensor3dXL<T>::exp2_tensor(Tensor3dXL<T> &A, Tensor3dXL<T> &C)
 {
 	for (unsigned d = 0; d < getDepth(A); d++)
 	{
-		TensorXL<T>::exp2_tensor(*get(A, d), *get(C, d));
+		TensorXL<T>::exp2_tensor(get(A, d), get(C, d));
 	}
 }
 
-template<class T> void Tensor3dXL<T>::clamp(Tensor3dXL<T> *A, T min, T max, Tensor3dXL<T> *C)
+template<class T> void Tensor3dXL<T>::clamp(Tensor3dXL<T> &A, T min, T max, Tensor3dXL<T> &C)
 {
 	for (unsigned d = 0; d < getDepth(A); d++)
 	{
-		TensorXL<T>::clamp(*get(A, d), min, max, *get(C, d));
+		TensorXL<T>::clamp(get(A, d), min, max, get(C, d));
 	}
 }
 
-template<class T> void Tensor3dXL<T>::roundTensor(Tensor3dXL<T> *A, Tensor3dXL<T> *C)
+template<class T> void Tensor3dXL<T>::roundTensor(Tensor3dXL<T> &A, Tensor3dXL<T> &C)
 {
 	for (unsigned d = 0; d < getDepth(A); d++)
 	{
-		TensorXL<T>::roundTensor(*get(A, d), *get(C, d));
+		TensorXL<T>::roundTensor(get(A, d), get(C, d));
 	}
 }
 
-template<class T> void Tensor3dXL<T>::reciprocal(Tensor3dXL<T> *A, Tensor3dXL<T> *C)
+template<class T> void Tensor3dXL<T>::reciprocal(Tensor3dXL<T> &A, Tensor3dXL<T> &C)
 {
 	for (unsigned d = 0; d < getDepth(A); d++)
 	{
-		TensorXL<T>::reciprocal(*get(A, d), *get(C, d));
+		TensorXL<T>::reciprocal(get(A, d), get(C, d));
 	}
 }
-template<class T> void Tensor3dXL<T>::sum(Tensor3dXL<T> *A, int dim, Tensor3dXL<T>* C)
+template<class T> void Tensor3dXL<T>::sum(Tensor3dXL<T> &A, int dim, Tensor3dXL<T> &C)
 {
 	if (dim == 0 || dim == 1)
 	{
 		for (unsigned d = 0; d < getDepth(A); d++)
 		{
-			TensorXL<T>::sum(*get(A, d), dim, *get(C, d));
+			TensorXL<T>::sum(get(A, d), dim, get(C, d));
 		}
 		setCols(C, TensorXL<T>::getCols(get(C, 0))); // the rows and cols of the layers were updated
 		setRows(C, TensorXL<T>::getRows(get(C, 0))); // but we still need to update the 3d matrix's
@@ -442,11 +443,11 @@ template<class T> void Tensor3dXL<T>::sum(Tensor3dXL<T> *A, int dim, Tensor3dXL<
 	{
 		T running;
 		running = T(0);
-		for (unsigned i = 0; i < A->t_numCols; i++)
+		for (unsigned i = 0; i < A.t_numCols; i++)
 		{
-			for (unsigned j = 0; j < A->t_numRows; j++)
+			for (unsigned j = 0; j < A.t_numRows; j++)
 			{
-				for (unsigned d = 0; d < A->t_depth; d++)
+				for (unsigned d = 0; d < A.t_depth; d++)
 				{
 					running += get(A, j, i, d);
 				}
@@ -455,43 +456,43 @@ template<class T> void Tensor3dXL<T>::sum(Tensor3dXL<T> *A, int dim, Tensor3dXL<
 			}
 		}
 		setDepth(C, 1);
-		setCols(C, A->t_numCols);
-		setRows(C, A->t_numRows);
+		setCols(C, A.t_numCols);
+		setRows(C, A.t_numRows);
 	}
 }
 
-template<class T> void Tensor3dXL<T>::sign(Tensor3dXL<T> *A, Tensor3dXL<T>* C)
+template<class T> void Tensor3dXL<T>::sign(Tensor3dXL<T> &A, Tensor3dXL<T> &C)
 {
 	for (unsigned d = 0; d < getDepth(A); d++)
 	{
-		TensorXL<T>::sign(*get(A, d), *get(C, d));
+		TensorXL<T>::sign(get(A, d), get(C, d));
 	}
 }
 
-template<class T> void Tensor3dXL<T>::mean(Tensor3dXL<T> *A, Tensor3dXL<T>* C)
+template<class T> void Tensor3dXL<T>::mean(Tensor3dXL<T> &A, Tensor3dXL<T> &C)
 {
 	for (unsigned d = 0; d < getDepth(A); d++)
 	{
-		TensorXL<T>::mean(*get(A, d), *get(C, d));
-		setRows(C, TensorXL<T>::getRows(*get(C, d))); //propogate the row change up to the 3d level
-		setCols(C, TensorXL<T>::getCols(*get(C, d))); // and col change
+		TensorXL<T>::mean(get(A, d), get(C, d));
+		setRows(C, TensorXL<T>::getRows(get(C, d))); //propogate the row change up to the 3d level
+		setCols(C, TensorXL<T>::getCols(get(C, d))); // and col change
 	}
 }
 
-template<class T> void Tensor3dXL<T>::sqrt_tensor(Tensor3dXL<T> *A, Tensor3dXL<T>* C)
+template<class T> void Tensor3dXL<T>::sqrt_tensor(Tensor3dXL<T> &A, Tensor3dXL<T> &C)
 {
 	for (unsigned d = 0; d < getDepth(A); d++)
 	{
-		TensorXL<T>::sqrt_tensor(*get(A, d), *get(C, d));
+		TensorXL<T>::sqrt_tensor(get(A, d), get(C, d));
 	}
 }
 
 //adressing methods where dep is depth and select the 2d array you want.
-template<class T> T Tensor3dXL<T>::get(Tensor3dXL<T> *tensor, const unsigned &row, const unsigned &col, const unsigned &dep)
+template<class T> T Tensor3dXL<T>::get(Tensor3dXL<T> &tensor, const unsigned &row, const unsigned &col, const unsigned &dep)
 {
 	if (dep < getDepth(tensor))
 	{
-		return TensorXL<T>::get(tensor->matrix[dep], row, col);
+		return TensorXL<T>::get(tensor.matrix[dep], row, col);
 	}
 	else
 	{
@@ -500,60 +501,48 @@ template<class T> T Tensor3dXL<T>::get(Tensor3dXL<T> *tensor, const unsigned &ro
 	}
 }
 
-template<class T> void Tensor3dXL<T>::set(Tensor3dXL<T> *tensor, const unsigned &row, const unsigned &col, const unsigned &dep, T val)
+template<class T> void Tensor3dXL<T>::set(Tensor3dXL<T> &tensor, const unsigned &row, const unsigned &col, const unsigned &dep, T val)
 {
 	if (dep < getDepth(tensor))
 	{
-		TensorXL<T>::set(tensor->matrix[dep], row, col, val);
+		TensorXL<T>::set(tensor.matrix[dep], row, col, val);
 	}
 }
 
-template<class T> TensorXL<T>* Tensor3dXL<T>::get(Tensor3dXL<T> *tensor, const unsigned &dep)
+template<class T> TensorXL<T>& Tensor3dXL<T>::get(Tensor3dXL<T> &tensor, const unsigned &dep)
 {
 	if (dep < getDepth(tensor))
 	{
-		return &tensor->matrix[dep];
+		return tensor.matrix[dep];
 	}
 	else
 	{
 		//assert(false);
-		return nullptr;
+		TensorXL<T> nullone;
+		return nullone;
 	}
 }
 
-template<class T> TensorXL<T>* Tensor3dXL<T>::get(Tensor3dXL<T> &tensor, const unsigned &dep)
-{
-	if (dep < getDepth(tensor))
-	{
-		return &tensor.matrix[dep];
-	}
-	else
-	{
-		//assert(false);
-		return nullptr;
-	}
-}
-
-template<class T> void Tensor3dXL<T>::set(Tensor3dXL<T> *tensor, const unsigned &dep, TensorXL<T>* slice)
+template<class T> void Tensor3dXL<T>::set(Tensor3dXL<T> &tensor, const unsigned &dep, TensorXL<T> &slice)
 {//does a copy operation from slice to tensor
 	if (dep < getDepth(tensor))
 	{
-		if (slice != nullptr)
+		if (!slice.null)
 		{
-			tensor->matrix[dep] = slice; // synthesis uses objects. DOES copy
+			tensor.matrix[dep] = slice; // synthesis uses objects. DOES copy
 		}
 		else
 		{
-			tensor->matrix[dep] = nullptr;
+			tensor.matrix[dep] = nullptr;
 		}
 	}
 }
 
-template<class T> TensorXL<T>* Tensor3dXL<T>::twoD(Tensor3dXL<T> *A) //analog to one for 2d Tensors, but checks for ONE layer 
+template<class T> TensorXL<T>* Tensor3dXL<T>::twoD(Tensor3dXL<T> &A) //analog to one for 2d Tensors, but checks for ONE layer 
 {
 	if (getDepth(A) == 1)
 	{
-		return get(A,0);
+		return &get(A,0);
 	}
 	else
 	{
@@ -563,33 +552,33 @@ template<class T> TensorXL<T>* Tensor3dXL<T>::twoD(Tensor3dXL<T> *A) //analog to
 	}
 }
 
-template<class T> void Tensor3dXL<T>::toTwoD(Tensor3dXL<T>* A, TensorXL<T>* C)
+template<class T> void Tensor3dXL<T>::toTwoD(Tensor3dXL<T> &A, TensorXL<T> &C)
 {
 	if (getDepth(A) == 1)
 	{
-		TensorXL<T>::copy(*twoD(A), *C);
+		TensorXL<T>::copy(*twoD(A), C);
 	}
 	else if (getRows(A) == 1)
 	{// Here we transform depth into rows. depth 0 being the first row
-		TensorXL<T>::setRows(*C, getDepth(A));
-		TensorXL<T>::setCols(*C, getCols(A));
+		TensorXL<T>::setRows(C, getDepth(A));
+		TensorXL<T>::setCols(C, getCols(A));
 		for (unsigned d = 0; d < getDepth(A); d++)
 		{
 			for (unsigned c = 0; c < getCols(A); c++)
 			{
-				TensorXL<T>::set(*C, d, c, get(A, 0, c, d));
+				TensorXL<T>::set(C, d, c, get(A, 0, c, d));
 			}
 		}
 	}
 	else if (getCols(A) == 1)
 	{// Here we transform depth into cols. depth 0 being the first column
-		TensorXL<T>::setCols(*C, getDepth(A));
-		TensorXL<T>::setRows(*C, getRows(A));
+		TensorXL<T>::setCols(C, getDepth(A));
+		TensorXL<T>::setRows(C, getRows(A));
 		for (unsigned d = 0; d < getDepth(A); d++)
 		{
 			for (unsigned r = 0; r < getRows(A); r++)
 			{
-				TensorXL<T>::set(*C, r, d, get(A, r, 0, d));
+				TensorXL<T>::set(C, r, d, get(A, r, 0, d));
 			}
 		}
 	}
@@ -600,38 +589,38 @@ template<class T> void Tensor3dXL<T>::toTwoD(Tensor3dXL<T>* A, TensorXL<T>* C)
 	}
 }
 
-template<class T> void Tensor3dXL<T>::append(Tensor3dXL<T> *tensor, TensorXL<T>* slice)
+template<class T> void Tensor3dXL<T>::append(Tensor3dXL<T> &tensor, TensorXL<T> &slice)
 {
 	setDepth(tensor, getDepth(tensor)+1);
 	set(tensor, getDepth(tensor)-1 , slice);
-	tensor->null = false;
+	tensor.null = false;
 }
 
 //helper functions
-template<class T>  void  Tensor3dXL<T>::print(Tensor3dXL<T> *A)
+template<class T>  void  Tensor3dXL<T>::print(Tensor3dXL<T> &A)
 {
 	printf("Tensor3dXL\n[");
 	for (unsigned d = 0; d < getDepth(A); d++)
 	{
-		TensorXL<T>::print(*(get(A,d)));
+		TensorXL<T>::print(get(A,d));
 		printf(",\n");
 	}
 	printf("] End Tensor3dXL\n");
 }
 
-template<class T> inline unsigned Tensor3dXL<T>::getRows(Tensor3dXL<T>* a)
+template<class T> inline unsigned Tensor3dXL<T>::getRows(Tensor3dXL<T> &a)
 {
-	return a->t_numRows;
+	return a.t_numRows;
 }
 
-template<class T> inline unsigned Tensor3dXL<T>::getCols(Tensor3dXL<T>* a)
+template<class T> inline unsigned Tensor3dXL<T>::getCols(Tensor3dXL<T> &a)
 {
-	return a->t_numCols;
+	return a.t_numCols;
 }
 
-template<class T> inline unsigned Tensor3dXL<T>::getDepth(Tensor3dXL<T>* a)
+template<class T> inline unsigned Tensor3dXL<T>::getDepth(Tensor3dXL<T> &a)
 {
-	return a->t_depth;
+	return a.t_depth;
 }
 template<class T> inline unsigned Tensor3dXL<T>::getRows(const Tensor3dXL<T> &a)
 {
@@ -648,7 +637,7 @@ template<class T> inline unsigned Tensor3dXL<T>::getDepth(const Tensor3dXL<T> &a
 	return a.t_depth;
 }
 
-template<class T> bool Tensor3dXL<T>::eq(Tensor3dXL<T>* A, Tensor3dXL<T>* B)
+template<class T> bool Tensor3dXL<T>::eq(Tensor3dXL<T> &A, Tensor3dXL<T> &B)
 {
 	bool one = false;
 	for (unsigned d = 0; d < getDepth(A); d++)
@@ -671,34 +660,34 @@ template<class T> bool Tensor3dXL<T>::eq(Tensor3dXL<T>* A, Tensor3dXL<T>* B)
 }
 
 //private helper functions
-template<class T> void Tensor3dXL<T>::setRows(Tensor3dXL<T>* a, int num)
+template<class T> void Tensor3dXL<T>::setRows(Tensor3dXL<T> &a, int num)
 {
-	a->t_numRows = num;
+	a.t_numRows = num;
 }
 
-template<class T> void Tensor3dXL<T>::setCols(Tensor3dXL<T>* a, int num) 
+template<class T> void Tensor3dXL<T>::setCols(Tensor3dXL<T> &a, int num) 
 {
-	a->t_numCols = num;
+	a.t_numCols = num;
 }
 
-template<class T> void Tensor3dXL<T>::setDepth(Tensor3dXL<T>* a, int num)
+template<class T> void Tensor3dXL<T>::setDepth(Tensor3dXL<T> &a, int num)
 {
-	a->t_depth = num;
+	a.t_depth = num;
 }
 
-template<class T> bool Tensor3dXL<T>::sameSize(Tensor3dXL<T> *A, TensorXL<T> *B)
+template<class T> bool Tensor3dXL<T>::sameSize(Tensor3dXL<T> &A, TensorXL<T> &B)
 {
 	return Tensor3dXL<T>::getRows(A) == TensorXL<T>::getRows(B) && Tensor3dXL<T>::getCols(A) == TensorXL<T>::getCols(B);
 }
 
-template<class T> bool Tensor3dXL<T>::sameSize(Tensor3dXL<T> *A, Tensor3dXL<T> *B) 
+template<class T> bool Tensor3dXL<T>::sameSize(Tensor3dXL<T> &A, Tensor3dXL<T> &B) 
 {
 	return TensorXL<T>::getRows(A) == TensorXL<T>::getRows(B) && 
 		TensorXL<T>::getCols(A) == TensorXL<T>::getCols(B) && 
 		TensorXL<T>::getDepth(A) == TensorXL<T>::getDepth(B);
 }
 
-template<class T> bool Tensor3dXL<T>::sameDep(Tensor3dXL<T> *A, Tensor3dXL<T> *B)
+template<class T> bool Tensor3dXL<T>::sameDep(Tensor3dXL<T> &A, Tensor3dXL<T> &B)
 {
 	return TensorXL<T>::getDepth(A) == TensorXL<T>::getDepth(B);
 }

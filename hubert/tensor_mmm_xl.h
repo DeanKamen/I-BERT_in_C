@@ -11,7 +11,7 @@
 //this function cannot auto-detect matrix size, it must be entered manually with compile time constants.
 //This is due to dynamic allocation constraints
 template<class T, int t_rowsA, int t_colsA, int t_colsB>
-void tensor_mmm_xl(TensorXL<T> A0, TensorXL<T> B0, TensorXL<T> C) {
+void tensor_mmm_xl(TensorXL<T> &A0, TensorXL<T> &B0, TensorXL<T> &C) {
 	const int ROWSA = t_rowsA;
 	const int COLSA = t_colsA;
 	const int COLSB = t_colsB;
