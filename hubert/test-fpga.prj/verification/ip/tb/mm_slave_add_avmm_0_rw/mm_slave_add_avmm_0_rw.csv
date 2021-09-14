@@ -1,0 +1,22 @@
+# system info mm_slave_add_avmm_0_rw on 2021.09.14.09:54:54
+system_info:
+name,value
+DEVICE,10CX220YF780I5G
+DEVICE_FAMILY,Cyclone 10 GX
+GENERATION_ID,0
+#
+#
+# Files generated for mm_slave_add_avmm_0_rw on 2021.09.14.09:54:54
+files:
+filepath,kind,attributes,module,is_top
+sim/mm_slave_add_avmm_0_rw.v,VERILOG,CONTAINS_INLINE_CONFIGURATION,mm_slave_add_avmm_0_rw,true
+hls_sim_mm_slave_dpi_bfm_10/sim/verbosity_pkg.sv,SYSTEM_VERILOG, COMMON_SYSTEMVERILOG_PACKAGE=avalon_lvip_verbosity_pkg,hls_sim_mm_slave_dpi_bfm,false
+hls_sim_mm_slave_dpi_bfm_10/sim/avalon_mm_pkg.sv,SYSTEM_VERILOG, COMMON_SYSTEMVERILOG_PACKAGE=avalon_vip_avalon_mm_pkg,hls_sim_mm_slave_dpi_bfm,false
+hls_sim_mm_slave_dpi_bfm_10/sim/avalon_utilities_pkg.sv,SYSTEM_VERILOG, COMMON_SYSTEMVERILOG_PACKAGE=avalon_vip_avalon_utilities_pkg,hls_sim_mm_slave_dpi_bfm,false
+hls_sim_mm_slave_dpi_bfm_10/sim/altera_avalon_mm_slave_bfm.sv,SYSTEM_VERILOG,,hls_sim_mm_slave_dpi_bfm,false
+hls_sim_mm_slave_dpi_bfm_10/sim/hls_sim_mm_slave_dpi_bfm.sv,SYSTEM_VERILOG,,hls_sim_mm_slave_dpi_bfm,false
+#
+# Map from instance-path to kind of module
+instances:
+instancePath,module
+mm_slave_add_avmm_0_rw.mm_slave_add_avmm_0_rw,hls_sim_mm_slave_dpi_bfm

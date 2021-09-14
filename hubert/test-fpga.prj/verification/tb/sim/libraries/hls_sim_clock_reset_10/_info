@@ -1,0 +1,36 @@
+m255
+K4
+z2
+!s11f vlog 2021.1 2021.02, Feb  3 2021
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dc:/Users/hunto_efxy22i/jupyterProjects/HUBERT/hubert/test-fpga.prj/verification/tb/sim
+vhls_sim_clock_reset
+DXx6 sv_std 3 std 0 22 VYECXdT12H8WgbUP_5Y6:3
+!s110 1631631354
+!i10b 1
+!s100 _3DjRGloX`?X^6C64M2:K1
+ID<37f9B2e1?EMAk?383FN0
+S1
+R0
+w1631631298
+8../../ip/tb/clock_reset/hls_sim_clock_reset_10/sim/hls_sim_clock_reset.sv
+F../../ip/tb/clock_reset/hls_sim_clock_reset_10/sim/hls_sim_clock_reset.sv
+!i122 0
+L0 21 68
+VDg1SIo80bB@j0V0VzS_@n1
+OV;L;2021.1;73
+r1
+!s85 0
+31
+!s108 1631631354.000000
+!s107 ../../ip/tb/clock_reset/hls_sim_clock_reset_10/sim/hls_sim_clock_reset.sv|
+!s90 -sv|+incdir+.|+define+COSIM_LIB|../../ip/tb/clock_reset/hls_sim_clock_reset_10/sim/hls_sim_clock_reset.sv|-work|hls_sim_clock_reset_10|
+!i113 1
+o-sv -work hls_sim_clock_reset_10
+!s92 -sv +incdir+. +define+COSIM_LIB -work hls_sim_clock_reset_10
+tCvgOpt 0

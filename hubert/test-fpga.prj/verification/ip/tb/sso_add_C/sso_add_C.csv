@@ -1,0 +1,18 @@
+# system info sso_add_C on 2021.09.14.09:54:58
+system_info:
+name,value
+DEVICE,10CX220YF780I5G
+DEVICE_FAMILY,Cyclone 10 GX
+GENERATION_ID,0
+#
+#
+# Files generated for sso_add_C on 2021.09.14.09:54:58
+files:
+filepath,kind,attributes,module,is_top
+sim/sso_add_C.v,VERILOG,CONTAINS_INLINE_CONFIGURATION,sso_add_C,true
+hls_sim_stream_source_dpi_bfm_10/sim/hls_sim_stream_source_dpi_bfm.sv,SYSTEM_VERILOG,,hls_sim_stream_source_dpi_bfm,false
+#
+# Map from instance-path to kind of module
+instances:
+instancePath,module
+sso_add_C.sso_add_C,hls_sim_stream_source_dpi_bfm

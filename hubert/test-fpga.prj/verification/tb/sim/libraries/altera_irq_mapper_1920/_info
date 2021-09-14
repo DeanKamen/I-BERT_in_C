@@ -1,0 +1,36 @@
+m255
+K4
+z2
+!s11f vlog 2021.1 2021.02, Feb  3 2021
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dc:/Users/hunto_efxy22i/jupyterProjects/HUBERT/hubert/test-fpga.prj/verification/tb/sim
+vtb_altera_irq_mapper_1920_trjgw7i
+DXx6 sv_std 3 std 0 22 VYECXdT12H8WgbUP_5Y6:3
+!s110 1631631355
+!i10b 1
+!s100 QOEWz=LgIQY]<Z1WRb1>J1
+Ig<@DPidh<mPoki591=;Mh2
+S1
+R0
+w1631631306
+8../altera_irq_mapper_1920/sim/tb_altera_irq_mapper_1920_trjgw7i.sv
+F../altera_irq_mapper_1920/sim/tb_altera_irq_mapper_1920_trjgw7i.sv
+!i122 0
+L0 30 26
+VDg1SIo80bB@j0V0VzS_@n1
+OV;L;2021.1;73
+r1
+!s85 0
+31
+!s108 1631631355.000000
+!s107 ../altera_irq_mapper_1920/sim/tb_altera_irq_mapper_1920_trjgw7i.sv|
+!s90 -sv|+incdir+.|+define+COSIM_LIB|../altera_irq_mapper_1920/sim/tb_altera_irq_mapper_1920_trjgw7i.sv|-work|altera_irq_mapper_1920|
+!i113 1
+o-sv -work altera_irq_mapper_1920
+!s92 -sv +incdir+. +define+COSIM_LIB -work altera_irq_mapper_1920
+tCvgOpt 0

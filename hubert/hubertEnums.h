@@ -3,10 +3,10 @@
 #ifndef __HUBERT_ENUMS_H__
 #define __HUBERT_ENUMS_H__
 
-#include "tensorXL.hpp"
-#include "tensor3dXL.hpp"
-#include "tensors.hpp"
-#include "tensor3d.hpp"
+#include "tensorXL.h"
+#include "tensor3dXL.h"
+#include "tensors.h"
+#include "tensor3d.h"
 
 //enum to desribe all preloaded Tensors
 enum class QuantMode {none, symmetric};
@@ -16,27 +16,27 @@ enum class ForceDequantMode{none, nonlinear, softmax, gelu, layernorm};
 struct scaled_tupleXL
 {//to get the most fidelity out of the translation, I make
  //a struct that emulates the returned tuple of most forwards
-	TensorXL<float>* matrix;
-	TensorXL<float>* scaling_factor;
+	TensorXL* matrix;
+	TensorXL* scaling_factor;
 };
 
 struct scaled_tuple3dXL
 {//same as scaled_tuple but 3d
-	Tensor3dXL<float>* matrix;
-	TensorXL<float>* scaling_factor;
+	Tensor3dXL* matrix;
+	TensorXL* scaling_factor;
 };
 
 struct scaled_tuple
 {//to get the most fidelity out of the translation, I make
  //a struct that emulates the returned tuple of most forwards
-	Tensor<float>* matrix;
-	TensorXL<float>* scaling_factor;
+	Tensor* matrix;
+	TensorXL* scaling_factor;
 };
 
 struct scaled_tuple3d
 {//same as scaled_tuple but 3d
-	Tensor3d<float>* matrix;
-	TensorXL<float>* scaling_factor;
+	Tensor3d* matrix;
+	TensorXL* scaling_factor;
 };
 
 enum class preload

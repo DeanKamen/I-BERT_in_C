@@ -1,0 +1,98 @@
+{
+  "nodes":
+  [
+    {
+      "type":"interface"
+      , "id":49
+      , "name":"A"
+      , "debug":
+      [
+        [
+          {
+            "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+            , "line":134
+          }
+        ]
+      ]
+      , "details":
+      [
+        {
+          "type":"table"
+          , "Stable":"No"
+          , "Data width":"64"
+          , "Address width":"64"
+          , "Address Space":"0"
+          , "Latency":"1"
+          , "ReadWrite Mode":"readwrite"
+          , "Maximum burst":"1"
+          , "Wait request":"0"
+          , "Alignment":"0"
+          , "Component":"add"
+        }
+      ]
+    }
+    , {
+      "type":"interface"
+      , "id":50
+      , "name":"B"
+      , "debug":
+      [
+        [
+          {
+            "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+            , "line":134
+          }
+        ]
+      ]
+      , "details":
+      [
+        {
+          "type":"table"
+          , "Stable":"No"
+          , "Data width":"64"
+          , "Address width":"64"
+          , "Address Space":"0"
+          , "Latency":"1"
+          , "ReadWrite Mode":"readwrite"
+          , "Maximum burst":"1"
+          , "Wait request":"0"
+          , "Alignment":"0"
+          , "Component":"add"
+        }
+      ]
+    }
+    , {
+      "type":"interface"
+      , "id":51
+      , "name":"C"
+      , "debug":
+      [
+        [
+          {
+            "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+            , "line":134
+          }
+        ]
+      ]
+      , "details":
+      [
+        {
+          "type":"table"
+          , "Stable":"No"
+          , "Data width":"64"
+          , "Address width":"64"
+          , "Address Space":"0"
+          , "Latency":"1"
+          , "ReadWrite Mode":"readwrite"
+          , "Maximum burst":"1"
+          , "Wait request":"0"
+          , "Alignment":"0"
+          , "Component":"add"
+        }
+      ]
+    }
+  ]
+  , "links":
+  [
+  ]
+}

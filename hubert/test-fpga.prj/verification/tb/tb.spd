@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<simPackage>
+ <file
+   path="altera_irq_mapper_1920/sim/tb_altera_irq_mapper_1920_trjgw7i.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_irq_mapper_1920" />
+ <file
+   path="sim/tb.v"
+   type="VERILOG"
+   library="tb"
+   hasInlineConfiguration="true" />
+ <topLevel name="tb.tb" />
+ <deviceFamily name="cyclone10gx" />
+ <device name="10CX220YF780I5G" />
+</simPackage>

@@ -1,0 +1,21 @@
+	component sso_add_B is
+		generic (
+			COMPONENT_NAME                  : string  := "add";
+			INTERFACE_NAME                  : string  := "B";
+			STREAM_DATAWIDTH                : integer := 64;
+			STREAM_BITSPERSYMBOL            : integer := 1;
+			EMPTY_WIDTH                     : integer := 0;
+			FIRST_SYMBOL_IN_HIGH_ORDER_BITS : integer := 0
+		);
+		port (
+			clock        : in  std_logic                     := 'X'; -- clk
+			resetn       : in  std_logic                     := 'X'; -- reset_n
+			clock2x      : in  std_logic                     := 'X'; -- clk
+			do_bind      : in  std_logic                     := 'X'; -- conduit
+			enable       : in  std_logic                     := 'X'; -- conduit
+			source_data  : out std_logic_vector(63 downto 0);        -- data
+			source_ready : in  std_logic                     := 'X'; -- conduit
+			source_valid : out std_logic                             -- conduit
+		);
+	end component sso_add_B;
+

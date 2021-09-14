@@ -1,0 +1,323 @@
+{
+  "name":"loop_attributes"
+  , "id":4294967295
+  , "nodes":
+  [
+    {
+      "name":"add"
+      , "id":1087708160
+      , "clk":"No"
+      , "fmax":"240.00"
+      , "debug":
+      [
+        [
+          {
+            "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+            , "line":135
+          }
+        ]
+      ]
+      , "type":"component"
+      , "children":
+      [
+        {
+          "name":"add.B0.runOnce"
+          , "id":1087188544
+          , "af":"240.00"
+          , "br":"0"
+          , "ci":"0"
+          , "fo":"Disabled"
+          , "ii":"1"
+          , "ll":"1"
+          , "lt":"2.000000"
+          , "mi":"n/a"
+          , "pl":"Yes"
+          , "tc":"0"
+          , "tn":"1"
+          , "type":"bb"
+        }
+        , {
+          "name":"add.B1.start"
+          , "id":1087190080
+          , "af":"240.00"
+          , "br":"1"
+          , "ci":"1"
+          , "fo":"Disabled"
+          , "ii":"n/a"
+          , "ll":"1"
+          , "lt":"66.000000"
+          , "mi":"n/a"
+          , "pl":"No"
+          , "tc":"0"
+          , "tn":"1"
+          , "details":
+          [
+            {
+              "type":"text"
+              , "text":"Hyper-Optimized loop structure: n/a"
+            }
+          ]
+          , "debug":
+          [
+            [
+              {
+                "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                , "line":135
+              }
+            ]
+          ]
+          , "type":"loop"
+          , "children":
+          [
+            {
+              "name":"add.B2"
+              , "id":1087190368
+              , "af":"240.00"
+              , "br":"0"
+              , "ci":"0"
+              , "fo":"Disabled"
+              , "ii":"1"
+              , "ll":"2"
+              , "lt":"0.000000"
+              , "mi":"n/a"
+              , "pl":"Yes"
+              , "tc":"0"
+              , "tn":"1"
+              , "type":"bb"
+            }
+            , {
+              "name":"add.B3"
+              , "id":1087191904
+              , "af":"240.00"
+              , "br":"0"
+              , "ci":"0"
+              , "fo":"Disabled"
+              , "ii":"1"
+              , "ll":"2"
+              , "lt":"0.000000"
+              , "mi":"n/a"
+              , "pl":"Yes"
+              , "tc":"0"
+              , "tn":"1"
+              , "type":"bb"
+            }
+            , {
+              "name":"add.B7"
+              , "id":1087191328
+              , "af":"240.00"
+              , "br":"0"
+              , "ci":"0"
+              , "fo":"Disabled"
+              , "ii":"n/a"
+              , "ll":"2"
+              , "lt":"52.000000"
+              , "mi":"n/a"
+              , "pl":"No"
+              , "tc":"0"
+              , "tn":"1"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"Hyper-Optimized loop structure: n/a"
+                }
+              ]
+              , "debug":
+              [
+                [
+                  {
+                    "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                    , "line":170
+                  }
+                ]
+              ]
+              , "type":"loop"
+              , "children":
+              [
+                {
+                  "name":"add.B8"
+                  , "id":1087192480
+                  , "af":"240.00"
+                  , "br":"1"
+                  , "ci":"0"
+                  , "fo":"Disabled"
+                  , "ii":"103"
+                  , "ll":"3"
+                  , "lt":"156.000000"
+                  , "mi":"1"
+                  , "pl":"Yes"
+                  , "tc":"0"
+                  , "tn":"0"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"Hyper-Optimized loop structure: n/a"
+                    }
+                  ]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":172
+                      }
+                    ]
+                  ]
+                  , "type":"loop"
+                }
+              ]
+            }
+            , {
+              "name":"add.B4"
+              , "id":1087192288
+              , "af":"240.00"
+              , "br":"0"
+              , "ci":"0"
+              , "fo":"Disabled"
+              , "ii":"n/a"
+              , "ll":"2"
+              , "lt":"2.000000"
+              , "mi":"n/a"
+              , "pl":"No"
+              , "tc":"0"
+              , "tn":"1"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"Hyper-Optimized loop structure: n/a"
+                }
+              ]
+              , "debug":
+              [
+                [
+                  {
+                    "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                    , "line":367
+                  }
+                ]
+              ]
+              , "type":"loop"
+              , "children":
+              [
+                {
+                  "name":"add.B5"
+                  , "id":1087192192
+                  , "af":"240.00"
+                  , "br":"1"
+                  , "ci":"0"
+                  , "fo":"Disabled"
+                  , "ii":"104"
+                  , "ll":"3"
+                  , "lt":"109.000000"
+                  , "mi":"1"
+                  , "pl":"Yes"
+                  , "tc":"0"
+                  , "tn":"0"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"Hyper-Optimized loop structure: n/a"
+                    }
+                  ]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":369
+                      }
+                    ]
+                  ]
+                  , "type":"loop"
+                }
+              ]
+            }
+            , {
+              "name":"add.B9"
+              , "id":1087192768
+              , "af":"240.00"
+              , "br":"1"
+              , "ci":"0"
+              , "fo":"Disabled"
+              , "ii":"1"
+              , "ll":"2"
+              , "lt":"2.000000"
+              , "mi":"n/a"
+              , "pl":"Yes"
+              , "tc":"0"
+              , "tn":"1"
+              , "type":"bb"
+            }
+            , {
+              "name":"add.B6"
+              , "id":1087189312
+              , "af":"240.00"
+              , "br":"1"
+              , "ci":"0"
+              , "fo":"Disabled"
+              , "ii":"1"
+              , "ll":"2"
+              , "lt":"2.000000"
+              , "mi":"n/a"
+              , "pl":"Yes"
+              , "tc":"0"
+              , "tn":"1"
+              , "type":"bb"
+            }
+            , {
+              "name":"add.B11"
+              , "id":1087191136
+              , "af":"240.00"
+              , "br":"0"
+              , "ci":"0"
+              , "fo":"Disabled"
+              , "ii":"1"
+              , "ll":"2"
+              , "lt":"0.000000"
+              , "mi":"n/a"
+              , "pl":"Yes"
+              , "tc":"0"
+              , "tn":"1"
+              , "type":"bb"
+            }
+            , {
+              "name":"add.B10"
+              , "id":1087192096
+              , "af":"240.00"
+              , "br":"0"
+              , "ci":"0"
+              , "fo":"Disabled"
+              , "ii":"1"
+              , "ll":"2"
+              , "lt":"0.000000"
+              , "mi":"n/a"
+              , "pl":"Yes"
+              , "tc":"0"
+              , "tn":"1"
+              , "type":"bb"
+            }
+          ]
+        }
+        , {
+          "name":"add.B12"
+          , "id":1087190752
+          , "af":"240.00"
+          , "br":"0"
+          , "ci":"0"
+          , "fo":"Disabled"
+          , "ii":"1"
+          , "ll":"1"
+          , "lt":"2.000000"
+          , "mi":"n/a"
+          , "pl":"Yes"
+          , "tc":"0"
+          , "tn":"1"
+          , "type":"bb"
+        }
+      ]
+    }
+  ]
+}

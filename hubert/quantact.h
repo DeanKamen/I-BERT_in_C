@@ -4,10 +4,9 @@
 
 #include "HLS/hls.h"
 #include "HLS/stdio.h"
-#include "tensors.hpp" 
-#include "tensorXL.hpp"
-#include "tensor3dXL.hpp"
-#include "tensor_mult.h"
+#include "tensors.h" 
+#include "tensorXL.h"
+#include "tensor3dXL.h"
 #include <iostream>
 #include "hubertEnums.h"
 
@@ -27,32 +26,32 @@ class QuantAct
     //other functions
 	static scaled_tuple3d QuantAct_forward(
 		QuantAct &self,
-		Tensor3d<float>& x,
-        TensorXL<float>& pre_act_scaling_factor,
-        Tensor3d<float>& identity,
-        TensorXL<float>& identity_scaling_factor,
-        Tensor<float>& specified_min,
-        Tensor<float>& specified_max);
+		Tensor3d& x,
+        TensorXL& pre_act_scaling_factor,
+        Tensor3d& identity,
+        TensorXL& identity_scaling_factor,
+        Tensor& specified_min,
+        Tensor& specified_max);
 
     void fix();
     void unfix();
 
-    static TensorXL<float>* symmetric_linear_quantization_params(
+    static TensorXL* symmetric_linear_quantization_params(
 		unsigned num_bits,
-        Tensor<float>& saturation_min,
-        Tensor<float>& saturation_max,
+        Tensor& saturation_min,
+        Tensor& saturation_max,
         bool per_channel=false);
 
-    static Tensor3d<float>* symmetric_quant_forward(QuantAct &self, Tensor3d<float>& x, int k, TensorXL<float>& specified_scale);
-    static Tensor3d<float>* linear_quantize(Tensor3d<float>& x, TensorXL<float>& scale, TensorXL<float>& zero_point);
-    static Tensor3d<float>* fixedpoint_mul(
-        Tensor3d<float>& pre_act,
-        TensorXL<float>& pre_act_scaling_factor,
+    static Tensor3d* symmetric_quant_forward(QuantAct &self, Tensor3d& x, int k, TensorXL& specified_scale);
+    static Tensor3d* linear_quantize(Tensor3d& x, TensorXL& scale, TensorXL& zero_point);
+    static Tensor3d* fixedpoint_mul(
+        Tensor3d& pre_act,
+        TensorXL& pre_act_scaling_factor,
         int bit_num,
         QuantMode quant_mode,
-        TensorXL<float>& z_scaling_factor,
-        Tensor3d<float>& identity,
-        TensorXL<float>& identity_scaling_factor
+        TensorXL& z_scaling_factor,
+        Tensor3d& identity,
+        TensorXL& identity_scaling_factor
     );
 	void set_param(preload x_min_n, preload x_max_n, preload act_scaling_factor_n);
 

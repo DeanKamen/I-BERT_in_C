@@ -1,0 +1,3458 @@
+{
+  "columns":
+  ["", "ALUTs", "FFs", "RAMs", "DSPs", "MLABs", "Details"]
+  , "debug_enabled":"true"
+  , "type":"module"
+  , "total_percent":
+  [19.2043, 13.795, 6.89904, 4.77002, 1.04167]
+  , "total":
+  [18763, 22168, 28, 2, 170]
+  , "name":"System"
+  , "max_resources":
+  [160660, 321320, 587, 192, 8033]
+  , "children":
+  [
+    {
+      "name":"add"
+      , "compute_units":1
+      , "type":"function"
+      , "total_percent":
+      [19.2043, 13.795, 6.89904, 4.77002, 1.04167]
+      , "total_kernel_resources":
+      [18763, 22168, 28, 2, 170]
+      , "details":
+      [
+        {
+          "type":"text"
+          , "text":"Number of compute units: 1"
+        }
+        , {
+          "type":"brief"
+          , "text":"1 compute unit."
+        }
+      ]
+      , "children":
+      [
+        {
+          "name":"Component call"
+          , "type":"resource"
+          , "data":
+          [0, 0, 0, 0, 0]
+          , "details":
+          [
+            {
+              "type":"text"
+              , "text":"Stream implemented 192 bits wide with a buffer size of 0 elements."
+            }
+            , {
+              "type":"brief"
+              , "text":"192b wide with 0 elements."
+            }
+          ]
+        }
+        , {
+          "name":"Component return"
+          , "type":"resource"
+          , "data":
+          [0, 0, 0, 0, 0]
+          , "details":
+          [
+            {
+              "type":"text"
+              , "text":"Stream implemented 1 bit wide with a buffer size of 0 elements."
+            }
+            , {
+              "type":"brief"
+              , "text":"1b wide with 0 elements."
+            }
+          ]
+        }
+        , {
+          "name":"Variable: \n - 'j' (tensorXL.cpp:169)"
+          , "type":"resource"
+          , "data":
+          [45, 198, 0, 0, 0]
+          , "debug":
+          [
+            [
+              {
+                "filename":"tensorXL.cpp"
+                , "line":169
+              }
+            ]
+          ]
+          , "details":
+          [
+            {
+              "type":"text"
+              , "text":"Type: Register"
+            }
+            , {
+              "type":"text"
+              , "text":"1 register of width 32 bits and depth 3"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":" Depth was increased by a factor of 103 due to a loop initiation interval of 103."
+                }
+              ]
+            }
+            , {
+              "type":"brief"
+              , "text":"Register,\n1 reg, 32 width by 3 depth"
+            }
+          ]
+        }
+        , {
+          "name":"Variable: \n - 'j' (tensorXL.cpp:366)"
+          , "type":"resource"
+          , "data":
+          [45, 198, 0, 0, 0]
+          , "debug":
+          [
+            [
+              {
+                "filename":"tensorXL.cpp"
+                , "line":366
+              }
+            ]
+          ]
+          , "details":
+          [
+            {
+              "type":"text"
+              , "text":"Type: Register"
+            }
+            , {
+              "type":"text"
+              , "text":"1 register of width 32 bits and depth 3"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":" Depth was increased by a factor of 104 due to a loop initiation interval of 104."
+                }
+              ]
+            }
+            , {
+              "type":"brief"
+              , "text":"Register,\n1 reg, 32 width by 3 depth"
+            }
+          ]
+        }
+        , {
+          "name":"add.B1.start"
+          , "type":"basicblock"
+          , "children":
+          [
+            {
+              "name":"State"
+              , "type":"resource"
+              , "data":
+              [252, 971, 0, 0, 12]
+              , "details":
+              [
+                {
+                  "type":"brief"
+                  , "text":"Live values and control logic"
+                }
+                , {
+                  "type":"text"
+                  , "text":"Resources for live values and control logic. To reduce this area:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"reduce size of local variables"
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"reduce scope of local variables, localizing them as much as possible"
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"reduce number of nested loops"
+                    }
+                  ]
+                }
+              ]
+              , "children":
+              [
+                {
+                  "name":"No Source Line"
+                  , "type":"resource"
+                  , "data":
+                  [204, 406, 0, 0, 12]
+                }
+                , {
+                  "name":"tensorXL.cpp:140 > tensorXL.cpp:1112 > \ntensorXL.cpp:1027"
+                  , "type":"resource"
+                  , "data":
+                  [38, 360, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":140
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":1112
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":1027
+                      }
+                    ]
+                  ]
+                }
+                , {
+                  "name":"tensorXL.cpp:142"
+                  , "type":"resource"
+                  , "data":
+                  [5, 37, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":142
+                      }
+                    ]
+                  ]
+                }
+                , {
+                  "name":"tensorXL.cpp:143"
+                  , "type":"resource"
+                  , "data":
+                  [5, 37, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":143
+                      }
+                    ]
+                  ]
+                }
+                , {
+                  "name":"tensorXL.cpp:159 > tensorXL.cpp:976 > \ntensorXL.cpp:930"
+                  , "type":"resource"
+                  , "data":
+                  [0, 32, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":159
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":976
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":930
+                      }
+                    ]
+                  ]
+                }
+                , {
+                  "name":"tensorXL.cpp:170"
+                  , "type":"resource"
+                  , "data":
+                  [0, 2, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":170
+                      }
+                    ]
+                  ]
+                }
+                , {
+                  "name":"tensorXL.cpp:174 > tensorXL.cpp:947"
+                  , "type":"resource"
+                  , "data":
+                  [0, 1, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":174
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":947
+                      }
+                    ]
+                  ]
+                }
+                , {
+                  "name":"tensorXL.cpp:174 > tensorXL.cpp:960 > \ntensorXL.cpp:1027"
+                  , "type":"resource"
+                  , "data":
+                  [0, 96, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":174
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":960
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":1027
+                      }
+                    ]
+                  ]
+                }
+              ]
+            }
+            , {
+              "name":"Feedback"
+              , "type":"resource"
+              , "data":
+              [7, 2, 0, 0, 0]
+              , "details":
+              [
+                {
+                  "type":"brief"
+                  , "text":"Loop-carried dependencies"
+                }
+                , {
+                  "type":"text"
+                  , "text":"Resources for loop-carried dependencies. To reduce this area:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"reduce number and size of loop-carried variables"
+                    }
+                  ]
+                }
+              ]
+              , "children":
+              [
+                {
+                  "name":"tensorXL.cpp:134"
+                  , "type":"resource"
+                  , "data":
+                  [7, 2, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":134
+                      }
+                    ]
+                  ]
+                }
+              ]
+            }
+            , {
+              "name":"Computation"
+              , "type":"resource"
+              , "children":
+              [
+                {
+                  "name":"No Source Line"
+                  , "type":"resource"
+                  , "data":
+                  [2, 1, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":""
+                        , "line":0
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"1-bit And"
+                      , "type":"resource"
+                      , "count":2
+                      , "data":
+                      [2, 1, 0, 0, 0]
+                    }
+                  ]
+                }
+                , {
+                  "name":"tensorXL.cpp:140 > tensorXL.cpp:1112 > \ntensorXL.cpp:1027"
+                  , "type":"resource"
+                  , "data":
+                  [1426, 1206, 0, 0, 40]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":140
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":1112
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":1027
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"32-bit Select"
+                      , "type":"resource"
+                      , "count":2
+                      , "data":
+                      [52, 0, 0, 0, 0]
+                    }
+                    , {
+                      "name":"Load"
+                      , "type":"resource"
+                      , "count":6
+                      , "data":
+                      [1374, 1206, 0, 0, 40]
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"Load uses a Pipelined LSU"
+                        }
+                        , {
+                          "type":"brief"
+                          , "text":"Pipelined LSU"
+                        }
+                      ]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"tensorXL.cpp:140 > tensorXL.cpp:1112"
+                  , "type":"resource"
+                  , "data":
+                  [75, 0, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":140
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":1112
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"1-bit Or"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [1, 0, 0, 0, 0]
+                    }
+                    , {
+                      "name":"32-bit Integer Compare"
+                      , "type":"resource"
+                      , "count":2
+                      , "data":
+                      [22, 0, 0, 0, 0]
+                    }
+                    , {
+                      "name":"32-bit Select"
+                      , "type":"resource"
+                      , "count":2
+                      , "data":
+                      [52, 0, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"tensorXL.cpp:159 > tensorXL.cpp:976 > \ntensorXL.cpp:917"
+                  , "type":"resource"
+                  , "data":
+                  [37, 1, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":159
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":976
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":917
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"32-bit Integer Compare"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [11, 1, 0, 0, 0]
+                    }
+                    , {
+                      "name":"32-bit Select"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [26, 0, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"tensorXL.cpp:159 > tensorXL.cpp:976 > \ntensorXL.cpp:930"
+                  , "type":"resource"
+                  , "data":
+                  [314, 222, 0, 0, 7]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":159
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":976
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":930
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"32-bit Integer Compare"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [11, 1, 0, 0, 0]
+                    }
+                    , {
+                      "name":"32-bit Select"
+                      , "type":"resource"
+                      , "count":2
+                      , "data":
+                      [52, 0, 0, 0, 0]
+                    }
+                    , {
+                      "name":"Load"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [251, 221, 0, 0, 7]
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"Load uses a Pipelined LSU"
+                        }
+                        , {
+                          "type":"brief"
+                          , "text":"Pipelined LSU"
+                        }
+                      ]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"tensorXL.cpp:174 > tensorXL.cpp:960 > \ntensorXL.cpp:1027"
+                  , "type":"resource"
+                  , "data":
+                  [528, 442, 0, 0, 14]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":174
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":960
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":1027
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"32-bit Select"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [26, 0, 0, 0, 0]
+                    }
+                    , {
+                      "name":"Load"
+                      , "type":"resource"
+                      , "count":2
+                      , "data":
+                      [502, 442, 0, 0, 14]
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"Load uses a Pipelined LSU"
+                        }
+                        , {
+                          "type":"brief"
+                          , "text":"Pipelined LSU"
+                        }
+                      ]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"tensorXL.cpp:174 > tensorXL.cpp:947"
+                  , "type":"resource"
+                  , "data":
+                  [185, 161, 0, 0, 6]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":174
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":947
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"Load"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [185, 161, 0, 0, 6]
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"Load uses a Pipelined LSU"
+                        }
+                        , {
+                          "type":"brief"
+                          , "text":"Pipelined LSU"
+                        }
+                      ]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"tensorXL.cpp:134"
+                  , "type":"resource"
+                  , "data":
+                  [1, 0, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":134
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"Stream Read"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [1, 0, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"tensorXL.cpp:142"
+                  , "type":"resource"
+                  , "data":
+                  [16, 0, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":142
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"32-bit Select"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [16, 0, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"tensorXL.cpp:143"
+                  , "type":"resource"
+                  , "data":
+                  [42, 0, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":143
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"32-bit Select"
+                      , "type":"resource"
+                      , "count":2
+                      , "data":
+                      [42, 0, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"tensorXL.cpp:157"
+                  , "type":"resource"
+                  , "data":
+                  [24, 0, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":157
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"1-bit And"
+                      , "type":"resource"
+                      , "count":2
+                      , "data":
+                      [2, 0, 0, 0, 0]
+                    }
+                    , {
+                      "name":"32-bit Integer Compare"
+                      , "type":"resource"
+                      , "count":2
+                      , "data":
+                      [22, 0, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"tensorXL.cpp:170"
+                  , "type":"resource"
+                  , "data":
+                  [11, 0, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":170
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"32-bit Integer Compare"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [11, 0, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+              ]
+            }
+          ]
+        }
+        , {
+          "name":"add.B12"
+          , "type":"basicblock"
+          , "children":
+          [
+            {
+              "name":"Feedback"
+              , "type":"resource"
+              , "data":
+              [5, 8, 0, 0, 0]
+              , "details":
+              [
+                {
+                  "type":"brief"
+                  , "text":"Loop-carried dependencies"
+                }
+                , {
+                  "type":"text"
+                  , "text":"Resources for loop-carried dependencies. To reduce this area:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"reduce number and size of loop-carried variables"
+                    }
+                  ]
+                }
+              ]
+              , "children":
+              [
+                {
+                  "name":"No Source Line"
+                  , "type":"resource"
+                  , "data":
+                  [5, 8, 0, 0, 0]
+                }
+              ]
+            }
+            , {
+              "name":"Computation"
+              , "type":"resource"
+              , "children":
+              [
+                {
+                  "name":"tensorXL.cpp:177"
+                  , "type":"resource"
+                  , "data":
+                  [5, 2, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":177
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"Stream Write"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [5, 2, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+              ]
+            }
+          ]
+        }
+        , {
+          "name":"add.B4"
+          , "type":"basicblock"
+          , "children":
+          [
+            {
+              "name":"State"
+              , "type":"resource"
+              , "data":
+              [18, 196, 0, 0, 0]
+              , "details":
+              [
+                {
+                  "type":"brief"
+                  , "text":"Live values and control logic"
+                }
+                , {
+                  "type":"text"
+                  , "text":"Resources for live values and control logic. To reduce this area:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"reduce size of local variables"
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"reduce scope of local variables, localizing them as much as possible"
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"reduce number of nested loops"
+                    }
+                  ]
+                }
+              ]
+              , "children":
+              [
+                {
+                  "name":"No Source Line"
+                  , "type":"resource"
+                  , "data":
+                  [17, 33, 0, 0, 0]
+                }
+                , {
+                  "name":"tensorXL.cpp:159 > tensorXL.cpp:366"
+                  , "type":"resource"
+                  , "data":
+                  [0, 32, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":159
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":366
+                      }
+                    ]
+                  ]
+                }
+                , {
+                  "name":"tensorXL.cpp:159 > tensorXL.cpp:367"
+                  , "type":"resource"
+                  , "data":
+                  [0, 32, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":159
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":367
+                      }
+                    ]
+                  ]
+                }
+                , {
+                  "name":"tensorXL.cpp:159 > tensorXL.cpp:367 > \ntensorXL.cpp:1027"
+                  , "type":"resource"
+                  , "data":
+                  [0, 64, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":159
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":367
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":1027
+                      }
+                    ]
+                  ]
+                }
+                , {
+                  "name":"tensorXL.cpp:159 > tensorXL.cpp:369"
+                  , "type":"resource"
+                  , "data":
+                  [0, 2, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":159
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":369
+                      }
+                    ]
+                  ]
+                }
+                , {
+                  "name":"tensorXL.cpp:159 > tensorXL.cpp:371 > \ntensorXL.cpp:932"
+                  , "type":"resource"
+                  , "data":
+                  [1, 32, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":159
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":371
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":932
+                      }
+                    ]
+                  ]
+                }
+                , {
+                  "name":"tensorXL.cpp:159 > tensorXL.cpp:371 > \ntensorXL.cpp:960"
+                  , "type":"resource"
+                  , "data":
+                  [0, 1, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":159
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":371
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":960
+                      }
+                    ]
+                  ]
+                }
+              ]
+            }
+            , {
+              "name":"Computation"
+              , "type":"resource"
+              , "children":
+              [
+                {
+                  "name":"tensorXL.cpp:159 > tensorXL.cpp:367 > \ntensorXL.cpp:1027"
+                  , "type":"resource"
+                  , "data":
+                  [52, 0, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":159
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":367
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":1027
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"32-bit Select"
+                      , "type":"resource"
+                      , "count":2
+                      , "data":
+                      [52, 0, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"tensorXL.cpp:159 > tensorXL.cpp:369 > \ntensorXL.cpp:1037"
+                  , "type":"resource"
+                  , "data":
+                  [26, 0, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":159
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":369
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":1037
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"32-bit Select"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [26, 0, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"tensorXL.cpp:159 > tensorXL.cpp:371 > \ntensorXL.cpp:960"
+                  , "type":"resource"
+                  , "data":
+                  [35, 1, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":159
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":371
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":960
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"32-bit Integer Compare"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [35, 1, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"tensorXL.cpp:159 > tensorXL.cpp:369"
+                  , "type":"resource"
+                  , "data":
+                  [12, 0, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":159
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":369
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"1-bit Or"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [1, 0, 0, 0, 0]
+                    }
+                    , {
+                      "name":"32-bit Integer Compare"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [11, 0, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+              ]
+            }
+          ]
+        }
+        , {
+          "name":"add.B5"
+          , "type":"basicblock"
+          , "children":
+          [
+            {
+              "name":"State"
+              , "type":"resource"
+              , "data":
+              [896, 1465, 9, 0, 4]
+              , "details":
+              [
+                {
+                  "type":"brief"
+                  , "text":"Live values and control logic"
+                }
+                , {
+                  "type":"text"
+                  , "text":"Resources for live values and control logic. To reduce this area:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"reduce size of local variables"
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"reduce scope of local variables, localizing them as much as possible"
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"reduce number of nested loops"
+                    }
+                  ]
+                }
+              ]
+              , "children":
+              [
+                {
+                  "name":"No Source Line"
+                  , "type":"resource"
+                  , "data":
+                  [892, 1401, 9, 0, 4]
+                }
+                , {
+                  "name":"tensorXL.cpp:159 > tensorXL.cpp:369 > \ntensorXL.cpp:1037"
+                  , "type":"resource"
+                  , "data":
+                  [4, 64, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":159
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":369
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":1037
+                      }
+                    ]
+                  ]
+                }
+              ]
+            }
+            , {
+              "name":"Feedback"
+              , "type":"resource"
+              , "data":
+              [457, 1083, 0, 0, 1]
+              , "details":
+              [
+                {
+                  "type":"brief"
+                  , "text":"Loop-carried dependencies"
+                }
+                , {
+                  "type":"text"
+                  , "text":"Resources for loop-carried dependencies. To reduce this area:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"reduce number and size of loop-carried variables"
+                    }
+                  ]
+                }
+              ]
+              , "children":
+              [
+                {
+                  "name":"tensorXL.cpp:159 > tensorXL.cpp:366"
+                  , "type":"resource"
+                  , "data":
+                  [22, 33, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":159
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":366
+                      }
+                    ]
+                  ]
+                }
+                , {
+                  "name":"tensorXL.cpp:159 > tensorXL.cpp:367"
+                  , "type":"resource"
+                  , "data":
+                  [66, 238, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":159
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":367
+                      }
+                    ]
+                  ]
+                }
+                , {
+                  "name":"tensorXL.cpp:159 > tensorXL.cpp:369"
+                  , "type":"resource"
+                  , "data":
+                  [133, 287, 0, 0, 1]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":159
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":369
+                      }
+                    ]
+                  ]
+                }
+                , {
+                  "name":"tensorXL.cpp:159 > tensorXL.cpp:369 > \ntensorXL.cpp:1037"
+                  , "type":"resource"
+                  , "data":
+                  [202, 504, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":159
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":369
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":1037
+                      }
+                    ]
+                  ]
+                }
+                , {
+                  "name":"tensorXL.cpp:159 > tensorXL.cpp:371 > \ntensorXL.cpp:962"
+                  , "type":"resource"
+                  , "data":
+                  [34, 21, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":159
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":371
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":962
+                      }
+                    ]
+                  ]
+                }
+              ]
+            }
+            , {
+              "name":"Cluster logic"
+              , "type":"resource"
+              , "data":
+              [8, 6, 0, 0, 3]
+              , "details":
+              [
+                {
+                  "type":"brief"
+                  , "text":"Logic required to efficiently support sets of operations that do not stall"
+                }
+                , {
+                  "type":"text"
+                  , "text":"Logic required to efficiently support sets of operations that do not stall. This area cannot be affected directly."
+                }
+              ]
+            }
+            , {
+              "name":"Computation"
+              , "type":"resource"
+              , "children":
+              [
+                {
+                  "name":"No Source Line"
+                  , "type":"resource"
+                  , "data":
+                  [1, 0, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":""
+                        , "line":0
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"1-bit Xor"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [1, 0, 0, 0, 0]
+                    }
+                  ]
+                }
+                , {
+                  "name":"tensorXL.cpp:140 > tensorXL.cpp:1112 > \ntensorXL.cpp:1027"
+                  , "type":"resource"
+                  , "data":
+                  [4, 0, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":140
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":1112
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":1027
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"FFwd Destination"
+                      , "type":"resource"
+                      , "count":7
+                      , "data":
+                      [4, 0, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"tensorXL.cpp:159 > tensorXL.cpp:369 > \ntensorXL.cpp:1037"
+                  , "type":"resource"
+                  , "data":
+                  [581, 442, 0, 0, 14]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":159
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":369
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":1037
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"1-bit Or"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [1, 0, 0, 0, 0]
+                    }
+                    , {
+                      "name":"32-bit Select"
+                      , "type":"resource"
+                      , "count":3
+                      , "data":
+                      [78, 0, 0, 0, 0]
+                    }
+                    , {
+                      "name":"Load"
+                      , "type":"resource"
+                      , "count":2
+                      , "data":
+                      [502, 442, 0, 0, 14]
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"Load uses a Pipelined LSU"
+                        }
+                        , {
+                          "type":"brief"
+                          , "text":"Pipelined LSU"
+                        }
+                      ]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"tensorXL.cpp:159 > tensorXL.cpp:371 > \ntensorXL.cpp:930 > tensorXL.cpp:1027"
+                  , "type":"resource"
+                  , "data":
+                  [26, 0, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":159
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":371
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":930
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":1027
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"32-bit Select"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [26, 0, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"tensorXL.cpp:159 > tensorXL.cpp:371 > \ntensorXL.cpp:917"
+                  , "type":"resource"
+                  , "data":
+                  [37, 2, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":159
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":371
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":917
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"1-bit And"
+                      , "type":"resource"
+                      , "count":2
+                      , "data":
+                      [2, 1, 0, 0, 0]
+                    }
+                    , {
+                      "name":"32-bit Integer Compare"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [35, 1, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"tensorXL.cpp:159 > tensorXL.cpp:371 > \ntensorXL.cpp:930"
+                  , "type":"resource"
+                  , "data":
+                  [71, 3, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":159
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":371
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":930
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"1-bit And"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [1, 1, 0, 0, 0]
+                    }
+                    , {
+                      "name":"32-bit Integer Compare"
+                      , "type":"resource"
+                      , "count":2
+                      , "data":
+                      [70, 2, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"tensorXL.cpp:159 > tensorXL.cpp:371 > \ntensorXL.cpp:932"
+                  , "type":"resource"
+                  , "data":
+                  [335, 254, 0, 0, 7]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":159
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":371
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":932
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"1-bit Select"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [1, 1, 0, 0, 0]
+                    }
+                    , {
+                      "name":"32-bit Select"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [32, 32, 0, 0, 0]
+                    }
+                    , {
+                      "name":"Load"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [251, 221, 0, 0, 7]
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"Load uses a Pipelined LSU"
+                        }
+                        , {
+                          "type":"brief"
+                          , "text":"Pipelined LSU"
+                        }
+                      ]
+                    }
+                    , {
+                      "name":"Select"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [51, 0, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"tensorXL.cpp:159 > tensorXL.cpp:371 > \ntensorXL.cpp:949"
+                  , "type":"resource"
+                  , "data":
+                  [37, 2, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":159
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":371
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":949
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"1-bit And"
+                      , "type":"resource"
+                      , "count":2
+                      , "data":
+                      [2, 1, 0, 0, 0]
+                    }
+                    , {
+                      "name":"32-bit Integer Compare"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [35, 1, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"tensorXL.cpp:159 > tensorXL.cpp:371 > \ntensorXL.cpp:960"
+                  , "type":"resource"
+                  , "data":
+                  [37, 2, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":159
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":371
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":960
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"1-bit And"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [1, 0, 0, 0, 0]
+                    }
+                    , {
+                      "name":"1-bit Or"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [1, 1, 0, 0, 0]
+                    }
+                    , {
+                      "name":"32-bit Integer Compare"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [35, 1, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"tensorXL.cpp:159 > tensorXL.cpp:371 > \ntensorXL.cpp:962"
+                  , "type":"resource"
+                  , "data":
+                  [156, 336, 0, 0, 5]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":159
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":371
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":962
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"Select"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [64, 64, 0, 0, 0]
+                    }
+                    , {
+                      "name":"Store"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [92, 272, 0, 0, 5]
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"Store uses a Pipelined LSU"
+                        }
+                        , {
+                          "type":"brief"
+                          , "text":"Pipelined LSU"
+                        }
+                      ]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"tensorXL.cpp:159 > tensorXL.cpp:369"
+                  , "type":"resource"
+                  , "data":
+                  [68, 8, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":159
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":369
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"1-bit And"
+                      , "type":"resource"
+                      , "count":3
+                      , "data":
+                      [2, 1, 0, 0, 0]
+                    }
+                    , {
+                      "name":"1-bit Or"
+                      , "type":"resource"
+                      , "count":5
+                      , "data":
+                      [3, 2, 0, 0, 0]
+                    }
+                    , {
+                      "name":"17-bit Select"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [14, 0, 0, 0, 0]
+                    }
+                    , {
+                      "name":"32-bit Integer Compare"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [35, 1, 0, 0, 0]
+                    }
+                    , {
+                      "name":"FFwd Destination"
+                      , "type":"resource"
+                      , "count":5
+                      , "data":
+                      [8, 0, 0, 0, 0]
+                    }
+                    , {
+                      "name":"Iteration Initiation"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [6, 4, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"tensorXL.cpp:159 > tensorXL.cpp:371"
+                  , "type":"resource"
+                  , "data":
+                  [0, 0, 0, 1, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":159
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":371
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"32-bit Floating-point Add"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [0, 0, 0, 1, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+              ]
+            }
+          ]
+        }
+        , {
+          "name":"add.B6"
+          , "type":"basicblock"
+          , "children":
+          [
+            {
+              "name":"State"
+              , "type":"resource"
+              , "data":
+              [36, 128, 0, 0, 0]
+              , "details":
+              [
+                {
+                  "type":"brief"
+                  , "text":"Live values and control logic"
+                }
+                , {
+                  "type":"text"
+                  , "text":"Resources for live values and control logic. To reduce this area:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"reduce size of local variables"
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"reduce scope of local variables, localizing them as much as possible"
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"reduce number of nested loops"
+                    }
+                  ]
+                }
+              ]
+              , "children":
+              [
+                {
+                  "name":"No Source Line"
+                  , "type":"resource"
+                  , "data":
+                  [32, 64, 0, 0, 0]
+                }
+                , {
+                  "name":"tensorXL.cpp:159 > tensorXL.cpp:367 > \ntensorXL.cpp:1027"
+                  , "type":"resource"
+                  , "data":
+                  [4, 64, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":159
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":367
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":1027
+                      }
+                    ]
+                  ]
+                }
+              ]
+            }
+            , {
+              "name":"Computation"
+              , "type":"resource"
+              , "children":
+              [
+                {
+                  "name":"tensorXL.cpp:140 > tensorXL.cpp:1112 > \ntensorXL.cpp:1027"
+                  , "type":"resource"
+                  , "data":
+                  [2, 0, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":140
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":1112
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":1027
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"FFwd Destination"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [2, 0, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"tensorXL.cpp:159 > tensorXL.cpp:367 > \ntensorXL.cpp:1027"
+                  , "type":"resource"
+                  , "data":
+                  [78, 0, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":159
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":367
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":1027
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"32-bit Select"
+                      , "type":"resource"
+                      , "count":3
+                      , "data":
+                      [78, 0, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"tensorXL.cpp:159 > tensorXL.cpp:367"
+                  , "type":"resource"
+                  , "data":
+                  [38, 2, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":159
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":367
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"1-bit And"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [1, 1, 0, 0, 0]
+                    }
+                    , {
+                      "name":"32-bit Integer Compare"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [35, 1, 0, 0, 0]
+                    }
+                    , {
+                      "name":"FFwd Destination"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [2, 0, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"tensorXL.cpp:170"
+                  , "type":"resource"
+                  , "data":
+                  [2, 0, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":170
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"FFwd Destination"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [2, 0, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+              ]
+            }
+          ]
+        }
+        , {
+          "name":"add.B7"
+          , "type":"basicblock"
+          , "children":
+          [
+            {
+              "name":"State"
+              , "type":"resource"
+              , "data":
+              [184, 4015, 1, 0, 0]
+              , "details":
+              [
+                {
+                  "type":"brief"
+                  , "text":"Live values and control logic"
+                }
+                , {
+                  "type":"text"
+                  , "text":"Resources for live values and control logic. To reduce this area:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"reduce size of local variables"
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"reduce scope of local variables, localizing them as much as possible"
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"reduce number of nested loops"
+                    }
+                  ]
+                }
+              ]
+              , "children":
+              [
+                {
+                  "name":"No Source Line"
+                  , "type":"resource"
+                  , "data":
+                  [183, 3788, 1, 0, 0]
+                }
+                , {
+                  "name":"tensorXL.cpp:169"
+                  , "type":"resource"
+                  , "data":
+                  [0, 32, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":169
+                      }
+                    ]
+                  ]
+                }
+                , {
+                  "name":"tensorXL.cpp:170"
+                  , "type":"resource"
+                  , "data":
+                  [0, 32, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":170
+                      }
+                    ]
+                  ]
+                }
+                , {
+                  "name":"tensorXL.cpp:170 > tensorXL.cpp:1027"
+                  , "type":"resource"
+                  , "data":
+                  [0, 64, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":170
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":1027
+                      }
+                    ]
+                  ]
+                }
+                , {
+                  "name":"tensorXL.cpp:172"
+                  , "type":"resource"
+                  , "data":
+                  [0, 2, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":172
+                      }
+                    ]
+                  ]
+                }
+                , {
+                  "name":"tensorXL.cpp:174"
+                  , "type":"resource"
+                  , "data":
+                  [0, 32, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":174
+                      }
+                    ]
+                  ]
+                }
+                , {
+                  "name":"tensorXL.cpp:174 > tensorXL.cpp:932"
+                  , "type":"resource"
+                  , "data":
+                  [1, 64, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":174
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":932
+                      }
+                    ]
+                  ]
+                }
+                , {
+                  "name":"tensorXL.cpp:174 > tensorXL.cpp:960"
+                  , "type":"resource"
+                  , "data":
+                  [0, 1, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":174
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":960
+                      }
+                    ]
+                  ]
+                }
+              ]
+            }
+            , {
+              "name":"Cluster logic"
+              , "type":"resource"
+              , "data":
+              [12, 10, 1, 0, 0]
+              , "details":
+              [
+                {
+                  "type":"brief"
+                  , "text":"Logic required to efficiently support sets of operations that do not stall"
+                }
+                , {
+                  "type":"text"
+                  , "text":"Logic required to efficiently support sets of operations that do not stall. This area cannot be affected directly."
+                }
+              ]
+            }
+            , {
+              "name":"Computation"
+              , "type":"resource"
+              , "children":
+              [
+                {
+                  "name":"tensorXL.cpp:170 > tensorXL.cpp:1027"
+                  , "type":"resource"
+                  , "data":
+                  [52, 0, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":170
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":1027
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"32-bit Select"
+                      , "type":"resource"
+                      , "count":2
+                      , "data":
+                      [52, 0, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"tensorXL.cpp:172 > tensorXL.cpp:1037"
+                  , "type":"resource"
+                  , "data":
+                  [26, 0, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":172
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":1037
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"32-bit Select"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [26, 0, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"tensorXL.cpp:174 > tensorXL.cpp:960"
+                  , "type":"resource"
+                  , "data":
+                  [35, 1, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":174
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":960
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"32-bit Integer Compare"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [35, 1, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"tensorXL.cpp:172"
+                  , "type":"resource"
+                  , "data":
+                  [12, 0, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":172
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"1-bit Or"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [1, 0, 0, 0, 0]
+                    }
+                    , {
+                      "name":"32-bit Integer Compare"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [11, 0, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"tensorXL.cpp:174"
+                  , "type":"resource"
+                  , "data":
+                  [2865, 528, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":174
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"32-bit Unsigned Integer Remainder"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [2865, 528, 0, 0, 0]
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"Implemented using inlined soft-IP."
+                        }
+                      ]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+              ]
+            }
+          ]
+        }
+        , {
+          "name":"add.B8"
+          , "type":"basicblock"
+          , "children":
+          [
+            {
+              "name":"State"
+              , "type":"resource"
+              , "data":
+              [3746, 6842, 17, 0, 7]
+              , "details":
+              [
+                {
+                  "type":"brief"
+                  , "text":"Live values and control logic"
+                }
+                , {
+                  "type":"text"
+                  , "text":"Resources for live values and control logic. To reduce this area:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"reduce size of local variables"
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"reduce scope of local variables, localizing them as much as possible"
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"reduce number of nested loops"
+                    }
+                  ]
+                }
+              ]
+              , "children":
+              [
+                {
+                  "name":"No Source Line"
+                  , "type":"resource"
+                  , "data":
+                  [3742, 6778, 17, 0, 7]
+                }
+                , {
+                  "name":"tensorXL.cpp:172 > tensorXL.cpp:1037"
+                  , "type":"resource"
+                  , "data":
+                  [4, 64, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":172
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":1037
+                      }
+                    ]
+                  ]
+                }
+              ]
+            }
+            , {
+              "name":"Feedback"
+              , "type":"resource"
+              , "data":
+              [444, 1076, 0, 0, 1]
+              , "details":
+              [
+                {
+                  "type":"brief"
+                  , "text":"Loop-carried dependencies"
+                }
+                , {
+                  "type":"text"
+                  , "text":"Resources for loop-carried dependencies. To reduce this area:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"reduce number and size of loop-carried variables"
+                    }
+                  ]
+                }
+              ]
+              , "children":
+              [
+                {
+                  "name":"tensorXL.cpp:169"
+                  , "type":"resource"
+                  , "data":
+                  [22, 33, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":169
+                      }
+                    ]
+                  ]
+                }
+                , {
+                  "name":"tensorXL.cpp:170"
+                  , "type":"resource"
+                  , "data":
+                  [66, 238, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":170
+                      }
+                    ]
+                  ]
+                }
+                , {
+                  "name":"tensorXL.cpp:172"
+                  , "type":"resource"
+                  , "data":
+                  [133, 287, 0, 0, 1]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":172
+                      }
+                    ]
+                  ]
+                }
+                , {
+                  "name":"tensorXL.cpp:172 > tensorXL.cpp:1037"
+                  , "type":"resource"
+                  , "data":
+                  [202, 504, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":172
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":1037
+                      }
+                    ]
+                  ]
+                }
+                , {
+                  "name":"tensorXL.cpp:174 > tensorXL.cpp:962"
+                  , "type":"resource"
+                  , "data":
+                  [21, 14, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":174
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":962
+                      }
+                    ]
+                  ]
+                }
+              ]
+            }
+            , {
+              "name":"Cluster logic"
+              , "type":"resource"
+              , "data":
+              [8, 6, 0, 0, 2]
+              , "details":
+              [
+                {
+                  "type":"brief"
+                  , "text":"Logic required to efficiently support sets of operations that do not stall"
+                }
+                , {
+                  "type":"text"
+                  , "text":"Logic required to efficiently support sets of operations that do not stall. This area cannot be affected directly."
+                }
+              ]
+            }
+            , {
+              "name":"Computation"
+              , "type":"resource"
+              , "children":
+              [
+                {
+                  "name":"No Source Line"
+                  , "type":"resource"
+                  , "data":
+                  [1, 0, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":""
+                        , "line":0
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"1-bit Xor"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [1, 0, 0, 0, 0]
+                    }
+                  ]
+                }
+                , {
+                  "name":"tensorXL.cpp:140 > tensorXL.cpp:1112 > \ntensorXL.cpp:1027"
+                  , "type":"resource"
+                  , "data":
+                  [6, 0, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":140
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":1112
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":1027
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"FFwd Destination"
+                      , "type":"resource"
+                      , "count":13
+                      , "data":
+                      [6, 0, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"tensorXL.cpp:172 > tensorXL.cpp:1037"
+                  , "type":"resource"
+                  , "data":
+                  [581, 442, 0, 0, 14]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":172
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":1037
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"1-bit Or"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [1, 0, 0, 0, 0]
+                    }
+                    , {
+                      "name":"32-bit Select"
+                      , "type":"resource"
+                      , "count":3
+                      , "data":
+                      [78, 0, 0, 0, 0]
+                    }
+                    , {
+                      "name":"Load"
+                      , "type":"resource"
+                      , "count":2
+                      , "data":
+                      [502, 442, 0, 0, 14]
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"Load uses a Pipelined LSU"
+                        }
+                        , {
+                          "type":"brief"
+                          , "text":"Pipelined LSU"
+                        }
+                      ]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"tensorXL.cpp:174 > tensorXL.cpp:930 > \ntensorXL.cpp:1027"
+                  , "type":"resource"
+                  , "data":
+                  [554, 442, 0, 0, 14]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":174
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":930
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":1027
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"32-bit Select"
+                      , "type":"resource"
+                      , "count":2
+                      , "data":
+                      [52, 0, 0, 0, 0]
+                    }
+                    , {
+                      "name":"Load"
+                      , "type":"resource"
+                      , "count":2
+                      , "data":
+                      [502, 442, 0, 0, 14]
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"Load uses a Pipelined LSU"
+                        }
+                        , {
+                          "type":"brief"
+                          , "text":"Pipelined LSU"
+                        }
+                      ]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"tensorXL.cpp:174 > tensorXL.cpp:917"
+                  , "type":"resource"
+                  , "data":
+                  [74, 4, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":174
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":917
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"1-bit And"
+                      , "type":"resource"
+                      , "count":4
+                      , "data":
+                      [4, 2, 0, 0, 0]
+                    }
+                    , {
+                      "name":"32-bit Integer Compare"
+                      , "type":"resource"
+                      , "count":2
+                      , "data":
+                      [70, 2, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"tensorXL.cpp:174 > tensorXL.cpp:930"
+                  , "type":"resource"
+                  , "data":
+                  [142, 5, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":174
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":930
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"1-bit And"
+                      , "type":"resource"
+                      , "count":2
+                      , "data":
+                      [2, 1, 0, 0, 0]
+                    }
+                    , {
+                      "name":"32-bit Integer Compare"
+                      , "type":"resource"
+                      , "count":4
+                      , "data":
+                      [140, 4, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"tensorXL.cpp:174 > tensorXL.cpp:932"
+                  , "type":"resource"
+                  , "data":
+                  [658, 444, 0, 0, 14]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":174
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":932
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"1-bit Select"
+                      , "type":"resource"
+                      , "count":2
+                      , "data":
+                      [2, 2, 0, 0, 0]
+                    }
+                    , {
+                      "name":"32-bit Select"
+                      , "type":"resource"
+                      , "count":2
+                      , "data":
+                      [52, 0, 0, 0, 0]
+                    }
+                    , {
+                      "name":"Load"
+                      , "type":"resource"
+                      , "count":2
+                      , "data":
+                      [502, 442, 0, 0, 14]
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"Load uses a Pipelined LSU"
+                        }
+                        , {
+                          "type":"brief"
+                          , "text":"Pipelined LSU"
+                        }
+                      ]
+                    }
+                    , {
+                      "name":"Select"
+                      , "type":"resource"
+                      , "count":2
+                      , "data":
+                      [102, 0, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"tensorXL.cpp:174 > tensorXL.cpp:949"
+                  , "type":"resource"
+                  , "data":
+                  [37, 2, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":174
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":949
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"1-bit And"
+                      , "type":"resource"
+                      , "count":2
+                      , "data":
+                      [2, 1, 0, 0, 0]
+                    }
+                    , {
+                      "name":"32-bit Integer Compare"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [35, 1, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"tensorXL.cpp:174 > tensorXL.cpp:960"
+                  , "type":"resource"
+                  , "data":
+                  [37, 2, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":174
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":960
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"1-bit And"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [1, 0, 0, 0, 0]
+                    }
+                    , {
+                      "name":"1-bit Or"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [1, 1, 0, 0, 0]
+                    }
+                    , {
+                      "name":"32-bit Integer Compare"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [35, 1, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"tensorXL.cpp:174 > tensorXL.cpp:962"
+                  , "type":"resource"
+                  , "data":
+                  [156, 336, 0, 0, 5]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":174
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":962
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"Select"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [64, 64, 0, 0, 0]
+                    }
+                    , {
+                      "name":"Store"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [92, 272, 0, 0, 5]
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"Store uses a Pipelined LSU"
+                        }
+                        , {
+                          "type":"brief"
+                          , "text":"Pipelined LSU"
+                        }
+                      ]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"tensorXL.cpp:172"
+                  , "type":"resource"
+                  , "data":
+                  [78, 12, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":172
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"1-bit And"
+                      , "type":"resource"
+                      , "count":3
+                      , "data":
+                      [2, 1, 0, 0, 0]
+                    }
+                    , {
+                      "name":"1-bit Or"
+                      , "type":"resource"
+                      , "count":5
+                      , "data":
+                      [3, 2, 0, 0, 0]
+                    }
+                    , {
+                      "name":"17-bit Select"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [14, 0, 0, 0, 0]
+                    }
+                    , {
+                      "name":"32-bit Integer Compare"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [35, 1, 0, 0, 0]
+                    }
+                    , {
+                      "name":"FFwd Destination"
+                      , "type":"resource"
+                      , "count":8
+                      , "data":
+                      [14, 0, 0, 0, 0]
+                    }
+                    , {
+                      "name":"Iteration Initiation"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [10, 8, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"tensorXL.cpp:174"
+                  , "type":"resource"
+                  , "data":
+                  [2866, 529, 0, 1, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":174
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"32-bit Floating-point Add"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [0, 0, 0, 1, 0]
+                    }
+                    , {
+                      "name":"32-bit Unsigned Integer Remainder"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [2866, 529, 0, 0, 0]
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"Implemented using inlined soft-IP."
+                        }
+                      ]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+              ]
+            }
+          ]
+        }
+        , {
+          "name":"add.B9"
+          , "type":"basicblock"
+          , "children":
+          [
+            {
+              "name":"State"
+              , "type":"resource"
+              , "data":
+              [36, 128, 0, 0, 0]
+              , "details":
+              [
+                {
+                  "type":"brief"
+                  , "text":"Live values and control logic"
+                }
+                , {
+                  "type":"text"
+                  , "text":"Resources for live values and control logic. To reduce this area:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"reduce size of local variables"
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"reduce scope of local variables, localizing them as much as possible"
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"reduce number of nested loops"
+                    }
+                  ]
+                }
+              ]
+              , "children":
+              [
+                {
+                  "name":"No Source Line"
+                  , "type":"resource"
+                  , "data":
+                  [32, 64, 0, 0, 0]
+                }
+                , {
+                  "name":"tensorXL.cpp:170 > tensorXL.cpp:1027"
+                  , "type":"resource"
+                  , "data":
+                  [4, 64, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":170
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":1027
+                      }
+                    ]
+                  ]
+                }
+              ]
+            }
+            , {
+              "name":"Computation"
+              , "type":"resource"
+              , "children":
+              [
+                {
+                  "name":"tensorXL.cpp:140 > tensorXL.cpp:1112 > \ntensorXL.cpp:1027"
+                  , "type":"resource"
+                  , "data":
+                  [2, 0, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":140
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":1112
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":1027
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"FFwd Destination"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [2, 0, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"tensorXL.cpp:170 > tensorXL.cpp:1027"
+                  , "type":"resource"
+                  , "data":
+                  [78, 0, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                        , "line":170
+                      }
+                      , {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":1027
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"32-bit Select"
+                      , "type":"resource"
+                      , "count":3
+                      , "data":
+                      [78, 0, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"tensorXL.cpp:170"
+                  , "type":"resource"
+                  , "data":
+                  [40, 2, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":170
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"1-bit And"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [1, 1, 0, 0, 0]
+                    }
+                    , {
+                      "name":"32-bit Integer Compare"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [35, 1, 0, 0, 0]
+                    }
+                    , {
+                      "name":"FFwd Destination"
+                      , "type":"resource"
+                      , "count":2
+                      , "data":
+                      [4, 0, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

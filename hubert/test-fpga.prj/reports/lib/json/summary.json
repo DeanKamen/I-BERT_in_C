@@ -1,0 +1,71 @@
+{
+  "functionNameMapping":
+  {
+    "name":"Synthesized Function Name Mapping"
+    , "columns":
+    ["User-defined Function Name", "Mapped Function Name"]
+    , "children":
+    [
+      {
+        "name":"public: static void __cdecl TensorXL::add(class TensorXL &, class TensorXL &, class TensorXL &)"
+        , "data":
+        ["add"]
+        , "debug":
+        [
+          [
+            {
+              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\./tensorXL.h"
+              , "line":43
+            }
+          ]
+        ]
+      }
+    ]
+  }
+  , "estimatedResources":
+  {
+    "name":"Estimated Resource Usage"
+    , "columns":
+    ["Function Name", "ALUTs ", "FFs  ", "RAMs ", "DSPs ", "MLABs"]
+    , "children":
+    [
+      {
+        "name":"add"
+        , "data":
+        [18763, 22168, 28, 2, 170]
+        , "debug":
+        [
+          [
+            {
+              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\./tensorXL.h"
+              , "line":43
+            }
+          ]
+        ]
+      }
+      , {
+        "name":"Total"
+        , "classes":
+        ["summary-highlight", "nohover"]
+        , "data":
+        [18763, 22168, 28, 2, 170]
+        , "data_percent":
+        [11.6787, 6.89904, 4.77002, 1.04167]
+      }
+      , {
+        "name":"Available"
+        , "classes":
+        ["summary-highlight", "nohover"]
+        , "data":
+        [160660, 321320, 587, 192, 0]
+      }
+    ]
+  }
+  , "compileWarnings":
+  {
+    "name":"Compile Warnings"
+    , "children":
+    [
+    ]
+  }
+}

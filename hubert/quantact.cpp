@@ -2,22 +2,21 @@
 
 #include "HLS/hls.h"
 #include "HLS/stdio.h"
-#include "tensors.hpp" 
-#include "tensor_mult.h"
+#include "tensors.h" 
 #include <iostream>
 #include "quantact.h"
 #include "loadTensors.h"
 #include "hubertEnums.h"
 #include "crosstype_tensors.h"
 
-typedef Tensor3d<float> T3d;
-typedef Tensor<float> T2d;
-typedef TensorXL<float> scalar;
+typedef Tensor3d T3d;
+typedef Tensor T2d;
+typedef TensorXL scalar;
 typedef scaled_tuple3d tuple;
 
-Tensor<float> x_min;//This is only ever of size one during inference at least
-Tensor<float> x_max;
-TensorXL<float> act_scaling_factor;
+Tensor x_min;//This is only ever of size one during inference at least
+Tensor x_max;
+TensorXL act_scaling_factor;
 
 QuantAct::QuantAct(int activation_bit_i, 
              float act_range_momentum_i,
@@ -241,7 +240,7 @@ T3d* QuantAct::linear_quantize(T3d& x, scalar& scale_c, scalar& zero_point)
 	}
 	else
 	{
-		mul_type(x, scale, x);
+		crosstype::mul_type(x, scale, x);
 	}
     T3d::add_scalar(x, scalar::one(zero_point), x);
     T3d::roundTensor(x, x);
@@ -269,7 +268,7 @@ T3d* QuantAct::fixedpoint_mul(
     scalar space(1,1,0.f);
 
     T3d z_int(pre_act);
-    div_type(pre_act, pre_act_scaling_factor, z_int); 
+    crosstype::div_type(pre_act, pre_act_scaling_factor, z_int); 
     T3d::roundTensor(z_int, z_int);
 
     //the following is in double precision in the code, but I did not make it double precision here
@@ -285,14 +284,14 @@ T3d* QuantAct::fixedpoint_mul(
 
 	scalar twos(T3d::getRows(output), T3d::getCols(output), 2.0f);
 	scalar::pow_dot(twos, e, twos); //use twos as temp storage
-	div_type(output, twos, output);
-    mul_type(output, m, output);
+	crosstype::div_type(output, twos, output);
+	crosstype::mul_type(output, m, output);
     T3d::roundTensor(output, output);
 
     if(!identity.null)
 	{
         T3d wx_int (identity);
-        div_type(identity, identity_scaling_factor, identity);
+		crosstype::div_type(identity, identity_scaling_factor, identity);
         T3d::roundTensor(identity, wx_int);
 
         _A = scalar(identity_scaling_factor);
@@ -305,10 +304,10 @@ T3d* QuantAct::fixedpoint_mul(
         scalar::tensor_frexp(new_scale, m1, e1);
 
         T3d output1(wx_int);
-        mul_type(wx_int, m1, output1);
+		crosstype::mul_type(wx_int, m1, output1);
 
         scalar::pow_dot(twos, e1, e1); //use e1 as temp storage
-        div_type(output1, e1, output1);
+		crosstype::div_type(output1, e1, output1);
         T3d::roundTensor(output1, output1);
 
         T3d::add(output, output1, output);

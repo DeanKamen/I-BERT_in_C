@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<simPackage>
+ <file
+   path="avalon_conduit_fanout_10/sim/add_en_cfan_avalon_conduit_fanout_10_joescla.sv"
+   type="SYSTEM_VERILOG"
+   library="avalon_conduit_fanout_10" />
+ <file
+   path="sim/add_en_cfan.v"
+   type="VERILOG"
+   library="add_en_cfan"
+   hasInlineConfiguration="true" />
+ <topLevel name="add_en_cfan.add_en_cfan" />
+ <deviceFamily name="cyclone10gx" />
+ <device name="10CX220YF780I5G" />
+</simPackage>

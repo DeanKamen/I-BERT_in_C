@@ -1,0 +1,36 @@
+<?xml version="1.0" ?>
+<node xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:altera="http://www.altera.com/XMLSchema/Qsys/SystemTree">
+  <instanceKey xsi:type="xs:string">add_cfan</instanceKey>
+  <instanceData xsi:type="data">
+    <parameters></parameters>
+    <interconnectAssignments></interconnectAssignments>
+    <className>add_cfan</className>
+    <version>1.0</version>
+    <name>add_cfan</name>
+    <uniqueName>add_cfan</uniqueName>
+    <nonce>0</nonce>
+    <incidentConnections></incidentConnections>
+  </instanceData>
+  <children>
+    <node>
+      <instanceKey xsi:type="xs:string">add_cfan</instanceKey>
+      <instanceData xsi:type="data">
+        <parameters>
+          <parameter>
+            <name>numFanOut</name>
+            <value>4</value>
+          </parameter>
+        </parameters>
+        <interconnectAssignments></interconnectAssignments>
+        <className>avalon_conduit_fanout</className>
+        <version>1.0</version>
+        <name>add_cfan</name>
+        <uniqueName>add_cfan_avalon_conduit_fanout_10_joescla</uniqueName>
+        <nonce>0</nonce>
+        <incidentConnections></incidentConnections>
+        <path>add_cfan.add_cfan</path>
+      </instanceData>
+      <children></children>
+    </node>
+  </children>
+</node>

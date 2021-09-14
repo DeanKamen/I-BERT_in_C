@@ -1,11 +1,10 @@
 //sentence_encoder_layer.cpp, created by Hunter Messner for the HUBERT project
 #include "HLS/hls.h"
 #include "HLS/stdio.h"
-#include "tensors.hpp" 
-#include "tensor3d.hpp"
-#include "tensorXL.hpp"
-#include "tensor3dXL.hpp"
-#include "tensor_mult.h"
+#include "tensors.h" 
+#include "tensor3d.h"
+#include "tensorXL.h"
+#include "tensor3dXL.h"
 #include <iostream>
 #include "quantact.h"
 #include "quantact_xl.h"
@@ -96,14 +95,14 @@ sentenceEncoderLayer::~sentenceEncoderLayer()
 
 scaled_tuple3dXL sentenceEncoderLayer::sel_forward(
 	sentenceEncoderLayer &self,
-	Tensor3dXL<float>& x,
-	TensorXL<float>& x_scaling_factor,
-	TensorXL<float>& self_attn_mask,
-	Tensor<float>& self_attn_padding_mask)
+	Tensor3dXL& x,
+	TensorXL& x_scaling_factor,
+	TensorXL& self_attn_mask,
+	Tensor& self_attn_padding_mask)
 {
 	T3d null3d;
 	T2d null2d;
-	Tensor<float> null2ds;
+	Tensor null2ds;
 
 	scaled_tuple3dXL t;
 	t = QuantAct_XL::QuantAct_forward(*self.input_act, x, x_scaling_factor, null3d, null2d, null2d, null2d);

@@ -1,0 +1,58 @@
+{
+  "nodes":
+  [
+    {
+      "name":"(Other)"
+      , "id":1
+      , "type":"component"
+      , "children":
+      [
+        {
+          "name":"Local Memory"
+          , "id":2
+          , "type":"memtype"
+          , "children":
+          [
+            {
+              "name":"nullone"
+              , "id":3
+              , "details":
+              [
+                {
+                  "type":"table"
+                  , "Declared at":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"%L"
+                      , "links":
+                      [
+                        {
+                          "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensor3d.cpp"
+                          , "line":"498"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+              , "debug":
+              [
+                [
+                  {
+                    "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensor3d.cpp"
+                    , "line":498
+                  }
+                ]
+              ]
+              , "type":"unsynth"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+  , "links":
+  [
+  ]
+}

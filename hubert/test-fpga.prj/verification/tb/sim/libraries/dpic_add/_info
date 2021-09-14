@@ -1,0 +1,34 @@
+m255
+K4
+z2
+!s11f vlog 2021.1 2021.02, Feb  3 2021
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dc:/Users/hunto_efxy22i/jupyterProjects/HUBERT/hubert/test-fpga.prj/verification/tb/sim
+vdpic_add
+!s110 1631631311
+!i10b 1
+!s100 JWz9T`@Z5i[T[Io8=VjTe3
+If<<Uaghzi]43CfzVS5UNX3
+R0
+w1631631295
+8../../ip/tb/dpic_add/sim/dpic_add.v
+F../../ip/tb/dpic_add/sim/dpic_add.v
+!i122 0
+L0 6 48
+VDg1SIo80bB@j0V0VzS_@n1
+OV;L;2021.1;73
+r1
+!s85 0
+31
+!s108 1631631311.000000
+!s107 ../../ip/tb/dpic_add/sim/dpic_add.v|
+!s90 +incdir+.|+define+COSIM_LIB|../../ip/tb/dpic_add/sim/dpic_add.v|-work|dpic_add|
+!i113 1
+o-work dpic_add
+!s92 +incdir+. +define+COSIM_LIB -work dpic_add
+tCvgOpt 0

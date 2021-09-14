@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<simPackage>
+ <file
+   path="hls_sim_stream_source_dpi_bfm_10/sim/hls_sim_stream_source_dpi_bfm.sv"
+   type="SYSTEM_VERILOG"
+   library="hls_sim_stream_source_dpi_bfm_10" />
+ <file
+   path="sim/sso_add_A.v"
+   type="VERILOG"
+   library="sso_add_A"
+   hasInlineConfiguration="true" />
+ <topLevel name="sso_add_A.sso_add_A" />
+ <deviceFamily name="cyclone10gx" />
+ <device name="10CX220YF780I5G" />
+</simPackage>

@@ -1,12 +1,12 @@
 //created by Hunter Messner (messn036) on 8/9/21
 
-#ifndef __HUBERT_SEC_H__
-#define __HUBERT_SEC_H__
+#ifndef __HUBERT_SEL_H__
+#define __HUBERT_SEL_H__
 
 #include "HLS/hls.h"
 #include "HLS/stdio.h"
-#include "tensors.hpp" 
-#include "tensor3d.hpp"
+#include "tensors.h" 
+#include "tensor3d.h"
 #include "hubertEnums.h"
 #include "quantact.h"
 #include "QuantLinear.h"
@@ -43,10 +43,10 @@ public:
 	//Forward
 	static scaled_tuple3dXL sel_forward(
 		sentenceEncoderLayer &self,
-		Tensor3dXL<float>& x,
-		TensorXL<float>& x_scaling_factor,
-		TensorXL<float>& self_attn_mask,
-		Tensor<float>& self_attn_padding_mask);
+		Tensor3dXL& x,
+		TensorXL& x_scaling_factor,
+		TensorXL& self_attn_mask,
+		Tensor& self_attn_padding_mask);
 
 	QuantMode quant_mode;
 	ForceDequantMode force_dequant;

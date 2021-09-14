@@ -1,0 +1,4 @@
+{"nodes":[
+{"debug":[[{"filename":"quantact_testbench.cpp","line":"81"}]],"details":[{"text":"quantact_testbench.cpp:81:28: warning: expression result unused [-Wunused-value]"}],"name":"expression result unused [-Wunused-value]"},
+{"debug":[[{"filename":"tensor3dXL.cpp","line":"516"}]],"details":[{"text":"tensor3dXL.cpp:516:10: warning: reference to stack memory associated with local variable 'nullone' returned [-Wreturn-stack-address]"}],"name":"reference to stack memory associated with local variable 'nullone' returned [-Wreturn-stack-address]"}
+]}

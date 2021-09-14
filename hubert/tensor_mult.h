@@ -51,7 +51,7 @@
 //this function cannot auto-detect matrix size, it must be entered manually with compile time constants.
 //This is due to dynamic allocation constraints
 template<class T, int t_rowsA, int t_colsA, int t_colsB, int DOT_VEC_SIZE = t_colsA, int BLOCK_SIZE = DOT_VEC_SIZE, int RUNNING_SUM_MULT_L = 1>
-void matrix_multiply(Tensor<T>* A, Tensor<T>* B, Tensor<T>* C) {
+void matrix_multiply(Tensor &A, Tensor &B, Tensor &C) {
 	const int COLSA = t_colsA;
 	const int ROWSA = t_rowsA;
 	const int COLSB = t_colsB;
@@ -101,7 +101,7 @@ void matrix_multiply(Tensor<T>* A, Tensor<T>* B, Tensor<T>* C) {
 					rowA = i;
 					colA = (s + 1) * DOT_VEC_SIZE + (j - COLSC + DOT_VEC_SIZE / BLOCK_SIZE) * BLOCK_SIZE + d;
 				}
-				val = Tensor<T>::get(A, rowA, colA);
+				val = Tensor::get(A, rowA, colA);
 			}
 			A_local_regs[d + DOT_VEC_SIZE - BLOCK_SIZE] = val;
 		}
@@ -109,7 +109,7 @@ void matrix_multiply(Tensor<T>* A, Tensor<T>* B, Tensor<T>* C) {
 		T running_sum = 0.0;
 #pragma unroll
 		for (int d = 0; d < DOT_VEC_SIZE; ++d) {
-			running_sum += A_local_regs_stable[d] * Tensor<T>::get(B, s * DOT_VEC_SIZE + d, j);
+			running_sum += A_local_regs_stable[d] * Tensor::get(B, s * DOT_VEC_SIZE + d, j);
 		}
 		T sum = running_sums_for_col[RUNNING_SUM_MULT_L * COLSC - 1] = (s < RUNNING_SUM_MULT_L ? (T) 0.0 : running_sums_for_col[RUNNING_SUM_MULT_L * COLSC - 1]) + running_sum;
 		T final_sum = sum;
@@ -134,7 +134,7 @@ void matrix_multiply(Tensor<T>* A, Tensor<T>* B, Tensor<T>* C) {
 		}
 
 		if (last_s_itr && i >= 0) {
-			Tensor<T>::set(C,i,j,final_sum);
+			Tensor::set(C,i,j,final_sum);
 		}
 		if (j == COLSC - 1) {
 			j = 0;

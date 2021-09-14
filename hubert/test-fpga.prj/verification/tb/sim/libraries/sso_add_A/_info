@@ -1,0 +1,35 @@
+m255
+K4
+z2
+!s11f vlog 2021.1 2021.02, Feb  3 2021
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dc:/Users/hunto_efxy22i/jupyterProjects/HUBERT/hubert/test-fpga.prj/verification/tb/sim
+vsso_add_A
+!s110 1631631354
+!i10b 1
+!s100 MBB[MFIeWkFgUiadFLmab3
+I@TX3MHN>8:6oSEUWn33oC2
+R0
+w1631631300
+8../../ip/tb/sso_add_A/sim/sso_add_A.v
+F../../ip/tb/sso_add_A/sim/sso_add_A.v
+!i122 0
+L0 6 37
+VDg1SIo80bB@j0V0VzS_@n1
+OV;L;2021.1;73
+r1
+!s85 0
+31
+!s108 1631631354.000000
+!s107 ../../ip/tb/sso_add_A/sim/sso_add_A.v|
+!s90 +incdir+.|+define+COSIM_LIB|../../ip/tb/sso_add_A/sim/sso_add_A.v|-work|sso_add_A|
+!i113 1
+o-work sso_add_A
+!s92 +incdir+. +define+COSIM_LIB -work sso_add_A
+tCvgOpt 0
+nsso_add_@a

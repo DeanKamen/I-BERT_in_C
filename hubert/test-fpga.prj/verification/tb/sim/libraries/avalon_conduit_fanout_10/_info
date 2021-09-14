@@ -1,0 +1,86 @@
+m255
+K4
+z2
+!s11f vlog 2021.1 2021.02, Feb  3 2021
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dc:/Users/hunto_efxy22i/jupyterProjects/HUBERT/hubert/test-fpga.prj/verification/tb/sim
+vadd_cfan_avalon_conduit_fanout_10_joescla
+Z1 DXx6 sv_std 3 std 0 22 VYECXdT12H8WgbUP_5Y6:3
+Z2 !s110 1631631354
+!i10b 1
+!s100 cP3I_bGz_R1E_S9N8m_eQ1
+ICj@iD0bjOM>aDXbmUHfWz1
+S1
+R0
+w1631631301
+8../../ip/tb/add_cfan/avalon_conduit_fanout_10/sim/add_cfan_avalon_conduit_fanout_10_joescla.sv
+F../../ip/tb/add_cfan/avalon_conduit_fanout_10/sim/add_cfan_avalon_conduit_fanout_10_joescla.sv
+!i122 1
+Z3 L0 36 22
+Z4 VDg1SIo80bB@j0V0VzS_@n1
+Z5 OV;L;2021.1;73
+r1
+!s85 0
+31
+Z6 !s108 1631631354.000000
+!s107 ../../ip/tb/add_cfan/avalon_conduit_fanout_10/sim/add_cfan_avalon_conduit_fanout_10_joescla.sv|
+!s90 -sv|+incdir+.|+define+COSIM_LIB|../../ip/tb/add_cfan/avalon_conduit_fanout_10/sim/add_cfan_avalon_conduit_fanout_10_joescla.sv|-work|avalon_conduit_fanout_10|
+!i113 1
+Z7 o-sv -work avalon_conduit_fanout_10
+Z8 !s92 -sv +incdir+. +define+COSIM_LIB -work avalon_conduit_fanout_10
+Z9 tCvgOpt 0
+vadd_en_cfan_avalon_conduit_fanout_10_joescla
+R1
+!s110 1631631355
+!i10b 1
+!s100 dIPKcoh?P8K_^1E8WiOBQ0
+I5j@9VYn2KzIGbX7dbn>i_1
+S1
+R0
+w1631631304
+8../../ip/tb/add_en_cfan/avalon_conduit_fanout_10/sim/add_en_cfan_avalon_conduit_fanout_10_joescla.sv
+F../../ip/tb/add_en_cfan/avalon_conduit_fanout_10/sim/add_en_cfan_avalon_conduit_fanout_10_joescla.sv
+!i122 2
+R3
+R4
+R5
+r1
+!s85 0
+31
+!s108 1631631355.000000
+!s107 ../../ip/tb/add_en_cfan/avalon_conduit_fanout_10/sim/add_en_cfan_avalon_conduit_fanout_10_joescla.sv|
+!s90 -sv|+incdir+.|+define+COSIM_LIB|../../ip/tb/add_en_cfan/avalon_conduit_fanout_10/sim/add_en_cfan_avalon_conduit_fanout_10_joescla.sv|-work|avalon_conduit_fanout_10|
+!i113 1
+R7
+R8
+R9
+vadd_ir_cfan_avalon_conduit_fanout_10_ak2cvai
+R1
+R2
+!i10b 1
+!s100 dTCgKT[6JE[U2Me`En>aY0
+IMgo<?`befKX]a<_11N<<D3
+S1
+R0
+w1631631298
+8../../ip/tb/add_ir_cfan/avalon_conduit_fanout_10/sim/add_ir_cfan_avalon_conduit_fanout_10_ak2cvai.sv
+F../../ip/tb/add_ir_cfan/avalon_conduit_fanout_10/sim/add_ir_cfan_avalon_conduit_fanout_10_ak2cvai.sv
+!i122 0
+L0 36 19
+R4
+R5
+r1
+!s85 0
+31
+R6
+!s107 ../../ip/tb/add_ir_cfan/avalon_conduit_fanout_10/sim/add_ir_cfan_avalon_conduit_fanout_10_ak2cvai.sv|
+!s90 -sv|+incdir+.|+define+COSIM_LIB|../../ip/tb/add_ir_cfan/avalon_conduit_fanout_10/sim/add_ir_cfan_avalon_conduit_fanout_10_ak2cvai.sv|-work|avalon_conduit_fanout_10|
+!i113 1
+R7
+R8
+R9

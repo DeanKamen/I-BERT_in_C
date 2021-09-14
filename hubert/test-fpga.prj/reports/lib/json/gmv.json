@@ -1,0 +1,921 @@
+{
+  "nodes":
+  [
+    {
+      "name":"0"
+      , "id":1
+      , "details":
+      [
+        {
+          "type":"table"
+          , "Interleaving":"Yes"
+          , "Interleave Size":"4095 MBs"
+          , "Channels":"1 channel"
+          , "Maximum bandwidth the BSP can deliver":"0.00 MB/s<br><small><i> Note: Realistic maximum bandwidth is about 90% of the above due to loss from interconnect and memory controller.</i></small>"
+          , "Channel 0_Width (bits)":"64"
+        }
+      ]
+      , "type":"memsys"
+      , "children":
+      [
+        {
+          "name":"0"
+          , "id":3
+          , "type":"bb"
+        }
+      ]
+    }
+    , {
+      "name":"Memory Controller"
+      , "id":2
+      , "parent":"1"
+      , "bw":"0.00"
+      , "num_channels":"1"
+      , "interleave":"1"
+      , "details":
+      [
+        {
+          "type":"table"
+          , "Maximum bandwidth the BSP can deliver":"0.00 MB/s<br><small><i> Note: Realistic maximum bandwidth is about 90% of the above due to loss from interconnect and memory controller.</i></small>"
+        }
+      ]
+      , "type":"bb"
+    }
+    , {
+      "name":"Global Memory Interconnect"
+      , "id":4
+      , "parent":"1"
+      , "type":"bb"
+      , "children":
+      [
+        {
+          "name":"SHARE"
+          , "id":5
+          , "type":"arb"
+        }
+        , {
+          "name":"Write Interconnect"
+          , "id":8
+          , "details":
+          [
+            {
+              "type":"table"
+              , "Name":"0"
+              , "Interconnect Style":"ring"
+              , "Writes":"2"
+              , "User specified force-single-store-ring flag":"False"
+              , "Store Rings":"1"
+            }
+          ]
+          , "type":"bb"
+        }
+        , {
+          "name":"Read Interconnect"
+          , "id":6
+          , "details":
+          [
+            {
+              "type":"table"
+              , "Name":"0"
+              , "Interconnect Style":"ring"
+              , "Reads":"19"
+            }
+          ]
+          , "type":"bb"
+        }
+        , {
+          "name":"Read Interconnect Router"
+          , "id":7
+          , "details":
+          [
+            {
+              "type":"table"
+              , "User specified num-reorder flag":"1"
+            }
+          ]
+          , "type":"memsys"
+          , "children":
+          [
+            {
+              "name":"Bus 0"
+              , "id":32
+              , "type":"memsys"
+            }
+          ]
+        }
+      ]
+    }
+    , {
+      "name":"Global Memory Loads"
+      , "id":9
+      , "parent":"1"
+      , "type":"bb"
+      , "children":
+      [
+        {
+          "name":"LD"
+          , "id":10
+          , "kwidth":"8"
+          , "mwidth":"64"
+          , "details":
+          [
+            {
+              "type":"table"
+              , "Start Cycle":"2"
+              , "Latency":"31 cycles"
+              , "Width":"8 bits"
+              , "0_Width":"64 bits"
+              , "Uses Caching":"No"
+              , "LSU Style":"PIPELINED"
+            }
+          ]
+          , "debug":
+          [
+            [
+              {
+                "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                , "line":1027
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"LD"
+          , "id":11
+          , "kwidth":"32"
+          , "mwidth":"64"
+          , "details":
+          [
+            {
+              "type":"table"
+              , "Start Cycle":"2"
+              , "Latency":"31 cycles"
+              , "Width":"32 bits"
+              , "0_Width":"64 bits"
+              , "Uses Caching":"No"
+              , "LSU Style":"PIPELINED"
+            }
+          ]
+          , "debug":
+          [
+            [
+              {
+                "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                , "line":1027
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"LD"
+          , "id":12
+          , "kwidth":"32"
+          , "mwidth":"64"
+          , "details":
+          [
+            {
+              "type":"table"
+              , "Start Cycle":"2"
+              , "Latency":"31 cycles"
+              , "Width":"32 bits"
+              , "0_Width":"64 bits"
+              , "Uses Caching":"No"
+              , "LSU Style":"PIPELINED"
+            }
+          ]
+          , "debug":
+          [
+            [
+              {
+                "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                , "line":1027
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"LD"
+          , "id":13
+          , "kwidth":"8"
+          , "mwidth":"64"
+          , "details":
+          [
+            {
+              "type":"table"
+              , "Start Cycle":"2"
+              , "Latency":"31 cycles"
+              , "Width":"8 bits"
+              , "0_Width":"64 bits"
+              , "Uses Caching":"No"
+              , "LSU Style":"PIPELINED"
+            }
+          ]
+          , "debug":
+          [
+            [
+              {
+                "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                , "line":1027
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"LD"
+          , "id":14
+          , "kwidth":"32"
+          , "mwidth":"64"
+          , "details":
+          [
+            {
+              "type":"table"
+              , "Start Cycle":"2"
+              , "Latency":"31 cycles"
+              , "Width":"32 bits"
+              , "0_Width":"64 bits"
+              , "Uses Caching":"No"
+              , "LSU Style":"PIPELINED"
+            }
+          ]
+          , "debug":
+          [
+            [
+              {
+                "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                , "line":1027
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"LD"
+          , "id":15
+          , "kwidth":"32"
+          , "mwidth":"64"
+          , "details":
+          [
+            {
+              "type":"table"
+              , "Start Cycle":"2"
+              , "Latency":"31 cycles"
+              , "Width":"32 bits"
+              , "0_Width":"64 bits"
+              , "Uses Caching":"No"
+              , "LSU Style":"PIPELINED"
+            }
+          ]
+          , "debug":
+          [
+            [
+              {
+                "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                , "line":1027
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"LD"
+          , "id":16
+          , "kwidth":"8"
+          , "mwidth":"64"
+          , "details":
+          [
+            {
+              "type":"table"
+              , "Start Cycle":"34"
+              , "Latency":"31 cycles"
+              , "Width":"8 bits"
+              , "0_Width":"64 bits"
+              , "Uses Caching":"No"
+              , "LSU Style":"PIPELINED"
+            }
+          ]
+          , "debug":
+          [
+            [
+              {
+                "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                , "line":947
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"LD"
+          , "id":17
+          , "kwidth":"32"
+          , "mwidth":"64"
+          , "details":
+          [
+            {
+              "type":"table"
+              , "Start Cycle":"34"
+              , "Latency":"31 cycles"
+              , "Width":"32 bits"
+              , "0_Width":"64 bits"
+              , "Uses Caching":"No"
+              , "LSU Style":"PIPELINED"
+            }
+          ]
+          , "debug":
+          [
+            [
+              {
+                "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                , "line":1027
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"LD"
+          , "id":18
+          , "kwidth":"32"
+          , "mwidth":"64"
+          , "details":
+          [
+            {
+              "type":"table"
+              , "Start Cycle":"34"
+              , "Latency":"31 cycles"
+              , "Width":"32 bits"
+              , "0_Width":"64 bits"
+              , "Uses Caching":"No"
+              , "LSU Style":"PIPELINED"
+            }
+          ]
+          , "debug":
+          [
+            [
+              {
+                "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                , "line":1027
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"LD"
+          , "id":19
+          , "kwidth":"32"
+          , "mwidth":"64"
+          , "details":
+          [
+            {
+              "type":"table"
+              , "Start Cycle":"34"
+              , "Latency":"31 cycles"
+              , "Width":"32 bits"
+              , "0_Width":"64 bits"
+              , "Uses Caching":"No"
+              , "LSU Style":"PIPELINED"
+            }
+          ]
+          , "debug":
+          [
+            [
+              {
+                "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                , "line":930
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"LD"
+          , "id":20
+          , "kwidth":"32"
+          , "mwidth":"64"
+          , "details":
+          [
+            {
+              "type":"table"
+              , "Start Cycle":"6"
+              , "Latency":"31 cycles"
+              , "Width":"32 bits"
+              , "0_Width":"64 bits"
+              , "Uses Caching":"No"
+              , "LSU Style":"PIPELINED"
+            }
+          ]
+          , "debug":
+          [
+            [
+              {
+                "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                , "line":932
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"LD"
+          , "id":23
+          , "kwidth":"32"
+          , "mwidth":"64"
+          , "details":
+          [
+            {
+              "type":"table"
+              , "Start Cycle":"76"
+              , "Latency":"31 cycles"
+              , "Width":"32 bits"
+              , "0_Width":"64 bits"
+              , "Uses Caching":"No"
+              , "LSU Style":"PIPELINED"
+            }
+          ]
+          , "debug":
+          [
+            [
+              {
+                "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                , "line":1037
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"LD"
+          , "id":24
+          , "kwidth":"32"
+          , "mwidth":"64"
+          , "details":
+          [
+            {
+              "type":"table"
+              , "Start Cycle":"76"
+              , "Latency":"31 cycles"
+              , "Width":"32 bits"
+              , "0_Width":"64 bits"
+              , "Uses Caching":"No"
+              , "LSU Style":"PIPELINED"
+            }
+          ]
+          , "debug":
+          [
+            [
+              {
+                "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                , "line":1037
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"LD"
+          , "id":25
+          , "kwidth":"32"
+          , "mwidth":"64"
+          , "details":
+          [
+            {
+              "type":"table"
+              , "Start Cycle":"21"
+              , "Latency":"31 cycles"
+              , "Width":"32 bits"
+              , "0_Width":"64 bits"
+              , "Uses Caching":"No"
+              , "LSU Style":"PIPELINED"
+            }
+          ]
+          , "debug":
+          [
+            [
+              {
+                "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                , "line":1027
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"LD"
+          , "id":26
+          , "kwidth":"32"
+          , "mwidth":"64"
+          , "details":
+          [
+            {
+              "type":"table"
+              , "Start Cycle":"21"
+              , "Latency":"31 cycles"
+              , "Width":"32 bits"
+              , "0_Width":"64 bits"
+              , "Uses Caching":"No"
+              , "LSU Style":"PIPELINED"
+            }
+          ]
+          , "debug":
+          [
+            [
+              {
+                "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                , "line":1027
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"LD"
+          , "id":27
+          , "kwidth":"32"
+          , "mwidth":"64"
+          , "details":
+          [
+            {
+              "type":"table"
+              , "Start Cycle":"54"
+              , "Latency":"31 cycles"
+              , "Width":"32 bits"
+              , "0_Width":"64 bits"
+              , "Uses Caching":"No"
+              , "LSU Style":"PIPELINED"
+            }
+          ]
+          , "debug":
+          [
+            [
+              {
+                "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                , "line":932
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"LD"
+          , "id":28
+          , "kwidth":"32"
+          , "mwidth":"64"
+          , "details":
+          [
+            {
+              "type":"table"
+              , "Start Cycle":"54"
+              , "Latency":"31 cycles"
+              , "Width":"32 bits"
+              , "0_Width":"64 bits"
+              , "Uses Caching":"No"
+              , "LSU Style":"PIPELINED"
+            }
+          ]
+          , "debug":
+          [
+            [
+              {
+                "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                , "line":932
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"LD"
+          , "id":30
+          , "kwidth":"32"
+          , "mwidth":"64"
+          , "details":
+          [
+            {
+              "type":"table"
+              , "Start Cycle":"123"
+              , "Latency":"31 cycles"
+              , "Width":"32 bits"
+              , "0_Width":"64 bits"
+              , "Uses Caching":"No"
+              , "LSU Style":"PIPELINED"
+            }
+          ]
+          , "debug":
+          [
+            [
+              {
+                "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                , "line":1037
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"LD"
+          , "id":31
+          , "kwidth":"32"
+          , "mwidth":"64"
+          , "details":
+          [
+            {
+              "type":"table"
+              , "Start Cycle":"123"
+              , "Latency":"31 cycles"
+              , "Width":"32 bits"
+              , "0_Width":"64 bits"
+              , "Uses Caching":"No"
+              , "LSU Style":"PIPELINED"
+            }
+          ]
+          , "debug":
+          [
+            [
+              {
+                "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                , "line":1037
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+      ]
+    }
+    , {
+      "name":"Global Memory Stores"
+      , "id":21
+      , "parent":"1"
+      , "type":"bb"
+      , "children":
+      [
+        {
+          "name":"ST"
+          , "id":22
+          , "kwidth":"32"
+          , "mwidth":"64"
+          , "details":
+          [
+            {
+              "type":"table"
+              , "Start Cycle":"45"
+              , "Latency":"31 cycles"
+              , "Width":"32 bits"
+              , "0_Width":"64 bits"
+              , "Uses Write Ack":"Yes"
+              , "LSU Style":"PIPELINED"
+            }
+          ]
+          , "debug":
+          [
+            [
+              {
+                "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                , "line":962
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"ST"
+          , "id":29
+          , "kwidth":"32"
+          , "mwidth":"64"
+          , "details":
+          [
+            {
+              "type":"table"
+              , "Start Cycle":"92"
+              , "Latency":"31 cycles"
+              , "Width":"32 bits"
+              , "0_Width":"64 bits"
+              , "Uses Write Ack":"Yes"
+              , "LSU Style":"PIPELINED"
+            }
+          ]
+          , "debug":
+          [
+            [
+              {
+                "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                , "line":962
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+      ]
+    }
+  ]
+  , "links":
+  [
+    {
+      "from":3
+      , "to":2
+    }
+    , {
+      "from":2
+      , "to":3
+    }
+    , {
+      "from":6
+      , "to":5
+    }
+    , {
+      "from":8
+      , "to":5
+    }
+    , {
+      "from":5
+      , "to":2
+    }
+    , {
+      "from":10
+      , "to":6
+    }
+    , {
+      "from":11
+      , "to":6
+    }
+    , {
+      "from":12
+      , "to":6
+    }
+    , {
+      "from":13
+      , "to":6
+    }
+    , {
+      "from":14
+      , "to":6
+    }
+    , {
+      "from":15
+      , "to":6
+    }
+    , {
+      "from":16
+      , "to":6
+    }
+    , {
+      "from":17
+      , "to":6
+    }
+    , {
+      "from":18
+      , "to":6
+    }
+    , {
+      "from":19
+      , "to":6
+    }
+    , {
+      "from":20
+      , "to":6
+    }
+    , {
+      "from":22
+      , "to":8
+    }
+    , {
+      "from":23
+      , "to":6
+    }
+    , {
+      "from":24
+      , "to":6
+    }
+    , {
+      "from":25
+      , "to":6
+    }
+    , {
+      "from":26
+      , "to":6
+    }
+    , {
+      "from":27
+      , "to":6
+    }
+    , {
+      "from":28
+      , "to":6
+    }
+    , {
+      "from":29
+      , "to":8
+    }
+    , {
+      "from":30
+      , "to":6
+    }
+    , {
+      "from":31
+      , "to":6
+    }
+    , {
+      "from":2
+      , "to":32
+    }
+    , {
+      "from":32
+      , "to":10
+      , "reverse":1
+    }
+    , {
+      "from":32
+      , "to":11
+      , "reverse":1
+    }
+    , {
+      "from":32
+      , "to":12
+      , "reverse":1
+    }
+    , {
+      "from":32
+      , "to":13
+      , "reverse":1
+    }
+    , {
+      "from":32
+      , "to":14
+      , "reverse":1
+    }
+    , {
+      "from":32
+      , "to":15
+      , "reverse":1
+    }
+    , {
+      "from":32
+      , "to":16
+      , "reverse":1
+    }
+    , {
+      "from":32
+      , "to":17
+      , "reverse":1
+    }
+    , {
+      "from":32
+      , "to":18
+      , "reverse":1
+    }
+    , {
+      "from":32
+      , "to":19
+      , "reverse":1
+    }
+    , {
+      "from":32
+      , "to":20
+      , "reverse":1
+    }
+    , {
+      "from":32
+      , "to":23
+      , "reverse":1
+    }
+    , {
+      "from":32
+      , "to":24
+      , "reverse":1
+    }
+    , {
+      "from":32
+      , "to":25
+      , "reverse":1
+    }
+    , {
+      "from":32
+      , "to":26
+      , "reverse":1
+    }
+    , {
+      "from":32
+      , "to":27
+      , "reverse":1
+    }
+    , {
+      "from":32
+      , "to":28
+      , "reverse":1
+    }
+    , {
+      "from":32
+      , "to":30
+      , "reverse":1
+    }
+    , {
+      "from":32
+      , "to":31
+      , "reverse":1
+    }
+  ]
+}

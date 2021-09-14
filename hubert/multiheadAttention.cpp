@@ -1,11 +1,10 @@
 //multiheadAttention.cpp, created by Hunter Messner for the HUBERT project
 #include "HLS/hls.h"
 #include "HLS/stdio.h"
-#include "tensors.hpp" 
-#include "tensor3d.hpp"
-#include "tensorXL.hpp"
-#include "tensor3dXL.hpp"
-#include "tensor_mult.h"
+#include "tensors.h" 
+#include "tensor3d.h"
+#include "tensorXL.h"
+#include "tensor3dXL.h"
 #include <iostream>
 #include "quantact.h"
 #include "quantact_xl.h"
@@ -16,8 +15,8 @@
 #include "multiheadAttention.h"
 #include "crosstype_tensors.h"
 
-Tensor<float> bias_k;
-Tensor<float> bias_v;
+Tensor bias_k;
+Tensor bias_v;
 
 multiheadAttention::multiheadAttention(
 	int embed_dim_i,
@@ -113,25 +112,25 @@ multiheadAttention::~multiheadAttention()
 
 scaled_tuple3dXL multiheadAttention::multiheadAttention_forward(
 	multiheadAttention &self,
-	Tensor3dXL<float> &query,
-	Tensor3dXL<float> &key,
-	Tensor3dXL<float> &value,
-	Tensor<float> &key_padding_mask,
-	Tensor<float> &incremental_state,
-	Tensor<float> &attn_mask,
-	TensorXL<float>& query_scale,
-	TensorXL<float>& key_scale,
-	TensorXL<float>& value_scale,
+	Tensor3dXL &query,
+	Tensor3dXL &key,
+	Tensor3dXL &value,
+	Tensor &key_padding_mask,
+	Tensor &incremental_state,
+	Tensor &attn_mask,
+	TensorXL& query_scale,
+	TensorXL& key_scale,
+	TensorXL& value_scale,
 	bool need_weights,
 	bool static_kv,
 	bool before_softmax,
 	bool need_head_wights
 )
 {
-	Tensor3dXL<float> null3d;
-	TensorXL<float> null2d;
+	Tensor3dXL null3d;
+	TensorXL null2d;
 	//ASSUMPTION q,k,v are 22x1x768 and the corresponding scaling factors are 1
-	int tgt_len = Tensor3dXL<float>::getDepth(query);
+	int tgt_len = Tensor3dXL::getDepth(query);
 	scaled_tuple3dXL q, k, v;
 	if (self.self_attention)
 	{
@@ -147,42 +146,42 @@ scaled_tuple3dXL multiheadAttention::multiheadAttention_forward(
 	k = QuantAct_XL::QuantAct_forward(*self.k_proj_act, *k.matrix, *k.scaling_factor, null3d, null2d, null2d, null2d);
 	v = QuantAct_XL::QuantAct_forward(*self.v_proj_act, *v.matrix, *v.scaling_factor, null3d, null2d, null2d, null2d);
 
-	Tensor3dXL<float>::mul_scalar(*q.matrix, self.scaling, *q.matrix);
+	Tensor3dXL::mul_scalar(*q.matrix, self.scaling, *q.matrix);
 	if (q.scaling_factor != nullptr)
 	{
-		TensorXL<float>::mul_scalar(*q.scaling_factor, self.scaling, *q.scaling_factor);
+		TensorXL::mul_scalar(*q.scaling_factor, self.scaling, *q.scaling_factor);
 	}
 	//assert(bias_k == nullptr);
 	
-	Tensor3d<float>* qT;
-	Tensor3d<float>* kT; 
-	Tensor3d<float>* vT;
-	Tensor3d<float> space(22, 12, 64, 0.0f);
-	qT = transformFromXL(*q.matrix, space);
-	kT = transformFromXL(*k.matrix, space);
-	vT = transformFromXL(*v.matrix, space);
+	Tensor3d* qT;
+	Tensor3d* kT; 
+	Tensor3d* vT;
+	Tensor3d space(22, 12, 64, 0.0f);
+	qT = crosstype::transformFromXL(*q.matrix, space);
+	kT = crosstype::transformFromXL(*k.matrix, space);
+	vT = crosstype::transformFromXL(*v.matrix, space);
 	// using small versions until we transform back
-	Tensor3d<float> attn_weights (12, 22, 22, 0.0f);
-	Tensor3d<float>::bmm(*qT, *kT, attn_weights); 
-	TensorXL<float> attn_weights_scaling_factor(1, 1, TensorXL<float>::one(*q.scaling_factor));
+	Tensor3d attn_weights (12, 22, 22, 0.0f);
+	Tensor3d::bmm(*qT, *kT, attn_weights); 
+	TensorXL attn_weights_scaling_factor(1, 1, TensorXL::one(*q.scaling_factor));
 	if (q.scaling_factor != nullptr)
 	{
-		TensorXL<float>::mul_dot(*q.scaling_factor, *k.scaling_factor, attn_weights_scaling_factor);
+		TensorXL::mul_dot(*q.scaling_factor, *k.scaling_factor, attn_weights_scaling_factor);
 	}
 	//MultiheadAttention.apply_sparse_mask does nothing in inference
 	scaled_tuple3d softmax_result = Softmax::softmax_forward(*self.softmax, attn_weights, attn_weights_scaling_factor);
 	attn_weights = softmax_result.matrix;
-	Tensor3d<float> attn (12, 22, 64, 0.0f);
-	Tensor3d<float>::bmm2(attn_weights, *vT, attn);//specialized, TODO: could be replaced?
+	Tensor3d attn (12, 22, 64, 0.0f);
+	Tensor3d::bmm2(attn_weights, *vT, attn);//specialized, TODO: could be replaced?
 
-	TensorXL<float> attn_scaling_factor(q.scaling_factor);
+	TensorXL attn_scaling_factor(q.scaling_factor);
 	if (!attn_scaling_factor.null)
 	{
-		TensorXL<float>::mul_dot(*q.scaling_factor, *k.scaling_factor, attn_scaling_factor);
+		TensorXL::mul_dot(*q.scaling_factor, *k.scaling_factor, attn_scaling_factor);
 	}
-	Tensor3dXL<float> attnXL;
+	Tensor3dXL attnXL;
 	space = Tensor3d(22, 12, 64, 0.0f);
-	attnXL = transformToXL(attn, space);
+	attnXL = crosstype::transformToXL(attn, space);
 	scaled_tuple3dXL attn_t1;
 	attn_t1 = QuantAct_XL::QuantAct_forward(*self.attn_act, attnXL, attn_scaling_factor, null3d, null2d, null2d, null2d);
 
@@ -190,26 +189,3 @@ scaled_tuple3dXL multiheadAttention::multiheadAttention_forward(
 	attn_t2 = QuantLinear::quantlinear_forward(*self.out_proj, *attn_t1.matrix, *attn_t1.scaling_factor);
 	return attn_t2;
 }	
-
-/*
-void bmm(Tensor3d<float> *A, Tensor3d<float> *B, Tensor3d<float> *C)//temp local function for evaluation
-{ //for when they both have the same size. 
-	//We assume B is the same shape as A but compatible to multiply 
-	//assuming a 22x64 * 22x64 but we transpose the second input
-	assert(Tensor3d<float>::getCols(A) == Tensor3d<float>::getCols(B));
-	Tensor3d<float>* ktransposed_v = loadGeneric3d("bin/ktranposed_verification.bin");
-	Tensor3d<float>* t_v = loadGeneric3d("bin/aw_verification.bin");
-
-	for (unsigned d = 0; d < Tensor3d<float>::getDepth(A); d++)
-	{
-		Tensor<float> *rhs = Tensor3d<float>::get(B, d);
-		Tensor<float>::transpose(rhs);
-		Tensor<float>::eq_verbose(Tensor3d<float>::get(ktransposed_v, d), rhs);
-		Tensor<float>::mul_cross(Tensor3d<float>::get(A, d), rhs, Tensor3d<float>::get(C, d));
-		Tensor<float>::eq_verbose(Tensor3d<float>::get(t_v, d), Tensor3d<float>::get(C, d));
-		Tensor<float>::transpose(rhs);
-	}
-	Tensor3d<float>::setCols(C, Tensor3d<float>::getRows(B)); //rows is correct because its un-transposed
-	Tensor3d<float>::setRows(C, Tensor3d<float>::getRows(A));
-}
-*/

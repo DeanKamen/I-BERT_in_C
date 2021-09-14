@@ -48,6 +48,18 @@
     <ClCompile Include="multiheadAttention.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="tensor3d.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tensor3dXL.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tensors.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tensorXL.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="crosstype_tensors.h">
@@ -98,28 +110,13 @@
     <ClInclude Include="tensor3d.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="tensor3d.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="tensor3dXL.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="tensor3dXL.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="tensors.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="tensors.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="tensorXL.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="tensorXL.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="testglobals.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

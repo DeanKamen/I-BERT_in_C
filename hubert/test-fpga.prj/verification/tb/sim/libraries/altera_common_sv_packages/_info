@@ -1,0 +1,87 @@
+m255
+K4
+z2
+!s11f vlog 2021.1 2021.02, Feb  3 2021
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dc:/Users/hunto_efxy22i/jupyterProjects/HUBERT/hubert/test-fpga.prj/verification/tb/sim
+Xavalon_mm_pkg
+Z1 DXx6 sv_std 3 std 0 22 VYECXdT12H8WgbUP_5Y6:3
+DXx4 work 13 verbosity_pkg 0 22 6GcdR8@0n6^?X4c?3POD[2
+Z2 !s110 1631631311
+!i10b 1
+!s100 c__9ZoG_o@dLioQJD>S<L3
+I[9Mc6]mY1m@F2;zi8LhdV3
+S1
+R0
+Z3 w1631631294
+8../../ip/tb/mm_slave_add_avmm_0_rw/hls_sim_mm_slave_dpi_bfm_10/sim/avalon_mm_pkg.sv
+F../../ip/tb/mm_slave_add_avmm_0_rw/hls_sim_mm_slave_dpi_bfm_10/sim/avalon_mm_pkg.sv
+!i122 1
+Z4 L0 40 0
+V[9Mc6]mY1m@F2;zi8LhdV3
+Z5 OV;L;2021.1;73
+r1
+!s85 0
+31
+Z6 !s108 1631631311.000000
+!s107 ../../ip/tb/mm_slave_add_avmm_0_rw/hls_sim_mm_slave_dpi_bfm_10/sim/avalon_mm_pkg.sv|
+!s90 -sv|+incdir+.|+define+COSIM_LIB|../../ip/tb/mm_slave_add_avmm_0_rw/hls_sim_mm_slave_dpi_bfm_10/sim/avalon_mm_pkg.sv|-work|altera_common_sv_packages|
+!i113 1
+Z7 o-sv -work altera_common_sv_packages
+Z8 !s92 -sv +incdir+. +define+COSIM_LIB -work altera_common_sv_packages
+Z9 tCvgOpt 0
+Xavalon_utilities_pkg
+R1
+R2
+!i10b 1
+!s100 8jaXS;NWCj;@>O2`3BMN@0
+I6W5=TY?AI560b]5Kj<UcY1
+S1
+R0
+R3
+8../../ip/tb/mm_slave_add_avmm_0_rw/hls_sim_mm_slave_dpi_bfm_10/sim/avalon_utilities_pkg.sv
+F../../ip/tb/mm_slave_add_avmm_0_rw/hls_sim_mm_slave_dpi_bfm_10/sim/avalon_utilities_pkg.sv
+!i122 2
+R4
+V6W5=TY?AI560b]5Kj<UcY1
+R5
+r1
+!s85 0
+31
+R6
+!s107 ../../ip/tb/mm_slave_add_avmm_0_rw/hls_sim_mm_slave_dpi_bfm_10/sim/avalon_utilities_pkg.sv|
+!s90 -sv|+incdir+.|+define+COSIM_LIB|../../ip/tb/mm_slave_add_avmm_0_rw/hls_sim_mm_slave_dpi_bfm_10/sim/avalon_utilities_pkg.sv|-work|altera_common_sv_packages|
+!i113 1
+R7
+R8
+R9
+Xverbosity_pkg
+R1
+R2
+!i10b 1
+!s100 iL_6>2j1Qz>7b0TDA<o3W1
+I6GcdR8@0n6^?X4c?3POD[2
+S1
+R0
+R3
+8../../ip/tb/mm_slave_add_avmm_0_rw/hls_sim_mm_slave_dpi_bfm_10/sim/verbosity_pkg.sv
+F../../ip/tb/mm_slave_add_avmm_0_rw/hls_sim_mm_slave_dpi_bfm_10/sim/verbosity_pkg.sv
+!i122 0
+L0 61 0
+V6GcdR8@0n6^?X4c?3POD[2
+R5
+r1
+!s85 0
+31
+R6
+!s107 ../../ip/tb/mm_slave_add_avmm_0_rw/hls_sim_mm_slave_dpi_bfm_10/sim/verbosity_pkg.sv|
+!s90 -sv|+incdir+.|+define+COSIM_LIB|../../ip/tb/mm_slave_add_avmm_0_rw/hls_sim_mm_slave_dpi_bfm_10/sim/verbosity_pkg.sv|-work|altera_common_sv_packages|
+!i113 1
+R7
+R8
+R9

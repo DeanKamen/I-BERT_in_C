@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<simPackage>
+ <file
+   path="hls_sim_mm_slave_dpi_bfm_10/sim/verbosity_pkg.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_common_sv_packages"
+   systemVerilogPackageName="avalon_lvip_verbosity_pkg" />
+ <file
+   path="hls_sim_mm_slave_dpi_bfm_10/sim/avalon_mm_pkg.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_common_sv_packages"
+   systemVerilogPackageName="avalon_vip_avalon_mm_pkg" />
+ <file
+   path="hls_sim_mm_slave_dpi_bfm_10/sim/avalon_utilities_pkg.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_common_sv_packages"
+   systemVerilogPackageName="avalon_vip_avalon_utilities_pkg" />
+ <file
+   path="hls_sim_mm_slave_dpi_bfm_10/sim/altera_avalon_mm_slave_bfm.sv"
+   type="SYSTEM_VERILOG"
+   library="hls_sim_mm_slave_dpi_bfm_10" />
+ <file
+   path="hls_sim_mm_slave_dpi_bfm_10/sim/hls_sim_mm_slave_dpi_bfm.sv"
+   type="SYSTEM_VERILOG"
+   library="hls_sim_mm_slave_dpi_bfm_10" />
+ <file
+   path="sim/mm_slave_add_avmm_0_rw.v"
+   type="VERILOG"
+   library="mm_slave_add_avmm_0_rw"
+   hasInlineConfiguration="true" />
+ <topLevel name="mm_slave_add_avmm_0_rw.mm_slave_add_avmm_0_rw" />
+ <deviceFamily name="cyclone10gx" />
+ <device name="10CX220YF780I5G" />
+</simPackage>

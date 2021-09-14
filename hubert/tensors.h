@@ -6,13 +6,13 @@
 #ifndef __HUBERT_TENSORS_H__
 #define __HUBERT_TENSORS_H__
 
+
 /*                TUNING AND OPTIONS                   */
 const unsigned MAX_ROWS = 64; // based on the max size of numpy arrays in default IBERT (3072)
 const unsigned MAX_COLS = 64;
 const unsigned UNITS_PER_MULTIPLY= 32; //must be a factor of the MAX_COLS
 typedef double fraction;
 
-template<class T>
 class Tensor{
     //private:
     public:
@@ -21,73 +21,73 @@ class Tensor{
         unsigned int t_numCols;
         bool transposed = false;
 		bool null = true;
-        T t_tensor[MAX_ROWS][MAX_COLS]; 
+        float t_tensor[MAX_ROWS][MAX_COLS]; 
 
     public:
         //constructors
 		Tensor(); //default constructor
-        Tensor(unsigned, unsigned, T); //row, column, fill constructor
-        Tensor(const unsigned numRows, const unsigned numCols, T** init_pointer);
-		Tensor(Tensor<T> *A);
+        Tensor(unsigned, unsigned, float); //row, column, fill constructor
+        Tensor(const unsigned numRows, const unsigned numCols, float** init_pointer);
+		Tensor(Tensor *A);
 
         //math
-		static void mul_cross(Tensor<T> &A, Tensor<T> &B, Tensor<T> &C);
-		static void mul_cross_secondary(Tensor<T> &A, Tensor<T> &B, Tensor<T> &C);
+		static void mul_cross(Tensor &A, Tensor &B, Tensor &C);
+		static void mul_cross_secondary(Tensor &A, Tensor &B, Tensor &C);
 		//dot type (broadcasting)
-        static void add(Tensor<T> &A, Tensor<T> &B, Tensor<T> &C);
-        static void sub(Tensor<T> &A, Tensor<T> &B, Tensor<T> &C);
-		static void mul_dot(Tensor<T> &A, Tensor<T> &B, Tensor<T> &C);
-		static void div_dot(Tensor<T> &A, Tensor<T> &B, Tensor<T> &C);
-		static void pow_dot(Tensor<T> &A, Tensor<T> &B, Tensor<T> &C);
+        static void add(Tensor &A, Tensor &B, Tensor &C);
+        static void sub(Tensor &A, Tensor &B, Tensor &C);
+		static void mul_dot(Tensor &A, Tensor &B, Tensor &C);
+		static void div_dot(Tensor &A, Tensor &B, Tensor &C);
+		static void pow_dot(Tensor &A, Tensor &B, Tensor &C);
 		//scalar type
-        static void add_scalar(Tensor<T> &A, T B, Tensor<T> &C);
-        static void mul_scalar(Tensor<T> &A, T B, Tensor<T> &C);
-        static void sub_scalar(Tensor<T> &A, T B, Tensor<T> &C);
-		static void sub_scalar(T B, Tensor<T> &A, Tensor<T> &C);
-        static void div_scalar(Tensor<T> &A, T B, Tensor<T> &C);
-        static void pow_scalar(Tensor<T> &A, T B, Tensor<T> &C);
-        static void max(Tensor<T> &A, int dim, Tensor<T> &C);
-        static void min(Tensor<T> &A, int dim, Tensor<T> &C);
-		static void max_scalar(Tensor<T> &A, T compare, Tensor<T> &C);
-		static void min_scalar(Tensor<T> &A, T compare, Tensor<T> &C);
-		static void min_dot(Tensor<T> &A, Tensor<T> &B, Tensor<T> &C);
-		static void abs_tensor(Tensor<T> &A, Tensor<T> &C);
-        static void floor_tensor(Tensor<T> &A, Tensor<T> &C);
-		static void exp2_tensor(Tensor<T> &A, Tensor<T> &C);
-        static void clamp(Tensor<T> &A, T min, T max, Tensor<T> &C);
-        static void roundTensor(Tensor<T> &A, Tensor<T> &C);
-        static void reciprocal(Tensor<T> &A, Tensor<T> &C);
-		static void sum(Tensor<T> &A, int dim, Tensor<T> &C);
-		static void sign(Tensor<T> &A, Tensor<T> &C);
-		static void mean(Tensor<T> &A, Tensor<T> &C);
-		static void sqrt_tensor(Tensor<T> &A, Tensor<T> &C);
+        static void add_scalar(Tensor &A, float B, Tensor &C);
+        static void mul_scalar(Tensor &A, float B, Tensor &C);
+        static void sub_scalar(Tensor &A, float B, Tensor &C);
+		static void sub_scalar(float B, Tensor &A, Tensor &C);
+        static void div_scalar(Tensor &A, float B, Tensor &C);
+        static void pow_scalar(Tensor &A, float B, Tensor &C);
+        static void max(Tensor &A, int dim, Tensor &C);
+        static void min(Tensor &A, int dim, Tensor &C);
+		static void max_scalar(Tensor &A, float compare, Tensor &C);
+		static void min_scalar(Tensor &A, float compare, Tensor &C);
+		static void min_dot(Tensor &A, Tensor &B, Tensor &C);
+		static void abs_tensor(Tensor &A, Tensor &C);
+        static void floor_tensor(Tensor &A, Tensor &C);
+		static void exp2_tensor(Tensor &A, Tensor &C);
+        static void clamp(Tensor &A, float min, float max, Tensor &C);
+        static void roundTensor(Tensor &A, Tensor &C);
+        static void reciprocal(Tensor &A, Tensor &C);
+		static void sum(Tensor &A, int dim, Tensor &C);
+		static void sign(Tensor &A, Tensor &C);
+		static void mean(Tensor &A, Tensor &C);
+		static void sqrt_tensor(Tensor &A, Tensor &C);
         //manipulation
-        static void fill(Tensor<T> &A, T fill);
-        static void view(Tensor<T> &A, int rows, int cols, Tensor<T> &space);
-        static void tensor_frexp(Tensor<float> &inputs, Tensor<float> &m, Tensor<float> &e);
+        static void fill(Tensor &A, float fill);
+        static void view(Tensor &A, int rows, int cols, Tensor &space);
+        static void tensor_frexp(Tensor &inputs, Tensor &m, Tensor &e);
         //adressing methods
-        static T get(Tensor<T> &tensor, const unsigned &row, const unsigned &col);
-        static void set(Tensor<T> &tensor, const unsigned &row, const unsigned &col, T val);
-		static T one(Tensor<T> &);
+        static float get(Tensor &tensor, const unsigned &row, const unsigned &col);
+        static void set(Tensor &tensor, const unsigned &row, const unsigned &col, float val);
+		static float one(Tensor &);
         //helper functions
-        static void transpose(Tensor<T> &a);
-        static void print(Tensor<T>&);
-		static void print_brief(Tensor<T>&);
-        static unsigned getRows(Tensor<T> &a);
-        static unsigned getCols(Tensor<T> &a);
-        static bool eq(Tensor<T> &A, Tensor<T> &B);
-		static bool eq_verbose(Tensor<T> &A, Tensor<T> &B);
+        static void transpose(Tensor &a);
+        static void print(Tensor&);
+		static void print_brief(Tensor&);
+        static unsigned getRows(Tensor &a);
+        static unsigned getCols(Tensor &a);
+        static bool eq(Tensor &A, Tensor &B);
+		static bool eq_verbose(Tensor &A, Tensor &B);
 
 		//functions that probably shouldnt be used out of this file
-		static void setRows(Tensor<T> &a, int num);
-		static void setCols(Tensor<T> &a, int num);
-		static void copy(Tensor<T> &A, Tensor<T> &C);
+		static void setRows(Tensor &a, int num);
+		static void setCols(Tensor &a, int num);
+		static void copy(Tensor &A, Tensor &C);
         //private helper functions
     private:
-		static bool sameSize(Tensor<T> &A, Tensor<T> &B);
-		static bool sameRows(Tensor<T> &A, Tensor<T> &B);
-		static bool sameCols(Tensor<T> &A, Tensor<T> &B);
-		static void flopSize(Tensor<T> *lhs, Tensor<T> *rhs);
+		static bool sameSize(Tensor &A, Tensor &B);
+		static bool sameRows(Tensor &A, Tensor &B);
+		static bool sameCols(Tensor &A, Tensor &B);
+		static void flopSize(Tensor *lhs, Tensor *rhs);
 		
 };
 

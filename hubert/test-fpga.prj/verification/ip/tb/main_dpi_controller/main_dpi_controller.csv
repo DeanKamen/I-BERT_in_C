@@ -1,0 +1,18 @@
+# system info main_dpi_controller on 2021.09.14.09:55:04
+system_info:
+name,value
+DEVICE,10CX220YF780I5G
+DEVICE_FAMILY,Cyclone 10 GX
+GENERATION_ID,0
+#
+#
+# Files generated for main_dpi_controller on 2021.09.14.09:55:04
+files:
+filepath,kind,attributes,module,is_top
+sim/main_dpi_controller.v,VERILOG,CONTAINS_INLINE_CONFIGURATION,main_dpi_controller,true
+hls_sim_main_dpi_controller_10/sim/hls_sim_main_dpi_controller.sv,SYSTEM_VERILOG,,hls_sim_main_dpi_controller,false
+#
+# Map from instance-path to kind of module
+instances:
+instancePath,module
+main_dpi_controller.main_dpi_controller,hls_sim_main_dpi_controller

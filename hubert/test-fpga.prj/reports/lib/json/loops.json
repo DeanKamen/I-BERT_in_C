@@ -1,0 +1,1282 @@
+{
+  "columns":
+  ["", "Pipelined", "II", "Speculated iterations", "Details"]
+  , "children":
+  [
+    {
+      "name":"Component: add"
+      , "data":
+      ["", "", ""]
+      , "debug":
+      [
+        [
+          {
+            "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+            , "line":134
+          }
+        ]
+      ]
+      , "details":
+      [
+        {
+          "type":"brief"
+          , "text":"Task function"
+        }
+        , {
+          "type":"text"
+          , "text":"Task function"
+        }
+        , {
+          "type":"text"
+          , "text":"Fmax bottlenck block: None"
+        }
+        , {
+          "type":"text"
+          , "text":"See %L for more information"
+          , "links":
+          [
+            {
+              "guide":"Reference Manual : Component"
+              , "link":"https://www.intel.com/content/www/us/en/programmable/documentation/ewa1462824960255.html#ewa1462820640727"
+            }
+          ]
+        }
+      ]
+      , "children":
+      [
+        {
+          "name":"add.B1.start"
+          , "data":
+          ["No", "n/a", "n/a"]
+          , "debug":
+          [
+            [
+              {
+                "filename":"Component invocation"
+                , "line":0
+              }
+            ]
+          ]
+          , "details":
+          [
+            {
+              "type":"brief"
+              , "text":"Divergent inner loop and..."
+            }
+            , {
+              "type":"text"
+              , "text":"Loop not pipelined due to:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"Loop contains divergent inner loops. Making all inner loops unconditional should fix this problem. Not pipelining this loop will most likely lead to poor performance."
+                }
+                , {
+                  "type":"text"
+                  , "text":"Loop iteration ordering: iterations of inner loop shown may get out of order with respect to the listed inner loop, as the number of iterations of the listed inner loop may be different for different iterations of this loop."
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"add.B7 (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                          , "line":"170"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"add.B4 (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                          , "line":"367"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Stallable instruction: n/a"
+            }
+            , {
+              "type":"text"
+              , "text":"Maximum concurrent iterations: 1 due to not being pipelined"
+            }
+            , {
+              "type":"text"
+              , "text":"See %L for more information"
+              , "links":
+              [
+                {
+                  "guide":"Reference Manual : Loops in Components"
+                  , "link":"https://www.intel.com/content/www/us/en/programmable/documentation/ewa1462824960255.html#ewa1462826976357"
+                }
+              ]
+            }
+          ]
+          , "children":
+          [
+            {
+              "name":"add.B7"
+              , "data":
+              ["No", "n/a", "n/a"]
+              , "debug":
+              [
+                [
+                  {
+                    "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                    , "line":170
+                  }
+                ]
+              ]
+              , "details":
+              [
+                {
+                  "type":"brief"
+                  , "text":"Unresolvable exit condition"
+                }
+                , {
+                  "type":"text"
+                  , "text":"Loop not pipelined due to:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"Loop exit condition unresolvable at iteration initiation."
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Stallable instruction: n/a"
+                }
+                , {
+                  "type":"text"
+                  , "text":"Maximum concurrent iterations: 1 due to not being pipelined"
+                }
+                , {
+                  "type":"text"
+                  , "text":"See %L for more information"
+                  , "links":
+                  [
+                    {
+                      "guide":"Reference Manual : Loops in Components"
+                      , "link":"https://www.intel.com/content/www/us/en/programmable/documentation/ewa1462824960255.html#ewa1462826976357"
+                    }
+                  ]
+                }
+              ]
+              , "children":
+              [
+                {
+                  "name":"add.B8"
+                  , "data":
+                  ["Yes", "~103", "16"]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":172
+                      }
+                    ]
+                  ]
+                  , "details":
+                  [
+                    {
+                      "type":"brief"
+                      , "text":"Memory dependency"
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"Compiler failed to schedule this loop with smaller II due to memory dependency:"
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"From: Load Operation (%L > %L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                              , "line":"174"
+                            }
+                            , {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                              , "line":"932"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"To: Store Operation (%L > %L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                              , "line":"174"
+                            }
+                            , {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                              , "line":"962"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"Compiler failed to schedule this loop with smaller II due to memory dependency:"
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"From: Load Operation (%L > %L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                              , "line":"174"
+                            }
+                            , {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                              , "line":"932"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"To: Store Operation (%L > %L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                              , "line":"174"
+                            }
+                            , {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                              , "line":"962"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"Compiler failed to schedule this loop with smaller II due to memory dependency:"
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"From: Store Operation (%L > %L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                              , "line":"174"
+                            }
+                            , {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                              , "line":"962"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"To: Load Operation (%L > %L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                              , "line":"172"
+                            }
+                            , {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                              , "line":"1037"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"Compiler failed to schedule this loop with smaller II due to memory dependency:"
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"From: Store Operation (%L > %L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                              , "line":"174"
+                            }
+                            , {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                              , "line":"962"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"To: Load Operation (%L > %L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                              , "line":"172"
+                            }
+                            , {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                              , "line":"1037"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"Compiler failed to schedule this loop with smaller II due to memory dependency:"
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"From: Load Operation (%L > %L > %L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                              , "line":"174"
+                            }
+                            , {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                              , "line":"930"
+                            }
+                            , {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                              , "line":"1027"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"To: Store Operation (%L > %L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                              , "line":"174"
+                            }
+                            , {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                              , "line":"962"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"Compiler failed to schedule this loop with smaller II due to memory dependency:"
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"From: Load Operation (%L > %L > %L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                              , "line":"174"
+                            }
+                            , {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                              , "line":"930"
+                            }
+                            , {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                              , "line":"1027"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"To: Store Operation (%L > %L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                              , "line":"174"
+                            }
+                            , {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                              , "line":"962"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"Most critical loop feedback path during scheduling:"
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"32.00 clock cycles Load Operation (%L > %L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                              , "line":"172"
+                            }
+                            , {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                              , "line":"1037"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"32.00 clock cycles Load Operation (%L > %L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                              , "line":"174"
+                            }
+                            , {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                              , "line":"932"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"31.00 clock cycles Store Operation (%L > %L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                              , "line":"174"
+                            }
+                            , {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                              , "line":"962"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"3.00 clock cycles 32-bit Floating-point Add Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                              , "line":"174"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"1.00 clock cycle 32-bit Select Operation (%L > %L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                              , "line":"174"
+                            }
+                            , {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                              , "line":"932"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"1.00 clock cycle 32-bit Integer Compare Operation (%L > %L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                              , "line":"174"
+                            }
+                            , {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                              , "line":"930"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"1.00 clock cycle 32-bit Select Operation (%L > %L > %L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                              , "line":"174"
+                            }
+                            , {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                              , "line":"930"
+                            }
+                            , {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                              , "line":"1027"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"1.00 clock cycle 32-bit Select Operation (%L > %L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                              , "line":"172"
+                            }
+                            , {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                              , "line":"1037"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"1.00 clock cycle Select Operation (%L > %L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                              , "line":"174"
+                            }
+                            , {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                              , "line":"932"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"0.30 clock cycles 1-bit And Operation (%L > %L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                              , "line":"174"
+                            }
+                            , {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                              , "line":"917"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"0.30 clock cycles 1-bit And Operation (%L > %L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                              , "line":"174"
+                            }
+                            , {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                              , "line":"917"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"II is an approximation due to the following stallable instructions:"
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"Load Operation (%L > %L > %L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                              , "line":"174"
+                            }
+                            , {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                              , "line":"930"
+                            }
+                            , {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                              , "line":"1027"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"Load Operation (%L > %L > %L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                              , "line":"174"
+                            }
+                            , {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                              , "line":"930"
+                            }
+                            , {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                              , "line":"1027"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"Load Operation (%L > %L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                              , "line":"174"
+                            }
+                            , {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                              , "line":"932"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"Load Operation (%L > %L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                              , "line":"174"
+                            }
+                            , {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                              , "line":"932"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"Store Operation (%L > %L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                              , "line":"174"
+                            }
+                            , {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                              , "line":"962"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"Load Operation (%L > %L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                              , "line":"172"
+                            }
+                            , {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                              , "line":"1037"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"Load Operation (%L > %L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                              , "line":"172"
+                            }
+                            , {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                              , "line":"1037"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"Maximum concurrent iterations: Capacity of loop"
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"Use the %L viewer to estimate capacity"
+                          , "links":
+                          [
+                            {
+                              "view":"Fmax II Report"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"See %L for more information"
+                      , "links":
+                      [
+                        {
+                          "guide":"Reference Manual : Loops in Components"
+                          , "link":"https://www.intel.com/content/www/us/en/programmable/documentation/ewa1462824960255.html#ewa1462826976357"
+                        }
+                      ]
+                    }
+                  ]
+                  , "children":
+                  [
+                  ]
+                }
+              ]
+            }
+            , {
+              "name":"add.B4"
+              , "data":
+              ["No", "n/a", "n/a"]
+              , "debug":
+              [
+                [
+                  {
+                    "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                    , "line":367
+                  }
+                ]
+              ]
+              , "details":
+              [
+                {
+                  "type":"brief"
+                  , "text":"Unresolvable exit condition"
+                }
+                , {
+                  "type":"text"
+                  , "text":"Loop not pipelined due to:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"Loop exit condition unresolvable at iteration initiation."
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Stallable instruction: n/a"
+                }
+                , {
+                  "type":"text"
+                  , "text":"Maximum concurrent iterations: 1 due to not being pipelined"
+                }
+                , {
+                  "type":"text"
+                  , "text":"See %L for more information"
+                  , "links":
+                  [
+                    {
+                      "guide":"Reference Manual : Loops in Components"
+                      , "link":"https://www.intel.com/content/www/us/en/programmable/documentation/ewa1462824960255.html#ewa1462826976357"
+                    }
+                  ]
+                }
+              ]
+              , "children":
+              [
+                {
+                  "name":"add.B5"
+                  , "data":
+                  ["Yes", "~104", "16"]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                        , "line":369
+                      }
+                    ]
+                  ]
+                  , "details":
+                  [
+                    {
+                      "type":"brief"
+                      , "text":"Memory dependency"
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"Compiler failed to schedule this loop with smaller II due to memory dependency:"
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"From: Load Operation (%L > %L > %L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                              , "line":"159"
+                            }
+                            , {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                              , "line":"371"
+                            }
+                            , {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                              , "line":"932"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"To: Store Operation (%L > %L > %L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                              , "line":"159"
+                            }
+                            , {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                              , "line":"371"
+                            }
+                            , {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                              , "line":"962"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"Compiler failed to schedule this loop with smaller II due to memory dependency:"
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"From: Store Operation (%L > %L > %L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                              , "line":"159"
+                            }
+                            , {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                              , "line":"371"
+                            }
+                            , {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                              , "line":"962"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"To: Load Operation (%L > %L > %L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                              , "line":"159"
+                            }
+                            , {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                              , "line":"369"
+                            }
+                            , {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                              , "line":"1037"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"Compiler failed to schedule this loop with smaller II due to memory dependency:"
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"From: Store Operation (%L > %L > %L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                              , "line":"159"
+                            }
+                            , {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                              , "line":"371"
+                            }
+                            , {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                              , "line":"962"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"To: Load Operation (%L > %L > %L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                              , "line":"159"
+                            }
+                            , {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                              , "line":"369"
+                            }
+                            , {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                              , "line":"1037"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"Most critical loop feedback path during scheduling:"
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"32.00 clock cycles Load Operation (%L > %L > %L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                              , "line":"159"
+                            }
+                            , {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                              , "line":"371"
+                            }
+                            , {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                              , "line":"932"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"32.00 clock cycles Load Operation (%L > %L > %L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                              , "line":"159"
+                            }
+                            , {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                              , "line":"369"
+                            }
+                            , {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                              , "line":"1037"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"31.00 clock cycles Store Operation (%L > %L > %L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                              , "line":"159"
+                            }
+                            , {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                              , "line":"371"
+                            }
+                            , {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                              , "line":"962"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"3.00 clock cycles 32-bit Floating-point Add Operation (%L > %L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                              , "line":"159"
+                            }
+                            , {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                              , "line":"371"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"1.00 clock cycle 32-bit Select Operation (%L > %L > %L > %L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                              , "line":"159"
+                            }
+                            , {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                              , "line":"371"
+                            }
+                            , {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                              , "line":"930"
+                            }
+                            , {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                              , "line":"1027"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"1.00 clock cycle 32-bit Integer Compare Operation (%L > %L > %L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                              , "line":"159"
+                            }
+                            , {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                              , "line":"371"
+                            }
+                            , {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                              , "line":"930"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"1.00 clock cycle 32-bit Select Operation (%L > %L > %L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                              , "line":"159"
+                            }
+                            , {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                              , "line":"369"
+                            }
+                            , {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                              , "line":"1037"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"1.00 clock cycle Select Operation (%L > %L > %L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                              , "line":"159"
+                            }
+                            , {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                              , "line":"371"
+                            }
+                            , {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                              , "line":"932"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"0.30 clock cycles 1-bit And Operation (%L > %L > %L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                              , "line":"159"
+                            }
+                            , {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                              , "line":"371"
+                            }
+                            , {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                              , "line":"917"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"0.30 clock cycles 1-bit And Operation (%L > %L > %L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                              , "line":"159"
+                            }
+                            , {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                              , "line":"371"
+                            }
+                            , {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                              , "line":"917"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"II is an approximation due to the following stallable instructions:"
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"Load Operation (%L > %L > %L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                              , "line":"159"
+                            }
+                            , {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                              , "line":"371"
+                            }
+                            , {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                              , "line":"932"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"Store Operation (%L > %L > %L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                              , "line":"159"
+                            }
+                            , {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                              , "line":"371"
+                            }
+                            , {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                              , "line":"962"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"Load Operation (%L > %L > %L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                              , "line":"159"
+                            }
+                            , {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                              , "line":"369"
+                            }
+                            , {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                              , "line":"1037"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"Load Operation (%L > %L > %L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                              , "line":"159"
+                            }
+                            , {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert/tensorXL.cpp"
+                              , "line":"369"
+                            }
+                            , {
+                              "filename":"C:\\Users\\hunto_efxy22i\\jupyterProjects\\HUBERT\\hubert\\tensorXL.cpp"
+                              , "line":"1037"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"Maximum concurrent iterations: Capacity of loop"
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"Use the %L viewer to estimate capacity"
+                          , "links":
+                          [
+                            {
+                              "view":"Fmax II Report"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"See %L for more information"
+                      , "links":
+                      [
+                        {
+                          "guide":"Reference Manual : Loops in Components"
+                          , "link":"https://www.intel.com/content/www/us/en/programmable/documentation/ewa1462824960255.html#ewa1462826976357"
+                        }
+                      ]
+                    }
+                  ]
+                  , "children":
+                  [
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

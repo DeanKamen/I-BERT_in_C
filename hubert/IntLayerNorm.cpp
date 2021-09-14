@@ -2,17 +2,16 @@
 
 #include "HLS/hls.h"
 #include "HLS/stdio.h"
-#include "tensors.hpp" 
-#include "tensor_mult.h"
+#include "tensors.h" 
 #include <iostream>
 #include "quantact.h"
 #include "loadTensors.h"
 #include "hubertEnums.h"
 #include "IntLayerNorm.h"
 
-TensorXL<float> shift;
-TensorXL<float> weight;
-TensorXL<float> bias;
+TensorXL shift;
+TensorXL weight;
+TensorXL bias;
 
 IntLayerNorm::IntLayerNorm(int output_bit_i, bool overflow_handling_i, QuantMode quant_mode_i, ForceDequantMode force_dequant)
 {
@@ -36,32 +35,32 @@ IntLayerNorm::~IntLayerNorm()
 	//delete bias;
 }
 
-scaled_tuple3dXL IntLayerNorm::intlayernorm_forward(IntLayerNorm& self, Tensor3dXL<float>& x, TensorXL<float>& scaling_factor)
+scaled_tuple3dXL IntLayerNorm::intlayernorm_forward(IntLayerNorm& self, Tensor3dXL& x, TensorXL& scaling_factor)
 {
 	//ASSUMPTION: x is 22x1x768 and scaling factor is 1x1
 	if (self.quant_mode == QuantMode::none)
 	{
-		Tensor3dXL<float> mean (x);
-		Tensor3dXL<float>::mean(x, mean);
-		Tensor3dXL<float> y(x);
+		Tensor3dXL mean (x);
+		Tensor3dXL::mean(x, mean);
+		Tensor3dXL y(x);
 		//custom 3d subtraction because none of my functions would work.
-		for (unsigned d = 0; d < Tensor3dXL<float>::getDepth(y); d++)
+		for (unsigned d = 0; d < Tensor3dXL::getDepth(y); d++)
 		{
-			TensorXL<float>::sub_scalar(Tensor3dXL<float>::get(x, d), TensorXL<float>::one(Tensor3dXL<float>::get(mean,d)), Tensor3dXL<float>::get(y, d));
+			TensorXL::sub_scalar(Tensor3dXL::get(x, d), TensorXL::one(Tensor3dXL::get(mean,d)), Tensor3dXL::get(y, d));
 		}
 
-		Tensor3dXL<float> var(y);
-		Tensor3dXL<float>::pow_scalar(y, 2, var);
-		Tensor3dXL<float>::mean(var, var);
-		Tensor3dXL<float>::add_scalar(var, self.eps, var);
-		Tensor3dXL<float>::sqrt_tensor(var, var);
+		Tensor3dXL var(y);
+		Tensor3dXL::pow_scalar(y, 2, var);
+		Tensor3dXL::mean(var, var);
+		Tensor3dXL::add_scalar(var, self.eps, var);
+		Tensor3dXL::sqrt_tensor(var, var);
 		//a custom div loop
-		for (unsigned d = 0; d < Tensor3dXL<float>::getDepth(x); d++)
+		for (unsigned d = 0; d < Tensor3dXL::getDepth(x); d++)
 		{
-			TensorXL<float>::div_scalar(Tensor3dXL<float>::get(y, d), TensorXL<float>::one(Tensor3dXL<float>::get(var, d)), Tensor3dXL<float>::get(x, d));
+			TensorXL::div_scalar(Tensor3dXL::get(y, d), TensorXL::one(Tensor3dXL::get(var, d)), Tensor3dXL::get(x, d));
 		}
-		Tensor3dXL<float>::mul_dot(x, weight, x);
-		Tensor3dXL<float>::add(x, bias, x);
+		Tensor3dXL::mul_dot(x, weight, x);
+		Tensor3dXL::add(x, bias, x);
 
 		scaled_tuple3dXL returnme;
 		returnme.matrix = &x;

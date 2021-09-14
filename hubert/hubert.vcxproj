@@ -92,6 +92,7 @@
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
+      <StackReserveSize>4194304</StackReserveSize>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -136,6 +137,10 @@
     <ClCompile Include="QuantLinear.cpp" />
     <ClCompile Include="sentence_encoder_layer.cpp" />
     <ClCompile Include="softmax.cpp" />
+    <ClCompile Include="tensor3d.cpp" />
+    <ClCompile Include="tensor3dXL.cpp" />
+    <ClCompile Include="tensors.cpp" />
+    <ClCompile Include="tensorXL.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="crosstype_tensors.h" />
@@ -150,18 +155,13 @@
     <ClInclude Include="sentence_encoder_layer.h" />
     <ClInclude Include="softmax.h" />
     <ClInclude Include="tensor3d.h" />
-    <ClInclude Include="tensor3d.hpp" />
     <ClInclude Include="tensor3dXL.h" />
-    <ClInclude Include="tensor3dXL.hpp" />
     <ClInclude Include="tensors.h" />
-    <ClInclude Include="tensors.hpp" />
     <ClInclude Include="tensorXL.h" />
-    <ClInclude Include="tensorXL.hpp" />
     <ClInclude Include="tensor_mmm.h" />
     <ClInclude Include="tensor_mmm_xl.h" />
     <ClInclude Include="tensor_mult.h" />
     <ClInclude Include="tensor_mult_xl.h" />
-    <ClInclude Include="testglobals.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

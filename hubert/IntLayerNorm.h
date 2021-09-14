@@ -5,10 +5,10 @@
 
 #include "HLS/hls.h"
 #include "HLS/stdio.h"
-#include "tensors.hpp" 
-#include "tensor3d.hpp"
-#include "tensorXL.hpp"
-#include "tensor3dXL.hpp"
+#include "tensors.h" 
+#include "tensor3d.h"
+#include "tensorXL.h"
+#include "tensor3dXL.h"
 #include "hubertEnums.h"
 
 //IntGELU.h implements the GELU layer. 
@@ -22,7 +22,7 @@ public:
 	//initializer
 	IntLayerNorm(int output_bit, bool overflow_handling = true, QuantMode quant_mode = QuantMode::none, ForceDequantMode force_dequant = ForceDequantMode::none);
 	~IntLayerNorm();
-	static scaled_tuple3dXL intlayernorm_forward(IntLayerNorm& self, Tensor3dXL<float>& x, TensorXL<float>& scaling_factor);
+	static scaled_tuple3dXL intlayernorm_forward(IntLayerNorm& self, Tensor3dXL& x, TensorXL& scaling_factor);
 	void set_param(preload shift, preload weight, preload bias);
 	QuantAct* activation;
 	QuantMode quant_mode;

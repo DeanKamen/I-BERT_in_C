@@ -5,15 +5,15 @@
 
 #include "HLS/hls.h"
 #include "HLS/stdio.h"
-#include "tensors.hpp" 
-#include "tensor3d.hpp"
-#include "tensorXL.hpp"
-#include "tensor3dXL.hpp"
+#include "tensors.h" 
+#include "tensor3d.h"
+#include "tensorXL.h"
+#include "tensor3dXL.h"
 #include "hubertEnums.h"
 
 //QuantLinear.h implements the GELU layer. 
-typedef Tensor3dXL<float> T3d;
-typedef TensorXL<float> T2d;
+typedef Tensor3dXL T3d;
+typedef TensorXL T2d;
 typedef scaled_tuple3dXL tuple;
 
 class QuantLinear

@@ -1,0 +1,32 @@
+# system info tb on 2021.09.14.09:55:06
+system_info:
+name,value
+DEVICE,10CX220YF780I5G
+DEVICE_FAMILY,Cyclone 10 GX
+GENERATION_ID,0
+#
+#
+# Files generated for tb on 2021.09.14.09:55:06
+files:
+filepath,kind,attributes,module,is_top
+sim/tb.v,VERILOG,CONTAINS_INLINE_CONFIGURATION,tb,true
+altera_irq_mapper_1920/sim/tb_altera_irq_mapper_1920_trjgw7i.sv,SYSTEM_VERILOG,,tb_altera_irq_mapper_1920_trjgw7i,false
+#
+# Map from instance-path to kind of module
+instances:
+instancePath,module
+tb.add_component_dpi_controller_bind_conduit_fanout_inst,add_cfan
+tb.add_component_dpi_controller_enable_conduit_fanout_inst,add_en_cfan
+tb.add_component_dpi_controller_implicit_ready_conduit_fanout_inst,add_ir_cfan
+tb.add_inst,add
+tb.clock_reset_inst,clock_reset
+tb.component_dpi_controller_add_inst,dpic_add
+tb.concatenate_component_done_inst,cat_done
+tb.concatenate_component_wait_for_stream_writes_inst,cat_cwfsw
+tb.main_dpi_controller_inst,main_dpi_controller
+tb.mm_slave_dpi_bfm_add_avmm_0_rw_inst,mm_slave_add_avmm_0_rw
+tb.split_component_start_inst,sp_cstart
+tb.stream_source_dpi_bfm_add_A_inst,sso_add_A
+tb.stream_source_dpi_bfm_add_B_inst,sso_add_B
+tb.stream_source_dpi_bfm_add_C_inst,sso_add_C
+tb.irq_mapper,tb_altera_irq_mapper_1920_trjgw7i

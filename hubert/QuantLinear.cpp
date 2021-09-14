@@ -1,8 +1,7 @@
 //QuantLinear.cpp, created by Hunter Messner for the HUBERT project
 #include "HLS/hls.h"
 #include "HLS/stdio.h"
-#include "tensors.hpp" 
-#include "tensor_mult.h"
+#include "tensors.h" 
 #include <iostream>
 #include "quantact_xl.h"
 #include "loadTensors.h"
@@ -10,8 +9,8 @@
 #include "QuantLinear.h"
 #include "HLS/matrix_mult.h"
 
-typedef Tensor3dXL<float> T3d;
-typedef TensorXL<float> T2d;
+typedef Tensor3dXL T3d;
+typedef TensorXL T2d;
 typedef scaled_tuple3dXL tuple;
 T2d fc_scaling_factor;
 T2d weight_ql;

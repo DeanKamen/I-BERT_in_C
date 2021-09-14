@@ -6,20 +6,22 @@
 #ifndef __HUBERT_CROSSTPYE_TENSORS_H__
 #define __HUBERT_CROSSTYPE_TENSORS_H__
 
-#include "tensorXL.hpp"
-#include "tensors.hpp"
-#include "tensor3dXL.hpp"
-#include "tensor3d.hpp"
+#include "tensorXL.h"
+#include "tensors.h"
+#include "tensor3dXL.h"
+#include "tensor3d.h"
 
-Tensor3d<float>* transformFromXL(Tensor3dXL<float> &A, Tensor3d<float> &space);
-Tensor3dXL<float>* transformToXL(Tensor3d<float> &A, Tensor3d<float> &space);
-bool sameSize(Tensor<float> &A, TensorXL<float> &B);
-bool sameRows(Tensor<float> &A, TensorXL<float> &B);
-bool sameCols(Tensor<float> &A, TensorXL<float> &B);
-void mul_type(Tensor<float> &A, TensorXL<float> &B, Tensor<float> &C);//2d ops
-void div_type(Tensor<float> &A, TensorXL<float> &B, Tensor<float> &C);
+namespace crosstype
+{
+	Tensor3d* transformFromXL(Tensor3dXL &A, Tensor3d &space);
+	Tensor3dXL* transformToXL(Tensor3d &A, Tensor3d &space);
+	bool sameSize(Tensor &A, TensorXL &B);
+	bool sameRows(Tensor &A, TensorXL &B);
+	bool sameCols(Tensor &A, TensorXL &B);
+	void mul_type(Tensor &A, TensorXL &B, Tensor &C);//2d ops
+	void div_type(Tensor &A, TensorXL &B, Tensor &C);
 
-void mul_type(Tensor3d<float> &A, TensorXL<float> &B, Tensor3d<float> &C);//3d ops
-void div_type(Tensor3d<float> &A, TensorXL<float> &B, Tensor3d<float> &C);
-
+	void mul_type(Tensor3d &A, TensorXL &B, Tensor3d &C);//3d ops
+	void div_type(Tensor3d &A, TensorXL &B, Tensor3d &C);
+}
 #endif

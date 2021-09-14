@@ -5,8 +5,8 @@
 
 #include "HLS/hls.h"
 #include "HLS/stdio.h"
-#include "tensors.hpp" 
-#include "tensor3d.hpp"
+#include "tensors.h" 
+#include "tensor3d.h"
 #include "hubertEnums.h"
 #include "quantact.h"
 #include "QuantLinear.h"
@@ -41,15 +41,15 @@ public:
 	//Forward
 	static scaled_tuple3dXL multiheadAttention_forward(
 		multiheadAttention &self,
-		Tensor3dXL<float> &query,
-		Tensor3dXL<float> &key,
-		Tensor3dXL<float>  &value,
-		Tensor<float> &key_padding_mask ,
-		Tensor<float> &incremental_state,
-		Tensor<float> &attn_mask,
-		TensorXL<float>& query_scale,
-		TensorXL<float>& key_scale,
-		TensorXL<float>& value_scale,
+		Tensor3dXL &query,
+		Tensor3dXL &key,
+		Tensor3dXL  &value,
+		Tensor &key_padding_mask ,
+		Tensor &incremental_state,
+		Tensor &attn_mask,
+		TensorXL& query_scale,
+		TensorXL& key_scale,
+		TensorXL& value_scale,
 		bool need_weights = true,
 		bool static_kv = false,
 		bool before_softmax = false,
