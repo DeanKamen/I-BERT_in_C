@@ -64,12 +64,12 @@ tuple QuantAct_XL::QuantAct_forward(
 	T2d &specified_max,
 	bool testing)
 {
-	 printf("lets go 2\n");
+
 	//identity and x are 22x1x768 or 12x22x22.
 	//pre_act_scaling factor is 1x768
 	//identity scaling factor is 1x1
 	x_act = T3d(x);
-	printf("lets go 3\n");
+
     if(identity.null)
     {
         x_act = x;
@@ -78,7 +78,6 @@ tuple QuantAct_XL::QuantAct_forward(
     {
         T3d::add(x, identity, x_act);
     }
-	printf("lets go 4\n");
 	//T2d local_xmin(1, 1, 0.f);
 	//T2d local_xmax(1, 1, 0.f);
 

@@ -1,2 +1,56 @@
-﻿  quantact_xl.cpp
+﻿  IntGELU.cpp
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\intgelu.cpp(70): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\intgelu.cpp(75): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\intgelu.cpp(99): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+  IntLayerNorm.cpp
+  QuantLinear.cpp
+d:\applications\intel_quartus\21.1\hls\include\hls\matrix_mult.h(71): warning C4068: unknown pragma
+d:\applications\intel_quartus\21.1\hls\include\hls\matrix_mult.h(76): warning C4068: unknown pragma
+d:\applications\intel_quartus\21.1\hls\include\hls\matrix_mult.h(82): warning C4068: unknown pragma
+d:\applications\intel_quartus\21.1\hls\include\hls\matrix_mult.h(101): warning C4068: unknown pragma
+d:\applications\intel_quartus\21.1\hls\include\hls\matrix_mult.h(107): warning C4068: unknown pragma
+d:\applications\intel_quartus\21.1\hls\include\hls\matrix_mult.h(113): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\quantlinear.cpp(54): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+  crosstype_tensors.cpp
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\crosstype_tensors.cpp(206): warning C4018: '<': signed/unsigned mismatch
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\crosstype_tensors.cpp(214): warning C4018: '<': signed/unsigned mismatch
+  loadTensors.cpp
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\loadtensors.cpp(57): warning C4018: '<': signed/unsigned mismatch
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\loadtensors.cpp(69): warning C4018: '<': signed/unsigned mismatch
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\loadtensors.cpp(117): warning C4018: '<': signed/unsigned mismatch
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\loadtensors.cpp(129): warning C4018: '<': signed/unsigned mismatch
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\loadtensors.cpp(162): warning C4018: '<': signed/unsigned mismatch
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\loadtensors.cpp(166): warning C4018: '<': signed/unsigned mismatch
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\loadtensors.cpp(201): warning C4018: '<': signed/unsigned mismatch
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\loadtensors.cpp(205): warning C4018: '<': signed/unsigned mismatch
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\loadtensors.cpp(238): warning C4018: '<': signed/unsigned mismatch
+  multiheadAttention.cpp
+d:\applications\intel_quartus\21.1\hls\include\hls\matrix_mult.h(71): warning C4068: unknown pragma
+d:\applications\intel_quartus\21.1\hls\include\hls\matrix_mult.h(76): warning C4068: unknown pragma
+d:\applications\intel_quartus\21.1\hls\include\hls\matrix_mult.h(82): warning C4068: unknown pragma
+d:\applications\intel_quartus\21.1\hls\include\hls\matrix_mult.h(101): warning C4068: unknown pragma
+d:\applications\intel_quartus\21.1\hls\include\hls\matrix_mult.h(107): warning C4068: unknown pragma
+d:\applications\intel_quartus\21.1\hls\include\hls\matrix_mult.h(113): warning C4068: unknown pragma
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\multiheadattention.cpp(54): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  quantact.cpp
+  quantact_testbench.cpp
+  quantact_xl.cpp
+  sentence_encoder_layer.cpp
+d:\applications\intel_quartus\21.1\hls\include\hls\matrix_mult.h(71): warning C4068: unknown pragma
+d:\applications\intel_quartus\21.1\hls\include\hls\matrix_mult.h(76): warning C4068: unknown pragma
+d:\applications\intel_quartus\21.1\hls\include\hls\matrix_mult.h(82): warning C4068: unknown pragma
+d:\applications\intel_quartus\21.1\hls\include\hls\matrix_mult.h(101): warning C4068: unknown pragma
+d:\applications\intel_quartus\21.1\hls\include\hls\matrix_mult.h(107): warning C4068: unknown pragma
+d:\applications\intel_quartus\21.1\hls\include\hls\matrix_mult.h(113): warning C4068: unknown pragma
+  softmax.cpp
+  tensor3d.cpp
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor3d.cpp(43): warning C4018: '<': signed/unsigned mismatch
+  tensor3dXL.cpp
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor3dxl.cpp(56): warning C4018: '<': signed/unsigned mismatch
+  Generating Code...
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor3dxl.cpp(25): warning C4717: 'Tensor3dXL::Tensor3dXL': recursive on all control paths, function will cause runtime stack overflow
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\tensor3dxl.cpp(516): warning C4172: returning address of local variable or temporary: nullone
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\quantact.cpp(321): warning C4172: returning address of local variable or temporary: output
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\quantact.cpp(325): warning C4172: returning address of local variable or temporary: output
+c:\users\hunto_efxy22i\jupyterprojects\hubert\hubert\quantact.cpp(329): warning C4172: returning address of local variable or temporary: output
   hubert.vcxproj -> C:\Users\hunto_efxy22i\jupyterProjects\HUBERT\x64\Debug\hubert.exe

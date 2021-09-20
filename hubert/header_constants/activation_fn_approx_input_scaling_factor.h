@@ -1,0 +1,6 @@
+#ifndef ACTIVATION_FN_APPROX_INPUT_SCALING_FACTOR_H
+#define ACTIVATION_FN_APPROX_INPUT_SCALING_FACTOR_H
+
+const float activation_fn_approx_input_scaling_factor[1] = {1.0};
+
+#endif // ACTIVATION_FN_APPROX_INPUT_SCALING_FACTOR_H

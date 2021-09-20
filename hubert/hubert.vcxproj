@@ -92,7 +92,6 @@
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <StackReserveSize>4194304</StackReserveSize>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -144,6 +143,82 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="crosstype_tensors.h" />
+    <ClInclude Include="header_constants\activation_fn_approx_input_scaling_factor.h" />
+    <ClInclude Include="header_constants\fc1_act_act_scaling_factor.h" />
+    <ClInclude Include="header_constants\fc1_act_x_max.h" />
+    <ClInclude Include="header_constants\fc1_act_x_min.h" />
+    <ClInclude Include="header_constants\fc1_bias.h" />
+    <ClInclude Include="header_constants\fc1_bias_integer.h" />
+    <ClInclude Include="header_constants\fc1_fc_scaling_factor.h" />
+    <ClInclude Include="header_constants\fc1_weight.h" />
+    <ClInclude Include="header_constants\fc1_weight_integer.h" />
+    <ClInclude Include="header_constants\fc2_act_act_scaling_factor.h" />
+    <ClInclude Include="header_constants\fc2_act_x_max.h" />
+    <ClInclude Include="header_constants\fc2_act_x_min.h" />
+    <ClInclude Include="header_constants\fc2_bias.h" />
+    <ClInclude Include="header_constants\fc2_bias_integer.h" />
+    <ClInclude Include="header_constants\fc2_fc_scaling_factor.h" />
+    <ClInclude Include="header_constants\fc2_weight.h" />
+    <ClInclude Include="header_constants\fc2_weight_integer.h" />
+    <ClInclude Include="header_constants\final_layer_norm_activation_act_scaling_factor.h" />
+    <ClInclude Include="header_constants\final_layer_norm_activation_x_max.h" />
+    <ClInclude Include="header_constants\final_layer_norm_activation_x_min.h" />
+    <ClInclude Include="header_constants\final_layer_norm_bias.h" />
+    <ClInclude Include="header_constants\final_layer_norm_shift.h" />
+    <ClInclude Include="header_constants\final_layer_norm_weight.h" />
+    <ClInclude Include="header_constants\input_act_act_scaling_factor.h" />
+    <ClInclude Include="header_constants\input_act_x_max.h" />
+    <ClInclude Include="header_constants\input_act_x_min.h" />
+    <ClInclude Include="header_constants\pre_final_layer_norm_act_act_scaling_factor.h" />
+    <ClInclude Include="header_constants\pre_final_layer_norm_act_x_max.h" />
+    <ClInclude Include="header_constants\pre_final_layer_norm_act_x_min.h" />
+    <ClInclude Include="header_constants\pre_self_attn_layer_norm_act_act_scaling_factor.h" />
+    <ClInclude Include="header_constants\pre_self_attn_layer_norm_act_x_max.h" />
+    <ClInclude Include="header_constants\pre_self_attn_layer_norm_act_x_min.h" />
+    <ClInclude Include="header_constants\self_attn_attn_act_act_scaling_factor.h" />
+    <ClInclude Include="header_constants\self_attn_attn_act_x_max.h" />
+    <ClInclude Include="header_constants\self_attn_attn_act_x_min.h" />
+    <ClInclude Include="header_constants\self_attn_attn_probs_act_act_scaling_factor.h" />
+    <ClInclude Include="header_constants\self_attn_attn_probs_act_x_max.h" />
+    <ClInclude Include="header_constants\self_attn_attn_probs_act_x_min.h" />
+    <ClInclude Include="header_constants\self_attn_k_proj_act_act_scaling_factor.h" />
+    <ClInclude Include="header_constants\self_attn_k_proj_act_x_max.h" />
+    <ClInclude Include="header_constants\self_attn_k_proj_act_x_min.h" />
+    <ClInclude Include="header_constants\self_attn_k_proj_bias.h" />
+    <ClInclude Include="header_constants\self_attn_k_proj_bias_integer.h" />
+    <ClInclude Include="header_constants\self_attn_k_proj_fc_scaling_factor.h" />
+    <ClInclude Include="header_constants\self_attn_k_proj_weight.h" />
+    <ClInclude Include="header_constants\self_attn_k_proj_weight_integer.h" />
+    <ClInclude Include="header_constants\self_attn_layer_norm_activation_act_scaling_factor.h" />
+    <ClInclude Include="header_constants\self_attn_layer_norm_activation_x_max.h" />
+    <ClInclude Include="header_constants\self_attn_layer_norm_activation_x_min.h" />
+    <ClInclude Include="header_constants\self_attn_layer_norm_bias.h" />
+    <ClInclude Include="header_constants\self_attn_layer_norm_shift.h" />
+    <ClInclude Include="header_constants\self_attn_layer_norm_weight.h" />
+    <ClInclude Include="header_constants\self_attn_out_proj_bias.h" />
+    <ClInclude Include="header_constants\self_attn_out_proj_bias_integer.h" />
+    <ClInclude Include="header_constants\self_attn_out_proj_fc_scaling_factor.h" />
+    <ClInclude Include="header_constants\self_attn_out_proj_weight.h" />
+    <ClInclude Include="header_constants\self_attn_out_proj_weight_integer.h" />
+    <ClInclude Include="header_constants\self_attn_q_proj_act_act_scaling_factor.h" />
+    <ClInclude Include="header_constants\self_attn_q_proj_act_x_max.h" />
+    <ClInclude Include="header_constants\self_attn_q_proj_act_x_min.h" />
+    <ClInclude Include="header_constants\self_attn_q_proj_bias.h" />
+    <ClInclude Include="header_constants\self_attn_q_proj_bias_integer.h" />
+    <ClInclude Include="header_constants\self_attn_q_proj_fc_scaling_factor.h" />
+    <ClInclude Include="header_constants\self_attn_q_proj_weight.h" />
+    <ClInclude Include="header_constants\self_attn_q_proj_weight_integer.h" />
+    <ClInclude Include="header_constants\self_attn_softmax_act_act_scaling_factor.h" />
+    <ClInclude Include="header_constants\self_attn_softmax_act_x_max.h" />
+    <ClInclude Include="header_constants\self_attn_softmax_act_x_min.h" />
+    <ClInclude Include="header_constants\self_attn_v_proj_act_act_scaling_factor.h" />
+    <ClInclude Include="header_constants\self_attn_v_proj_act_x_max.h" />
+    <ClInclude Include="header_constants\self_attn_v_proj_act_x_min.h" />
+    <ClInclude Include="header_constants\self_attn_v_proj_bias.h" />
+    <ClInclude Include="header_constants\self_attn_v_proj_bias_integer.h" />
+    <ClInclude Include="header_constants\self_attn_v_proj_fc_scaling_factor.h" />
+    <ClInclude Include="header_constants\self_attn_v_proj_weight.h" />
+    <ClInclude Include="header_constants\self_attn_v_proj_weight_integer.h" />
     <ClInclude Include="hubertEnums.h" />
     <ClInclude Include="IntGELU.h" />
     <ClInclude Include="IntLayerNorm.h" />

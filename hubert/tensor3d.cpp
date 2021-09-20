@@ -42,7 +42,7 @@ Tensor3d::Tensor3d(int dep, int row, int col, float init)
 	t_depth = dep;
 	for (unsigned d = 0; d < dep; d++)
 	{
-		matrix[d] = Tensor(row, col, init);;//TODO: almost certainly wrong. Dont care right now 
+		matrix[d] = Tensor(row, col, init);//TODO: almost certainly wrong. Dont care right now 
 	}
 	null = false;
 }

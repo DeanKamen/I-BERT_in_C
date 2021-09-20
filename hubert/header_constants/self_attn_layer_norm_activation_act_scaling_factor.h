@@ -1,0 +1,6 @@
+#ifndef SELF_ATTN_LAYER_NORM_ACTIVATION_ACT_SCALING_FACTOR_H
+#define SELF_ATTN_LAYER_NORM_ACTIVATION_ACT_SCALING_FACTOR_H
+
+const float self_attn_layer_norm_activation_act_scaling_factor[1] = {0.0};
+
+#endif // SELF_ATTN_LAYER_NORM_ACTIVATION_ACT_SCALING_FACTOR_H
